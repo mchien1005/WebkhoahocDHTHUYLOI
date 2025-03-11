@@ -19,9 +19,9 @@ class VanPhongKhoaController extends Controller
     {
         return view('vanphongkhoa.capnhatketqua');
     }
-    public function index()
+    public function tintuc()
     {
-        return view('vanphongkhoa.index');
+        return view('vanphongkhoa.tintuc');
     }
     /**
      * Show the form for creating a new resource.

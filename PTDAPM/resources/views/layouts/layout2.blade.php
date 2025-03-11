@@ -139,6 +139,11 @@
             align-items: center;
         }
 
+        .dropdown-button img {
+            width: 20px;
+            height: 60px;
+        }
+
         .dropdown-icon {
             width: 20px;
             height: 20px;
@@ -148,6 +153,7 @@
             display: none;
             position: absolute;
             right: 0;
+            margin-right: -20px;
             top: 100%;
             background-color: rgba(36, 82, 147, 0.95);
             min-width: 250px;
@@ -453,7 +459,7 @@
         <!-- Header -->
         <div class="header">
             <img src="{{ asset('anhheader/Logo-Thuy_Loi.png ')}}" alt="Logo Thủy Lợi" class="logo" />
-            <h1 class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+            <a class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</a>
             <div class="user-info">
                 <img src="{{ asset('anhheader/Test Account.png')}}" alt="User Icon" class="user-icon" />
                 <span class="user-name">Nguyễn văn A</span>

@@ -140,6 +140,11 @@
             align-items: center;
         }
 
+        .dropdown-button img {
+            width: 20px;
+            height: 60px;
+        }
+
         .dropdown-icon {
             width: 20px;
             height: 20px;
@@ -149,6 +154,7 @@
             display: none;
             position: absolute;
             right: 0;
+            margin-right: -20px;
             top: 100%;
             background-color: rgba(36, 82, 147, 0.95);
             min-width: 250px;

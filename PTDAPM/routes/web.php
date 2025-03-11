@@ -1,20 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DangNhap\TaikhoanController;
+use App\Http\Controllers\VanPhongKhoa\VanPhongKhoaController;
 
-Route::get('/', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/', function () {
+    return redirect()->route('login.form');
+});
+// Hiển thị trang đăng nhập
+Route::get('/dang-nhap', [TaikhoanController::class, 'index'])->name('login.form');
 
+// Xử lý đăng nhập
+Route::post('/dang-nhap', [TaikhoanController::class, 'login'])->name('login.process');
+
+// Trang tin tức (chỉ cho phép user đã đăng nhập)
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/index', [VanPhongKhoaController::class, 'tintuc'])->name('vanphongkhoa.tintuc');
 });
 
-use App\Http\Controllers\VanPhongKhoaController;
-
-Route::get('/truy-van-thong-tin', [VanPhongKhoaController::class, 'truyVanThongTin'])->name('truyvanthongtin');
-Route::get('/cap-nhat-ket-qua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('capnhatketqua');
-Route::get('/index', [VanPhongKhoaController::class, 'index'])->name('index');
+// Đăng xuất
+Route::post('/dang-xuat', [TaikhoanController::class, 'logout'])->name('logout');
