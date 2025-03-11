@@ -138,6 +138,11 @@
             align-items: center;
         }
 
+        .dropdown-button img {
+            width: 20px;
+            height: 60px;
+        }
+
         .dropdown-icon {
             width: 20px;
             height: 20px;
