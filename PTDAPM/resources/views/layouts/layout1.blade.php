@@ -152,6 +152,7 @@
             display: none;
             position: absolute;
             right: 0;
+            margin-right: -20px;
             top: 100%;
             background-color: rgba(36, 82, 147, 0.95);
             min-width: 250px;
