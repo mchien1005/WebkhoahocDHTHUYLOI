@@ -584,8 +584,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 810px;
-            height: 307px;
+            width: 985px;
+            height: 584px;
             background: #e7f5ff;
             border: 2px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -623,9 +623,9 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
+            margin-top: 100px;
         }
 
         .confirm-popup .confirm-btn:hover,
@@ -700,6 +700,50 @@
         a:hover {
             color: blue;
             /* Màu khi di chuột vào */
+        }
+
+        .popup-divider {
+            border: 1px solid #255293;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        /* Container cho radio button */
+        .radio-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        /* Ẩn radio mặc định */
+        .radio-container input {
+            display: none;
+        }
+
+        /* Tạo vòng tròn radio */
+        .radio-custom {
+            width: 30px;
+            height: 30px;
+            background: #5183CA99;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            margin-right: 70px;
+            margin-left: 20px;
+        }
+
+        /* Khi được chọn, tô màu */
+        .radio-container input:checked+.radio-custom {
+            background-color: #255293;
+        }
+
+        /* Nút xác nhận & hủy */
+        .popup-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 0px;
         }
     </style>
     <div class="frame-1">
@@ -795,22 +839,44 @@
 
     </div>
 
-    <!-- Popup xác nhận -->
-    <div class="popup-overlay" id="confirmOverlay2" style="display: none;"></div>
-    <div class="confirm-popup" id="confirmPopup2" style="display: none;">
+    <!-- Overlay mờ nền khi popup xuất hiện -->
+    <div class="popup-overlay" id="popupOverlay" style="display: none;"></div>
+
+    <!-- Popup chính -->
+    <div class="confirm-popup" id="popupRadio" style="display: none;">
         <div class="popup-header">
-            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
-            <span>Thông báo</span>
+            <span>Xuất danh sách đề tài</span>
         </div>
 
-        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+        <hr class="popup-divider">
 
+        <!-- Nội dung popup -->
         <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn xuất danh sách đề tài không?</p>
-            <button class="confirm-btn" style="margin-right: 20px;" onclick="exportReport2()">Xác nhận</button>
+            <label class="radio-container">
+                <input type="radio" name="topic" value="official">
+                <span class="radio-custom"></span>
+                Đề tài chính thức
+            </label>
+
+            <label class="radio-container">
+                <input type="radio" name="topic" value="faculty">
+                <span class="radio-custom"></span>
+                Đề tài đã nghiên cứu cấp khoa
+            </label>
+
+            <label class="radio-container">
+                <input type="radio" name="topic" value="university">
+                <span class="radio-custom"></span>
+                Đề tài đã nghiên cứu cấp trường
+            </label>
+            <button class="confirm-btn" style="margin-right: 50px;" onclick="exportReport2()">Đồng ý</button>
             <button class="cancel-btn" onclick="closeConfirmPopup2()">Hủy</button>
         </div>
+
     </div>
+
+
+    <!-- Popup xác nhận -->
 
     <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay2" style="display: none;"></div>
@@ -843,6 +909,7 @@
             document.getElementById("confirmOverlay").style.display = "none";
             document.getElementById("confirmPopup").style.display = "none";
             document.getElementById("popup").style.display = "block";
+
         }
 
         function exportReport() {
@@ -859,18 +926,18 @@
         }
 
         function showConfirmPopup2() {
-            document.getElementById("confirmOverlay2").style.display = "flex";
-            document.getElementById("confirmPopup2").style.display = "block";
+            document.getElementById("popupOverlay").style.display = "block";
+            document.getElementById("popupRadio").style.display = "block";
         }
 
         function closeConfirmPopup2() {
-            document.getElementById("confirmOverlay2").style.display = "none";
-            document.getElementById("confirmPopup2").style.display = "none";
-        }
+            document.getElementById("popupOverlay").style.display = "none";
+            document.getElementById("popupRadio").style.display = "none";
 
+        }
         function exportReport2() {
-            document.getElementById("confirmOverlay2").style.display = "none";
-            document.getElementById("confirmPopup2").style.display = "none";
+            document.getElementById("popupOverlay").style.display = "none";
+            document.getElementById("popupRadio").style.display = "none";
             document.getElementById("successOverlay2").style.display = "flex";
             document.getElementById("successPopup2").style.display = "block";
 
@@ -881,17 +948,6 @@
             }, 2000);
         }
 
-        // function closeSuccessPopup() {
-        //     document.getElementById("successOverlay").style.display = "none";
-        //     document.getElementById("successPopup").style.display = "none";
-        // }
-
-
-        // function exportReport() {
-        //     // Add your export report logic here
-        //     closeConfirmPopup();
-        //     alert("Báo cáo đã được xuất!");
-        // }
     </script>
 
 @endsection
