@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_hoi_dong_danh_gia', function (Blueprint $table) {
-            $table->id('ma_hd');
-            $table->integer('so_luong_gv')->check('so_luong_gv > 0');
-            $table->integer('ma_de_tai');
-            $table->foreign('ma_de_tai')->references('ma_de_tai')->on('de_tai_nghien_cuu')->onDelete('cascade');
+        Schema::create('tai_khoan', function (Blueprint $table) {
+            $table->string('email', 100)->primary();
+            $table->string('mat_khau', 255);
+            $table->enum('vai_tro', ['Admin', 'Giảng viên', 'Sinh viên', 'Nhân viên']);
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_hoi_dong_danh_gia');
+        Schema::dropIfExists('tai_khoan');
     }
 };
