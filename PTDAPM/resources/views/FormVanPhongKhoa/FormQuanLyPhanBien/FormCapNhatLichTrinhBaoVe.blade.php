@@ -568,6 +568,14 @@
             /* Tạo khoảng cách giữa icon và chữ */
         }
 
+        .cancel {
+            width: 90px;
+            /* Kích thước icon */
+            height: 90px;
+
+            /* Tạo khoảng cách giữa icon và chữ */
+        }
+
         .line-16 {
             margin-top: -1px;
             border-style: solid;
@@ -691,6 +699,22 @@
             background-color: #D0E4FF;
             /* Đổi màu khi hover */
         }
+
+        .error-message {
+            padding: 30px;
+            display: flex;
+            /* Sử dụng flexbox */
+            align-items: center;
+            /* Căn giữa theo chiều dọc */
+            gap: 10px;
+            /* Khoảng cách giữa icon và văn bản */
+            color: #17488C;
+            /* Màu chữ */
+            font-size: 40px;
+            /* Cỡ chữ */
+            font-weight: 500;
+            font-family: Rasa;
+        }
     </style>
     <div class="frame-1">
         <div class="md-01">Hội đồng 1</div>
@@ -737,7 +761,7 @@
         </button>
     </div>
     <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
-    <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
+    <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
     <div class="confirm-popup" id="Popupupdate" style="display: none;">
         <div class="popup-header">
             <span>Cập nhật lịch trình bảo vệ đề tài</span>
@@ -763,7 +787,7 @@
             </div>
 
             <!-- Nút xác nhận -->
-            <button class="btn-update" onclick="saveResult()">Cập nhật</button>
+            <button class="btn-update" onclick="validateAndSubmit()">Cập nhật</button>
         </div>
     </div>
     </div>
@@ -797,34 +821,22 @@
 
     </div>
 
-    <!-- Popup xác nhận -->
-    <div class="popup-overlay" id="confirmOverlay2" style="display: none;"></div>
-    <div class="confirm-popup" id="confirmPopup2" style="display: none;">
-        <div class="popup-header">
+    {{-- pop lỗi --}}
+    <div class="popup-overlay" id="errorOverlay" style="display: none;"></div>
+    <div class="confirm-popup" id="errorPopup" style="display: none;">
+        <div class="popup-header2">
             <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
             <span>Thông báo</span>
         </div>
 
         <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
 
-        <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn xuất danh sách đề tài không?</p>
-            <button class="confirm-btn" style="margin-right: 20px;" onclick="exportReport2()">Xác nhận</button>
-            <button class="cancel-btn" onclick="closeConfirmPopup2()">Hủy</button>
+        <div class="error-message">
+            <img class="cancel" src="{{ asset('images/Cancel.png') }}">
+            <p>Thông tin bạn nhập không chính xác <br /> hoặc thiếu!Bạn hãy nhập lại thông
+                tin.</p>
         </div>
     </div>
-
-    <!-- Popup thông báo thành công -->
-    <div class="popup-overlay" id="successOverlay2" style="display: none;"></div>
-    <div class="popup-container success-popup" id="successPopup2" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
-            <p>Xuất danh sách đề tài thành công!</p>
-        </div>
-
-    </div>
-
-
 
     <script>
         function openPopup() {
@@ -834,25 +846,23 @@
         function closePopup() {
             document.getElementById("Popupupdate").style.display = "none";
         }
-
         function saveResult() {
             // Ẩn popup xác nhận
             document.getElementById("Popupupdate").style.display = "none";
-            document.getElementById("confirmOverlay").style.display = "none";
+            document.getElementById("updateOverlay").style.display = "none";
 
             // Hiện popup thành công
             document.getElementById("confirmOverlay").style.display = "block";
             document.getElementById("confirmPopup").style.display = "block";
 
+            // Tự động đóng popup sau 2 giây
+            setTimeout(() => {
+                document.getElementById("confirmOverlay").style.display = "none";
+                document.getElementById("confirmPopup").style.display = "none";
+            }, 2000);
         }
         function openDateTimePicker() {
             document.getElementById("datetime").showPicker(); // Hiển thị DateTime Picker
-        }
-
-        function showConfirmPopup() {
-            document.getElementById("popup").style.display = "none";
-            document.getElementById("confirmOverlay").style.display = "flex";
-            document.getElementById("confirmPopup").style.display = "block";
         }
 
         function closeConfirmPopup() {
@@ -874,28 +884,30 @@
             }, 2000);
         }
 
-        function showConfirmPopup2() {
-            document.getElementById("confirmOverlay2").style.display = "flex";
-            document.getElementById("confirmPopup2").style.display = "block";
+        function validateAndSubmit() {
+            let dateTime = document.getElementById("datetime").value;
+            let location = document.getElementById("location").value;
+
+            if (!dateTime || !location) {
+                showErrorPopup();
+            } else {
+                saveResult(); // Gọi hàm xử lý lưu dữ liệu
+            }
         }
 
-        function closeConfirmPopup2() {
-            document.getElementById("confirmOverlay2").style.display = "none";
-            document.getElementById("confirmPopup2").style.display = "none";
+        function showErrorPopup() {
+            document.getElementById("errorOverlay").style.display = "block";
+            document.getElementById("errorPopup").style.display = "block";
         }
 
-        function exportReport2() {
-            document.getElementById("confirmOverlay2").style.display = "none";
-            document.getElementById("confirmPopup2").style.display = "none";
-            document.getElementById("successOverlay2").style.display = "flex";
-            document.getElementById("successPopup2").style.display = "block";
-
-            // Tự động đóng sau 2 giây
-            setTimeout(() => {
-                document.getElementById("successOverlay2").style.display = "none";
-                document.getElementById("successPopup2").style.display = "none";
-            }, 2000);
+        function hideErrorPopup() {
+            document.getElementById("errorOverlay").style.display = "none";
+            document.getElementById("errorPopup").style.display = "none";
         }
+
+        // Đóng popup khi click ra ngoài
+        document.getElementById("errorOverlay").addEventListener("click", hideErrorPopup);
+        document.getElementById("confirmOverlay").addEventListener("click", hideErrorPopup);
     </script>
 
 @endsection
