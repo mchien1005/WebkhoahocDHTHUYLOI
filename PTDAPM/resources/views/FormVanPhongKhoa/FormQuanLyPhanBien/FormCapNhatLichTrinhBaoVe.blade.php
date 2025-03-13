@@ -492,6 +492,23 @@
 
         }
 
+        .confirm-popup2 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1048px;
+            height: 428px;
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
         .confirm-popup .popup-header2 {
             font-size: 40px;
             font-weight: bold;
@@ -516,7 +533,7 @@
             word-wrap: break-word
         }
 
-        .confirm-popup .btn-update {
+        .confirm-popup2 .btn-update {
             background-color: #5183CA99;
             color: #255293;
             font-size: 32px;
@@ -528,8 +545,8 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 20px;
-            margin-left: 500px;
+            margin-top: 40px;
+            margin-left: 700px;
             font-weight: 500;
             word-wrap: break-word
         }
@@ -649,41 +666,46 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
+            margin-top: 40px;
         }
 
         .form-label {
             color: #17488C;
-            font-size: 24px;
+            font-size: 32px;
             font-family: Rasa;
             font-weight: 700;
-            width: 220px;
+            width: 300px;
             /* Điều chỉnh độ rộng của nhãn */
         }
 
         .input-container {
             position: relative;
-            width: 500px;
+            width: 640px;
             height: 48.23601531982422px;
             border-radius: 10px;
-
+            font-size: 32px;
+            font-family: Rasa;
+            font-weight: 700;
 
         }
 
         .form-input {
-            width: 500px;
+            width: 640px;
             height: 44.790584564208984px;
             border-radius: 10px;
             border: 1px solid #255293;
             padding: 0 40px 0 10px;
-
+            color: #17488C;
             background: #5183CA99;
-            font-size: 18px;
+            font-size: 32px;
+            font-family: Rasa;
+            font-weight: 700;
         }
 
         .icon {
             position: absolute;
-            right: 27px;
-            top: 50%;
+            right: 41px;
+            top: 47%;
             transform: translateY(-50%);
             width: 35px;
             height: 35px;
@@ -691,7 +713,7 @@
             /* Làm nổi bật icon */
             padding: 3px;
             border-radius: 50%;
-            margin-left: -100px;
+            margin-left: -120px;
             background-color: #D0E4FF;
         }
 
@@ -714,6 +736,15 @@
             /* Cỡ chữ */
             font-weight: 500;
             font-family: Rasa;
+        }
+
+        input[type="datetime-local"] {
+            color: #17488C;
+            /* Màu chữ */
+            font-size: 32px;
+            /* Điều chỉnh cỡ chữ */
+            font-weight: bold;
+            /* Đậm chữ */
         }
     </style>
     <div class="frame-1">
@@ -762,7 +793,7 @@
     </div>
     <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
     <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
-    <div class="confirm-popup" id="Popupupdate" style="display: none;">
+    <div class="confirm-popup2" id="Popupupdate" style="display: none;">
         <div class="popup-header">
             <span>Cập nhật lịch trình bảo vệ đề tài</span>
         </div>
