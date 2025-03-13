@@ -13,7 +13,7 @@
             <span>Báo cáo đề tài</span>
         </a>
     </div>
-    <div class="menu-item">
+    <div class="menu-item active">
         <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
@@ -25,7 +25,7 @@
             <span>Cập nhật kết quả</span>
         </a>
     </div>
-    <div class="menu-item active">
+    <div class="menu-item">
         <a href="{{ route('vanphongkhoa.truyvanthongtin') }}">
             <img src="{{ asset('images/mdi_court-hammer.png') }}" alt="Invitation Icon" class="sidebar-icon" />
             <span>Truy vấn thông tin</span>
@@ -786,10 +786,12 @@
     <div class="line-15"></div>
     <div class="group-13">
         <div class="rectangle-40"></div>
-        <button class="quaylai" onclick="openPopup()"
-            style="border: none;background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
-            Quay lại
-        </button>
+        <a href="{{ route('vanphongkhoa.quanlyphanbien') }}">
+            <button class="quaylai"
+                style="border: none;background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                Quay lại
+            </button>
+        </a>
     </div>
     <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
     <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
@@ -870,13 +872,25 @@
     </div>
 
     <script>
+        // Lấy phần tử popup và overlay
+        const popup = document.getElementById("Popupupdate");
+        const overlay = document.getElementById("updateOverlay");
+
+        // Hàm mở popup
         function openPopup() {
-            document.getElementById("Popupupdate").style.display = "block";
+            popup.style.display = "block";
+            overlay.style.display = "block";
         }
 
+        // Hàm đóng popup
         function closePopup() {
-            document.getElementById("Popupupdate").style.display = "none";
+            popup.style.display = "none";
+            overlay.style.display = "none";
         }
+
+        // Sự kiện: Click ra ngoài thì đóng popup
+        overlay.addEventListener("click", closePopup);
+
         function saveResult() {
             // Ẩn popup xác nhận
             document.getElementById("Popupupdate").style.display = "none";
@@ -938,7 +952,7 @@
 
         // Đóng popup khi click ra ngoài
         document.getElementById("errorOverlay").addEventListener("click", hideErrorPopup);
-        document.getElementById("confirmOverlay").addEventListener("click", hideErrorPopup);
+
     </script>
 
 @endsection
