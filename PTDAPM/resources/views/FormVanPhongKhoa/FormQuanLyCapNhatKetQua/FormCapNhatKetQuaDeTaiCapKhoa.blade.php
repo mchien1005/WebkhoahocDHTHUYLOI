@@ -577,19 +577,19 @@
 
     <div class="line-15"></div>
     <!-- <div class="group-13">
-                                                                        <div class="rectangle-40"></div>
-                                                                        <button class="xuatbaocao" onclick="openPopup()"
-                                                                            style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">
-                                                                            Xuất báo cáo thống kê
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="group-12">
-                                                                        <div class="rectangle-402"></div>
-                                                                        <button class="xuatdanhsach" onclick="showConfirmPopup2()"
-                                                                            style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">Xuất
-                                                                            danh sách đề tài
-                                                                        </button>
-                                                                    </div> -->
+                                                                            <div class="rectangle-40"></div>
+                                                                            <button class="xuatbaocao" onclick="openPopup()"
+                                                                                style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">
+                                                                                Xuất báo cáo thống kê
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="group-12">
+                                                                            <div class="rectangle-402"></div>
+                                                                            <button class="xuatdanhsach" onclick="showConfirmPopup2()"
+                                                                                style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">Xuất
+                                                                                danh sách đề tài
+                                                                            </button>
+                                                                        </div> -->
     <div class="truy-v-n-th-ng-tin2">Cập nhật kết quả đề tài cấp khoa</div>
 
     <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
@@ -603,7 +603,7 @@
         <div class="popup-content">
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result" style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                            word-wrap: break-word;">Kết quả:</label>
+                                                                word-wrap: break-word;">Kết quả:</label>
                 <input type="text" id="result"
                     style="width: 455px; height: 52px; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
@@ -611,18 +611,6 @@
                 nhận</button>
         </div>
     </div>
-    <!-- Popup xác nhận -->
-    <!-- <div id="editResultPopup" class="popup-container" style="display: none;">
-                                                                        <div class="popup-content">
-                                                                            <span class="close-btn" onclick="closePopup()">&times;</span>
-                                                                            <h2>Chỉnh sửa kết quả</h2>
-                                                                            <label for="result">Nhập kết quả mới:</label>
-                                                                            <input type="text" id="result" placeholder="Nhập kết quả mới">
-                                                                            <button onclick="saveResult()">Lưu</button>
-                                                                        </div>
-                                                                    </div> -->
-
-    <!-- Popup thông báo thành công -->
     <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
     <div class="popup-container success-popup" id="successPopup" style="display: none;">

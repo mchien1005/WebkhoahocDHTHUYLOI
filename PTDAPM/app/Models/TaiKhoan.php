@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models\DangNhap;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class ModelTaiKhoan extends Authenticatable
+class TaiKhoan extends Authenticatable
 {
     use HasFactory;
 

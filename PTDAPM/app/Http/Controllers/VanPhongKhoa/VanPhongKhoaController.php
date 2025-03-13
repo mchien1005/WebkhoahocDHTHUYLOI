@@ -23,6 +23,14 @@ class VanPhongKhoaController extends Controller
     {
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
     }
+    public function capnhatlichtrinhbaove()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormCapNhatLichTrinhBaoVe');
+    }
+    public function ghepdoidetaihoidong()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong');
+    }
     /**
      * Show the form for creating a new resource.
      */

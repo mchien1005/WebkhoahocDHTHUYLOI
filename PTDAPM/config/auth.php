@@ -64,7 +64,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\DangNhap\ModelTaiKhoan::class, // Sử dụng Model TaiKhoan thay vì User
+            'model' => App\Models\TaiKhoan::class, // Sử dụng Model TaiKhoan thay vì User
         ],
     ],
 
