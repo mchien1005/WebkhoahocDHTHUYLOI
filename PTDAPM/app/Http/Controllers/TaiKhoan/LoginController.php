@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\TaiKhoan;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -10,7 +11,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login'); 
+        return view('login');
     }
 
     public function login(Request $request)
@@ -25,12 +26,12 @@ class LoginController extends Controller
             if ($user->vai_tro === 'Sinh viên') {
                 return redirect()->route('FormSinhVien.student.index');
             } elseif ($user->vai_tro === 'Giảng viên') {
-                return redirect()->route('FormGiangVien.admin'); 
+                return redirect()->route('FormGiangVien.admin');
             } elseif ($user->vai_tro === 'Admin') {
-                return redirect()->route('vanphongkhoa.tintuc'); 
+                return redirect()->route('vanphongkhoa.tintuc');
             } elseif ($user->vai_tro === 'Nhân viên') {
-                return redirect()->route('phongdaotao.tintuc'); 
-            } 
+                return redirect()->route('phongdaotao.tintuc');
+            }
         }
         return back()->withErrors(['email' => 'Email hoặc mật khẩu không chính xác!'])->withInput();
     }
