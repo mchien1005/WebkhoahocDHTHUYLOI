@@ -26,20 +26,18 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:3',
         ]);
-        if (Auth::attempt($credentials)) {
+
+        if (Auth::attempt((['email' => $credentials['email'], 'password' => $credentials['password']]))) {
             $user = Auth::user();
             if ($user->vai_tro === 'Sinh viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('FormSinhVien.student.index');
             } elseif ($user->vai_tro === 'Giảng viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('tintuc.index');
             } elseif ($user->vai_tro === 'Admin') {
-                return redirect()->route('vanphongkhoa.capnhatketqua');
-            } elseif ($user->vai_tro === 'Nhân viên') {
                 return redirect()->route('vanphongkhoa.tintuc');
+            } elseif ($user->vai_tro === 'Nhân viên') {
+                return redirect()->route('phongdaotao.tintuc');
             }
-            // else {
-            //     return redirect()->route('home'); // Điều hướng mặc định
-            // }
         }
         return back()->withErrors(['email' => 'Email hoặc mật khẩu không chính xác!'])->withInput();
     }
