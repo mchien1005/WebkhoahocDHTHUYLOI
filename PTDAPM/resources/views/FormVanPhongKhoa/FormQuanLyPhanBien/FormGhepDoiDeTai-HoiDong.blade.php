@@ -820,44 +820,14 @@
     </div>
     <div class="group-12">
         <div class="rectangle-402"></div>
-        <button class="luu" onclick="showConfirmPopup()""
-                        style=" border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 36px;
-            font-weight: 500;">
+        <button class="luu" onclick="validateCheckbox()""
+                                                                                    style=" border: none; background:
+            transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
     </div>
     <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
-    <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
-    <div class="confirm-popup2" id="Popupupdate" style="display: none;">
-        <div class="popup-header">
-            <span>Cập nhật lịch trình bảo vệ đề tài</span>
-        </div>
-
-        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
-
-        <div class="popup-content">
-            <!-- Ngày và giờ bảo vệ -->
-            <div class="form-group">
-                <label for="datetime" class="form-label">Ngày và giờ bảo vệ:</label>
-                <div class="input-container">
-                    <img src="{{ asset('images/Time Limit.png') }}" alt="Calendar Icon" class="icon"
-                        onclick="openDateTimePicker()">
-                    <input type="datetime-local" id="datetime" class="form-input">
-                </div>
-            </div>
-
-            <!-- Địa điểm bảo vệ -->
-            <div class="form-group">
-                <label for="location" class="form-label">Địa điểm bảo vệ:</label>
-                <input type="text" id="location" class="form-input">
-            </div>
-
-            <!-- Nút xác nhận -->
-            <button class="btn-update" onclick="validateAndSubmit()">Cập nhật</button>
-        </div>
-    </div>
-    </div>
 
 
     <!-- Popup xác nhận -->
@@ -871,7 +841,7 @@
         <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
 
         <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn muốn cập nhật lịch trình<br /> bảo vệ không?</p>
+            <p style="margin-left: -100px;">Bạn có chắc chắn muốn lưu các ghép đôi đề<br />tài-hội đồng này không?</p>
             <button class="confirm-btn" style="margin-right: 20px;" onclick="exportReport()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
@@ -883,7 +853,7 @@
     <div class="popup-container success-popup" id="successPopup" style="display: none;">
         <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
             <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
-            <p>Cập nhật lịch trình bảo vệ thành công!</p>
+            <p>Ghép đôi đề tài-hội đồng thành công!</p>
         </div>
 
     </div>
@@ -900,30 +870,12 @@
 
         <div class="error-message">
             <img class="cancel" src="{{ asset('images/Cancel.png') }}">
-            <p>Thông tin bạn nhập không chính xác <br /> hoặc thiếu!Bạn hãy nhập lại thông
-                tin.</p>
+            <p>Số lượng giảng viên không hợp lệ,<br />vui lòng nhập lại.</p>
         </div>
     </div>
 
     <script>
-        // Lấy phần tử popup và overlay
-        const popup = document.getElementById("Popupupdate");
-        const overlay = document.getElementById("updateOverlay");
 
-        // Hàm mở popup
-        function openPopup() {
-            popup.style.display = "block";
-            overlay.style.display = "block";
-        }
-
-        // Hàm đóng popup
-        function closePopup() {
-            popup.style.display = "none";
-            overlay.style.display = "none";
-        }
-
-        // Sự kiện: Click ra ngoài thì đóng popup
-        overlay.addEventListener("click", closePopup);
 
         function saveResult() {
             // Ẩn popup xác nhận
@@ -939,9 +891,6 @@
                 document.getElementById("confirmOverlay").style.display = "none";
                 document.getElementById("confirmPopup").style.display = "none";
             }, 2000);
-        }
-        function openDateTimePicker() {
-            document.getElementById("datetime").showPicker(); // Hiển thị DateTime Picker
         }
         function showConfirmPopup() {
 
@@ -966,30 +915,30 @@
             }, 2000);
         }
 
-        function validateAndSubmit() {
-            let dateTime = document.getElementById("datetime").value;
-            let location = document.getElementById("location").value;
+        function validateCheckbox() {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+            let isChecked = false;
 
-            if (!dateTime || !location) {
-                showErrorPopup();
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    isChecked = true;
+                }
+            });
+
+            if (!isChecked) {
+                // Hiển thị popup lỗi
+                document.getElementById("errorOverlay").style.display = "block";
+                document.getElementById("errorPopup").style.display = "block";
+
+                // Ẩn popup sau 2 giây
+                setTimeout(() => {
+                    document.getElementById("errorOverlay").style.display = "none";
+                    document.getElementById("errorPopup").style.display = "none";
+                }, 2000);
             } else {
-                saveResult(); // Gọi hàm xử lý lưu dữ liệu
+                showConfirmPopup();
             }
         }
-
-        function showErrorPopup() {
-            document.getElementById("errorOverlay").style.display = "block";
-            document.getElementById("errorPopup").style.display = "block";
-        }
-
-        function hideErrorPopup() {
-            document.getElementById("errorOverlay").style.display = "none";
-            document.getElementById("errorPopup").style.display = "none";
-        }
-
-        // Đóng popup khi click ra ngoài
-        document.getElementById("errorOverlay").addEventListener("click", hideErrorPopup);
-
     </script>
 
 @endsection
