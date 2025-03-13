@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\DangNhap;
+namespace App\Http\Controllers\TaiKhoan;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\DangNhap\TaiKhoan;
 
-class TaikhoanController extends Controller
+class LoginController extends Controller
 {
     /**
      * Hiển thị giao diện đăng nhập

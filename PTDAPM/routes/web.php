@@ -1,15 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DangNhap\TaikhoanController;
+use App\Http\Controllers\TaiKhoan\LoginController;
 use App\Http\Controllers\VanPhongKhoa\VanPhongKhoaController;
 
 Route::get('/', function () {
     return redirect()->route('login.form');
 });
 
-Route::get('/dang-nhap', [TaikhoanController::class, 'index'])->name('login.form'); // Trang hiển thị form đăng nhập
-Route::post('/dang-nhap', [TaikhoanController::class, 'login'])->name('login.process'); // Xử lý đăng nhập
+Route::get('/dang-nhap', [LoginController::class, 'index'])->name('login.form'); // Trang hiển thị form đăng nhập
+Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.process'); // Xử lý đăng nhập
 
 
 Route::middleware(['auth'])->group(function () {
@@ -21,4 +21,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Đăng xuất
-Route::post('/dang-xuat', [TaikhoanController::class, 'logout'])->name('logout');
+Route::post('/dang-xuat', [LoginController::class, 'logout'])->name('logout');
