@@ -540,6 +540,22 @@
             color: blue;
             /* Màu khi di chuột vào */
         }
+
+        .error-message {
+            padding: 30px;
+            display: flex;
+            /* Sử dụng flexbox */
+            align-items: center;
+            /* Căn giữa theo chiều dọc */
+            gap: 10px;
+            /* Khoảng cách giữa icon và văn bản */
+            color: #17488C;
+            /* Màu chữ */
+            font-size: 40px;
+            /* Cỡ chữ */
+            font-weight: 500;
+            font-family: Rasa;
+        }
     </style>
     <div class="frame-1">
         <div class="md-01">MD01</div>
@@ -567,7 +583,7 @@
     <div class="line-8"></div>
     <div class="madetai">Mã đề tài</div>
     <div class="tendetai">Tên đề tài</div>
-    <div class="ketqua" onclick="openPopup()">Kết quả</div>
+    <div class="ketqua" onclick="showPopup()">Kết quả</div>
     <div class="line-9"></div>
     <div class="line-10"></div>
     <div class="line-11"></div>
@@ -576,20 +592,7 @@
     <div class="line-14"></div>
 
     <div class="line-15"></div>
-    <!-- <div class="group-13">
-                                                                            <div class="rectangle-40"></div>
-                                                                            <button class="xuatbaocao" onclick="openPopup()"
-                                                                                style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">
-                                                                                Xuất báo cáo thống kê
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="group-12">
-                                                                            <div class="rectangle-402"></div>
-                                                                            <button class="xuatdanhsach" onclick="showConfirmPopup2()"
-                                                                                style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">Xuất
-                                                                                danh sách đề tài
-                                                                            </button>
-                                                                        </div> -->
+
     <div class="truy-v-n-th-ng-tin2">Cập nhật kết quả đề tài cấp khoa</div>
 
     <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
@@ -602,52 +605,103 @@
 
         <div class="popup-content">
             <div style="display: flex; align-items: center; margin: 20px 0;">
-                <label for="result" style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                word-wrap: break-word;">Kết quả:</label>
-                <input type="text" id="result"
-                    style="width: 455px; height: 52px; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
+                <label for="result"
+                    style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
+                                                                                                                                                                        word-wrap: break-word;">Kết
+                    quả:</label>
+                <input type="text" id="scoreInput"
+                    style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
-            <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="saveResult()">Xác
-                nhận</button>
+            <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="validateScore()"">Xác nhận</button>
+                                                    </div>
+                                                    </div>
+                                                    <!-- Popup thông báo thành công -->
+                                                <div class=" popup-overlay" id="successOverlay" style="display: none;">
         </div>
-    </div>
-    <!-- Popup thông báo thành công -->
-    <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
-    <div class="popup-container success-popup" id="successPopup" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <img class="done" src="{{ asset('images/Done.png') }}" alt="Cập nhật thành công!">
-            <p>Cập nhật thành công!</p>
+        <div class="popup-container success-popup" id="successPopup" style="display: none;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                <img class="done" src="{{ asset('images/Done.png') }}" alt="Cập nhật thành công!">
+                <p>Cập nhật thành công!</p>
+            </div>
         </div>
-    </div>
 
-    </div>
+        {{-- pop lỗi --}}
+        <div class="popup-overlay" id="errorOverlay" style="display: none;"></div>
+        <div class="confirm-popup" id="errorPopup" style="display: none;">
+            <div class="popup-header">
+                <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+                <span>Thông báo</span>
+            </div>
 
-    </div>
+            <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
 
-    <script>
-        function openPopup() {
-            document.getElementById("confirmPopup").style.display = "block";
-        }
+            <div class="error-message">
+                <img class="cancel" src="{{ asset('images/Cancel.png') }}">
+                <p>Điểm không hợp lệ, vui lòng nhập lại</p>
+            </div>
+        </div>
 
-        function closePopup() {
-            document.getElementById("confirmPopup").style.display = "none";
-        }
+        <script>
+            // Hàm mở popup
+            function showPopup() {
+                document.getElementById("confirmOverlay").style.display = "block";
+                document.getElementById("confirmPopup").style.display = "block";
+            }
 
-        function saveResult() {
-            // Ẩn popup xác nhận
-            document.getElementById("confirmPopup").style.display = "none";
-            document.getElementById("confirmOverlay").style.display = "none";
+            // Hàm đóng popup
+            function closePopup() {
+                document.getElementById("confirmOverlay").style.display = "none";
+                document.getElementById("confirmPopup").style.display = "none";
+            }
 
-            // Hiện popup thành công
-            document.getElementById("successOverlay").style.display = "block";
-            document.getElementById("successPopup").style.display = "block";
+            // Lắng nghe sự kiện click vào overlay để đóng popup
+            document.getElementById("confirmOverlay").addEventListener("click", function (event) {
+                // Kiểm tra nếu người dùng nhấn vào overlay (không phải nội dung bên trong)
+                if (event.target === this) {
+                    closePopup();
+                }
+            });
 
-            // Tự động đóng popup sau 2 giây
-            setTimeout(() => {
-                document.getElementById("successOverlay").style.display = "none";
+            document.getElementById("confirmPopup").addEventListener("click", hideErrorPopup);
+            function validateScore() {
+                let input = document.getElementById("scoreInput"); // Lấy ô nhập điểm
+                let value = input.value.trim(); // Loại bỏ khoảng trắng thừa
+
+                // Kiểm tra giá trị nhập vào có phải số hợp lệ không
+                if (!/^\d+(\.\d+)?$/.test(value)) {
+                    showErrorPopup();
+                    input.value = ""; // Xóa nội dung nhập sai
+                } else {
+                    showSuccessPopup();
+                }
+            }
+
+            // Hiển thị popup lỗi
+            function showErrorPopup() {
+                document.getElementById("errorOverlay").style.display = "block";
+                document.getElementById("errorPopup").style.display = "block";
+                setTimeout(closeErrorPopup, 2000);
+            }
+
+            // Đóng popup lỗi
+            function closeErrorPopup() {
+                document.getElementById("errorOverlay").style.display = "none";
+                document.getElementById("errorPopup").style.display = "none";
+            }
+
+            // Hiển thị popup thành công
+            function showSuccessPopup() {
+                document.getElementById("errorOverlay").style.display = "none";
+                document.getElementById("errorPopup").style.display = "none";
+                document.getElementById("successPopup").style.display = "block";
+
+                setTimeout(closeSuccessPopup, 2000);
+            }
+
+            // Đóng popup thành công
+            function closeSuccessPopup() {
                 document.getElementById("successPopup").style.display = "none";
-            }, 2000);
-        }
-    </script>
+            }
+        </script>
 
 @endsection
