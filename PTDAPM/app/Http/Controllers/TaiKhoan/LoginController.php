@@ -14,7 +14,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        return view('FormChung.FormDangNhap'); // Tạo file resources/views/auth/login.blade.php
+        return view('login'); // Tạo file resources/views/auth/login.blade.php
     }
 
     /**
@@ -47,9 +47,9 @@ class LoginController extends Controller
     /**
      * Xử lý đăng xuất
      */
-    // public function logout()
-    // {
-    //     Auth::logout();
-    //     return redirect()->route('login.form'); // Quay lại trang đăng nhập sau khi đăng xuất
-    // }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login.form'); // Quay lại trang đăng nhập sau khi đăng xuất
+    }
 }

@@ -13,12 +13,13 @@ Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.proces
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/vanphongkhoa/capnhatketqua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('vanphongkhoa.capnhatketqua');
-    Route::get('/vanphongkhoa/quanlyphanbien', [VanPhongKhoaController::class, 'quanlyphanbienindex'])->name('vanphongkhoa.quanlyphanbien');
-    Route::get('/vanphongkhoa/truycapthongtin', [VanPhongKhoaController::class, 'truyvanthongtin'])->name('vanphongkhoa.truyvanthongtin');
-    Route::get('/vanphongkhoa/capnhatlichtrinhbaove', [VanPhongKhoaController::class, 'capnhatlichtrinhbaove'])->name('vanphongkhoa.capnhatlichtrinhbaove');
-    Route::get('/vanphongkhoa/ghepdoidetai-hoidong', [VanPhongKhoaController::class, 'ghepdoidetaihoidong'])->name('vanphongkhoa.ghepdoidetaihoidong');
+    Route::prefix('vanphongkhoa')->group(function () {
+        Route::get('/capnhatketqua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('vanphongkhoa.capnhatketqua');
+        Route::get('/quanlyphanbien', [VanPhongKhoaController::class, 'quanlyphanbienindex'])->name('vanphongkhoa.quanlyphanbien');
+        Route::get('/truycapthongtin', [VanPhongKhoaController::class, 'truyvanthongtin'])->name('vanphongkhoa.truyvanthongtin');
+        Route::get('/capnhatlichtrinhbaove', [VanPhongKhoaController::class, 'capnhatlichtrinhbaove'])->name('vanphongkhoa.capnhatlichtrinhbaove');
+        Route::get('/ghepdoidetai-hoidong', [VanPhongKhoaController::class, 'ghepdoidetaihoidong'])->name('vanphongkhoa.ghepdoidetaihoidong');
+        // Đăng xuất
+        Route::post('/dang-xuat', [LoginController::class, 'logout'])->name('logout');
+    });
 });
-
-// Đăng xuất
-Route::post('/dang-xuat', [LoginController::class, 'logout'])->name('logout');
