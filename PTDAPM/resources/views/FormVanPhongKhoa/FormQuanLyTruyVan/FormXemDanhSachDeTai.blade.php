@@ -584,6 +584,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 810px;
+            height: 308px;
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
+        .confirm-popup2 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 985px;
             height: 584px;
             background: #e7f5ff;
@@ -619,6 +636,48 @@
             font-family: Rasa;
             font-weight: 500;
             word-wrap: break-word;
+            padding: 5px 5px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            word-wrap: break-word;
+            margin-top: 30px;
+        }
+
+        .confirm-popup .confirm-btn {
+            margin-left: -100px;
+        }
+
+        .confirm-popup .confirm-btn:hover,
+        .confirm-popup .cancel-btn:hover {
+            background-color: #1d417a;
+        }
+
+        --- .confirm-popup2 .popup-header {
+            font-size: 40px;
+            font-weight: bold;
+            color: #255293;
+            font-weight: 500;
+            word-wrap: break-word
+        }
+
+        .confirm-popup2 .popup-content {
+            font-size: 40px;
+            color: #255293;
+            font-weight: 500;
+            word-wrap: break-word
+        }
+
+        .confirm-popup2 .confirm-btn,
+        .confirm-popup2 .cancel-btn {
+            background-color: #5183CA99;
+            color: #255293;
+            font-size: 36px;
+            width: 200px;
+            font-family: Rasa;
+            font-weight: 500;
+            word-wrap: break-word;
             padding: 10px 10px;
             border: none;
             border-radius: 10px;
@@ -628,8 +687,8 @@
             margin-top: 100px;
         }
 
-        .confirm-popup .confirm-btn:hover,
-        .confirm-popup .cancel-btn:hover {
+        .confirm-popup2 .confirm-btn:hover,
+        .confirm-popup2 .cancel-btn:hover {
             background-color: #1d417a;
         }
 
@@ -843,7 +902,7 @@
     <div class="popup-overlay" id="popupOverlay" style="display: none;"></div>
 
     <!-- Popup chính -->
-    <div class="confirm-popup" id="popupRadio" style="display: none;">
+    <div class="confirm-popup2" id="popupRadio" style="display: none;">
         <div class="popup-header">
             <span>Xuất danh sách đề tài</span>
         </div>
