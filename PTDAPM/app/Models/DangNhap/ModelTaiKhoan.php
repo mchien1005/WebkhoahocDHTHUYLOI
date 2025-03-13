@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\DangNhap;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class TaiKhoan extends Authenticatable
+class ModelTaiKhoan extends Authenticatable
 {
     use HasFactory;
 
-    // Khai báo tên bảng
     protected $table = 'tai_khoan';
 
     // Khóa chính của bảng (vì mặc định Laravel dùng 'id')

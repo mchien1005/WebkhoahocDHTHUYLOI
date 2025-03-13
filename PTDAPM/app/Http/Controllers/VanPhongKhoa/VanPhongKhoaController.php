@@ -13,15 +13,15 @@ class VanPhongKhoaController extends Controller
      */
     public function truyVanThongTin()
     {
-        return view('vanphongkhoa.truyvanthongtin');
+        return view('FormVanPhongKhoa.FormQuanLyTruyVan.FormXemDanhSachDeTai');
     }
     public function capnhatketqua()
     {
-        return view('vanphongkhoa.capnhatketqua');
+        return view('FormVanPhongKhoa.FormQuanLyCapNhatKetQua.FormCapNhatKetQuaDeTaiCapKhoa');
     }
-    public function tintuc()
+    public function quanlyphanbienindex()
     {
-        return view('vanphongkhoa.tintuc');
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
     }
     /**
      * Show the form for creating a new resource.
@@ -34,40 +34,4 @@ class VanPhongKhoaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Khoa $khoa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Khoa $khoa)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Khoa $khoa)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Khoa $khoa)
-    {
-        //
-    }
 }

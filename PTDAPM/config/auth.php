@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\DangNhap\TaiKhoan;
+
 return [
 
     /*
@@ -62,14 +64,10 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\DangNhap\ModelTaiKhoan::class, // Sử dụng Model TaiKhoan thay vì User
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

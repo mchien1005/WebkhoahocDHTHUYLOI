@@ -73,7 +73,7 @@
             filter: brightness(0) invert(1);
         }
 
-        span {
+        .user-info span {
             color: #E7F5FF;
             font-size: 32px;
             font-family: Rasa;
@@ -471,7 +471,7 @@
                         <img src="{{ asset('anhheader/User.png') }}" alt="Profile"
                             style="display: block; margin: auto;">
 
-                        <a href="#">
+                        <a href="{{ route('login.form')}}">
                             <img src="{{ asset('anhheader/Move Up.png') }}" alt="Logout" class="menu-icon" />
                             Đăng xuất
                         </a>

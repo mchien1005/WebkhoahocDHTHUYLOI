@@ -14,7 +14,7 @@ class TaikhoanController extends Controller
      */
     public function index()
     {
-        return view('auth.login'); // Tạo file resources/views/auth/login.blade.php
+        return view('FormChung.FormDangNhap'); // Tạo file resources/views/auth/login.blade.php
     }
 
     /**
@@ -26,7 +26,6 @@ class TaikhoanController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:3',
         ]);
-
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->vai_tro === 'Sinh viên') {
@@ -34,7 +33,7 @@ class TaikhoanController extends Controller
             } elseif ($user->vai_tro === 'Giảng viên') {
                 return redirect()->route('vanphongkhoa.tintuc');
             } elseif ($user->vai_tro === 'Admin') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('vanphongkhoa.capnhatketqua');
             } elseif ($user->vai_tro === 'Nhân viên') {
                 return redirect()->route('vanphongkhoa.tintuc');
             }
