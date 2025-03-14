@@ -9,6 +9,7 @@ class TaiKhoan extends Authenticatable
 {
     use HasFactory;
 
+    // Khai báo tên bảng
     protected $table = 'tai_khoan';
 
     // Khóa chính của bảng (vì mặc định Laravel dùng 'id')
