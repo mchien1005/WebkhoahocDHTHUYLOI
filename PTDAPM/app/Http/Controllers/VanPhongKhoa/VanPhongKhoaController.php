@@ -31,6 +31,26 @@ class VanPhongKhoaController extends Controller
     {
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong');
     }
+    public function xemBaoCao()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemBaoCao');
+    }
+    public function phanBienVaBaoVe()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
+    }
+    public function tintuc()
+    {
+        return view('FormVanPhongKhoa.FormTinTuc.FormTinTuc');
+    }
+    public function chiaHoiDong()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChiaHoiDong');
+    }
+    public function chonHoiDong()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChonHoiDong');
+    }
     /**
      * Show the form for creating a new resource.
      */
