@@ -11,6 +11,26 @@ class VanPhongKhoaController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function truyVanThongTin()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyTruyVan.FormXemDanhSachDeTai');
+    }
+    public function capnhatketqua()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyCapNhatKetQua.FormCapNhatKetQuaDeTaiCapKhoa');
+    }
+    public function quanlyphanbienindex()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
+    }
+    public function capnhatlichtrinhbaove()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormCapNhatLichTrinhBaoVe');
+    }
+    public function ghepdoidetaihoidong()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong');
+    }
     public function xemBaoCao()
     {
         return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemBaoCao');
@@ -22,7 +42,6 @@ class VanPhongKhoaController extends Controller
     public function tintuc()
     {
         return view('FormVanPhongKhoa.FormTinTuc.FormTinTuc');
-
     }
     public function chiaHoiDong()
     {
@@ -39,7 +58,8 @@ class VanPhongKhoaController extends Controller
     {
         //
     }
-}
 
-    
-    
+    /**
+     * Store a newly created resource in storage.
+     */
+}
