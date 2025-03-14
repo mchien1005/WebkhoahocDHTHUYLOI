@@ -78,7 +78,7 @@
             font-size: 32px;
             font-family: Rasa;
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
         }
 
         /* Header styles */
@@ -169,7 +169,7 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            font-size: 14px;
+            font-size: 32px;
         }
 
         .dropdown-content a:hover {
@@ -292,10 +292,10 @@
             align-items: center;
         }
 
-        .news-link img {
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
+        button img {
+            width: 80px;
+            height: 59px;
+            margin-left: 20px;
         }
 
         .divider {
@@ -304,9 +304,12 @@
             margin: 25px 0;
         }
 
-        a.text-link {
-            color: #17478c;
-            text-decoration: underline;
+        button a {
+            backgroud-color: white;
+            font-size: 24px;
+            font-weight: 500;
+            height: 59px;
+
         }
 
         /* Media queries for laptop screens */
@@ -470,29 +473,34 @@
                     <div class="dropdown-content">
                         <img src="{{ asset('anhheader/User.png') }}" alt="Profile"
                             style="display: block; margin: auto;">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                style="background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 30px;">
+                                <img src="{{ asset('anhheader/Move Up.png') }}" alt="Logout" class="menu-icon" />
+                                <a class="logout" ">Đăng
+                                    xuất</a>
+                            </button>
+                        </form>
 
-                        <a href="{{ route('login.form')}}">
-                            <img src="{{ asset('anhheader/Move Up.png') }}" alt="Logout" class="menu-icon" />
-                            Đăng xuất
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Content container (sidebar + main content) -->
-        <div class="content-container">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                @yield('sidebar')
-            </div>
+        <div class=" content-container">
+                                    <!-- Sidebar -->
+                                    <div class="sidebar">
+                                        @yield('sidebar')
+                                    </div>
 
-            <!-- Main Content -->
-            <div class="main-content">
-                @yield('content')
-            </div>
-        </div>
-    </div>
+                                    <!-- Main Content -->
+                                    <div class="main-content">
+                                        @yield('content')
+                                    </div>
+                    </div>
+                </div>
 </body>
 
 </html>

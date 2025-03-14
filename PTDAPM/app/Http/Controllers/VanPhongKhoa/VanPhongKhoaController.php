@@ -11,25 +11,26 @@ class VanPhongKhoaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function truyVanThongTin()
+    public function xemBaoCao()
     {
-        return view('FormVanPhongKhoa.FormQuanLyTruyVan.FormXemDanhSachDeTai');
+        return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemBaoCao');
     }
-    public function capnhatketqua()
-    {
-        return view('FormVanPhongKhoa.FormQuanLyCapNhatKetQua.FormCapNhatKetQuaDeTaiCapKhoa');
-    }
-    public function quanlyphanbienindex()
+    public function phanBienVaBaoVe()
     {
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
     }
-    public function capnhatlichtrinhbaove()
+    public function tintuc()
     {
-        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormCapNhatLichTrinhBaoVe');
+        return view('FormVanPhongKhoa.FormTinTuc.FormTinTuc');
+
     }
-    public function ghepdoidetaihoidong()
+    public function chiaHoiDong()
     {
-        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong');
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChiaHoiDong');
+    }
+    public function chonHoiDong()
+    {
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChonHoiDong');
     }
     public function xemBaoCao()
     {
@@ -58,8 +59,7 @@ class VanPhongKhoaController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
 }
+
+    
+    

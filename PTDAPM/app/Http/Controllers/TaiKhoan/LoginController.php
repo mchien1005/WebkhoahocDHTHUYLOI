@@ -5,51 +5,43 @@ namespace App\Http\Controllers\TaiKhoan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Models\DangNhap\TaiKhoan;
+use App\Models\TaiKhoan;
 
 class LoginController extends Controller
 {
-    /**
-     * Hiển thị giao diện đăng nhập
-     */
     public function index()
     {
-        return view('FormChung.FormDangNhap'); // Tạo file resources/views/auth/login.blade.php
+        return view('login');
     }
 
-    /**
-     * Xử lý đăng nhập
-     */
     public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|min:3',
         ]);
-        if (Auth::attempt($credentials)) {
+
+        if (Auth::attempt((['email' => $credentials['email'], 'password' => $credentials['password']]))) {
             $user = Auth::user();
             if ($user->vai_tro === 'Sinh viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('FormSinhVien.student.index');
             } elseif ($user->vai_tro === 'Giảng viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('tintuc.index');
             } elseif ($user->vai_tro === 'Admin') {
                 return redirect()->route('vanphongkhoa.tintuc');
             } elseif ($user->vai_tro === 'Nhân viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('phongdaotao.tintuc');
             }
-            // else {
-            //     return redirect()->route('home'); // Điều hướng mặc định
-            // }
         }
         return back()->withErrors(['email' => 'Email hoặc mật khẩu không chính xác!'])->withInput();
     }
 
-    /**
-     * Xử lý đăng xuất
-     */
-    // public function logout()
-    // {
-    //     Auth::logout();
-    //     return redirect()->route('login.form'); // Quay lại trang đăng nhập sau khi đăng xuất
-    // }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/dang-nhap')->with('success', 'Bạn đã đăng xuất thành công!');
+    }
 }
