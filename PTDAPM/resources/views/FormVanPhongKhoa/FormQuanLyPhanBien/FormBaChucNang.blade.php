@@ -2,15 +2,15 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="">
-            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-            <span>Tin tức</span>
+        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
+                    <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+        <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="">
-            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
-            <span>Báo cáo đề tài</span>
+        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
+                    <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+        <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item active">
@@ -22,7 +22,7 @@
     <div class="menu-item">
         <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
             <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả</span>
+            <span>Cập nhật kết quả <br />trình bày bảo vệ</span>
         </a>
     </div>
     <div class="menu-item">
@@ -97,7 +97,7 @@
         <div class="grid-container">
             <!-- Hàng trên với 2 button -->
             <div class="row">
-                <form action="{{ route('vanphongkhoa.ghepdoidetaihoidong') }}" method="GET">
+                <form action="{{ route('vanphongkhoa.chiahoidong') }}" method="GET">
                     <button class="custom-button">Chia hội đồng phản biện</button>
                 </form>
                 <form action="{{ route('vanphongkhoa.ghepdoidetaihoidong') }}" method="GET">

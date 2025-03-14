@@ -2,13 +2,13 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="">
+        <a href="<a href=" {{ route('vanphongkhoa.tintuc') }}"">
             <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
             <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="">
+        <a href="<a href=" {{ route('vanphongkhoa.xembaocao') }}"">
             <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
             <span>Báo cáo đề tài</span>
         </a>
@@ -22,7 +22,7 @@
     <div class="menu-item">
         <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
             <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả</span>
+            <span>Cập nhật kết quả <br />trình bày bảo vệ</span>
         </a>
     </div>
     <div class="menu-item">
@@ -821,8 +821,8 @@
     <div class="group-12">
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateCheckbox()""
-                                                                                    style=" border: none; background:
-            transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                style=" border: none;
+            background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>

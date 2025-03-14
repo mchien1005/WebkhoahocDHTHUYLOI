@@ -2,27 +2,27 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="">
-            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-            <span>Tin tức</span>
+        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
+                    <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+        <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="">
-            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
-            <span>Báo cáo đề tài</span>
+        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
+                    <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+        <span>Báo cáo đề tài</span>
         </a>
     </div>
-    <div class="menu-item">
-        <a href="{{route('vanphongkhoa.quanlyphanbien')}}">
+    <div class="menu-item active">
+        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
     </div>
-    <div class="menu-item active">
+    <div class="menu-item">
         <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
             <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả</span>
+            <span>Cập nhật kết quả <br />trình bày bảo vệ</span>
         </a>
     </div>
     <div class="menu-item">
@@ -607,16 +607,17 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                        word-wrap: break-word;">Kết
+                                                                                                                                                                                        word-wrap: break-word;">Kết
                     quả:</label>
                 <input type="text" id="scoreInput"
                     style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
             <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="validateScore()"">Xác nhận</button>
-                                                    </div>
-                                                    </div>
-                                                    <!-- Popup thông báo thành công -->
-                                                <div class=" popup-overlay" id="successOverlay" style="display: none;">
+                                                                    </div>
+                                                                    </div>
+                                                                    <!-- Popup thông báo thành công -->
+                                                                <div class=" popup-overlay" id="successOverlay"
+                style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
