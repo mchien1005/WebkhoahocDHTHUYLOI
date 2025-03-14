@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaiKhoan\LoginController;
 use App\Http\Controllers\GiangVien\TintucController;
+use App\Http\Controllers\GiangVien\DangKyNghienCuuController;
 use App\Http\Controllers\GiangVien\DetainghiencuuController;
+use App\Http\Controllers\GiangVien\BaocaonghiencuuController;
+use App\Http\Controllers\GiangVien\LoimoihuongdanController;
 
 
 // Trang chủ, chuyển hướng về đăng nhập
@@ -23,5 +26,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/tin-tuc', [TintucController::class, 'show'])->name('tintuc.show');
     
+    Route::get('/dang-ky-nghien-cuu', [DangKyNghienCuuController::class, 'index'])->name('dangkynghiencuu.index');
+
+    Route::get('/dangkynghiencuu', [DangKyNghienCuuController::class, 'show'])->name('dangkynghiencuu.show');    
+
+    Route::get('/de-tai-nghien-cuu', [DetainghiencuuController::class, 'index'])->name('detainghiencuu.index');
+
+    Route::get('/bao-cao-de-tai', [BaocaonghiencuuController::class, 'index'])->name('baocaodetai.index');
+
+    Route::get('/loi-moi-huong-dan', [LoimoihuongdanController::class, 'index'])->name('loimoihuongdan.index');
 });
 });
