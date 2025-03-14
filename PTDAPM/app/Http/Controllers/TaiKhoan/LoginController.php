@@ -26,7 +26,7 @@ class LoginController extends Controller
             if ($user->vai_tro === 'Sinh viên') {
                 return redirect()->route('FormSinhVien.student.index');
             } elseif ($user->vai_tro === 'Giảng viên') {
-                return redirect()->route('FormGiangVien.admin');
+                return redirect()->route('tintuc.index');
             } elseif ($user->vai_tro === 'Admin') {
                 return redirect()->route('vanphongkhoa.tintuc');
             } elseif ($user->vai_tro === 'Nhân viên') {
