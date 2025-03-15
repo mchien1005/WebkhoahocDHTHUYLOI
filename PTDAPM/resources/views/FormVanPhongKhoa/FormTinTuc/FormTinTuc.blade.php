@@ -3,13 +3,14 @@
 @section('sidebar')
     <div class="menu-item active">
         <a href=" {{ route('vanphongkhoa.tintuc') }}"">
-                                <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+                                    <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon"
+            class="sidebar-icon" />
         <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
         <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
-                                <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon"
+                                    <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon"
             class="sidebar-icon" />
         <span>Báo cáo đề tài</span>
         </a>
