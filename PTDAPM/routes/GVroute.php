@@ -24,9 +24,12 @@ Route::middleware(['auth'])->group(function () {
     // Trang tin tức dành cho sinh viên
     Route::get('/tintuc', [TintucController::class, 'index'])->name('tintuc.index');
 
-    Route::get('/tin-tuc', [TintucController::class, 'show'])->name('tintuc.show');
+    Route::get('/tin-tuc/{id}', [TintucController::class, 'show'])->name('tintuc.show');
     
     Route::get('/dang-ky-nghien-cuu', [DangKyNghienCuuController::class, 'index'])->name('dangkynghiencuu.index');
+
+    Route::post('/dang-ky-nghien-cuu/dangky-dinhhuong', [DangKyNghienCuuController::class, 'DangKyDinhHuongNghienCuu'])
+    ->name('giangvien.dangky-dinhhhuong');
 
     Route::get('/dangkynghiencuu', [DangKyNghienCuuController::class, 'show'])->name('dangkynghiencuu.show');    
 
