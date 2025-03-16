@@ -40,7 +40,8 @@
             flex-direction: column;
             align-items: center;
             gap: 30px;
-            padding: 60px;
+            padding: 20px;
+            margin-left: 100px;
         }
 
         .row {
@@ -67,12 +68,13 @@
             box-shadow: none;
             padding: 10px;
             margin-right: 143px;
-            margin-top: 100px;
+            margin-top: 50px;
+
         }
 
         .wide {
             width: 320px;
-            margin-top: 143px;
+            margin-top: 100px;
         }
 
         /* Responsive */

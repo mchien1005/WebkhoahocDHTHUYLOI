@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/lich-trinh/{id}/update', [VanPhongKhoaController::class, 'updatelichtrinh'])->name('lich_trinh.update');
 
     Route::get('/ghepdoidetai-hoidong', [VanPhongKhoaController::class, 'ghepdoidetaihoidong'])->name('vanphongkhoa.ghepdoidetaihoidong');
+    Route::get('/ghepdoidetai-hoidong-luu', [VanPhongKhoaController::class, 'storeghepdoidetai'])->name('ghepdoi.luu');
 
     Route::get('/tintuc', [VanPhongKhoaController::class, 'tintuc'])->name('vanphongkhoa.tintuc');
     Route::get('/phanbienvabaove', [VanPhongKhoaController::class, 'phanBienVaBaoVe'])->name('vanphongkhoa.phanbienvabaove');

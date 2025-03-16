@@ -154,7 +154,18 @@ class VanPhongKhoaController extends Controller
     }
     public function ghepdoidetaihoidong()
     {
-        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong');
+        $deTais = DeTai::all();
+        $hoiDongs = HoiDongDanhGia::all();
+        return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormGhepDoiDeTai-HoiDong', compact('deTais', 'hoiDongs'));
+    }
+    public function storeghepdoidetai(Request $request)
+    {
+        foreach ($request->ghep_doi as $ma_de_tai => $ma_hd) {
+            HoiDongDanhGia::where('ma_de_tai', $ma_de_tai)
+                ->update(['ma_hd' => $ma_hd]);
+        }
+
+        return response()->json(['success' => true]);
     }
     public function xemBaoCao()
     {
