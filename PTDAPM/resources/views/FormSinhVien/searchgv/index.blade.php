@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('sidebar')
 <div class="menu-item">
     <a href="{{ route('FormSinhVien.student.index') }}">
@@ -6,7 +7,7 @@
         <span>Tin tức</span>
     </a>
 </div>
-<div class="menu-item ">
+<div class="menu-item">
     <a href="{{ route('FormSinhVien.detai.index') }}">
         <img src="{{ asset('img/Saddle Stitched Booklet.png') }}" alt="Research Icon" class="sidebar-icon" />
         <span>Đề tài nghiên cứu</span>
@@ -132,44 +133,49 @@
 }
 </style>
 
-<body class="p-3" style="background-color: #E6F0FA;">
-
-    <!-- Bọc toàn bộ nội dung trong một div căn giữa -->
+<body class="" style="background-color: #E6F0FA;">
     <div class="container d-flex flex-column align-items-start">
 
-        <!-- Ô tìm kiếm -->
-        <div class="mb-3 search-container">
-            <input type="text" class="form-control"
-                style="width: 524px; background-color: rgba(81, 131, 202, 0.6);color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;">
-            <button type="submit" class="btn" style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 32px; border-radius: 18px; border: none; 
-               height: 51px; width: 152px;">
-                Tìm kiếm
-            </button>
-        </div>
+        <!-- Form tìm kiếm -->
+        <form action="{{ route('FormSinhVien.searchgv.index') }}" method="GET">
+            <div class="mb-3 search-container">
+                <input type="text" class="form-control" name="search"
+                    style="width: 524px; background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;"
+                    placeholder="Tìm kiếm giảng viên" value="{{ request('search') }}">
+                <button type="submit" class="btn"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 32px; border-radius: 18px; border: none; height: 51px; width: 152px;">
+                    Tìm kiếm
+                </button>
+            </div>
 
-        <!-- Dropdown lĩnh vực nghiên cứu -->
-        <div class="mb-3">
-            <select name="field" class="form-control"
-                style="width: 524px; background-color: rgba(81, 131, 202, 0.6);color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;">
-                <option value="">-- Chọn lĩnh vực nghiên cứu --</option>
-                <option value="Khoa học máy tính" {{ request('field') == 'Khoa học máy tính' ? 'selected' : '' }}>Khoa
-                    học
-                    máy tính</option>
-                <option value="Trí tuệ nhân tạo" {{ request('field') == 'Trí tuệ nhân tạo' ? 'selected' : '' }}>Trí tuệ
-                    nhân
-                    tạo</option>
-                <option value="Kỹ thuật phần mềm" {{ request('field') == 'Kỹ thuật phần mềm' ? 'selected' : '' }}>Kỹ
-                    thuật
-                    phần mềm</option>
-                <option value="An toàn thông tin" {{ request('field') == 'An toàn thông tin' ? 'selected' : '' }}>An
-                    toàn
-                    thông tin</option>
-                <option value="Mạng máy tính" {{ request('field') == 'Mạng máy tính' ? 'selected' : '' }}>Mạng máy tính
-                </option>
-            </select>
-        </div>
+            <!-- Dropdown lĩnh vực nghiên cứu -->
+            <div class="mb-3">
+                <select name="field" class="form-control"
+                    style="width: 524px; background-color: rgba(81, 131, 202, 0.6);color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;">
+                    <option value="">-- Chọn lĩnh vực nghiên cứu --</option>
+                    @foreach ($fields as $field)
+                    <option value="{{ $field }}" {{ request('field') == $field ? 'selected' : '' }}>
+                        {{ $field }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
 
-        <div class="container mt-4 table-container">
+
+        </form>
+
+        <!-- Thông báo lỗi -->
+        @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
+
+        <!-- Kết quả tìm kiếm -->
+        <div class="container mt-4 table-container" >
+            @if($giangVien->isEmpty())
+            <p>Không có giảng viên phù hợp với tiêu chí tìm kiếm.</p>
+            @else
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -181,85 +187,90 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($giangVien as $gv)
                         <tr>
+                            <td class="text-center-col">{{ $gv->ma_gv }}</td>
                             <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#GVchitietModal">GV01</a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#GVchitietModal{{ $gv->ma_gv }}"
+                                    style="color: #17488C; display: inline-block; cursor: pointer;">{{ $gv->ten_gv }}</a>
                             </td>
-                            <td class="text-center-col">Nguyen Van B</td>
-                            <td class="text-center-col">Trí tuệ nhân tạo</td>
+                            <td class="text-center-col">{{ $gv->linh_vuc_nc }}</td>
                             <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal">Gửi lời mời hướng
-                                    dẫn</a>
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal">
+                                    Gửi lời mời hướng dẫn
+                                </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#DTchitietModal">GV02</a>
-                            </td>
-                            <td class="text-center-col">Nguyen Van B</td>
-                            <td class="text-center-col">Khoa học</td>
-                            <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal">Gửi lời mời hướng
-                                    dẫn</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#DTchitietModal">GV03</a>
-                            </td>
-                            <td class="text-center-col">Nguyen Van B</td>
-                            <td class="text-center-col">Học sâu</td>
-                            <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal">Gửi lời mời hướng
-                                    dẫn</a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            @endif
         </div>
-
     </div>
-    <!-- GVchitietModal Bootstrap -->
-    <div class="modal fade" id="GVchitietModal" tabindex="-1" aria-labelledby="GVchitietModalLabel" aria-hidden="true">
+
+    <!-- Modals cho từng giảng viên -->
+    @foreach($giangVien as $gv)
+    <!-- Modal Chi tiết Giảng viên -->
+    <div class="modal fade" id="GVchitietModal{{ $gv->ma_gv }}" tabindex="-1"  style="color: #17488C; border-radius: 18px ;font-size:20px"
+        aria-labelledby="GVchitietModalLabel{{ $gv->ma_gv }}" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content"
-                style="background-color: #E7F5FF; border-radius: 0; display: flex; align-items: center; justify-content: center;">
-                <div class="modal-body d-flex flex-column justify-content-center">
+                style="background-color: #E7F5FF; border-radius: 0; display: flex; justify-content: flex-start;">
+                <div class="modal-body d-flex flex-column text-start">
                     <div class="row">
-                        <!-- Cột hình ảnh -->
-                        <div class="col-md-3 d-flex justify-content-center align-items-start">
-                            <!-- Dịch ảnh lên trên -->
-                            <div style="width: 130px; height: 160px; background-color: rgba(81, 131, 202, 0.6); 
-                                display: flex; justify-content: center; align-items: center; border-radius: 8px;">
+                        <div class="col-md-2 d-flex justify-content-start align-items-start">
+                            <div
+                                style="width: 130px; height: 160px; background-color: rgba(81, 131, 202, 0.6); display: flex; justify-content: center; align-items: center; border-radius: 8px;">
                                 <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="100" height="100"
                                     style="border-radius: 45%;">
                             </div>
                         </div>
-
-                        <!-- Cột thông tin -->
-                        <div class="col-md-9">
-                            <p><strong>Họ và tên:</strong> Nguyễn Văn B</p>
-                            <p><strong>Mã giảng viên:</strong> GV01 &nbsp;&nbsp;&nbsp;&nbsp;
-                                <strong>Mã khoa:</strong> CSE384
-                            </p>
-                            <p><strong>Học vị:</strong> Thạc sĩ</p>
-                            <p><strong>Số điện thoại:</strong> 0867078917</p>
-                            <p><strong>Email:</strong> NguyenVanB@email.com</p>
-                            <p><strong>Lĩnh vực nghiên cứu:</strong> Trí tuệ nhân tạo</p>
+                        <div class="col-md-10">
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-3 fw-bold">Họ và tên:</div>
+                                <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->ten_gv }}</div>
+                            </div>
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-3 fw-bold">Mã giảng viên:</div>
+                                <div class="col-md-3 text-wrap" style="word-break: break-word;">{{ $gv->ma_gv }}</div>
+                                <div class="col-md-2 fw-bold">Mã khoa:</div>
+                                <div class="col-md-4 text-wrap" style="word-break: break-word;">{{ $gv->ma_khoa }}</div>
+                            </div>
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-3 fw-bold">Học vị:</div>
+                                <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->hoc_vi }}</div>
+                            </div>
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-3 fw-bold">Số điện thoại:</div>
+                                <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->sdt }}</div>
+                            </div>
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-3 fw-bold">Email:</div>
+                                <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->email }}</div>
+                            </div>
+                            <div class="row g-0"  style="color: #17488C;">
+                                <div class="col-md-4 fw-bold">Lĩnh vực nghiên cứu:</div>
+                                <div class="col-md-8 text-wrap" style="word-break: break-word; ;font-size:20px">{{ $gv->linh_vuc_nc }}
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <!-- Định hướng nghiên cứu -->
-                    <p><strong>Định hướng nghiên cứu:</strong> Ứng dụng AI trong chẩn đoán bệnh qua
-                        hình ảnh y khoa:
-                        Phát triển mô hình AI hỗ trợ bác sĩ phân tích X-quang, MRI, CT.
-                        Nghiên cứu độ chính xác của AI so với chẩn đoán truyền thống.
-                        Mục tiêu cải thiện chất lượng và tốc độ chẩn đoán y khoa.
-                    </p>
-
-                    <!-- Số sinh viên hướng dẫn -->
-                    <p><strong>Số sinh viên hướng dẫn:</strong> 5</p>
+                    <div class="row g-0 mt-2" >
+                        <div class="col-md-12">
+                            <p><strong>Định hướng nghiên cứu:</strong>
+                                <span class="text-wrap" style="word-break: break-word;color: #17488C ;font-size:20px">{{ $gv->dinh_huong_nc }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row g-0">
+                        <div class="col-md-12">
+                            <p><strong>Số sinh viên hướng dẫn:</strong>
+                                <span class="text-wrap"
+                                    style="word-break: break-word; color: #17488C;font-size:20px">{{ $gv->so_sv_huong_dan }}</span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -281,7 +292,7 @@
                         <label class="col-md-4 col-form-label fw-bold " style="text-decoration: none !important;">Tên
                             giảng viên:</label>
                         <div class="col-md-8">
-                            <span class="fw-bold " style="text-decoration: none !important;">Nguyễn Văn B</span>
+                            <span class="fw-bold " style="text-decoration: none !important; color: #225293;">{{ $gv->ten_gv }}</span>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -289,7 +300,7 @@
                             sinh viên:</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control bg-primary-subtle " placeholder="Nhập tên sinh viên"
-                                style="text-decoration: none !important;">
+                                style="text-decoration: none !important;" value="">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -349,7 +360,7 @@
                         <label class="col-md-4 col-form-label fw-bold " style="text-decoration: none !important;">Tên
                             giảng viên:</label>
                         <div class="col-md-8">
-                            <span class="fw-bold " style="text-decoration: none !important;">Nguyễn Văn B</span>
+                            <span class="fw-bold " style="text-decoration: none !important; color:#225293">{{ $gv->ten_gv }}</span>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -396,4 +407,6 @@
             </div>
         </div>
     </div>
-    @endsection
+    @endforeach
+</body>
+@endsection

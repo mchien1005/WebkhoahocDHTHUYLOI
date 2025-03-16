@@ -34,7 +34,6 @@
         <div class="row">
             <!-- Cột chứa nội dung -->
             <div class="col-md-9">
-                <img src="{{ asset('img/nhakhoahoc.png') }}" alt="Nhà khoa học" class="news-image" />
                 <p><strong>Mã tin tức:</strong> {{ $student->ma_tin_tuc }}</p>
 
                 <p><strong>Tiêu đề:</strong> {{ $student->tieu_de }}</p>
