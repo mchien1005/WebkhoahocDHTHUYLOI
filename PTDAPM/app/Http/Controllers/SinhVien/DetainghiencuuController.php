@@ -12,9 +12,10 @@ class DetainghiencuuController extends Controller
      */
     public function index()
     {
-        
-        return view('FormSinhVien.detai.index');
+        $deTais = DeTai::all(); // Lấy tất cả đề tài từ database
+        return view('FormSinhVien.detai.index', compact('deTais'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -36,10 +37,11 @@ class DetainghiencuuController extends Controller
      * Display the specified resource.
      */
     public function show($id)
-    {
-        $deTai = DeTai::findOrFail($id);
-        return view('de_tai.chi_tiet', compact('deTai'));
-    }
+{
+    $deTai = DeTai::findOrFail($id); // Lấy một đề tài theo ID
+    return view('FormSinhVien.detai.show', compact('deTai')); // Chuyển sang trang chi tiết
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -64,19 +66,7 @@ class DetainghiencuuController extends Controller
     {
         //
     }
-    public function nopBaoCao(Request $request)
-{
-    // Kiểm tra file có được gửi lên không
-    if ($request->hasFile('file')) {
-        $file = $request->file('file');
-        $filename = time() . '_' . $file->getClientOriginalName();
-        $file->storeAs('baocaos', $filename, 'public');
 
-        return response()->json(['success' => true, 'message' => 'Nộp báo cáo thành công!']);
-    }
-
-    return response()->json(['success' => false, 'message' => 'Không có tệp nào được chọn!']);
-}
 
 
 }
