@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller; // Quan trọng!
 use Illuminate\Http\Request;
 use App\Models\TinTuc;
 
-class SinhVienController extends Controller
+class TTSinhVienController extends Controller
 {
     public function index()
-    {
-        $student = TinTuc::all();
-        return view('FormSinhVien.student.index', compact('student'));
-    }
+{
+    $students = TinTuc::all(); // Đổi tên biến thành số nhiều
+    return view('FormSinhVien.student.index', compact('students'));
+}
+
 
     public function show($ma_tin_tuc)
     {
@@ -26,4 +27,5 @@ class SinhVienController extends Controller
 
         return view('FormSinhVien.student.detail', compact('student'));
     }
+    
 }
