@@ -2,19 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
-                        <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-        <span>Tin tức</span>
+        <a href="{{route('vanphongkhoa.tintuc')}}">
+            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+            <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
-                        <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
-        <span>Báo cáo đề tài</span>
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
+            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+            <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -35,398 +35,6 @@
 
 @section('content')
     <style>
-        .frame-1 {
-            background: rgba(81, 131, 202, 0.6);
-            width: 1380px;
-            height: 481.62px;
-            position: absolute;
-            left: 420px;
-            top: 307.94px;
-            overflow: hidden;
-        }
-
-        .md-01 {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 16px;
-            top: 19px;
-        }
-
-        .nghi-n-c-u-v-s-ti-n-h-a-c-a-virus-trong-t-ng-lai {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 116px;
-            top: 12px;
-        }
-
-        .md-02 {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 16px;
-            top: 100px;
-        }
-
-        .md-04 {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 16px;
-            top: 236px;
-        }
-
-        .md-03 {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 16px;
-            top: 170px;
-        }
-
-        .ng-d-ng-tr-tu-nh-n-t-o-trong-nh-n-di-n-khu-n-m-t {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 117px;
-            top: 88px;
-        }
-
-        .ph-t-tri-n-thu-t-to-n-h-c-m-y-d-o-n-gi-c-phi-u {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 116px;
-            top: 158px;
-        }
-
-        .t-i-u-h-a-hi-u-su-t-m-ng-b-ng-thu-t-to-n-h-c-s-u {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 111px;
-            top: 228.06px;
-        }
-
-        .rectangle-38 {
-            background: rgba(37, 82, 147, 0.87);
-            width: 1380px;
-            height: 64.15px;
-            position: absolute;
-            left: 420px;
-            top: 242.86px;
-        }
-
-        .line-8 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 520.56px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-        .madetai {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 430px;
-            top: 263px;
-            width: 107.23px;
-            height: 30.14px;
-        }
-
-        .tendetai {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            position: absolute;
-            left: 556.1px;
-            top: 263.31px;
-            width: 200.32px;
-            height: 30.14px;
-        }
-
-        .ngaydangky {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 800px;
-            top: 260.53px;
-            width: 200px;
-            height: 29.67px;
-        }
-
-        .trangthai {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 980px;
-            top: 260.53px;
-            width: 115.32px;
-            height: 30.14px;
-        }
-
-        .giangvien {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 1140px;
-            top: 260.53px;
-            width: 88.39px;
-            height: 29.75px;
-        }
-
-        .sinhvien {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 1360px;
-            top: 260.53px;
-            width: 65.88px;
-            height: 29.75px;
-        }
-
-        .ketquacaptruong {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 1520px;
-            top: 245px;
-            width: 65.88px;
-            height: 29.75px;
-        }
-
-        .ketquacapkhoa {
-            color: #e7f5ff;
-            text-align: left;
-            font-family: "Inter-SemiBold", sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            position: absolute;
-            left: 1690px;
-            top: 245px;
-            width: 65.88px;
-            height: 29.75px;
-        }
-
-        .line-9 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #ffffff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 780.39px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(89.684deg) scale(1, 1);
-        }
-
-        .line-10 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1420px;
-            height: 0px;
-            position: absolute;
-            left: 410px;
-            top: 375.97px;
-            transform-origin: 0 0;
-            transform: rotate(0.109deg) scale(1, 1);
-        }
-
-        .line-11 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1420px;
-            height: 0px;
-            position: absolute;
-            left: 410px;
-            top: 446.64px;
-            transform-origin: 0 0;
-            transform: rotate(0.313deg) scale(1, 1);
-        }
-
-        .line-12 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1420px;
-            height: 0px;
-            position: absolute;
-            left: 396px;
-            top: 513.15px;
-            transform-origin: 0 0;
-            transform: rotate(0.455deg) scale(1, 1);
-        }
-
-        .line-13 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1420px;
-            height: 0px;
-            position: absolute;
-            left: 410px;
-            top: 586.94px;
-            transform-origin: 0 0;
-            transform: rotate(0.189deg) scale(1, 1);
-        }
-
-        .line-14 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1420px;
-            height: 0px;
-            position: absolute;
-            left: 410px;
-            top: 657.6px;
-            transform-origin: 0 0;
-            transform: rotate(0.112deg) scale(1, 1);
-        }
-
-        .line-19 {
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 930px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-        .line-20 {
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 1100.56px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-
-
-        .line-21 {
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 1300.56px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-
-        .line-22 {
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 1450.56px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-        .line-23 {
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 549.77px;
-            height: 0px;
-            position: absolute;
-            left: 1650.56px;
-            top: 242.86px;
-            transform-origin: 0 0;
-            transform: rotate(90deg) scale(1, 1);
-        }
-
-
-        .line-15 {
-            margin-top: -1px;
-            border-style: solid;
-            border-color: #e7f5ff;
-            border-width: 1px 0 0 0;
-            width: 1449.01px;
-            height: 0px;
-            position: absolute;
-            left: 410px;
-            top: 724.12px;
-            transform-origin: 0 0;
-            transform: rotate(0.168deg) scale(1, 1);
-        }
-
         .group-13 {
             width: 345px;
             height: 92px;
@@ -439,8 +47,8 @@
             width: 345px;
             height: 92px;
             position: absolute;
-            left: 608px;
-            top: 879px;
+            left: 558px;
+            top: 679px;
         }
 
         .xuatbaocao {
@@ -450,8 +58,8 @@
             font-size: 36px;
             font-weight: 500;
             position: absolute;
-            left: 639px;
-            top: 881px;
+            left: 589px;
+            top: 681px;
             width: 297.05px;
             height: 56.25px;
         }
@@ -468,8 +76,8 @@
             width: 345px;
             height: 92px;
             position: absolute;
-            left: 1056px;
-            top: 879px;
+            left: 1006px;
+            top: 679px;
         }
 
         .xuatdanhsach {
@@ -480,8 +88,8 @@
             font-size: 36px;
             font-weight: 500;
             position: absolute;
-            left: 1100px;
-            top: 883px;
+            left: 1050px;
+            top: 683px;
             width: 253.28px;
             height: 56.25px;
         }
@@ -504,22 +112,26 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 862px;
-            height: 930px;
+            width: 95%;
+            /* Chiếm 90% chiều rộng màn hình */
+            max-width: 862px;
+            /* Giữ nguyên kích thước tối đa */
+            height: 95%;
+            /* Chiếm 80% chiều cao màn hình */
+            max-height: 887px;
+            /* Giữ nguyên kích thước tối đa */
             background: #e7f5ff;
             border: 2px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             z-index: 1000;
             overflow: auto;
             border-radius: 10px;
-            /* color: #5183ca; */
-            font-weight: bolder;
             color: #255293;
-            font-size: 20px;
+            font-size: 16px;
             font-family: "Rasa", sans-serif;
             font-weight: 500;
             word-wrap: break-word;
-            line-height: 1.8;
+            line-height: 1.5;
         }
 
 
@@ -531,8 +143,29 @@
             padding-top: 40px;
 
             /* Điều chỉnh khoảng cách giữa các dòng */
-            font-size: 14px;
-            font-weight: bolder;
+            font-family: Rasa;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+            line-height: 1.4;
+        }
+
+        .de-tai-trang-thai {
+            list-style: none;
+            /* Bỏ dấu chấm đầu dòng */
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            margin-left: 50px;
+        }
+
+        .indent-text {
+            margin-left: 10px;
+            /* Thụt vào 10px */
         }
 
         /* Nút đóng popup */
@@ -804,55 +437,112 @@
             gap: 10px;
             margin-top: 0px;
         }
+
+        .custom-table {
+            padding-top: 100px;
+            /* Màu nền bảng */
+            color: white;
+            /* Màu chữ */
+            text-align: center;
+        }
+
+        .custom-table th {
+            background-color: #255293DE;
+            color: white;
+            text-align: center;
+            height: 64.15px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+        .custom-table td {
+            background: rgba(81, 131, 202, 0.6);
+            color: white;
+            text-align: center;
+            max-height: 100px;
+            height: 50px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+
+        .custom-table th:nth-child(1) {
+            width: 10%;
+        }
+
+        /* Mã đề tài */
+        .custom-table th:nth-child(2) {
+            width: 25%;
+        }
+
+        /* Tên đề tài */
+        .custom-table th:nth-child(3) {
+            width: 10%;
+        }
+
+        /* Ngày đăng ký */
+        .custom-table th:nth-child(4) {
+            width: 10%;
+        }
+
+        /* Trạng thái */
+        .custom-table th:nth-child(5) {
+            width: 15%;
+        }
+
+        /* Giảng viên */
+        .custom-table th:nth-child(6) {
+            width: 10%;
+        }
+
+        /* Số sinh viên */
+        .custom-table th:nth-child(7) {
+            width: 10%;
+        }
+
+        /* Kết quả cấp trường */
+        .custom-table th:nth-child(8) {
+            width: 10%;
+        }
     </style>
-    <div class="frame-1">
-        <div class="md-01">MD01</div>
-        <div class="nghi-n-c-u-v-s-ti-n-h-a-c-a-virus-trong-t-ng-lai">
-            Nghiên cứu về sự tiến hóa của
-            <br />
-            Virus trong tương lai.
-        </div>
-        <div class="md-02">MD02</div>
-        <div class="md-04">MD04</div>
-        <div class="md-03">MD03</div>
-        <div class="ng-d-ng-tr-tu-nh-n-t-o-trong-nh-n-di-n-khu-n-m-t">
-            Ứng dụng trí tuệ nhân tạo trong
-            <br />
-            nhận diện khuôn mặt.
-        </div>
-        <div class="ph-t-tri-n-thu-t-to-n-h-c-m-y-d-o-n-gi-c-phi-u">
-            Phát triển thuật toán học máy
-            <br />
-            để dự đoán giá cổ phiếu.
-        </div>
-        <div class="t-i-u-h-a-hi-u-su-t-m-ng-b-ng-thu-t-to-n-h-c-s-u">
-            Tối ưu hóa hiệu suất mạng bằng
-            <br />
-            thuật toán học sâu.
-        </div>
+    <div class="container mt-4">
+        <table class="table table-bordered custom-table responsive-table">
+            <thead>
+                <tr>
+                    <th>Mã đề tài</th>
+                    <th>Tên đề tài</th>
+                    <th>Ngày đăng ký</th>
+                    <th>Trạng thái</th>
+                    <th>Giảng viên</th>
+                    <th>Số sinh viên</th>
+                    <th>Kết quả cấp trường</th>
+                    <th>Kết quả cấp khoa</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($deTaiList as $deTai)
+                    <tr>
+                        <td>{{ $deTai->ma_de_tai }}</td>
+                        <td>{{ $deTai->ten_de_tai }}</td>
+                        <td>{{ \Carbon\Carbon::parse($deTai->ngay_dang_ky)->format('d/m/Y') }}</td>
+                        <td>{{ $deTai->trang_thai }}</td>
+                        <td>{{ $deTai->ma_gv }}</td>
+                        <td>{{ $deTai->so_luong_sv }}</td>
+                        <td>{{ $deTai->ket_qua_truong ?? 'Chưa có' }}</td>
+                        <td>{{ $deTai->ket_qua_khoa ?? 'Chưa có' }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
-    <div class="rectangle-38"></div>
-    <div class="line-8"></div>
-    <div class="madetai">Mã đề tài</div>
-    <div class="tendetai">Tên đề tài</div>
-    <div class="ngaydangky">Ngày đăng ký</div>
-    <div class="trangthai">Trạng thái</div>
-    <div class="giangvien">Giảng viên</div>
-    <div class="sinhvien">Số sinh viên</div>
-    <div class="ketquacaptruong">Kết quả cấp trường</div>
-    <div class="ketquacapkhoa">Kết quả cấp khoa</div>
-    <div class="line-9"></div>
-    <div class="line-10"></div>
-    <div class="line-11"></div>
-    <div class="line-12"></div>
-    <div class="line-13"></div>
-    <div class="line-14"></div>
-    <div class="line-19"></div>
-    <img class="line-20" src="line-200.svg" />
-    <img class="line-21" src="line-210.svg" />
-    <img class="line-22" src="line-220.svg" />
-    <img class="line-23" src="line-230.svg" />
-    <div class="line-15"></div>
     <div class="group-13">
         <div class="rectangle-40"></div>
         <button class="xuatbaocao" onclick="openPopup()"

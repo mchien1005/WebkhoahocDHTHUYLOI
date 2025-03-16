@@ -2,19 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="<a href=" {{ route('vanphongkhoa.tintuc') }}"">
+        <a href="{{route('vanphongkhoa.tintuc')}}">
             <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
             <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="<a href=" {{ route('vanphongkhoa.xembaocao') }}"">
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
             <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
             <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item active">
-        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -773,45 +773,90 @@
             width: 20px;
             height: 20px;
         }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            /* Căn giữa ngang */
+            align-items: center;
+            /* Căn giữa dọc (nếu cần) */
+        }
+
+        .custom-table {
+            padding-top: 150px;
+            width: 80%;
+            /* Điều chỉnh độ rộng bảng */
+            max-width: 1000px;
+            /* Giới hạn chiều rộng tối đa */
+            margin: auto;
+            /* Căn giữa theo chiều ngang */
+            text-align: center;
+            /* Căn giữa nội dung */
+        }
+
+        .custom-table th {
+            background-color: #255293DE;
+            color: white;
+            text-align: center;
+            height: 64.15px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+        .custom-table td {
+            background: rgba(81, 131, 202, 0.6);
+            color: #255293;
+            text-align: center;
+            max-height: 100px;
+            height: 50px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+
+        .custom-table th:nth-child(1) {
+            width: 250px;
+            max-width: 300px;
+        }
     </style>
-    <div class="frame-1">
-        <div class="md-01">Đề tài 1</div>
-        <div class="dt01">
-            <input type="checkbox">
-        </div>
-        <div class="md-02">Đề tài 7</div>
-        <div class="md-03">Đề tài 1</div>
-        <div class="dt02">
-            <input type="checkbox">
-        </div>
-        <div class="dt03">
-            <input type="checkbox">
-        </div>
-        <div class="hd01" onclick="openPopup()">
-            <input type="checkbox">
-        </div>
-        <div class="hd02" onclick="openPopup()">
-            <input type="checkbox">
-        </div>
-        <div class="hd03" onclick="openPopup()">
-            <input type="checkbox">
-        </div>
+    <div class="container mt-4 d-flex justify-content-center">
+        <table class="table table-bordered custom-table responsive-table text-center">
+
+            <thead>
+                <tr>
+                    <th>Tên Đề tài</th>
+                    @foreach ($hoiDongs as $hoiDong)
+                        <th>Hội đồng {{ $hoiDong->ma_hd }}</th>
+                    @endforeach
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach ($deTais as $deTai)
+                    <tr>
+                        <td>{{ $deTai->ten_de_tai }}</td>
+                        @foreach ($hoiDongs as $hoiDong)
+                            <td>
+                                <input type="checkbox" name="ghep_doi[{{ $deTai->ma_de_tai }}][]" value="{{ $hoiDong->ma_hd }}">
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
     </div>
-    <div class="rectangle-38"></div>
-    <div class="line-8"></div>
-    <div class="hoidong">Tên đề tài</div>
-    <div class="detai">Hội đồng 1</div>
-    <div class="lichtrinhbaove">Hội đồng 2</div>
-    <div class="line-9"></div>
-    <div class="line-10"></div>
-    <div class="line-11"></div>
-    <div class="line-12"></div>
-    <div class="line-13"></div>
-    <div class="line-14"></div>
-    <div class="line-15"></div>
     <div class="group-13">
         <div class="rectangle-40"></div>
-        <a href="{{ route('vanphongkhoa.quanlyphanbien') }}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove') }}">
             <button class="quaylai"
                 style="border: none;background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
                 Thoát
@@ -820,9 +865,9 @@
     </div>
     <div class="group-12">
         <div class="rectangle-402"></div>
-        <button class="luu" onclick="validateCheckbox()""
-                                                                                                style=" border: none;
-            background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+        <button class="luu" onclick="validateAndSave()"
+            style="
+                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -831,36 +876,31 @@
 
 
     <!-- Popup xác nhận -->
-    <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
-    <div class="confirm-popup" id="confirmPopup" style="display: none;">
-        <div class="popup-header2">
-            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+    <div class="popup-overlay" id="confirmOverlay"></div>
+    <div class="confirm-popup" id="confirmPopup">
+        <div class="popup-header">
             <span>Thông báo</span>
         </div>
-
-        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
-
+        <hr>
         <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn muốn lưu các ghép đôi đề<br />tài-hội đồng này không?</p>
-            <button class="confirm-btn" style="margin-right: 20px;" onclick="exportReport()">Xác nhận</button>
+            <p style="margin-left: -100px;">Bạn có chắc chắn muốn lưu các ghép đôi đề tài - hội đồng này không?</p>
+            <button class="confirm-btn" onclick="submitData()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
     </div>
 
-    <!-- Popup thông báo thành công -->
-    <!-- Popup thông báo thành công -->
-    <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
-    <div class="popup-container success-popup" id="successPopup" style="display: none;">
+    <!-- Popup thành công -->
+    <div class="popup-overlay" id="successOverlay"></div>
+    <div class="popup-container" id="successPopup">
         <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
             <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
             <p>Ghép đôi đề tài-hội đồng thành công!</p>
         </div>
-
     </div>
 
-    {{-- pop lỗi --}}
-    <div class="popup-overlay" id="errorOverlay" style="display: none;"></div>
-    <div class="confirm-popup" id="errorPopup" style="display: none;">
+    <!-- Popup lỗi -->
+    <div class="popup-overlay" id="errorOverlay"></div>
+    <div class="popup-container" id="errorPopup">
         <div class="popup-header2">
             <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
             <span>Thông báo</span>
@@ -875,62 +915,29 @@
     </div>
 
     <script>
+        function validateAndSave() {
+            let rows = document.querySelectorAll("tbody tr");
+            let isValid = true;
 
+            rows.forEach(row => {
+                let checkboxes = row.querySelectorAll("input[type='checkbox']");
+                let checkedCount = 0;
 
-        function saveResult() {
-            // Ẩn popup xác nhận
-            document.getElementById("Popupupdate").style.display = "none";
-            document.getElementById("updateOverlay").style.display = "none";
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedCount++;
+                    }
+                });
 
-            // Hiện popup thành công
-            document.getElementById("confirmOverlay").style.display = "block";
-            document.getElementById("confirmPopup").style.display = "block";
-
-            // Tự động đóng popup sau 2 giây
-            setTimeout(() => {
-                document.getElementById("confirmOverlay").style.display = "none";
-                document.getElementById("confirmPopup").style.display = "none";
-            }, 2000);
-        }
-        function showConfirmPopup() {
-
-            document.getElementById("confirmPopup").style.display = "block";
-        }
-        function closeConfirmPopup() {
-            document.getElementById("confirmOverlay").style.display = "none";
-            document.getElementById("confirmPopup").style.display = "none";
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function exportReport() {
-            document.getElementById("confirmOverlay").style.display = "none";
-            document.getElementById("confirmPopup").style.display = "none";
-            document.getElementById("successOverlay").style.display = "flex";
-            document.getElementById("successPopup").style.display = "block";
-
-            // Tự động đóng sau 2 giây
-            setTimeout(() => {
-                document.getElementById("successOverlay").style.display = "none";
-                document.getElementById("successPopup").style.display = "none";
-            }, 2000);
-        }
-
-        function validateCheckbox() {
-            let checkboxes = document.querySelectorAll("input[type='checkbox']");
-            let isChecked = false;
-
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    isChecked = true;
+                // Nếu có chọn hội đồng nhưng số lượng < 2 => báo lỗi
+                if (checkedCount > 0 && checkedCount < 2) {
+                    isValid = false;
                 }
             });
 
-            if (!isChecked) {
-                // Hiển thị popup lỗi
+            if (!isValid) {
                 document.getElementById("errorOverlay").style.display = "block";
                 document.getElementById("errorPopup").style.display = "block";
-
-                // Ẩn popup sau 2 giây
                 setTimeout(() => {
                     document.getElementById("errorOverlay").style.display = "none";
                     document.getElementById("errorPopup").style.display = "none";
@@ -939,6 +946,102 @@
                 showConfirmPopup();
             }
         }
-    </script>
 
+
+
+        function showConfirmPopup() {
+            document.getElementById("confirmOverlay").style.display = "block";
+            document.getElementById("confirmPopup").style.display = "block";
+        }
+
+        function closeConfirmPopup() {
+            document.getElementById("confirmOverlay").style.display = "none";
+            document.getElementById("confirmPopup").style.display = "none";
+        }
+
+        function validateAndShowConfirm() {
+            let rows = document.querySelectorAll("tbody tr");
+            let isValid = true;
+            let data = [];
+
+            rows.forEach(row => {
+                let checkboxes = row.querySelectorAll("input[type='checkbox']");
+                let checkedValues = [];
+
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedValues.push(checkbox.value);
+                    }
+                });
+
+                if (checkedValues.length > 0 && checkedValues.length < 2) {
+                    isValid = false;
+                }
+
+                if (checkedValues.length > 0) {
+                    data.push({
+                        ma_de_tai: row.cells[0].dataset.id,
+                        ma_hds: checkedValues
+                    });
+                }
+            });
+
+            if (!isValid) {
+                document.getElementById("errorOverlay").style.display = "block";
+                document.getElementById("errorPopup").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("errorOverlay").style.display = "none";
+                    document.getElementById("errorPopup").style.display = "none";
+                }, 2000);
+            } else {
+                document.getElementById("confirmOverlay").style.display = "block";
+                document.getElementById("confirmPopup").style.display = "block";
+                window.ghepDoiData = data; // Lưu tạm dữ liệu để gửi sau khi xác nhận
+            }
+        }
+
+        function submitData() {
+            let selectedData = {};
+            document.querySelectorAll("input[type='checkbox']:checked").forEach((checkbox) => {
+                let maDeTai = checkbox.name.match(/\d+/)[0]; // Lấy mã đề tài từ name="ghep_doi[1][]"
+                let maHoiDong = checkbox.value;
+
+                if (!selectedData[maDeTai]) {
+                    selectedData[maDeTai] = [];
+                }
+                selectedData[maDeTai].push(maHoiDong);
+            });
+
+            console.log("Dữ liệu gửi đi:", selectedData);
+
+            fetch("{{ route('ghepdoi.luu') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ ghep_doi: selectedData })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Phản hồi từ server:", data);
+                    if (data.success) {
+                        document.getElementById("confirmOverlay").style.display = "none";
+                        document.getElementById("confirmPopup").style.display = "none";
+                        document.getElementById("successOverlay").style.display = "flex";
+                        document.getElementById("successPopup").style.display = "block";
+
+                        setTimeout(() => {
+                            document.getElementById("successOverlay").style.display = "none";
+                            document.getElementById("successPopup").style.display = "none";
+                        }, 2000);
+                    } else {
+                        console.error("Lỗi: Server không phản hồi success!");
+                    }
+                })
+                .catch(error => console.error("Lỗi gửi dữ liệu:", error));
+        }
+
+
+    </script>
 @endsection

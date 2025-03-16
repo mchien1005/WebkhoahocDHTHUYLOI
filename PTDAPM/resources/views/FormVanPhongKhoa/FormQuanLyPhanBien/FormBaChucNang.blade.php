@@ -2,19 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
-                    <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-        <span>Tin tức</span>
+        <a href="{{route('vanphongkhoa.tintuc')}}">
+            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+            <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
-                    <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
-        <span>Báo cáo đề tài</span>
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
+            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+            <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item active">
-        <a href="#dang-ky-nghien-cuu">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -40,7 +40,8 @@
             flex-direction: column;
             align-items: center;
             gap: 30px;
-            padding: 60px;
+            padding: 20px;
+            margin-left: 100px;
         }
 
         .row {
@@ -67,12 +68,13 @@
             box-shadow: none;
             padding: 10px;
             margin-right: 143px;
-            margin-top: 100px;
+            margin-top: 50px;
+
         }
 
         .wide {
             width: 320px;
-            margin-top: 143px;
+            margin-top: 100px;
         }
 
         /* Responsive */

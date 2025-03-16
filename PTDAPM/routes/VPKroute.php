@@ -9,23 +9,26 @@ Route::get('/', function () {
 });
 
 Route::get('/dang-nhap', [LoginController::class, 'index'])->name('login.form'); // Trang hiển thị form đăng nhập
-Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.process');
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('vanphongkhoa')->group(function () {
-        Route::get('/capnhatketqua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('vanphongkhoa.capnhatketqua');
-        Route::get('/quanlyphanbien', [VanPhongKhoaController::class, 'quanlyphanbienindex'])->name('vanphongkhoa.quanlyphanbien');
-        Route::get('/truycapthongtin', [VanPhongKhoaController::class, 'truyvanthongtin'])->name('vanphongkhoa.truyvanthongtin');
-        Route::get('/capnhatlichtrinhbaove', [VanPhongKhoaController::class, 'capnhatlichtrinhbaove'])->name('vanphongkhoa.capnhatlichtrinhbaove');
-        Route::get('/ghepdoidetai-hoidong', [VanPhongKhoaController::class, 'ghepdoidetaihoidong'])->name('vanphongkhoa.ghepdoidetaihoidong');
+Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.process'); // Xử lý đăng nhập
 
-        Route::get('/tintuc', [VanPhongKhoaController::class, 'tintuc'])->name('vanphongkhoa.tintuc');
-        Route::get('/tintuc/{ma_tin_tuc}', [VanPhongKhoaController::class, 'showTinTuc'])->name('vanphongkhoa.chitiettintuc');
-        Route::get('/phanbienvabaove', [VanPhongKhoaController::class, 'phanBienVaBaoVe'])->name('vanphongkhoa.phanbienvabaove');
-        Route::get('/xem-bao-cao', [VanPhongKhoaController::class, 'xemBaoCao'])->name('vanphongkhoa.xembaocao');
-        Route::get('vanphongkhoa/baocao/{ma_bc}', [VanPhongKhoaController::class, 'showBaoCao'])->name('vanphongkhoa.chitietbaocao');
-        Route::get('/chia-hoi-dong', [VanPhongKhoaController::class, 'chiaHoiDong'])->name('vanphongkhoa.chiahoidong');
-        Route::get('/chon-hoi-dong', [VanPhongKhoaController::class, 'chonHoiDong'])->name('vanphongkhoa.chonhoidong');
-        // Đăng xuất
-        Route::post('/dang-xuat', [LoginController::class, 'logout'])->name('logout');
-    });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/capnhatketqua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('vanphongkhoa.capnhatketqua');
+    Route::post('/cap-nhat-diem', [VanPhongKhoaController::class, 'capNhatDiem']);
+
+    Route::get('/truyvanthongtin', [VanPhongKhoaController::class, 'truyvanthongtin'])->name('vanphongkhoa.truyvanthongtin');
+    Route::get('/capnhatlichtrinhbaove', [VanPhongKhoaController::class, 'capnhatlichtrinhbaove'])->name('vanphongkhoa.capnhatlichtrinhbaove');
+    Route::post('/lich-trinh/{id}/update', [VanPhongKhoaController::class, 'updatelichtrinh'])->name('lich_trinh.update');
+
+    Route::get('/ghepdoidetai-hoidong', [VanPhongKhoaController::class, 'ghepdoidetaihoidong'])->name('vanphongkhoa.ghepdoidetaihoidong');
+    Route::post('/ghepdoidetai-hoidong-luu', [VanPhongKhoaController::class, 'storeghepdoidetai'])->name('ghepdoi.luu');
+
+    Route::get('/tintuc', [VanPhongKhoaController::class, 'tintuc'])->name('vanphongkhoa.tintuc');
+    Route::get('/phanbienvabaove', [VanPhongKhoaController::class, 'phanBienVaBaoVe'])->name('vanphongkhoa.phanbienvabaove');
+    Route::get('/xem-bao-cao', [VanPhongKhoaController::class, 'xemBaoCao'])->name('vanphongkhoa.xembaocao');
+    Route::get('/chia-hoi-dong', [VanPhongKhoaController::class, 'chiaHoiDong'])->name('vanphongkhoa.chiahoidong');
+    Route::get('/chon-hoi-dong', [VanPhongKhoaController::class, 'chonHoiDong'])->name('vanphongkhoa.chonhoidong');
 });
+
+// Đăng xuất
+Route::post('/dang-xuat', [LoginController::class, 'logout'])->name('logout');

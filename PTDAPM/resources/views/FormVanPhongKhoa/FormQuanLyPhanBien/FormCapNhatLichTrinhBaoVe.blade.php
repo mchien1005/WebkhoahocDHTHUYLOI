@@ -2,20 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
-                            <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-        <span>Tin tức</span>
+        <a href="{{route('vanphongkhoa.tintuc')}}">
+            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+            <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
-                            <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon"
-            class="sidebar-icon" />
-        <span>Báo cáo đề tài</span>
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
+            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+            <span>Báo cáo đề tài</span>
         </a>
     </div>
-    <div class="menu-item active">
-        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
+    <div class="menu-item active ">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -33,7 +32,6 @@
         </a>
     </div>
 @endsection
-
 @section('content')
     <style>
         .frame-1 {
@@ -345,8 +343,8 @@
             width: 174px;
             height: 60px;
             position: absolute;
-            left: 690px;
-            top: 800px;
+            left: 510px;
+            top: 700px;
         }
 
         .quaylai {
@@ -355,8 +353,8 @@
             font-size: 24px;
             font-weight: 600;
             position: absolute;
-            left: 630px;
-            top: 800px;
+            left: 450px;
+            top: 700px;
             width: 297.05px;
             height: 56.25px;
         }
@@ -747,47 +745,133 @@
             font-weight: bold;
             /* Đậm chữ */
         }
+
+
+        .container {
+            display: flex;
+            justify-content: center;
+            /* Căn giữa ngang */
+            align-items: center;
+            /* Căn giữa dọc (nếu cần) */
+        }
+
+        .custom-table {
+            padding-top: 150px;
+            width: 80%;
+            /* Điều chỉnh độ rộng bảng */
+            max-width: 1000px;
+            /* Giới hạn chiều rộng tối đa */
+            margin: auto;
+            /* Căn giữa theo chiều ngang */
+            text-align: center;
+            /* Căn giữa nội dung */
+        }
+
+        .custom-table th {
+            background-color: #255293DE;
+            color: white;
+            text-align: center;
+            height: 64.15px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+        .custom-table td {
+            background: rgba(81, 131, 202, 0.6);
+            color: #255293;
+            text-align: center;
+            max-height: 100px;
+            height: 50px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+
+        .custom-table th:nth-child(1) {
+            width: 25%;
+        }
+
+        /* Mã đề tài */
+        .custom-table th:nth-child(2) {
+            width: 25%;
+        }
+
+        /* Tên đề tài */
+        .custom-table th:nth-child(3) {
+            width: 25%;
+        }
+
+        /* Ngày đăng ký */
+        .custom-table th:nth-child(4) {
+            width: 25%;
+        }
+
+        .btn-update {
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+            /* Cỡ chữ 20px */
+            background-color: transparent;
+            /* Nền trong suốt */
+            border: none;
+            /* Không có viền */
+            color: #255293;
+            /* Màu chữ (có thể điều chỉnh nếu trùng với nền) */
+            cursor: pointer;
+            /* Hiển thị con trỏ khi rê chuột */
+            /* Chữ in đậm để dễ nhìn hơn */
+        }
+
+        /* Trạng thái */
     </style>
-    <div class="frame-1">
-        <div class="md-01">Hội đồng 1</div>
-        <div class="dt01">
-            Đề tài 1
-        </div>
-        <div class="md-02">Hội đồng 1</div>
-        <div class="md-03">Hội đồng 1</div>
-        <div class="dt02">
-            Đề tài 1
-        </div>
-        <div class="dt03">
-            Đề tài 2
-        </div>
-        <div class="hd01" onclick="openPopup()">
-            Cập nhật lịch <br /> trình bảo vệ
-        </div>
-        <div class="hd02" onclick="openPopup()">
-            Cập nhật lịch <br />trình bảo vệ
-        </div>
-        <div class="hd03" onclick="openPopup()">
-            Cập nhật lịch <br />trình bảo vệ
-        </div>
+    <div class="container mt-4 d-flex justify-content-center">
+        <table class="table table-bordered custom-table responsive-table text-center">
+
+            <thead>
+                <tr>
+                    <th>Hội đồng</th>
+                    <th>Đề tài</th>
+                    <th>Lịch trình bảo vệ</th>
+                    <th>Hoạt động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($lichTrinh as $lt)
+                    <tr>
+                        <td>Hội đồng {{ $lt->ma_hoi_dong }}</td> <!-- Hiển thị mã hội đồng -->
+                        <td>Đề tài {{ $lt->ma_de_tai }}</td> <!-- Hiển thị mã đề tài -->
+                        <td>
+                            {{ \Carbon\Carbon::parse($lt->ngay_bao_ve)->format('d/m/Y') }} -
+                            {{ \Carbon\Carbon::parse($lt->gio_bao_ve)->format('H:i') }}
+                        </td> <!-- Hiển thị ngày và giờ bảo vệ -->
+                        <td>
+                            <button class="btn-update" data-id="{{ $lt->ma_lich_trinh }}" data-ngay="{{ $lt->ngay_bao_ve }}"
+                                data-gio="{{ $lt->gio_bao_ve }}" data-diadiem="{{ $lt->dia_diem }}"
+                                onclick="openPopupFromButton(this)">
+                                Cập nhật lịch <br>trình bảo vệ
+                            </button>
+                        </td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
     </div>
-    <div class="rectangle-38"></div>
-    <div class="line-8"></div>
-    <div class="hoidong">Hội đồng</div>
-    <div class="detai">Đề tài</div>
-    <div class="lichtrinhbaove">Lịch trình <br> bảo vệ</div>
-    <div class="hoatdong">Hoạt động</div>
-    <div class="line-9"></div>
-    <div class="line-10"></div>
-    <div class="line-11"></div>
-    <div class="line-12"></div>
-    <div class="line-13"></div>
-    <div class="line-14"></div>
-    <div class="line-19"></div>
-    <div class="line-15"></div>
     <div class="group-13">
         <div class="rectangle-40"></div>
-        <a href="{{ route('vanphongkhoa.quanlyphanbien') }}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove') }}">
             <button class="quaylai"
                 style="border: none;background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
                 Quay lại
@@ -795,6 +879,8 @@
         </a>
     </div>
     <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
+    <!-- Popup cập nhật lịch trình -->
+    <!-- Popup cập nhật lịch trình -->
     <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
     <div class="confirm-popup2" id="Popupupdate" style="display: none;">
         <div class="popup-header">
@@ -806,128 +892,62 @@
         <div class="popup-content">
             <!-- Ngày và giờ bảo vệ -->
             <div class="form-group">
-                <label for="datetime" class="form-label">Ngày và giờ bảo vệ:</label>
-                <div class="input-container">
-                    <img src="{{ asset('images/Time Limit.png') }}" alt="Calendar Icon" class="icon"
-                        onclick="openDateTimePicker()">
-                    <input type="datetime-local" id="datetime" class="form-input">
-                </div>
+                <label class="form-label">Ngày và giờ bảo vệ:</label>
+                <input type="datetime-local" id="datetime" class="form-input">
             </div>
 
             <!-- Địa điểm bảo vệ -->
             <div class="form-group">
-                <label for="location" class="form-label">Địa điểm bảo vệ:</label>
+                <label class="form-label">Địa điểm bảo vệ:</label>
                 <input type="text" id="location" class="form-input">
             </div>
+
+            <input type="hidden" id="lichTrinhId">
 
             <!-- Nút xác nhận -->
             <button class="btn-update" onclick="validateAndSubmit()">Cập nhật</button>
         </div>
     </div>
-    </div>
-
 
     <!-- Popup xác nhận -->
     <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
     <div class="confirm-popup" id="confirmPopup" style="display: none;">
         <div class="popup-header2">
-            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
             <span>Thông báo</span>
         </div>
-
         <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
-
         <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn muốn cập nhật lịch trình<br /> bảo vệ không?</p>
-            <button class="confirm-btn" style="margin-right: 20px;" onclick="exportReport()">Xác nhận</button>
+            <p>Bạn có chắc chắn muốn cập nhật lịch trình bảo vệ không?</p>
+            <button class="confirm-btn" onclick="submitUpdate()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
     </div>
 
     <!-- Popup thông báo thành công -->
-    <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
     <div class="popup-container success-popup" id="successPopup" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-            <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
-            <p>Cập nhật lịch trình bảo vệ thành công!</p>
-        </div>
-
-    </div>
-
-    {{-- pop lỗi --}}
-    <div class="popup-overlay" id="errorOverlay" style="display: none;"></div>
-    <div class="confirm-popup" id="errorPopup" style="display: none;">
-        <div class="popup-header2">
-            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
-            <span>Thông báo</span>
-        </div>
-
-        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
-
-        <div class="error-message">
-            <img class="cancel" src="{{ asset('images/Cancel.png') }}">
-            <p>Thông tin bạn nhập không chính xác <br /> hoặc thiếu!Bạn hãy nhập lại thông
-                tin.</p>
-        </div>
+        <p>Cập nhật lịch trình bảo vệ thành công!</p>
     </div>
 
     <script>
-        // Lấy phần tử popup và overlay
-        const popup = document.getElementById("Popupupdate");
-        const overlay = document.getElementById("updateOverlay");
+        function openPopupFromButton(button) {
+            let id = button.getAttribute("data-id");
+            let ngay = button.getAttribute("data-ngay");
+            let gio = button.getAttribute("data-gio");
+            let diadiem = button.getAttribute("data-diadiem");
 
-        // Hàm mở popup
-        function openPopup() {
-            popup.style.display = "block";
-            overlay.style.display = "block";
+            console.log("Dữ liệu nhận:", id, ngay, gio, diadiem); // Kiểm tra giá trị nhận được
+
+            document.getElementById("Popupupdate").style.display = "block";
+            document.getElementById("updateOverlay").style.display = "block";
+            document.getElementById("lichTrinhId").value = id;
+            document.getElementById("datetime").value = ngay + "T" + gio;
+            document.getElementById("location").value = diadiem;
         }
 
-        // Hàm đóng popup
         function closePopup() {
-            popup.style.display = "none";
-            overlay.style.display = "none";
-        }
-
-        // Sự kiện: Click ra ngoài thì đóng popup
-        overlay.addEventListener("click", closePopup);
-
-        function saveResult() {
-            // Ẩn popup xác nhận
             document.getElementById("Popupupdate").style.display = "none";
             document.getElementById("updateOverlay").style.display = "none";
-
-            // Hiện popup thành công
-            document.getElementById("confirmOverlay").style.display = "block";
-            document.getElementById("confirmPopup").style.display = "block";
-
-            // Tự động đóng popup sau 2 giây
-            setTimeout(() => {
-                document.getElementById("confirmOverlay").style.display = "none";
-                document.getElementById("confirmPopup").style.display = "none";
-            }, 2000);
-        }
-        function openDateTimePicker() {
-            document.getElementById("datetime").showPicker(); // Hiển thị DateTime Picker
-        }
-
-        function closeConfirmPopup() {
-            document.getElementById("confirmOverlay").style.display = "none";
-            document.getElementById("confirmPopup").style.display = "none";
-            document.getElementById("popup").style.display = "block";
-        }
-
-        function exportReport() {
-            document.getElementById("confirmOverlay").style.display = "none";
-            document.getElementById("confirmPopup").style.display = "none";
-            document.getElementById("successOverlay").style.display = "flex";
-            document.getElementById("successPopup").style.display = "block";
-
-            // Tự động đóng sau 2 giây
-            setTimeout(() => {
-                document.getElementById("successOverlay").style.display = "none";
-                document.getElementById("successPopup").style.display = "none";
-            }, 2000);
         }
 
         function validateAndSubmit() {
@@ -935,25 +955,49 @@
             let location = document.getElementById("location").value;
 
             if (!dateTime || !location) {
-                showErrorPopup();
+                alert("Vui lòng nhập đầy đủ thông tin!");
             } else {
-                saveResult(); // Gọi hàm xử lý lưu dữ liệu
+                document.getElementById("confirmOverlay").style.display = "block";
+                document.getElementById("confirmPopup").style.display = "block";
             }
         }
 
-        function showErrorPopup() {
-            document.getElementById("errorOverlay").style.display = "block";
-            document.getElementById("errorPopup").style.display = "block";
+        function closeConfirmPopup() {
+            document.getElementById("confirmOverlay").style.display = "none";
+            document.getElementById("confirmPopup").style.display = "none";
         }
 
-        function hideErrorPopup() {
-            document.getElementById("errorOverlay").style.display = "none";
-            document.getElementById("errorPopup").style.display = "none";
-        }
+        function submitUpdate() {
+            let id = document.getElementById("lichTrinhId").value;
+            let ngayGio = document.getElementById("datetime").value;
+            let diadiem = document.getElementById("location").value;
 
+            fetch(`/lich-trinh/${id}/update`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ ngay_gio: ngayGio, dia_diem: diadiem })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        closePopup();
+                        document.getElementById("successOverlay").style.display = "block";
+                        document.getElementById("successPopup").style.display = "block";
+
+                        setTimeout(() => {
+                            location.reload();
+                        }, 2000);
+                    }
+                });
+        }
         // Đóng popup khi click ra ngoài
-        document.getElementById("errorOverlay").addEventListener("click", hideErrorPopup);
-
+        document.getElementById("updateOverlay").addEventListener("click", function (event) {
+            if (event.target === this) {
+                closePopup();
+            }
+        });
     </script>
-
 @endsection
