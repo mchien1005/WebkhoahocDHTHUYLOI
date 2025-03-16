@@ -2,20 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href=" {{ route('vanphongkhoa.tintuc') }}"">
-                            <img src=" {{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-        <span>Tin tức</span>
+        <a href="{{route('vanphongkhoa.tintuc')}}">
+            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+            <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href=" {{ route('vanphongkhoa.xembaocao') }}"">
-                            <img src=" {{ asset('images/School Director.png') }}" alt="Research Icon"
-            class="sidebar-icon" />
-        <span>Báo cáo đề tài</span>
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
+            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
+            <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item active">
-        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -23,7 +22,7 @@
     <div class="menu-item">
         <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
             <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả <br />trình bày bảo vệ</span>
+            <span>Cập nhật kết quả</span>
         </a>
     </div>
     <div class="menu-item">

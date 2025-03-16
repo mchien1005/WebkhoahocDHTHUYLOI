@@ -13,7 +13,7 @@
             <span>Báo cáo đề tài</span>
         </a>
     </div>
-    <div class="menu-item ">
+    <div class="menu-item">
         <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
@@ -112,136 +112,104 @@
             font-weight: 600;
             line-height: normal;
         }
+
+        .custom-title {
+            color: #17488C;
+            font-family: Rasa, sans-serif;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            margin-bottom: 40px;
+        }
+
+        /* Thiết lập chung cho bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(81, 131, 202, 0.6);
+            text-align: center;
+            font-family: Inter, sans-serif;
+        }
+
+        /* Header của bảng */
+        thead tr {
+            background-color: rgba(37, 82, 147, 0.87);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Các ô trong bảng */
+        td,
+        th {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        /* Các dòng xen kẽ khác màu */
+        tbody tr:nth-child(even) {
+            background-color: rgba(81, 131, 202, 0.4);
+        }
+
+        /* Hover effect */
+        tbody tr:hover {
+            background-color: rgba(37, 82, 147, 0.75);
+            color: white;
+            transition: 0.3s;
+        }
+
+        /* Căn chỉnh liên kết "Xem báo cáo" */
+        td a {
+            display: inline-block;
+            text-decoration: none;
+            color: #1E40AF;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        td a:hover {
+            background-color: #1E40AF;
+            color: white;
+        }
+
+        .text-blue-600 {
+            color: white !important;
+            /* Đổi màu chữ thành trắng */
+        }
     </style>
     <div class="main-content">
         <div class="flex-1 p-8">
-            <h1 class="text-2xl font-bold mb-4">
-                Báo cáo đề tài
-            </h1>
+            <h1 class="custom-title">Báo cáo đề tài</h1>
             <table class="w-full bg-blue-200 text-center">
                 <thead>
-                    <thead>
-                        <tr class="bg-blue-300" style="background-color: rgba(37, 82, 147, 0.87);">
-                            <th class="p-2 border table-header">Mã báo cáo</th>
-                            <th class="p-2 border table-header">Tên đề tài</th>
-                            <th class="p-2 border table-header">Tiêu đề</th>
-                            <th class="p-2 border table-header">Hoạt động</th>
-                        </tr>
-                    </thead>
-
+                    <tr class="bg-blue-300" style="background-color: rgba(37, 82, 147, 0.87);">
+                        <th class="p-2 border table-header">Mã báo cáo</th>
+                        <th class="p-2 border table-header">Tên đề tài</th>
+                        <th class="p-2 border table-header">Tiêu đề</th>
+                        <th class="p-2 border table-header">Hoạt động</th>
+                    </tr>
                 </thead>
                 <tbody style="background-color: rgba(81, 131, 202, 0.60);">
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border"
-                            style="color: #E7F5FF; font-family: Inter, sans-serif; font-size: 24px; font-weight: 600;text-align: center;">
-                            Xem báo cáo
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border">
-                        </td>
-                        <td class="p-2 border text-blue-800">
-                            &nbsp;
-                        </td>
-                    </tr>
+                    @foreach ($baocaos as $baocao)
+                        <tr>
+                            <td class="p-2 border">{{ $baocao->ma_bc }}</td>
+                            <td class="p-2 border">{{ $baocao->deTai->ten_de_tai ?? 'Không có dữ liệu' }}</td>
+                            <td class="p-2 border">{{ $baocao->tieu_de }}</td>
+                            <td class="p-2 border">
+                                <a href="{{ route('vanphongkhoa.chitietbaocao', $baocao->ma_bc) }}"
+                                    class="text-blue-600 font-semibold">
+                                    Xem báo cáo
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    @if ($baocaos->isEmpty())
+                        <tr>
+                            <td colspan="4" class="p-2 border text-gray-500">Không có báo cáo nào.</td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
         </div>

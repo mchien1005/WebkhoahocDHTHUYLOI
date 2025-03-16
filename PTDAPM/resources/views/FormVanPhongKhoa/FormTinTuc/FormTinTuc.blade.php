@@ -1,7 +1,7 @@
 @extends('layouts.layout2')
 
 @section('sidebar')
-    <div class="menu-item ">
+    <div class="menu-item active">
         <a href="{{route('vanphongkhoa.tintuc')}}">
             <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
             <span>Tin tức</span>
@@ -25,7 +25,7 @@
             <span>Cập nhật kết quả</span>
         </a>
     </div>
-    <div class="menu-item active">
+    <div class="menu-item ">
         <a href="{{ route('vanphongkhoa.truyvanthongtin') }}">
             <img src="{{ asset('images/mdi_court-hammer.png') }}" alt="Invitation Icon" class="sidebar-icon" />
             <span>Truy vấn thông tin</span>
@@ -120,100 +120,77 @@
         /* Hiệu ứng hover cho liên kết "Xem chi tiết tin tức" */
         .news-link {
             transition: color 0.3s ease-in-out;
+            color: #255293;
+            font-family: Rasa;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
         }
 
         .news-link:hover {
             color: #0f3460;
         }
+
+        .divider {
+            background-color: #245292;
+            /* Màu xanh theo yêu cầu */
+            margin: 20px 0;
+            /* Khoảng cách trên dưới */
+            width: 100%;
+            /* Độ dài 100% để kéo dài toàn bộ */
+        }
+
+        .news-meta {
+            color: #255293;
+            font-family: Rasa;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .news-title {
+            color: #255293;
+            font-family: "Rasa";
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        .news-meta {
+            color: #17488C;
+            font-family: Rasa;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
     </style>
     <div class="main-content">
         <h1 class="page-title">Tin tức</h1>
-        <!-- News Item 1 -->
-        <div class="news-section">
+
+        @foreach ($vpk as $item)
             <div class="news-item">
-                <img src="{{asset('images/nha-khoa-hoc-7559-1672.jpg 1.png')}}" alt="Nhà khoa học" class="news-image" />
+                <img src="{{ asset('images/nha-khoa-hoc-7559-1672.jpg') }}" alt="Nhà khoa học" class="news-image" />
+
                 <div class="news-content">
-                    <h3 class="news-title">Khuyến khích nhà khoa học dám nghĩ, dám làm</h3>
-                    <div class="news-date">06/02/2025 07:01</div>
-                    <p class="news-excerpt">
-                        Thời gian qua, một trong những vướng mắc đối với các nhà khoa học là chưa
-                        có quy định, cơ chế rõ ràng về rủi ro trong nghiên cứu khoa học...
-                    </p>
-                    <div class="news-link">
-                        <img src="{{asset('images/Chevron Right.png')}}" alt="Arrow" />
-                        <span>Xem chi tiết tin tức</span>
+                    <h3 class="news-title">{{ $item->tieu_de }}</h3>
+                    <div class="news-meta">{{ date('d/m/Y H:i', strtotime($item->ngay_dang)) }}</div>
+                    <p class="news-excerpt">{{ Str::limit($item->noi_dung, 500) }}</p>
+                    <div class="news-action">
+                        <a href="{{ route('vanphongkhoa.chitiettintuc', ['ma_tin_tuc' => $item->ma_tin_tuc]) }}"
+                            class="news-link">
+                            <img src="{{ asset('images/Chevron Right.png') }}" alt="Arrow" />
+                            Xem chi tiết tin tức
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- News Item 2 -->
-        <div class="news-section">
-            <div class="news-item">
-                <img src="{{asset('images/3-02-4392jpg-9516-6273.jpg 1.png')}}" alt="Nghiên cứu khoa học"
-                    class="news-image" />
-                <div class="news-content">
-                    <h3 class="news-title">Mở đường để các công trình, nghiên cứu khoa học đi vào đời sống</h3>
-                    <div class="news-date">18/01/2025 07:01</div>
-                    <p class="news-excerpt">
-                        Nghị quyết số 57-NQ/TW ngày 22/12/2024 của Bộ Chính trị về đột phá phát triển
-                        khoa học, công nghệ, đổi mới sáng tạo và <a href="#" class="text-link">chuyển đổi số quốc gia</a>
-                        vừa được ký ban hành...
-                    </p>
-                    <div class="news-link">
-                        <img src="{{asset('images/Chevron Right.png')}}" alt="Arrow" />
-                        <span>Xem chi tiết tin tức</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- News Item 3 -->
-        <div class="news-section">
-            <div class="news-item">
-                <img src="{{asset('images/1-7309.png 1.png')}}" alt="Công trình khoa học" class="news-image" />
-                <div class="news-content">
-                    <h3 class="news-title">17 công trình vào chung khảo Giải thưởng khoa <br />học công nghệ dành cho giảng
-                        viên trẻ</h3>
-                    <div class="news-date">06/03/2025&nbsp;&nbsp; 07:01</div>
-                    <p class="news-excerpt">
-                        17 công trình khoa học của giảng viên từ các trường đại học đã được Hội đồng
-                        đánh giá và xét Giải thưởng khoa học công nghệ dành cho giảng viên trẻ năm
-                        2024...
-                    </p>
-                    <div class="news-link">
-                        <img src="{{asset('images/Chevron Right.png')}}" alt="Arrow" />
-                        <span>Xem chi tiết tin tức</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <!-- News Item 4 -->
-        <div class="news-section">
-            <div class="news-item">
-                <img src="{{asset('images/5-2-5058.jpg 1.png')}}" alt="Phát triển khoa học" class="news-image" />
-                <div class="news-content">
-                    <h3 class="news-title">17 công trình vào chung khảo Giải thưởng khoa <br />học công nghệ dành cho giảng
-                        viên trẻ</h3>
-                    <div class="news-date">06/03/2025&nbsp;&nbsp; 07:01</div>
-                    <p class="news-excerpt">
-                        Hiện nay, Bộ Khoa học và Công nghệ đang cùng các bộ, ngành phối hợp chặt
-                        chẽ triển khai Chương trình Phát triển khoa học cơ bản...
-                    </p>
-                    <div class="news-link">
-                        <img src="{{asset('images/Chevron Right.png')}}" alt="Arrow" />
-                        <span>Xem chi tiết tin tức</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div class="divider"></div>
+        @endforeach
     </div>
+
 
 @endsection
