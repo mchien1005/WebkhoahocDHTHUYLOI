@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_nhan_vien_van_phong_khoa', function (Blueprint $table) {
+        Schema::create('nhan_vien_van_phong_khoa', function (Blueprint $table) {
             $table->string('ma_nv', 20)->primary();
             $table->string('ten_nv', 100);
             $table->string('phong_ban', 100);
             $table->string('email', 100);
             $table->enum('quyen_nguoi_dung', ['Admin', 'Nhân viên']);
-            $table->foreign('email')->references('email')->on('tai_khoan')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('email')->references('email')->on('tai_khoan')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_nhan_vien_van_phong_khoa');
+        Schema::dropIfExists('nhan_vien_van_phong_khoa');
     }
 };

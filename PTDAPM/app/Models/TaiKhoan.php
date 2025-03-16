@@ -9,31 +9,31 @@ class TaiKhoan extends Authenticatable
 {
     use HasFactory;
 
-    // Khai báo tên bảng
     protected $table = 'tai_khoan';
-
-    // Khóa chính của bảng (vì mặc định Laravel dùng 'id')
     protected $primaryKey = 'email';
-
-    // Khóa chính không phải là auto-increment (email là string)
     public $incrementing = false;
     protected $keyType = 'string';
 
-    // Các trường có thể gán dữ liệu (mass assignment)
     protected $fillable = [
         'email',
-        'mat_khau',
+        'mat_khau', // Đổi lại từ 'mat_khau' để Laravel nhận diện đúng
         'vai_tro',
     ];
 
-    // Ẩn trường mật khẩu khi trả về JSON
     protected $hidden = [
-        'mat_khau',
+        'mat_khau', // Laravel yêu cầu trường này
     ];
 
     // Đổi tên cột 'mat_khau' để dùng với Laravel Auth
     public function getAuthPassword()
     {
-        return $this->mat_khau;
+        return $this->attributes['mat_khau']; // Sử dụng 'password' thay vì 'mat_khau'
     }
+    public function sinhVien()
+    {
+        return $this->hasOne(SinhVien::class, 'email', 'email');
+    }
+    
 }
+
+    

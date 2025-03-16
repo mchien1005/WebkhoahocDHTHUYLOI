@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_sinh_vien_de_tai', function (Blueprint $table) {
+        Schema::create('sinh_vien_de_tai', function (Blueprint $table) {
             $table->string('ma_sv', 20);
-            $table->integer('ma_de_tai');
+            $table->unsignedInteger('ma_de_tai');
             $table->primary(['ma_sv', 'ma_de_tai']);
-            $table->foreign('ma_sv')->references('ma_sv')->on('sinh_vien')->onDelete('cascade');
-            $table->foreign('ma_de_tai')->references('ma_de_tai')->on('de_tai_nghien_cuu')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('ma_sv')->references('ma_sv')->on('sinh_vien')->onDelete('cascade');
+            $table->foreign('ma_de_tai')->references('ma_de_tai')->on('de_tai')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_sinh_vien_de_tai');
+        Schema::dropIfExists('sinh_vien_de_tai');
     }
 };

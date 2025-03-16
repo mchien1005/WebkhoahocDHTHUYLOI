@@ -2,46 +2,84 @@
     <span class="close-btn" onclick="closePopup()">✖</span>
     <div class="popup-content">
         <h2>BÁO CÁO THỐNG KÊ ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h2>
+
         <p><b>I. Thông tin tổng quan</b></p>
-        <p>1. Tổng số đề tài đăng ký: ...............</p>
-        <p>2. Số đề tài theo trạng thái:</p>
-        <ul>
-            Đang chờ duyệt: ........... Được duyệt: ........... Hoàn thành: ........... Bị từ chối:
-            ...........
+        <p class="indent-text">1. Tổng số đề tài đăng ký: <strong>{{ $tongDeTai }}</strong></p>
+
+        <p class="indent-text">2. Số đề tài theo trạng thái:</p>
+        <ul style="list-style-type: none;">
+            <li>
+                Đang chờ duyệt: <strong>{{ $deTaiChoDuyet }}</strong>&emsp;
+                Được duyệt: <strong>{{ $deTaiDuocDuyet }}</strong>&emsp;
+                Hoàn thành: <strong>{{ $deTaiHoanThanh }}</strong>
+            </li>
+
         </ul>
-        <p>3. Số lượng đề tài theo lĩnh vực nghiên cứu:</p>
+
+        <p class="indent-text">3. Số lượng đề tài theo lĩnh vực nghiên cứu:</p>
         <ul>
-            <li>Công nghệ thông tin: ...........</li>
-            <li>Khoa học xã hội: ...........</li>
-            <li>Khoa học tự nhiên: ...........</li>
-            <li>Khác: ...........</li>
+            @foreach ($deTaiTheoLinhVuc as $linhVuc => $soLuong)
+                <li>{{ $linhVuc }}: <strong>{{ $soLuong }}</strong></li>
+            @endforeach
         </ul>
-        <p>4. Số lượng đề tài theo khoa:</p>
+        <p class="indent-text">4. Số lượng đề tài theo khoa:</p>
         <ul>
-            <li>Khoa A: ...........</li>
-            <li>Khoa B: ...........</li>
-            <li>Khoa C: ...........</li>
+            @foreach ($deTaiTheoKhoa as $khoa)
+                <li>{{ $khoa->ten_khoa }}: <strong>{{ $khoa->so_luong }}</strong></li>
+            @endforeach
         </ul>
-        <p>5. Tổng số giảng viên hướng dẫn: ...........</p>
-        <p>6. Tổng số sinh viên tham gia: ...........</p>
+
+        <p class="indent-text">5. Tổng số giảng viên hướng dẫn: <strong>{{ $tongGiangVien }}</strong></p>
+        <p class="indent-text">6. Tổng số sinh viên tham gia: <strong>{{ $tongSinhVien }}</strong></p>
 
         <p><b>IV. Thống kê kết quả đề tài</b></p>
-        <p>1. Số đề tài đạt cấp khoa: ...........</p>
-        <p>2. Số đề tài đạt cấp trường: ...........</p>
-        <p>3. Điểm phản biện trung bình: ...........</p>
+        <p class="indent-text">1. Số đề tài đạt cấp khoa: <strong>{{ $deTaiDatCapKhoa }}</strong></p>
+        <p class="indent-text">2. Số đề tài đạt cấp trường: <strong>{{ $deTaiDatCapTruong }}</strong></p>
+        <p class="indent-text">3. Điểm phản biện trung bình: <strong>{{ number_format($diemPhanBienTB, 2) }}</strong>
+        </p>
 
         <p><b>V. Thống kê lịch trình bảo vệ</b></p>
-        <p>1. Số đề tài bảo vệ trong từng đợt:</p>
+        <p class="indent-text">1. Số đề tài bảo vệ trong từng đợt:</p>
         <ul>
-            <li>Đợt 1: ...........</li>
-            <li>Đợt 2: ...........</li>
+            @foreach ($deTaiTheoDot as $dot)
+                <li>Ngày {{ \Carbon\Carbon::parse($dot->ngay_bao_ve)->format('d/m/Y') }}: <strong>{{ $dot->total }}</strong>
+                </li>
+            @endforeach
         </ul>
-        <p>2. Tỷ lệ đề tài bảo vệ thành công: ...........</p>
-        <p>3. Danh sách đề tài có lịch bảo vệ sắp tới:</p>
-        <p>4. MãđềtàiNgàybảovệGiờbảovệĐịađiểm.................</p>
+        <p class="indent-text">2. Tỷ lệ báo cáo đề tài thành công:
+            <strong>{{ number_format($tyLeBaoCaoThanhCong, 2) }}%</strong>
+        </p>
+
+        <p class="indent-text">3. Danh sách đề tài có lịch bảo vệ sắp tới:</p>
+        @if ($deTaiSapBaoVe->isEmpty())
+            <p>Không có đề tài nào sắp bảo vệ.</p>
+        @else
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Mã đề tài</th>
+                        <th>Ngày bảo vệ</th>
+                        <th>Giờ bảo vệ</th>
+                        <th>Địa điểm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($deTaiSapBaoVe as $lichTrinh)
+                        <tr>
+                            <td>{{ $lichTrinh->ma_de_tai }}</td>
+                            <td>{{ \Carbon\Carbon::parse($lichTrinh->ngay_bao_ve)->format('d/m/Y') }}</td>
+                            <td>{{ $lichTrinh->gio_bao_ve }}</td>
+                            <td>{{ $lichTrinh->dia_diem }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
 
         <p><b>VI. Thống kê hội đồng phản biện</b></p>
-        <p>1. Tổng số hội đồng phản biện: ...........</p>
-        <p>2. Tổng số giảng viên phản biện: ...........</p>
+        <p class="indent-text">1. Tổng số hội đồng phản biện: <strong>{{ $tongHoiDong }}</strong></p>
+        <p class="indent-text">2. Tổng số giảng viên phản biện: <strong>{{ $tongGiangVienPhanBien }}</strong></p>
+
         <button class="export-btn" onclick="showConfirmPopup()">XUẤT BÁO CÁO THỐNG KÊ</button>
     </div>
+</div>

@@ -2,19 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="">
+        <a href="{{route('vanphongkhoa.tintuc')}}">
             <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
             <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="">
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
             <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
             <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item active">
-        <a href="{{ route('vanphongkhoa.quanlyphanbien')}}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -811,7 +811,7 @@
     <div class="line-15"></div>
     <div class="group-13">
         <div class="rectangle-40"></div>
-        <a href="{{ route('vanphongkhoa.quanlyphanbien') }}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove') }}">
             <button class="quaylai"
                 style="border: none;background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
                 Thoát
@@ -821,8 +821,8 @@
     <div class="group-12">
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateCheckbox()""
-                                                                                    style=" border: none; background:
-            transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                    style=" border: none;
+            background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>

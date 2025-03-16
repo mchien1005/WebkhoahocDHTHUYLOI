@@ -2,19 +2,19 @@
 
 @section('sidebar')
     <div class="menu-item ">
-        <a href="">
+        <a href="{{route('vanphongkhoa.tintuc')}}">
             <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
             <span>Tin tức</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="">
+        <a href="{{route('vanphongkhoa.xembaocao')}}">
             <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
             <span>Báo cáo đề tài</span>
         </a>
     </div>
     <div class="menu-item">
-        <a href="{{route('vanphongkhoa.quanlyphanbien')}}">
+        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
             <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
             <span>Phản biện & bảo vệ</span>
         </a>
@@ -556,42 +556,96 @@
             font-weight: 500;
             font-family: Rasa;
         }
-    </style>
-    <div class="frame-1">
-        <div class="md-01">MD01</div>
-        <div class="nghi-n-c-u-v-s-ti-n-h-a-c-a-virus-trong-t-ng-lai">
-            Nghiên cứu về sự tiến hóa của
-            Virus trong tương lai.
-        </div>
-        <div class="md-02">MD02</div>
-        <div class="md-04">MD04</div>
-        <div class="md-03">MD03</div>
-        <div class="ng-d-ng-tr-tu-nh-n-t-o-trong-nh-n-di-n-khu-n-m-t">
-            Ứng dụng trí tuệ nhân tạo trong
-            nhận diện khuôn mặt.
-        </div>
-        <div class="ph-t-tri-n-thu-t-to-n-h-c-m-y-d-o-n-gi-c-phi-u">
-            Phát triển thuật toán học máy
-            để dự đoán giá cổ phiếu.
-        </div>
-        <div class="t-i-u-h-a-hi-u-su-t-m-ng-b-ng-thu-t-to-n-h-c-s-u">
-            Tối ưu hóa hiệu suất mạng bằng
-            thuật toán học sâu.
-        </div>
-    </div>
-    <div class="rectangle-38"></div>
-    <div class="line-8"></div>
-    <div class="madetai">Mã đề tài</div>
-    <div class="tendetai">Tên đề tài</div>
-    <div class="ketqua" onclick="showPopup()">Kết quả</div>
-    <div class="line-9"></div>
-    <div class="line-10"></div>
-    <div class="line-11"></div>
-    <div class="line-12"></div>
-    <div class="line-13"></div>
-    <div class="line-14"></div>
 
-    <div class="line-15"></div>
+        .container {
+            display: flex;
+            justify-content: center;
+            /* Căn giữa ngang */
+            align-items: center;
+            /* Căn giữa dọc (nếu cần) */
+        }
+
+        .custom-table {
+            padding-top: 150px;
+            width: 80%;
+            /* Điều chỉnh độ rộng bảng */
+            max-width: 1000px;
+            /* Giới hạn chiều rộng tối đa */
+            margin: auto;
+            /* Căn giữa theo chiều ngang */
+            text-align: center;
+            /* Căn giữa nội dung */
+        }
+
+        .custom-table th {
+            background-color: #255293DE;
+            color: white;
+            text-align: center;
+            height: 64.15px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+        .custom-table td {
+            background: rgba(81, 131, 202, 0.6);
+            color: white;
+            text-align: center;
+            max-height: 100px;
+            height: 67px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+
+        .custom-table th:nth-child(1) {
+            width: 20%;
+        }
+
+        /* Mã đề tài */
+        .custom-table th:nth-child(2) {
+            width: 60%;
+        }
+
+        /* Tên đề tài */
+        .custom-table th:nth-child(3) {
+            width: 20%;
+        }
+
+        /* Ngày đăng ký */
+    </style>
+
+    <div class="container mt-4">
+        <table class="table table-bordered custom-table responsive-table">
+            <thead>
+                <tr>
+                    <th>Mã đề tài</th>
+                    <th>Tên đề tài</th>
+                    <th>Điểm phản biện</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($deTaiList as $deTai)
+                    <tr>
+                        <td>{{ $deTai->ma_de_tai }}</td>
+                        <td>{{ $deTai->ten_de_tai }}</td>
+                        <td onclick="openPopup({{ $deTai->ma_de_tai }}, '{{ $deTai->diem_phan_bien ?? 'Chưa có' }}')"
+                            style="cursor: pointer; color: white;">
+                            {{ $deTai->diem_phan_bien ?? 'Chưa có' }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+
+        </table>
+    </div>
 
     <div class="truy-v-n-th-ng-tin2">Cập nhật kết quả đề tài cấp khoa</div>
 
@@ -607,16 +661,16 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                        word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                            word-wrap: break-word;">Kết
                     quả:</label>
                 <input type="text" id="scoreInput"
                     style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
             <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="validateScore()"">Xác nhận</button>
-                                                    </div>
-                                                    </div>
-                                                    <!-- Popup thông báo thành công -->
-                                                <div class=" popup-overlay" id="successOverlay" style="display: none;">
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                        <!-- Popup thông báo thành công -->
+                                                    <div class=" popup-overlay" id="successOverlay" style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
@@ -642,66 +696,71 @@
         </div>
 
         <script>
-            // Hàm mở popup
-            function showPopup() {
-                document.getElementById("confirmOverlay").style.display = "block";
-                document.getElementById("confirmPopup").style.display = "block";
+            let selectedMaDeTai = null;
+
+            function openPopup(maDeTai, currentScore) {
+                selectedMaDeTai = maDeTai;
+                document.getElementById('scoreInput').value = (currentScore === 'Chưa có') ? '' : currentScore;
+                document.getElementById('confirmOverlay').style.display = 'block';
+                document.getElementById('confirmPopup').style.display = 'block';
             }
 
-            // Hàm đóng popup
             function closePopup() {
-                document.getElementById("confirmOverlay").style.display = "none";
-                document.getElementById("confirmPopup").style.display = "none";
+                document.getElementById('confirmOverlay').style.display = 'none';
+                document.getElementById('confirmPopup').style.display = 'none';
             }
 
-            // Lắng nghe sự kiện click vào overlay để đóng popup
+            function validateScore() {
+                let newScore = document.getElementById('scoreInput').value.trim();
+
+                if (isNaN(newScore) || newScore < 0 || newScore > 100) {
+                    showErrorPopup();
+                    return;
+                }
+
+                fetch('/cap-nhat-diem', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ ma_de_tai: selectedMaDeTai, diem_phan_bien: newScore })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            closePopup(); // Đóng popup nhập điểm
+                            showSuccessPopup(); // Hiển thị popup thành công
+                        }
+                    })
+                    .catch(error => console.error('Lỗi cập nhật:', error));
+            }
+
+            function showSuccessPopup() {
+                document.getElementById('successOverlay').style.display = 'block';
+                document.getElementById('successPopup').style.display = 'block';
+
+                setTimeout(() => {
+                    document.getElementById('successOverlay').style.display = 'none';
+                    document.getElementById('successPopup').style.display = 'none';
+                    location.reload();
+                }, 2000);
+            }
+
+            function showErrorPopup() {
+                document.getElementById('errorOverlay').style.display = 'block';
+                document.getElementById('errorPopup').style.display = 'block';
+
+                setTimeout(() => {
+                    document.getElementById('errorOverlay').style.display = 'none';
+                    document.getElementById('errorPopup').style.display = 'none';
+                }, 2000);
+            }
+            // Đóng popup khi click ra ngoài
             document.getElementById("confirmOverlay").addEventListener("click", function (event) {
-                // Kiểm tra nếu người dùng nhấn vào overlay (không phải nội dung bên trong)
                 if (event.target === this) {
                     closePopup();
                 }
             });
-
-            document.getElementById("confirmPopup").addEventListener("click", hideErrorPopup);
-            function validateScore() {
-                let input = document.getElementById("scoreInput"); // Lấy ô nhập điểm
-                let value = input.value.trim(); // Loại bỏ khoảng trắng thừa
-
-                // Kiểm tra giá trị nhập vào có phải số hợp lệ không
-                if (!/^\d+(\.\d+)?$/.test(value)) {
-                    showErrorPopup();
-                    input.value = ""; // Xóa nội dung nhập sai
-                } else {
-                    showSuccessPopup();
-                }
-            }
-
-            // Hiển thị popup lỗi
-            function showErrorPopup() {
-                document.getElementById("errorOverlay").style.display = "block";
-                document.getElementById("errorPopup").style.display = "block";
-                setTimeout(closeErrorPopup, 2000);
-            }
-
-            // Đóng popup lỗi
-            function closeErrorPopup() {
-                document.getElementById("errorOverlay").style.display = "none";
-                document.getElementById("errorPopup").style.display = "none";
-            }
-
-            // Hiển thị popup thành công
-            function showSuccessPopup() {
-                document.getElementById("errorOverlay").style.display = "none";
-                document.getElementById("errorPopup").style.display = "none";
-                document.getElementById("successPopup").style.display = "block";
-
-                setTimeout(closeSuccessPopup, 2000);
-            }
-
-            // Đóng popup thành công
-            function closeSuccessPopup() {
-                document.getElementById("successPopup").style.display = "none";
-            }
         </script>
-
 @endsection

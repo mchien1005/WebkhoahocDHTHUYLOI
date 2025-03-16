@@ -11,16 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_sinh_vien', function (Blueprint $table) {
+        Schema::create('sinh_vien', function (Blueprint $table) {
             $table->string('ma_sv', 20)->primary();
             $table->string('ten_sv', 100);
             $table->string('lop', 50);
             $table->enum('gioi_tinh', ['Nam', 'Nữ', 'Khác']);
             $table->year('nam_sinh');
-            $table->string('ma_khoa', 10);
+            $table->string('khoa', 100);
             $table->string('email', 100);
-            $table->foreign('email')->references('email')->on('tai_khoan')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('email')->references('email')->on('tai_khoan')->onDelete('cascade');
         });
     }
 
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_sinh_vien');
+        Schema::dropIfExists('sinh_vien');
     }
 };

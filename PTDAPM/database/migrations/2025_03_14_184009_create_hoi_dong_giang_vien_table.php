@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('_hoi_dong_giang_vien', function (Blueprint $table) {
-            $table->integer('ma_hd');
+        Schema::create('hoi_dong_giang_vien', function (Blueprint $table) {
+            $table->unsignedInteger('ma_hd');
             $table->string('ma_gv', 20);
             $table->primary(['ma_hd', 'ma_gv']);
-            $table->foreign('ma_hd')->references('ma_hd')->on('hoi_dong')->onDelete('cascade');
-            $table->foreign('ma_gv')->references('ma_gv')->on('giang_vien')->onDelete('cascade');
             $table->timestamps();
+
+            $table->foreign('ma_hd')->references('ma_hd')->on('hoi_dong_danh_gia')->onDelete('cascade');
+            $table->foreign('ma_gv')->references('ma_gv')->on('giang_vien')->onDelete('cascade');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('_hoi_dong_giang_vien');
+        Schema::dropIfExists('hoi_dong_giang_vien');
     }
 };

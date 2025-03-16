@@ -4,14 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateTaiKhoanTable extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
-        Schema::create('_tai_khoan', function (Blueprint $table) {
+        Schema::create('tai_khoan', function (Blueprint $table) {
             $table->string('email', 100)->primary();
             $table->string('mat_khau', 255);
             $table->enum('vai_tro', ['Admin', 'Giảng viên', 'Sinh viên', 'Nhân viên']);
@@ -19,11 +16,8 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('_tai_khoan');
+        Schema::dropIfExists('tai_khoan');
     }
-};
+}
