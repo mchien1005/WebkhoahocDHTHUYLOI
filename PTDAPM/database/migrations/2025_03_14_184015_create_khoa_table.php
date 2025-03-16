@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('ten_khoa', 100);
             $table->string('truong_khoa', 20)->nullable();
             $table->timestamps();
+
+            //$table->foreign('truong_khoa')->references('ma_gv')->on('giang_vien')->onDelete('set null');
         });
     }
 

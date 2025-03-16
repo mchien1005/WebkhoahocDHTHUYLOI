@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('lop', 50);
             $table->enum('gioi_tinh', ['Nam', 'Nữ', 'Khác']);
             $table->year('nam_sinh');
-            $table->string('khoa', 100);
+            $table->string('ma_khoa', 20);
             $table->string('email', 100);
             $table->timestamps();
 
