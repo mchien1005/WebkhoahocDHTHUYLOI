@@ -99,7 +99,7 @@
         <div class="grid-container">
             <!-- Hàng trên với 2 button -->
             <div class="row">
-                <form action="{{ route('vanphongkhoa.chiahoidong') }}" method="GET">
+                <form action="{{ route('vanphongkhoa.chonhoidong') }}" method="GET">
                     <button class="custom-button">Chia hội đồng phản biện</button>
                 </form>
                 <form action="{{ route('vanphongkhoa.ghepdoidetaihoidong') }}" method="GET">

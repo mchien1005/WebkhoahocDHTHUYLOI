@@ -7,39 +7,6 @@
             <span>Tin tức</span>
         </a>
     </div>
-    <div class="menu-item">
-        <a href="{{route('vanphongkhoa.xembaocao')}}">
-            <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />
-            <span>Báo cáo đề tài</span>
-        </a>
-    </div>
-    <div class="menu-item">
-        <a href="{{ route('vanphongkhoa.phanbienvabaove')}}">
-            <img src="{{ asset('images/carbon_result.png') }}" alt="Register Icon" class="sidebar-icon" />
-            <span>Phản biện & bảo vệ</span>
-        </a>
-    </div>
-    <div class="menu-item">
-        <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
-            <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả</span>
-        </a>
-    </div>
-    <div class="menu-item active">
-        <a href="{{ route('vanphongkhoa.truyvanthongtin') }}">
-            <img src="{{ asset('images/mdi_court-hammer.png') }}" alt="Invitation Icon" class="sidebar-icon" />
-            <span>Truy vấn thông tin</span>
-        </a>
-    </div>
-@endsection@extends('layouts.layout2')
-
-@section('sidebar')
-    <div class="menu-item ">
-        <a href="{{route('vanphongkhoa.tintuc')}}">
-            <img src="{{ asset('images/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
-            <span>Tin tức</span>
-        </a>
-    </div>
     <div class="menu-item active">
         <a href="{{route('vanphongkhoa.xembaocao')}}">
             <img src="{{ asset('images/School Director.png') }}" alt="Research Icon" class="sidebar-icon" />

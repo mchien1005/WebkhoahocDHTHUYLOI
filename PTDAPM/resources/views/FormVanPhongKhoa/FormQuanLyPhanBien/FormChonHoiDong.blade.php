@@ -25,7 +25,7 @@
     <span>Cập nhật kết quả</span>
     </a>
   </div>
-  <div class="menu-item active">
+  <div class="menu-item">
     <a href="{{ route('vanphongkhoa.truyvanthongtin') }}">
     <img src="{{ asset('images/mdi_court-hammer.png') }}" alt="Invitation Icon" class="sidebar-icon" />
     <span>Truy vấn thông tin</span>
