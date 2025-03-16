@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\GiangVien;
-use App\Models\Detainghiencuu;
+use App\Models\GiangVien;
 
 use Illuminate\Http\Request;
 
@@ -12,8 +12,30 @@ class DangKyNghienCuuController
      */
     public function index()
     {
-        
-        return view('FormGiangVien.FormDangKyDeTai.index');
+        $giangviens = GiangVien::all();
+        return view('FormGiangVien.FormDangKyDeTai.index', compact('giangviens'));
+    }
+
+    public function DangKyDinhHuongNghienCuu(Request $request)
+    {
+        $validated = $request->validate([
+            'research_orientation' => 'required|string',
+            'ma_gv' => 'required|string|exists:giang_vien,ma_gv',
+        ]);
+    
+        try {
+            // Lấy mã giảng viên từ form thay vì session
+            $maGV = $validated['ma_gv'];
+            
+            // Tìm và cập nhật giảng viên
+            $giangVien = GiangVien::findOrFail($maGV);
+            $giangVien->dinh_huong_nc = $validated['research_orientation'];
+            $giangVien->save();
+            
+            return redirect()->back()->with('success', 'Đăng ký định hướng nghiên cứu thành công!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        }
     }
 
     /**
