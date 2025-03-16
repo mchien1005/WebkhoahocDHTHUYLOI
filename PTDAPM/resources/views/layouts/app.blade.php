@@ -10,21 +10,15 @@
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Rasa', serif;
     }
 
     body {
         background-color: #e7f5ff;
-        font-family: 'Rasa', serif !important;
-    }
-
-    .news-content {
-        font-family: 'Rasa', serif !important;
     }
 
     .page-wrapper {
@@ -38,12 +32,12 @@
         background-color: #4267B2;
         color: white;
         width: 100%;
-        max-width: 300px;
+        max-width: 500px;
     }
 
     .menu-item {
         padding: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: #255293DE;
     }
 
     .menu-item a {
@@ -61,7 +55,7 @@
     }
 
     .menu-item.active {
-        background-color: #5B7BC0;
+        background: rgba(80.75, 131.22, 201.88, 0.60);
     }
 
     .icon-container {
@@ -73,24 +67,28 @@
     }
 
     .sidebar-icon {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         filter: brightness(0) invert(1);
     }
 
-    a {
-        font-size: 16px;
+    span {
+        color: #E7F5FF;
+        font-size: 32px;
+        font-family: Rasa;
         font-weight: 500;
+        word-wrap: break-word
     }
 
     /* Header styles */
     .header {
-        background-color: #245292;
+        background-color: #255293;
         height: 80px;
         display: flex;
         align-items: center;
         padding: 0 20px;
         width: 100%;
+        border-bottom: 2px solid #82b0f1;
     }
 
     .logo {
@@ -100,9 +98,11 @@
     }
 
     .school-name {
-        color: #e7f5ff;
-        font-size: 28px;
+        color: #E7F5FF;
+        font-size: 40px;
+        font-family: Rasa;
         font-weight: 500;
+        word-wrap: break-word;
     }
 
     .user-info {
@@ -140,6 +140,11 @@
         align-items: center;
     }
 
+    .dropdown-button img {
+        width: 20px;
+        height: 60px;
+    }
+
     .dropdown-icon {
         width: 20px;
         height: 20px;
@@ -149,6 +154,7 @@
         display: none;
         position: absolute;
         right: 0;
+        margin-right: -20px;
         top: 100%;
         background-color: rgba(36, 82, 147, 0.95);
         min-width: 250px;
@@ -188,13 +194,6 @@
         flex: 1;
     }
 
-    .text-primary {
-        color: #007bff !important;
-        /* Màu xanh đậm */
-        text-decoration: underline !important;
-        /* Gạch chân */
-    }
-
     /* Sidebar styles */
     .sidebar {
         width: 250px;
@@ -204,16 +203,13 @@
 
     .menu-item {
         height: 60px;
+        border: 1px solid #02367f;
         display: flex;
         align-items: center;
         padding-left: 15px;
-        color: white;
+        color: #e7f5ff;
         font-size: 20px;
         font-weight: 500;
-        background-color: #245292;
-        /* Cùng màu sidebar */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        transition: background-color 0.3s;
     }
 
     .menu-item.active {
@@ -231,13 +227,10 @@
     }
 
     /* Main content styles */
-    /* Main content styles */
     .main-content {
         flex: 1;
         padding: 20px;
         overflow-y: auto;
-        color: #255293;
-        /* Cập nhật màu chữ */
     }
 
     .page-title {
@@ -313,7 +306,7 @@
     }
 
     a.text-link {
-        color: #255293;
+        color: #17478c;
         text-decoration: underline;
     }
 
@@ -328,7 +321,11 @@
         }
 
         .school-name {
-            font-size: 32px;
+            color: #E7F5FF;
+            font-size: 40px;
+            font-family: Rasa;
+            font-weight: 500;
+            word-wrap: break-word;
         }
 
         .user-name {
@@ -398,8 +395,7 @@
         }
 
         .sidebar {
-
-            width: 354px;
+            width: 400px;
         }
 
         .menu-item {
@@ -433,30 +429,7 @@
         }
 
         .news-link {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            /* Căn phải */
-            margin-top: auto;
-            /* Đẩy xuống cuối */
-            padding-right: 150px
-        }
-
-        .news-link img {
-            width: 21px;
-            height: 20px;
-        }
-
-        .news-link a {
-            text-decoration: none;
-            /* Bỏ gạch chân */
-            color: inherit;
-            /* Giữ nguyên màu chữ */
-        }
-
-        .news-link a:hover {
-            text-decoration: none;
-            /* Đảm bảo không xuất hiện gạch chân khi hover */
+            font-size: 24px;
         }
 
 
@@ -474,6 +447,37 @@
             height: 24px;
             margin-right: 16px;
         }
+
+        .news-link {
+            display: flex;
+            justify-content: flex-end;
+            /* Đảm bảo căn lề phải */
+            align-items: center;
+            margin-top: 10px;
+            /* Thêm khoảng cách nếu cần */
+            width: 100%;
+            /* Đảm bảo nó chiếm toàn bộ chiều rộng */
+        }
+
+        .news-link img {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            /* Khoảng cách giữa biểu tượng và chữ */
+        }
+
+        .news-link a {
+            color: #245292;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-link a:hover {
+            text-decoration: underline;
+        }
     }
     </style>
 </head>
@@ -486,7 +490,7 @@
             <h1 class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
             <div class="user-info">
                 <img src="{{ asset('img/Test Account.png') }}" alt="User Icon" class="user-icon" />
-                <span class="user-name">Nguyễn văn A</span>
+                <span class="user-name">{{ Auth::user()->sinhVien->ten_sv }}</span>
                 <div class="dropdown">
                     <button class="dropdown-button">
 
@@ -494,15 +498,20 @@
                     </button>
                     <div class="dropdown-content">
                         <img src="{{ asset('img/User.png') }}" alt="Profile" style="display: block; margin: auto;">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <img src="{{ asset('img/User Male.png') }}" alt="Password" class="menu-icon" />
+                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btn-edit-profile">
+                            <img src="{{ asset('img/User Male.png') }}" alt="Profile" class="menu-icon" />
                             Cập nhật thông tin cá nhân
                         </a>
 
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#DoiMKModal">
+                        <!-- <a type="button" data-bs-toggle="modal" data-bs-target="#DoiMKModal">
                             <img src="{{ asset('img/Security Shield.png') }}" alt="Password" class="menu-icon" />
                             Đổi mật khẩu
-                        </a>
+                        </a> -->
+                        <a class="nav-link" href="{{ route('doi-mat-khau.form') }}" data-bs-toggle="modal"
+                            data-bs-target="#DoiMKModal">
+                            <img src="{{ asset('img/Security Shield.png') }}" alt="Password" class="menu-icon" />
+                            Đổi mật khẩu</a>
+
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <img src="{{ asset('img/Move Up.png') }}" alt="Password" class="menu-icon" />
@@ -531,106 +540,126 @@
         </div>
     </div>
 
+    <div class="modal-body">
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
+                    <form id="updateSinhVienForm" method="POST"
+                        action="{{ route('profile.update', ['ma_sv' => Auth::user()->sinhVien->ma_sv]) }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                    <div
+                                        style="width: 164.36px; height: 213.39px; background-color: rgba(81, 131, 202, 0.6); display: flex; justify-content: center; align-items: center; border-radius: 10px;">
+                                        <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="120"
+                                            height="120" style="border-radius: 50%;">
+                                    </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <div
-                                style="width: 164.36px; height: 213.39px; background-color: rgba(81, 131, 202, 0.6); display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                                <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="120" height="120"
-                                    style="border-radius: 50%;">
-                            </div>
 
-
-                        </div>
-                        <div class="col-md-9">
-                            <div class="mb-2 d-flex align-items-center">
-                                <label class="form-label me-2"
-                                    style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Họ
-                                    và tên:</label>
-                                <input type="text" class="form-control"
-                                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                    value="Nguyễn Văn A">
-                            </div>
-                            <div class="mb-2 row">
-                                <div class="col-md-7 d-flex align-items-center">
-                                    <label class="form-label me-2"
-                                        style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
-                                        sinh viên:</label>
-                                    <input type="text" class="form-control"
-                                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; width: 421.06px; height: 49.89px;"
-                                        value="225117336">
                                 </div>
-                                <div class="col-md-5 d-flex align-items-center">
-                                    <label class="form-label me-2"
-                                        style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Lớp:</label>
-                                    <input type="text" class="form-control"
-                                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; width: 160.31px; height: 49.89px;"
-                                        value="64KTPM4">
-                                </div>
-                            </div>
-                            <div class="mb-2 row align-items-center">
-                                <div class="col-md-7 d-flex align-items-center">
-                                    <label class="form-label me-2"
-                                        style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Giới
-                                        tính:</label>
-                                    <div class="d-flex align-items-center">
-                                        <input type="radio" name="gender" checked class="me-2"
-                                            style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;">
-                                        Nam
-                                        <input type="radio" name="gender" class="ms-4 me-2"
-                                            style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;">
-                                        Nữ
+
+                                <div class="col-md-9">
+                                    <div class="mb-2 d-flex align-items-center">
+                                        <label class="form-label me-2"
+                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Họ
+                                            và tên:</label>
+
+                                        <input type="text" class="form-control"
+                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                            value="{{ Auth::user()->sinhVien->ten_sv }}">
+                                    </div>
+                                    <div class="mb-2 row">
+                                        <div class="col-md-7 d-flex align-items-center">
+                                            <label class="form-label me-2"
+                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
+                                                sinh viên:</label>
+                                            <input type="text" class="form-control"
+                                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                                value="{{ Auth::user()->sinhVien->ma_sv }}">
+                                        </div>
+                                        <div class="col-md-5 d-flex align-items-center">
+                                            <label class="form-label me-2"
+                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Lớp:</label>
+                                            <input type="text" class="form-control"
+                                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                                value="{{ Auth::user()->sinhVien->lop }}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2 row align-items-center">
+                                        <div class="col-md-7 d-flex align-items-center">
+                                            <label class="form-label me-2"
+                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Giới
+                                                tính:</label>
+                                            <div class="d-flex align-items-center">
+                                                <input type="radio" name="gioi_tinh" checked class="me-2"
+                                                    style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;">
+                                                Nam
+                                                <input type="radio" name="gioi_tinh"
+                                                    style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;"
+                                                    class="ms-4">
+                                                Nữ
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 d-flex align-items-center">
+                                            <label class="form-label me-3"
+                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Năm
+                                                sinh:</label>
+                                            <input type="year" class="form-control"
+                                                style="background-color: #d9eaff; color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                                value="{{ Auth::user()->sinhVien->nam_sinh }}">
+                                        </div>
+                                    </div>
+                                    <div class="mb-2 d-flex align-items-center">
+                                        <label class="form-label me-2"
+                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
+                                            khoa:</label>
+                                        <input type="text" class="form-control"
+                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                            value="{{ Auth::user()->sinhVien->ma_khoa}}">
+
+                                    </div>
+                                    <div class="mb-2 d-flex align-items-center">
+                                        <label class="form-label me-2"
+                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Email:</label>
+                                        <input type="email" class="form-control"
+                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
+                                            value="{{ Auth::user()->sinhVien->email }}">
                                     </div>
                                 </div>
-                                <div class="col-md-5 d-flex align-items-center">
-                                    <label class="form-label me-2"
-                                        style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Ngày
-                                        sinh:</label>
-                                    <input type="date" class="form-control"
-                                        style="background-color: #d9eaff; color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                        value="2004-03-10">
-                                </div>
-                            </div>
-                            <div class="mb-2 d-flex align-items-center">
-                                <label class="form-label me-2"
-                                    style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
-                                    khoa:</label>
-                                <input type="text" class="form-control"
-                                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                    value="CSE364">
-                            </div>
-                            <div class="mb-2 d-flex align-items-center">
-                                <label class="form-label me-2"
-                                    style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Email:</label>
-                                <input type="email" class="form-control"
-                                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                    value="NguyenVanA@email.com">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="button" class="btn btn-primary"
-                        style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
-                    <button type="button" class="btn btn-secondary"
-                        style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
-                        data-bs-dismiss="modal">Hủy</button>
+                        <div class="modal-footer border-0">
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
+                            <button type="button" class="btn btn-secondary"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
+                                data-bs-dismiss="modal">Hủy</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
+
     </div>
-
-
-    <!-- Modal Đổi Mật Khẩu -->
     <div class="modal fade" id="DoiMKModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;height: 652px;">
             <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-
-                <!-- Tiêu đề -->
                 <div class="modal-header border-0">
                     <img src="{{ asset('img/Security Lock.png') }}" alt="Password" class="menu-icon"
                         style="color:#17478c" />
@@ -639,54 +668,88 @@
                         khẩu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
+                @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
                 <hr>
-                <div class="row">
-                    <div class="col-md-3 d-flex justify-content-center align-items-center">
-                        <div
-                            style="width: 164.36px; height: 213.39px; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                            <img src="{{ asset('img/Padlock.png') }}" class="img-fluid" width="120" height="120"
-                                style="border-radius: 50%;">
+                <form method="POST" action="{{ route('doi-mat-khau.update') }}">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <div
+                                style="width: 164.36px; height: 213.39px; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
+                                <img src="{{ asset('img/Padlock.png') }}" class="img-fluid" width="120" height="120"
+                                    style="border-radius: 50%;">
+                            </div>
                         </div>
-
-
-                    </div>
-
-                    <!-- Nội dung -->
-                    <div class="col-md-9">
-                        <div class="modal-body">
-                            <div class="text-center mb-3">
-                                <i class="fas fa-lock" style="font-size: 50px; color: #17488C;"></i>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Mật khẩu hiện tại</label>
-                                <input type="password" class="form-control" id="currentPassword"
-                                    style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; border: none; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Mật khẩu mới</label>
-                                <input type="password" class="form-control" id="newPassword"
-                                    style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; border: none; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Nhập lại mật khẩu mới</label>
-                                <input type="password" class="form-control" id="confirmPassword"
-                                    style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; border: none; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                        <div class="col-md-9">
+                            <div class="modal-body">
+                                <div class="text-center mb-3">
+                                    <i class="fas fa-lock" style="font-size: 50px; color: #17488C;"></i>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mật khẩu hiện tại</label>
+                                    <input type="password" name="current_password" class="form-control"
+                                        id="currentPassword"
+                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Mật khẩu mới</label>
+                                    <input type="password" name="new_password" class="form-control" id="newPassword"
+                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Nhập lại mật khẩu mới</label>
+                                    <input type="password" name="confirm_password" class="form-control"
+                                        id="confirmPassword"
+                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Footer -->
-                <div class="modal-footer border-0 d-flex">
-                    <button type="button" class="btn btn-primary"
-                        style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">Lưu</button>
-                </div>
+                    <div class="modal-footer border-0 d-flex">
+                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#XNModal"
+                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+            <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                <h4 class="modal-title">
+                    <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
+                </h4>
+            </div>
+
+            <div class="modal-body text-center">
+                <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
+            </div>
+
+            <div class="modal-footer d-flex">
+                <form action="{{ route('doi-mat-khau.update') }}" method="POST" class="w-100">
+                    @csrf
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary flex-grow-1 mx-5"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
+                            Xác nhận
+                        </button>
+
+                        <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                            data-bs-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
