@@ -3,84 +3,47 @@
 namespace App\Http\Controllers\GiangVien;
 
 use Illuminate\Http\Request;
-use App\Models\GiangVien\Baocaonghiencuu;
+use App\Models\BaoCaoNghienCuu;
+use App\Models\NhanXetBaoCao;
 
-class BaocaonghiencuuController 
+class BaoCaoNghienCuuController 
 {
-    /**
-     * Hiển thị danh sách báo cáo.
-     */
+    // Hiển thị danh sách báo cáo
     public function index()
     {
-
-        return view('FormGiangVien.FormQuanLyBaoCao.index'); // Trả về view thay vì JSON
+        $baocaos = BaoCaoNghienCuu::all();
+        return view('FormGiangVien.FormQuanLyBaoCao.index', compact('baocaos'));
     }
 
-//     /**
-//      * Hiển thị form tạo báo cáo mới.
-//      */
-//     public function create()
-//     {
-//         return view('baocao.create');
-//     }
-//
-//     /**
-//      * Lưu một báo cáo mới.
-//      */
-//     public function store(Request $request)
-//     {
-//         $request->validate([
-//             'tieu_de' => 'required|string|max:255',
-//             'noi_dung' => 'required',
-//             'ma_de_tai' => 'required|integer',
-//             'nguoi_tao' => 'required|string|max:20',
-//             'trang_thai' => 'required|in:Chờ duyệt,Được duyệt,Bị từ chối',
-//             'duong_dan_tep' => 'nullable|string|max:255',
-//         ]);
+    // Xử lý duyệt báo cáo
+    public function xuLy(Request $request)
+    {
+        
+        $baocao = BaoCaoNghienCuu::findOrFail($request->baocao_id);
 
-//         Baocaonghiencuu::create($request->all());
+        if ($request->action == 'accept') {
+            $baocao->update(['trang_thai' => 'Được duyệt']);
+        } else {
+            $baocao->update(['trang_thai' => 'Bị từ chối']);
+        }
 
-//         return redirect()->route('baocao.index')->with('success', 'Báo cáo đã được tạo thành công!');
-//     }
+        $baocao->save();
+        return redirect()->route('baocaodetai.index');
+    }
 
-//     /**
-//      * Hiển thị chi tiết một báo cáo.
-//      */
-//     public function show($id)
-//     {
-//         $baoCao = Baocaonghiencuu::findOrFail($id);
-//         return view('baocao.show', compact('baoCao'));
-//     }
+    // Xử lý nhận xét báo cáo
+    public function nhanXet(Request $request)
+    {
+        $request->validate([
+            'ma_bc' => 'required|exists:bao_cao_nghien_cuu,ma_bc',
+            'noi_dung' => 'nullable|string|max:1000'
+        ]);
 
-//     /**
-//      * Hiển thị form chỉnh sửa báo cáo.
-//      */
-//     public function edit($id)
-//     {
-//         $baoCao = Baocaonghiencuu::findOrFail($id);
-//         return view('baocao.edit', compact('baoCao'));
-//     }
+        $nhanXet = NhanXetBaoCao::updateOrCreate(
+            ['ma_bc' => $request->ma_bc],
+            ['noi_dung' => $request->noi_dung]
+        );
 
-//     /**
-//      * Cập nhật thông tin một báo cáo.
-//      */
-//     public function update(Request $request, $id)
-//     {
-//         $baoCao = Baocaonghiencuu::findOrFail($id);
-//         $baoCao->update($request->all());
-
-//         return redirect()->route('baocao.index')->with('success', 'Báo cáo đã được cập nhật!');
-//     }
-
-//     /**
-//      * Xóa một báo cáo.
-//      */
-//     public function destroy($id)
-//     {
-//         $baoCao = Baocaonghiencuu::findOrFail($id);
-//         $baoCao->delete();
-
-//         return redirect()->route('baocao.index')->with('success', 'Báo cáo đã bị xóa!');
-//     }
-// }
+        return redirect()->back()->with('success', 'Nhận xét đã được lưu.');
+    }
 }

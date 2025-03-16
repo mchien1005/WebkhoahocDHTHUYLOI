@@ -12,6 +12,8 @@ use App\Models\HoiDongDanhGia;
 use App\Models\LichTrinhBaoVe;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\BaoCaoNghienCuu;
+use App\Models\TinTuc;
 
 class VanPhongKhoaController extends Controller
 {
@@ -184,30 +186,34 @@ class VanPhongKhoaController extends Controller
             return response()->json(['success' => false, 'message' => 'Lỗi khi lưu dữ liệu!']);
         }
     }
-   public function xemBaoCao(){
-    $baocaos = BaoCaoNghienCuu::all();
-    return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemBaoCao', compact('baocaos'));
+    public function xemBaoCao()
+    {
+        $baocaos = BaoCaoNghienCuu::all();
+        return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemBaoCao', compact('baocaos'));
     }
 
-    public function showBaoCao($ma_bc){
-    // Lấy dữ liệu báo cáo từ database
-    $baocao = BaoCaoNghienCuu::find($ma_bc);
-    // Kiểm tra nếu không tìm thấy báo cáo
-    if (!$baocao) {
-        abort(404, 'Báo cáo không tồn tại');
-    }
-    return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemChiTietBaoCao', compact('baocao'));
+    public function showBaoCao($ma_bc)
+    {
+        // Lấy dữ liệu báo cáo từ database
+        $baocao = BaoCaoNghienCuu::find($ma_bc);
+        // Kiểm tra nếu không tìm thấy báo cáo
+        if (!$baocao) {
+            abort(404, 'Báo cáo không tồn tại');
+        }
+        return view('FormVanPhongKhoa.FormQuanLyBaoCaoNghienCuu.FormXemChiTietBaoCao', compact('baocao'));
     }
 
-    public function phanBienVaBaoVe(){
+    public function phanBienVaBaoVe()
+    {
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormBaChucNang');
     }
     public function tintuc()
     {
         $vpk = TinTuc::all();
-        return view('FormVanPhongKhoa.FormTinTuc.FormTinTuc',compact('vpk'));
+        return view('FormVanPhongKhoa.FormTinTuc.FormTinTuc', compact('vpk'));
     }
-    public function showTinTuc($ma_tin_tuc){
+    public function showTinTuc($ma_tin_tuc)
+    {
         // Lấy dữ liệu tin tức từ database
         $vpk = TinTuc::find($ma_tin_tuc);
         // Kiểm tra nếu không tìm thấy tin tức
@@ -216,23 +222,25 @@ class VanPhongKhoaController extends Controller
         }
 
         return view('FormVanPhongKhoa.FormTinTuc.FormDetailTinTuc', compact('vpk'));
-        }
-        public function chiaHoiDong(){
+    }
+    public function chiaHoiDong()
+    {
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChiaHoiDong');
-        }
-        public function chonHoiDong(){
-    // Lấy danh sách giảng viên từ database
+    }
+    public function chonHoiDong()
+    {
+        // Lấy danh sách giảng viên từ database
         $giangVien = GiangVien::all();
-    // Trả dữ liệu về view
+        // Trả dữ liệu về view
         return view('FormVanPhongKhoa.FormQuanLyPhanBien.FormChonHoiDong', compact('giangVien'));
-        }
+    }
     /**
      * Show the form for creating a new resource.
      */
-        public function create()
-        {
+    public function create()
+    {
         //
-        }
+    }
 
     /**
      * Store a newly created resource in storage.
