@@ -1,6 +1,6 @@
-@extends('layouts.app')
+    @extends('layouts.app')
 
-@section('sidebar')
+    @section('sidebar')
     <div class="menu-item active">
         <a href="{{ route('FormSinhVien.student.index') }}">
             <img src="{{ asset('img/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
@@ -25,33 +25,33 @@
             <span>Lời mời hướng dẫn</span>
         </a>
     </div>
-@endsection
+    @endsection
 
-@section('content')
+    @section('content')
     <h2 class="page-title">Tin tức</h2>
 
-    @foreach ($student as $item)
-        <div class="news-section">
-            <div class="news-item">
 
-                <img src="{{ asset('img/nhakhoahoc.png') }}" alt="Nhà khoa học" class="news-image" />
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title news-text-color">{{ $item->tieu_de }}</h5>
-                        <p class="card-text news-text-color">
-                            <small>{{ date('d/m/Y', strtotime($item->ngay_dang)) }}</small>
-                        </p>
-                        <p class="card-text news-text-color">{{ Str::limit($item->noi_dung, 150) }}</p>
-                        <div class="news-link">
-                            <img src="{{ asset('img/Chevron Right.png') }}" alt="Arrow" />
-                            <a href="{{ route('FormSinhVien.student.show', ['ma_tin_tuc' => $item->ma_tin_tuc]) }}">Xem chi tiết
-                                tin tức</a>
-                        </div>
+    @foreach ($students as $item)
+    <div class="news-section" >
+        <div class="news-item">
+            <div class="col-md-11">
+                <div class="card-body" style="color:  #225293;">
+                    <h5 class="card-title news-text-color">{{ $item->tieu_de }}</h5>
+                    <p class="card-text news-text-color">
+                        <small>{{ date('d/m/Y', strtotime($item->ngay_dang)) }}</small>
+                    </p>
+                    <p class="card-text news-text-color">{{ Str::limit($item->noi_dung, 150) }}</p>
+                    <div class="news-link d-flex justify-content-end">
+                        <img src="{{ asset('img/Chevron Right.png') }}" alt="Arrow" />
+                        <a href="{{ route('FormSinhVien.student.show', ['ma_tin_tuc' => $item->ma_tin_tuc]) }}">Xem chi
+                            tiết tin tức</a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="divider"></div>
+    </div>
+    <div class="divider"></div>
     @endforeach
 
-@endsection
+
+    @endsection
