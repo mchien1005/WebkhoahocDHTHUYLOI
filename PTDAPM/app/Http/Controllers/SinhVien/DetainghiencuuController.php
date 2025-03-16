@@ -4,7 +4,7 @@ namespace App\Http\Controllers\SinhVien; // Đúng với đường dẫn file
 use App\Http\Controllers\Controller; // Thêm dòng này
 use App\Models\Detai;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class DetainghiencuuController extends Controller
 {
     /**
@@ -12,61 +12,26 @@ class DetainghiencuuController extends Controller
      */
     public function index()
     {
-        $deTais = DeTai::all(); // Lấy tất cả đề tài từ database
+        $sinhVien = Auth::user()->sinhVien; // Lấy thông tin sinh viên từ tài khoản đăng nhập
+
+        if (!$sinhVien) {
+            return redirect()->route('login')->with('error', 'Bạn chưa đăng nhập hoặc không phải sinh viên.');
+        }
+
+        // Lấy danh sách đề tài mà sinh viên này đã đăng ký
+        $deTais = $sinhVien->deTai()->get();
+
         return view('FormSinhVien.detai.index', compact('deTais'));
-    }
-    
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
      * Display the specified resource.
      */
     public function show($id)
-{
-    $deTai = DeTai::findOrFail($id); // Lấy một đề tài theo ID
-    return view('FormSinhVien.detai.show', compact('deTai')); // Chuyển sang trang chi tiết
-}
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
-        //
+        $deTai = DeTai::findOrFail($id); // Lấy một đề tài theo ID
+        return view('FormSinhVien.detai.show', compact('deTai'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
 
 
 }
