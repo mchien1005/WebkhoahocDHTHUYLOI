@@ -845,7 +845,7 @@
                         <td>{{ $deTai->ten_de_tai }}</td>
                         @foreach ($hoiDongs as $hoiDong)
                             <td>
-                                <input type="checkbox" name="ghep_doi[{{ $deTai->ma_de_tai }}]" value="{{ $hoiDong->ma_hd }}">
+                                <input type="checkbox" name="ghep_doi[{{ $deTai->ma_de_tai }}][]" value="{{ $hoiDong->ma_hd }}">
                             </td>
                         @endforeach
                     </tr>
@@ -867,7 +867,7 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                            border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -884,7 +884,7 @@
         <hr>
         <div class="popup-content">
             <p style="margin-left: -100px;">Bạn có chắc chắn muốn lưu các ghép đôi đề tài - hội đồng này không?</p>
-            <button class="confirm-btn" onclick="submitForm()">Xác nhận</button>
+            <button class="confirm-btn" onclick="submitData()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
     </div>
@@ -920,15 +920,22 @@
             let isValid = true;
 
             rows.forEach(row => {
-                let checkedRadios = row.querySelectorAll("input[type='checkbox']:checked").length;
+                let checkboxes = row.querySelectorAll("input[type='checkbox']");
+                let checkedCount = 0;
 
-                if (checkedRadios < 2) {
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedCount++;
+                    }
+                });
+
+                // Nếu có chọn hội đồng nhưng số lượng < 2 => báo lỗi
+                if (checkedCount > 0 && checkedCount < 2) {
                     isValid = false;
                 }
             });
 
             if (!isValid) {
-                // Hiển thị popup lỗi
                 document.getElementById("errorOverlay").style.display = "block";
                 document.getElementById("errorPopup").style.display = "block";
                 setTimeout(() => {
@@ -940,6 +947,8 @@
             }
         }
 
+
+
         function showConfirmPopup() {
             document.getElementById("confirmOverlay").style.display = "block";
             document.getElementById("confirmPopup").style.display = "block";
@@ -950,27 +959,89 @@
             document.getElementById("confirmPopup").style.display = "none";
         }
 
-        function submitForm() {
-            let formData = new FormData(document.getElementById("ghepDoiForm"));
+        function validateAndShowConfirm() {
+            let rows = document.querySelectorAll("tbody tr");
+            let isValid = true;
+            let data = [];
+
+            rows.forEach(row => {
+                let checkboxes = row.querySelectorAll("input[type='checkbox']");
+                let checkedValues = [];
+
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedValues.push(checkbox.value);
+                    }
+                });
+
+                if (checkedValues.length > 0 && checkedValues.length < 2) {
+                    isValid = false;
+                }
+
+                if (checkedValues.length > 0) {
+                    data.push({
+                        ma_de_tai: row.cells[0].dataset.id,
+                        ma_hds: checkedValues
+                    });
+                }
+            });
+
+            if (!isValid) {
+                document.getElementById("errorOverlay").style.display = "block";
+                document.getElementById("errorPopup").style.display = "block";
+                setTimeout(() => {
+                    document.getElementById("errorOverlay").style.display = "none";
+                    document.getElementById("errorPopup").style.display = "none";
+                }, 2000);
+            } else {
+                document.getElementById("confirmOverlay").style.display = "block";
+                document.getElementById("confirmPopup").style.display = "block";
+                window.ghepDoiData = data; // Lưu tạm dữ liệu để gửi sau khi xác nhận
+            }
+        }
+
+        function submitData() {
+            let selectedData = {};
+            document.querySelectorAll("input[type='checkbox']:checked").forEach((checkbox) => {
+                let maDeTai = checkbox.name.match(/\d+/)[0]; // Lấy mã đề tài từ name="ghep_doi[1][]"
+                let maHoiDong = checkbox.value;
+
+                if (!selectedData[maDeTai]) {
+                    selectedData[maDeTai] = [];
+                }
+                selectedData[maDeTai].push(maHoiDong);
+            });
+
+            console.log("Dữ liệu gửi đi:", selectedData);
 
             fetch("{{ route('ghepdoi.luu') }}", {
                 method: "POST",
-                body: formData,
                 headers: {
-                    "X-CSRF-TOKEN": document.querySelector("input[name='_token']").value
-                }
-            }).then(response => response.json())
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ ghep_doi: selectedData })
+            })
+                .then(response => response.json())
                 .then(data => {
+                    console.log("Phản hồi từ server:", data);
                     if (data.success) {
-                        document.getElementById("successOverlay").style.display = "block";
+                        document.getElementById("confirmOverlay").style.display = "none";
+                        document.getElementById("confirmPopup").style.display = "none";
+                        document.getElementById("successOverlay").style.display = "flex";
                         document.getElementById("successPopup").style.display = "block";
+
                         setTimeout(() => {
                             document.getElementById("successOverlay").style.display = "none";
                             document.getElementById("successPopup").style.display = "none";
-                            location.reload();
                         }, 2000);
+                    } else {
+                        console.error("Lỗi: Server không phản hồi success!");
                     }
-                });
+                })
+                .catch(error => console.error("Lỗi gửi dữ liệu:", error));
         }
+
+
     </script>
 @endsection

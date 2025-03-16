@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\HoiDongDanhGia;
 use App\Models\LichTrinhBaoVe;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class VanPhongKhoaController extends Controller
 {
@@ -160,12 +161,28 @@ class VanPhongKhoaController extends Controller
     }
     public function storeghepdoidetai(Request $request)
     {
-        foreach ($request->ghep_doi as $ma_de_tai => $ma_hd) {
-            HoiDongDanhGia::where('ma_de_tai', $ma_de_tai)
-                ->update(['ma_hd' => $ma_hd]);
+        Log::info("Dữ liệu nhận từ AJAX:", $request->all());
+
+        if (!isset($request->ghep_doi) || empty($request->ghep_doi)) {
+            return response()->json(['success' => false, 'message' => 'Dữ liệu trống!']);
         }
 
-        return response()->json(['success' => true]);
+        try {
+            foreach ($request->ghep_doi as $ma_de_tai => $ma_hds) {
+                foreach ($ma_hds as $ma_hd) {
+                    HoiDongDanhGia::create([
+                        'ma_hd' => $ma_hd,
+                        'ma_de_tai' => $ma_de_tai,
+                        'so_luong_gv' => count($ma_hds)
+                    ]);
+                }
+            }
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error("Lỗi khi lưu dữ liệu: " . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Lỗi khi lưu dữ liệu!']);
+        }
     }
     public function xemBaoCao()
     {
