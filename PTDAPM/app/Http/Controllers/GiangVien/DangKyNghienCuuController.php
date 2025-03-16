@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GiangVien;
 use App\Models\GiangVien;
+use App\Models\DeTai;
 
 use Illuminate\Http\Request;
 
@@ -49,9 +50,36 @@ class DangKyNghienCuuController
     /**
      * Store a newly created resource in storage.
      */
+    /**
+ * Store a newly created resource in storage.
+ */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'tenDeTai' => 'required|string|max:255',
+            'moTa' => 'required|string',
+            'linhVuc' => 'required|string',
+            'soLuongSV' => 'required|integer|min:1|max:5',
+            'ma_gv' => 'required|string|exists:giang_vien,ma_gv',
+        ]);
+
+        try {
+            // Tạo bản ghi DeTai mới
+            $deTai = new DeTai();
+            $deTai->ten_de_tai = $validated['tenDeTai'];
+            $deTai->mo_ta = $validated['moTa'];
+            $deTai->linh_vuc_nc = $validated['linhVuc'];
+            $deTai->so_luong_sv = $validated['soLuongSV'];
+            $deTai->ma_gv = $validated['ma_gv'];
+            $deTai->ngay_dang_ky = now(); // Ngày giờ hiện tại
+            $deTai->trang_thai = 'Chờ duyệt'; // Trạng thái mặc định
+            $deTai->save();
+            
+            return redirect()->route('dangkynghiencuu.index');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
+        }
     }
 //
     /**
