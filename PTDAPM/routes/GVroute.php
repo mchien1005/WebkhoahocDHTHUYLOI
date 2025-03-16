@@ -33,10 +33,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dangkynghiencuu', [DangKyNghienCuuController::class, 'show'])->name('dangkynghiencuu.show');    
 
-    Route::get('/de-tai-nghien-cuu', [DetainghiencuuController::class, 'index'])->name('detainghiencuu.index');
+    Route::get('/de-tai-nghien-cuu', [DeTaiNghienCuuController::class, 'index'])->name('detainghiencuu.index');
+    Route::post('/detainghiencuu', [DeTaiNghienCuuController::class, 'store'])->name('detainghiencuu.store');
+    Route::get('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'show'])->name('detainghiencuu.show');
+    Route::put('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'update'])->name('detainghiencuu.update');
+    Route::delete('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'destroy'])->name('detainghiencuu.destroy');
 
-    Route::get('/bao-cao-de-tai', [BaocaonghiencuuController::class, 'index'])->name('baocaodetai.index');
+    
+    
 
-    Route::get('/loi-moi-huong-dan', [LoimoihuongdanController::class, 'index'])->name('loimoihuongdan.index');
+  
+
+    Route::get('/bao-cao-de-tai', [BaoCaoNghienCuuController::class, 'index'])->name('baocaodetai.index');
+    Route::post('/bao-cao-de-tai/nhan-xet', [BaoCaoNghienCuuController::class, 'nhanXet'])->name('FormGiangVien.FormBaoCaoNghienCuu.nhanXet');
+    Route::post('/bao-cao-de-tai/xu-ly', [BaoCaoNghienCuuController::class, 'xuLy'])->name('FormGiangVien.FormBaoCaoNghienCuu.xuLy');
+
+    Route::get('/loi-moi-huong-dan', [LoiMoiHuongDanController::class, 'index'])->name('loimoihuongdan.index');
+    Route::post('/loi-moi-huong-dan/xu-ly', [LoiMoiHuongDanController::class, 'xuLy'])->name('FormGiangVien.FormLoiMoiHuongDan.xuLy');
+});
 });
 });
