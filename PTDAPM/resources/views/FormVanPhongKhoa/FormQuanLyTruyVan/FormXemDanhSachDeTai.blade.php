@@ -22,7 +22,7 @@
     <div class="menu-item">
         <a href="{{ route('vanphongkhoa.capnhatketqua') }}">
             <img src="{{ asset('images/New Document.png') }}" alt="Report Icon" class="sidebar-icon" />
-            <span>Cập nhật kết quả</span>
+            <span>Cập nhật kết quả <br />trình bày bảo vệ</span>
         </a>
     </div>
     <div class="menu-item active">

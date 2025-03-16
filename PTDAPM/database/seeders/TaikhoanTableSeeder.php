@@ -16,14 +16,14 @@ class TaikhoanTableSeeder extends Seeder
         DB::table('tai_khoan')->insert([
             [
                 'email' => 'admin@example.com',
-                'mat_khau' => Hash::make('admin123'), 
+                'mat_khau' => Hash::make('admin123'),
                 'vai_tro' => 'Admin',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
-                'email' => 'kingofzing2004@gmail.com',
-                'mat_khau' => Hash::make('tta2004'),
+                'email' => 'giangvien@gmail.com',
+                'mat_khau' => Hash::make('giangvien123'),
                 'vai_tro' => 'Giảng viên',
                 'created_at' => now(),
                 'updated_at' => now(),
