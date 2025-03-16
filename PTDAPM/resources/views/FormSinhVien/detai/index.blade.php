@@ -89,6 +89,9 @@
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-responsive">
+            @if ($deTais->isEmpty())
+            <p class="text-center text-muted">Bạn chưa đăng ký đề tài nào.</p>
+            @else
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -119,9 +122,11 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 </div>
+
 
 <!-- Modal Nộp Báo Cáo -->
 <div class="modal fade" id="baocaoModal" tabindex="-1" aria-hidden="true">
@@ -189,7 +194,7 @@
 <div class="modal fade" id="DTchitietModal{{ str_replace(' ', '_', $deTai->ma_de_tai) }}" tabindex="-1"
     aria-labelledby="modalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px;">
-        <div class="modal-content">
+        <div class="modal-content" style="background-color:#E7F5FF; color: #255293;">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalTitle{{ $deTai->ma_de_tai }}">Thông tin chi tiết của đề tài</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -200,7 +205,7 @@
                 <p><strong>Mô tả:</strong> {{ $deTai->mo_ta }}</p>
                 <p><strong>Trạng thái:</strong> {{ $deTai->trang_thai }}</p>
                 <p><strong>Mã giảng viên:</strong> {{ $deTai->ma_gv }}</p>
-                <p><strong>Ngày đăng ký:</strong> {{ $deTai->ngay_dang_ki }}</p>
+                <p><strong>Ngày đăng ký:</strong> {{ $deTai->ngay_dang_ky }}</p> <!-- Đổi từ ngay_dang_ki -->
                 <p><strong>Số lượng sinh viên:</strong> {{ $deTai->so_luong_sv }}</p>
                 <p><strong>Lĩnh vực nghiên cứu:</strong> {{ $deTai->linh_vuc_nc }}</p>
                 <p><strong>Điểm phản biện:</strong> {{ $deTai->diem_phan_bien }}</p>
@@ -210,9 +215,8 @@
         </div>
     </div>
 </div>
-
-
 @endforeach
+
 
 
 
