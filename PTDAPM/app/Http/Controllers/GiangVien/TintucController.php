@@ -19,7 +19,6 @@ class TintucController
     {
     }
 
-    // Xử lý lưu tin tức vào database
     public function store(Request $request)
     {
         $request->validate([
@@ -39,9 +38,10 @@ class TintucController
     }
 
     // Hiển thị chi tiết một tin tức
-    public function show()
+    public function show($id)
     {
-        return view('FormGiangVien.FormTinTuc.show');
+        $tintuc = Tintuc::findOrFail($id);
+        return view('FormGiangVien.FormTinTuc.show', compact('tintuc'));
     }
 
     // Hiển thị form chỉnh sửa tin tức
