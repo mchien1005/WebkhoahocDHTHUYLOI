@@ -26,6 +26,7 @@
     </a>
 </div>
 @endsection
+
 @section('content')
 
 <style>
@@ -100,95 +101,79 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($loiMois as $loiMoi)
                     <tr>
-                        <td class="text-center-col">LM01</td>
-
-                        <td class="text-center-col">GV01</td>
-                        <td class="text-center-col">Đang chờ</td>
-                        <td class="text-center-col">10/2/2025</td>
+                        <td class="text-center-col">{{ $loiMoi->id }}</td>
+                        <td class="text-center-col">{{ $loiMoi->ma_gv }}</td>
+                        <td class="text-center-col">{{ $loiMoi->trang_thai }}</td>
+                        <td class="text-center-col">{{ $loiMoi->thoi_gian_gui }}</td>
                         <td class="text-center-col">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#xacnhanModal">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#xacnhanModal{{ $loiMoi->id }}">
                                 Thu hồi
                             </a>
                         </td>
-
                     </tr>
-                    <tr>
-                        <td class="text-center-col">LM02</td>
-
-                        <td class="text-center-col">GV02</td>
-                        <td class="text-center-col">Đang chờ</td>
-                        <td class="text-center-col">10/2/2025</td>
-                        <td class="text-center-col">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#xacnhanModal">
-                                Thu hồi
-                            </a>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center-col">LM03</td>
-
-                        <td class="text-center-col">GV03</td>
-                        <td class="text-center-col">Đang chờ</td>
-                        <td class="text-center-col">10/2/2025</td>
-                        <td class="text-center-col">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#xacnhanModal">
-                                Thu hồi
-                            </a>
-                        </td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                        <td class="text-center-col"></td>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                        <td class="text-center-col"></td>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                        <td class="text-center-col"></td>
-                        <td class="text-center-col"></td>
-                        <td></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="xacnhanModal" tabindex="-1" aria-hidden="true">
+<!-- Fixed Modal - Now inside the foreach loop -->
+@foreach($loiMois as $loiMoi)
+<div class="modal fade" id="xacnhanModal{{ $loiMoi->id }}" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
         <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
             <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                <h4 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo</h4>
+                <h4 class="modal-title">
+                    <img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo
+                </h4>
             </div>
+
             <div class="modal-body text-center">
                 <h4 id="thongbaoText">Bạn chắc chắn muốn thu hồi lời mời?</h4>
             </div>
-            <div class="modal-footer d-flex">
-                <button type="button" class="btn btn-primary flex-grow-1 mx-5"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                    id="btnTaiLen">Xác nhận</button>
-                <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                    data-bs-dismiss="modal">Hủy bỏ</button>
-            </div>
 
+            <div class="modal-footer d-flex">
+                <form action="{{ route('sinhvien.loimoi.thuhoi', $loiMoi->id) }}" method="POST" class="w-100">
+                    @csrf
+                    @method('DELETE')
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary flex-grow-1 mx-5" data-bs-toggle="modal"
+                            data-bs-target="#TCModal{{ $loiMoi->id }}"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
+                            Xác nhận
+                        </button>
+
+                        <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                            data-bs-dismiss="modal">Hủy bỏ</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
 
+<!-- Modal Thông báo Thu hồi -->
+<div class="modal fade" data-bs-dismiss="modal" id="TCModal{{ $loiMoi->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+            <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                <h4 class="modal-title">
+                    <img src="{{ asset('images/Done.png') }}" width="30"> Thông báo
+                </h4>
+            </div>
+
+            <div class="modal-body text-center">
+                <h4 id="thongbaoText">Đã thu hồi lời mời</h4>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 @endsection
