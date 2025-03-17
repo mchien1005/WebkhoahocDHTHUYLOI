@@ -29,8 +29,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dang-ky-nghien-cuu', [DangKyNghienCuuController::class, 'index'])->name('dangkynghiencuu.index');
 
         Route::post('/dang-ky-nghien-cuu/dangky-dinhhuong', [DangKyNghienCuuController::class, 'DangKyDinhHuongNghienCuu'])
-            ->name('giangvien.dangky-dinhhhuong');
-
+            ->name('giangvien.dangky-dinhhuong');
+        Route::post('/dang-ky-nghien-cuu/store', [DangKyNghienCuuController::class, 'store'])->name('dangkydetaidukien.store');
         Route::get('/dangkynghiencuu', [DangKyNghienCuuController::class, 'show'])->name('dangkynghiencuu.show');
 
         Route::get('/de-tai-nghien-cuu', [DeTaiNghienCuuController::class, 'index'])->name('detainghiencuu.index');
