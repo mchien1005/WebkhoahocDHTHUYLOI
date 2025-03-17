@@ -10,7 +10,7 @@ class BaoCaoNghienCuu extends Model
     use HasFactory;
 
     protected $table = 'bao_cao_nghien_cuu'; // Tên bảng
-    protected $primaryKey = 'ma_bao_cao'; // Khóa chính
+    protected $primaryKey = 'ma_bc'; // Khóa chính
 
     protected $fillable = [
         'ma_de_tai', 'tieu_de', 'noi_dung', 'ngay_nop'

@@ -102,6 +102,7 @@
             color: #e7f5ff;
             font-size: 28px;
             font-weight: 500;
+            text-decoration: none;
         }
 
         .user-info {

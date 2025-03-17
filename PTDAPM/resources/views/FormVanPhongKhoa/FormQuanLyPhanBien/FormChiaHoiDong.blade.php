@@ -1270,8 +1270,8 @@
             otherMembersContainer.innerHTML = '';
 
             const members = {
-                'Hội đồng 1': ['Nguyễn Văn B', 'Nguyễn Văn A'],
-                'Hội đồng 2': ['Nguyễn Văn C', 'Nguyễn Văn D']
+                'Hội đồng 1': ['Phạm Tuấn Anh', 'Nguyễn Văn A'],
+                'Hội đồng 2': ['Trần Thị B', 'Lê Thị C']
             };
 
             const selectedCouncil = selectElement.value;
@@ -1316,7 +1316,7 @@
                             <option value="Hội đồng 2">Hội đồng 2</option>
                         </select>
                     </div>
-                    <img src="{{asset('images/People.png')}}" class="mx-auto mb-4" height="100" src="images/People.png"
+                    <img src="{{asset('images/People (2).png')}}" class="mx-auto mb-4" height="100" src="images/People.png"
                         width="100" />
                     <div id="members1"></div>
                 </div>
@@ -1328,7 +1328,7 @@
                             <option value="Hội đồng 2">Hội đồng 2</option>
                         </select>
                     </div>
-                    <img src="{{asset('images/People.png')}}" class="mx-auto mb-4" height="100" src="images/People.png"
+                    <img src="{{asset('images/People (2).png')}}" class="mx-auto mb-4" height="100" src="images/People.png"
                         width="100" />
                     <div id="members2"></div>
                 </div>

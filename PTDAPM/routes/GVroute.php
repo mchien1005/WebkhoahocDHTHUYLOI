@@ -23,16 +23,18 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('Giảng Viên')->group(function () {
         // Trang tin tức dành cho sinh viên
         Route::get('/tintuc', [TintucController::class, 'index'])->name('tintuc.index');
-
         Route::get('/tin-tuc/{id}', [TintucController::class, 'show'])->name('tintuc.show');
 
+        
         Route::get('/dang-ky-nghien-cuu', [DangKyNghienCuuController::class, 'index'])->name('dangkynghiencuu.index');
-
         Route::post('/dang-ky-nghien-cuu/dangky-dinhhuong', [DangKyNghienCuuController::class, 'DangKyDinhHuongNghienCuu'])
             ->name('giangvien.dangky-dinhhuong');
         Route::post('/dang-ky-nghien-cuu/store', [DangKyNghienCuuController::class, 'store'])->name('dangkydetaidukien.store');
         Route::get('/dangkynghiencuu', [DangKyNghienCuuController::class, 'show'])->name('dangkynghiencuu.show');
+        Route::post('/detai/approve', [DangKyNghienCuuController::class, 'approve'])->name('detai.approve');
 
+
+        
         Route::get('/de-tai-nghien-cuu', [DeTaiNghienCuuController::class, 'index'])->name('detainghiencuu.index');
         Route::post('/detainghiencuu', [DeTaiNghienCuuController::class, 'store'])->name('detainghiencuu.store');
         Route::get('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'show'])->name('detainghiencuu.show');
@@ -42,12 +44,11 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-
-
         Route::get('/bao-cao-de-tai', [BaoCaoNghienCuuController::class, 'index'])->name('baocaodetai.index');
         Route::post('/bao-cao-de-tai/nhan-xet', [BaoCaoNghienCuuController::class, 'nhanXet'])->name('FormGiangVien.FormBaoCaoNghienCuu.nhanXet');
         Route::post('/bao-cao-de-tai/xu-ly', [BaoCaoNghienCuuController::class, 'xuLy'])->name('FormGiangVien.FormBaoCaoNghienCuu.xuLy');
 
+        
         Route::get('/loi-moi-huong-dan', [LoiMoiHuongDanController::class, 'index'])->name('loimoihuongdan.index');
         Route::post('/loi-moi-huong-dan/xu-ly', [LoiMoiHuongDanController::class, 'xuLy'])->name('FormGiangVien.FormLoiMoiHuongDan.xuLy');
     });
