@@ -10,11 +10,15 @@ class LoiMoiHuongDan extends Model
     use HasFactory;
 
     protected $table = 'loi_moi_huong_dan';
-    protected $primaryKey = 'ma_loi_moi';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
 
-    protected $fillable = [
-        'ma_gv', 'ma_de_tai', 'trang_thai'
-    ];
+    protected $fillable = ['ma_sv', 'ma_gv', 'ma_de_tai', 'trang_thai', 'thoi_gian_gui'];
+
+    public function sinhVien()
+    {
+        return $this->belongsTo(SinhVien::class, 'ma_sv', 'ma_sv');
+    }
 
     public function giangVien()
     {
