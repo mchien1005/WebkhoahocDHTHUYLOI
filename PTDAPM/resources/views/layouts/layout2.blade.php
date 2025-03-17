@@ -465,7 +465,7 @@
             <a class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</a>
             <div class="user-info">
                 <img src="{{ asset('anhheader/Test Account.png')}}" alt="User Icon" class="user-icon" />
-                <span class="user-name">Nguyễn văn A</span>
+                <span class="user-name">{{ Auth::user()->vanphongkhoa->ten_nv }}</span>
                 <div class="dropdown">
                     <button class="dropdown-button">
                         <img src="{{ asset('anhheader/Chevron Down.png') }}" alt="Dropdown" class="dropdown-icon" />
