@@ -169,7 +169,7 @@
         <div class="position-relative">
             <div class="row">
                 <div class="col-md-9 position-relative text-left">
-                    <img src="{{ asset('images/nhakhoahoc.png') }}" alt="Nhà khoa học" class="news-image" />
+                   
 
                     <p class="matintuc"><strong>Mã tin tức:</strong> {{ $vpk->ma_tin_tuc }}</p>
                     <p class="tieude"><strong>Tiêu đề:</strong> {{ $vpk->tieu_de }}</p>
@@ -177,7 +177,7 @@
                     <p><strong>Nội dung:</strong></p>
                     <p>{{ $vpk->noi_dung }}</p>
 
-                    <p><strong>Ngày đăng:</strong> {{ date('d/m/Y H:i', strtotime($vpk->ngay_dang)) }}</p>
+                    <p><strong>Ngày đăng:</strong> {{ date('d/m/Y 07:01', strtotime($vpk->ngay_dang)) }}</p>
                     <p><strong>Người đăng:</strong> {{ $vpk->nguoi_dang }}</p>
 
                     @if($vpk->duong_dan_tep)
