@@ -29,7 +29,7 @@
 <div class="container mt-4">
     <h4 class="custom-title">Xem chi tiết tin tức</h4>
 
-    <div class="p-3 rounded fs-5" style="background-color: #e7f5ff;">
+    <div class="p-3 rounded fs-5" style="background-color: #e7f5ff;color:  #225293;">
 
         <div class="row">
             <!-- Cột chứa nội dung -->
