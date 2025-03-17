@@ -102,6 +102,7 @@
             color: #e7f5ff;
             font-size: 28px;
             font-weight: 500;
+            text-decoration: none;
         }
 
         .user-info {
@@ -465,7 +466,7 @@
             <a class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</a>
             <div class="user-info">
                 <img src="{{ asset('anhheader/Test Account.png')}}" alt="User Icon" class="user-icon" />
-                <span class="user-name">Nguyễn văn A</span>
+                <span class="user-name">Văn Phòng Khoa</span>
                 <div class="dropdown">
                     <button class="dropdown-button">
                         <img src="{{ asset('anhheader/Chevron Down.png') }}" alt="Dropdown" class="dropdown-icon" />
