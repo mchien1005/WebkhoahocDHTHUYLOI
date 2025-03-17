@@ -111,18 +111,19 @@ class VanPhongKhoaController extends Controller
     public function capNhatDiem(Request $request)
     {
         $request->validate([
-            'diem_phan_bien' => 'required|numeric|min:0|max:100',
+            'ma_de_tai' => 'required|exists:de_tai,ma_de_tai',
+            'ket_qua_khoa' => 'required|string|max:255',
         ]);
 
         $deTai = DeTai::find($request->ma_de_tai);
-        if ($deTai) {
-            $deTai->diem_phan_bien = $request->diem_phan_bien;
-            $deTai->save();
-
-            return response()->json(['success' => true]);
+        if (!$deTai) {
+            return response()->json(['success' => false, 'message' => 'Đề tài không tồn tại'], 404);
         }
 
-        return response()->json(['success' => false], 400);
+        $deTai->ket_qua_khoa = $request->ket_qua_khoa;
+        $deTai->save();
+
+        return response()->json(['success' => true, 'message' => 'Cập nhật thành công']);
     }
 
 

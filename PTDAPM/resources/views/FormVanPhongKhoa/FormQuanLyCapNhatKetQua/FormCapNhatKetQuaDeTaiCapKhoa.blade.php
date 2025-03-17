@@ -557,6 +557,10 @@
             font-family: Rasa;
         }
 
+        .error-message p {
+            padding-left: 60px;
+        }
+
         .container {
             display: flex;
             justify-content: center;
@@ -628,7 +632,7 @@
                 <tr>
                     <th>Mã đề tài</th>
                     <th>Tên đề tài</th>
-                    <th>Điểm phản biện</th>
+                    <th>Kết quả</th>
                 </tr>
             </thead>
             <tbody>
@@ -636,9 +640,9 @@
                     <tr>
                         <td>{{ $deTai->ma_de_tai }}</td>
                         <td>{{ $deTai->ten_de_tai }}</td>
-                        <td onclick="openPopup({{ $deTai->ma_de_tai }}, '{{ $deTai->diem_phan_bien ?? 'Chưa có' }}')"
+                        <td onclick="openPopup({{ $deTai->ma_de_tai }}, '{{ $deTai->ket_qua_khoa ?? 'Chưa có' }}')"
                             style="cursor: pointer; color: white;">
-                            {{ $deTai->diem_phan_bien ?? 'Chưa có' }}
+                            {{ $deTai->ket_qua_khoa ?? 'Chưa có' }}
                         </td>
                     </tr>
                 @endforeach
@@ -661,22 +665,22 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                                                                                                                                                                                                                word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                                                                                    word-wrap: break-word;">Kết
                     quả:</label>
                 <input type="text" id="scoreInput"
                     style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
             <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="validateScore()"">Xác nhận</button>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                            <!-- Popup thông báo thành công -->
-                                                        <div class=" popup-overlay" id="successOverlay"
-                style="display: none;">
+                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                <!-- Popup thông báo thành công -->
+                                                                                                            <div class="
+                popup-overlay" id="successOverlay" style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
                 <img class="done" src="{{ asset('images/Done.png') }}" alt="Cập nhật thành công!">
-                <p>Cập nhật thành công!</p>
+                <p>Cập nhật kết quả thành công!</p>
             </div>
         </div>
 
@@ -692,19 +696,21 @@
 
             <div class="error-message">
                 <img class="cancel" src="{{ asset('images/Cancel.png') }}">
-                <p>Điểm không hợp lệ, vui lòng nhập lại</p>
+                <p>Kết quả không được bỏ trống</p>
             </div>
         </div>
 
         <script>
             let selectedMaDeTai = null;
 
-            function openPopup(maDeTai, currentScore) {
+            function openPopup(maDeTai, ketQuaKhoa) {
                 selectedMaDeTai = maDeTai;
-                document.getElementById('scoreInput').value = (currentScore === 'Chưa có') ? '' : currentScore;
+                document.getElementById('scoreInput').value = (ketQuaKhoa === 'Chưa có') ? '' : ketQuaKhoa;
                 document.getElementById('confirmOverlay').style.display = 'block';
                 document.getElementById('confirmPopup').style.display = 'block';
             }
+
+
 
             function closePopup() {
                 document.getElementById('confirmOverlay').style.display = 'none';
@@ -714,19 +720,22 @@
             function validateScore() {
                 let newScore = document.getElementById('scoreInput').value.trim();
 
-                if (isNaN(newScore) || newScore < 0 || newScore > 100) {
+                // Kiểm tra nếu newScore rỗng hoặc chứa số => báo lỗi
+                if (newScore === '' || /\d/.test(newScore)) {
                     showErrorPopup();
                     return;
                 }
 
-                fetch('/cap-nhat-diem', {
+
+                fetch('/cap-nhat-ket-qua-khoa', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     },
-                    body: JSON.stringify({ ma_de_tai: selectedMaDeTai, diem_phan_bien: newScore })
+                    body: JSON.stringify({ ma_de_tai: selectedMaDeTai, ket_qua_khoa: newScore })
                 })
+
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
