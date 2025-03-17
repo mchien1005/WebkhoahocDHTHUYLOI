@@ -14,7 +14,7 @@ Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.proces
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/capnhatketqua', [VanPhongKhoaController::class, 'capnhatketqua'])->name('vanphongkhoa.capnhatketqua');
-    Route::post('/cap-nhat-diem', [VanPhongKhoaController::class, 'capNhatDiem']);
+    Route::post('/cap-nhat-ket-qua-khoa', [VanPhongKhoaController::class, 'capNhatDiem']);
 
     Route::get('/truyvanthongtin', [VanPhongKhoaController::class, 'truyvanthongtin'])->name('vanphongkhoa.truyvanthongtin');
     Route::get('/capnhatlichtrinhbaove', [VanPhongKhoaController::class, 'capnhatlichtrinhbaove'])->name('vanphongkhoa.capnhatlichtrinhbaove');
