@@ -4,6 +4,7 @@ namespace App\Http\Controllers\GiangVien;
 use App\Models\GiangVien;
 use App\Models\DeTai;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -85,7 +86,36 @@ public function store(Request $request)
      */
     public function show()
     {
-        return view('FormGiangVien.FormDangKyDeTai.show');
+        $deTaiList = DB::table('de_tai')
+            ->where('trang_thai', 'Chờ duyệt')
+            ->select('ma_de_tai', 'ten_de_tai')
+            ->get();
+        
+        return view('FormGiangVien.FormDangKyDeTai.show', [
+            'deTaiList' => $deTaiList
+        ]);
+    }
+
+    public function approve(Request $request)
+    {
+        // Xác thực request
+        $request->validate([
+            'selected_detai' => 'sometimes|array',
+            'selected_detai.*' => 'exists:de_tai,ma_de_tai',
+        ]);
+
+        // Lấy các ID đề tài đã chọn
+        $selectedDeTai = $request->input('selected_detai', []);
+
+        if (count($selectedDeTai) > 0) {
+            // Cập nhật trạng thái của các đề tài đã chọn thành "Được duyệt"
+            DB::table('de_tai')
+                ->whereIn('ma_de_tai', $selectedDeTai)
+                ->update(['trang_thai' => 'Được duyệt']);
+
+            return redirect()->back()->with('success', 'Nộp đề tài thành công thành công!');
+        }
+
     }
 
     /**
