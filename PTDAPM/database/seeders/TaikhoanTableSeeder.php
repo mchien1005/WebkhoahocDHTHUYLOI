@@ -120,13 +120,6 @@ class TaikhoanTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'email' => 'sinhvien@example.com',
-                'mat_khau' => Hash::make('pta11'),
-                'vai_tro' => 'Sinh Viên',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
                 'email' => 'sinhvien1@gmail.com',
                 'mat_khau' => Hash::make('pta11'),
                 'vai_tro' => 'Sinh Viên',
