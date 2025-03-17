@@ -33,6 +33,18 @@ class TaiKhoan extends Authenticatable
     {
         return $this->hasOne(SinhVien::class, 'email', 'email');
     }
+    public function giangVien()
+    {
+        return $this->hasOne(GiangVien::class, 'email', 'email');
+    }
+    public function vanphongkhoa()
+    {
+        return $this->hasOne(VanPhongKhoa::class, 'email', 'email');
+    }
+    public function phongdaotao()
+    {
+        return $this->hasOne(PhongDaoTao::class, 'email', 'email');
+    }
     
 }
 
