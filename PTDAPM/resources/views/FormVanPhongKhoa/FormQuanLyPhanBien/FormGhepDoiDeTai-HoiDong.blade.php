@@ -344,8 +344,8 @@
             width: 174px;
             height: 60px;
             position: absolute;
-            left: 690px;
-            top: 800px;
+            left: 520px;
+            top: 700px;
         }
 
         .quaylai {
@@ -354,8 +354,8 @@
             font-size: 24px;
             font-weight: 600;
             position: absolute;
-            left: 630px;
-            top: 800px;
+            left: 460px;
+            top: 700px;
             width: 297.05px;
             height: 56.25px;
         }
@@ -366,8 +366,8 @@
             width: 174px;
             height: 60px;
             position: absolute;
-            left: 1350px;
-            top: 800px;
+            left: 1150px;
+            top: 700px;
         }
 
         .luu {
@@ -376,8 +376,8 @@
             font-size: 24px;
             font-weight: 600;
             position: absolute;
-            left: 1290px;
-            top: 800px;
+            left: 1090px;
+            top: 700px;
             width: 297.05px;
             height: 56.25px;
         }
@@ -396,8 +396,8 @@
             font-size: 36px;
             font-weight: 500;
             position: absolute;
-            left: 1100px;
-            top: 883px;
+            left: 1000px;
+            top: 783px;
             width: 253.28px;
             height: 56.25px;
         }
@@ -420,8 +420,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 1048px;
-            height: 428px;
+            width: 810px;
+            height: 307px;
             background: #e7f5ff;
             border: 2px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -431,13 +431,41 @@
             /* color: #5183ca; */
             font-weight: bolder;
             color: #255293;
-            font-size: 20px;
+            font-size: 24px;
             font-family: "Rasa", sans-serif;
             font-weight: 500;
             word-wrap: break-word;
             line-height: 1.8;
         }
 
+        .popup-container2 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 778px;
+            height: 242px;
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: auto;
+            border-radius: 10px;
+            /* color: #5183ca; */
+            font-weight: bolder;
+            color: #255293;
+            padding-top: 50px;
+
+        }
+
+        .popup-container2 p {
+            padding-left: 40px;
+            font-size: 36px;
+            font-family: "Rasa", sans-serif;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
 
         /* Nội dung có thể cuộn */
         .popup-content {
@@ -532,7 +560,7 @@
         }
 
         .confirm-popup .popup-header2 {
-            font-size: 40px;
+            font-size: 24px;
             font-weight: bold;
             color: #255293;
             font-weight: 500;
@@ -592,10 +620,10 @@
             display: flex;
             align-items: center;
             /* Canh giữa theo chiều dọc */
-            font-size: 40px;
+            font-size: 36px;
             font-weight: bold;
             color: #255293;
-            padding: 10px;
+            padding: 5px;
         }
 
         .megaphone {
@@ -746,6 +774,7 @@
 
         .error-message {
             padding: 30px;
+
             display: flex;
             /* Sử dụng flexbox */
             align-items: center;
@@ -758,6 +787,14 @@
             /* Cỡ chữ */
             font-weight: 500;
             font-family: Rasa;
+        }
+
+        .error-message img {
+            margin-left: 20px;
+        }
+
+        .error-message p {
+            padding-left: 40px;
         }
 
         input[type="datetime-local"] {
@@ -783,8 +820,8 @@
         }
 
         .custom-table {
-            padding-top: 150px;
-            width: 80%;
+            padding-top: 100px;
+            width: 90%;
             /* Điều chỉnh độ rộng bảng */
             max-width: 1000px;
             /* Giới hạn chiều rộng tối đa */
@@ -815,7 +852,7 @@
             height: 50px;
             font-family: 'Rasa', serif;
             font-weight: 600;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 100%;
             letter-spacing: 0%;
 
@@ -867,23 +904,24 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                                                                                                                                                                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
     </div>
-    <div class="truy-v-n-th-ng-tin2">Cập nhật lịch trình bảo vệ</div>
+    <div class="truy-v-n-th-ng-tin2">Ghép đôi đề tài - hội đồng</div>
 
 
     <!-- Popup xác nhận -->
     <div class="popup-overlay" id="confirmOverlay"></div>
     <div class="confirm-popup" id="confirmPopup">
         <div class="popup-header">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
             <span>Thông báo</span>
         </div>
         <hr>
         <div class="popup-content">
-            <p style="margin-left: -100px;">Bạn có chắc chắn muốn lưu các ghép đôi đề tài - hội đồng này không?</p>
+            <p style="margin: 10px;">Bạn có chắc chắn muốn lưu các ghép đôi đề<br> tài - hội đồng này không?</p>
             <button class="confirm-btn" onclick="submitData()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
@@ -891,7 +929,7 @@
 
     <!-- Popup thành công -->
     <div class="popup-overlay" id="successOverlay"></div>
-    <div class="popup-container" id="successPopup">
+    <div class="popup-container2" id="successPopup">
         <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
             <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
             <p>Ghép đôi đề tài-hội đồng thành công!</p>
@@ -933,6 +971,7 @@
                 if (checkedCount > 0 && checkedCount < 2) {
                     isValid = false;
                 }
+
             });
 
             if (!isValid) {
