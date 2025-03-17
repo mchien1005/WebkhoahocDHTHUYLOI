@@ -173,11 +173,11 @@
 
         @foreach ($vpk as $item)
             <div class="news-item">
-                <img src="{{ asset('images/nha-khoa-hoc-7559-1672.jpg') }}" alt="Nhà khoa học" class="news-image" />
+                
 
                 <div class="news-content">
                     <h3 class="news-title">{{ $item->tieu_de }}</h3>
-                    <div class="news-meta">{{ date('d/m/Y H:i', strtotime($item->ngay_dang)) }}</div>
+                    <div class="news-meta">{{ date('d/m/Y 07:01', strtotime($item->ngay_dang)) }}</div>
                     <p class="news-excerpt">{{ Str::limit($item->noi_dung, 500) }}</p>
                     <div class="news-action">
                         <a href="{{ route('vanphongkhoa.chitiettintuc', ['ma_tin_tuc' => $item->ma_tin_tuc]) }}"
