@@ -112,7 +112,7 @@ class VanPhongKhoaController extends Controller
     {
         $request->validate([
             'ma_de_tai' => 'required|exists:de_tai,ma_de_tai',
-            'ket_qua_khoa' => 'required|string|max:255',
+            'ket_qua_khoa' => 'required|string|in:Giải Nhất,Giải Nhì,Giải Ba,Không có giải',
         ]);
 
         $deTai = DeTai::find($request->ma_de_tai);

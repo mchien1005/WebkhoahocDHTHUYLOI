@@ -665,17 +665,23 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                                                                                                                                                                                                                                                                    word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                                                                                                word-wrap: break-word;">Kết
                     quả:</label>
-                <input type="text" id="scoreInput"
-                    style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
+                <select id="scoreInput"
+                    style="width: 455px; height: 52px; font-size: 32px; color: #255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
+                    <option value="">-- Chọn kết quả --</option>
+                    <option value="Giải Nhất">Giải Nhất</option>
+                    <option value="Giải Nhì">Giải Nhì</option>
+                    <option value="Giải Ba">Giải Ba</option>
+                    <option value="Không có giải">Không có giải</option>
+                </select>
             </div>
-            <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;" onclick="validateScore()"">Xác nhận</button>
-                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                <!-- Popup thông báo thành công -->
-                                                                                                            <div class="
-                popup-overlay" id="successOverlay" style="display: none;">
+            <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;"
+                onclick="validateScore()"">Xác nhận</button>
+                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                            <!-- Popup thông báo thành công -->
+                                                                                                                        <div class=" popup-overlay" id="successOverlay" style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
             <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
@@ -741,6 +747,9 @@
                         if (data.success) {
                             closePopup(); // Đóng popup nhập điểm
                             showSuccessPopup(); // Hiển thị popup thành công
+                        }
+                        else {
+                            showErrorPopup(data.error);
                         }
                     })
                     .catch(error => console.error('Lỗi cập nhật:', error));
