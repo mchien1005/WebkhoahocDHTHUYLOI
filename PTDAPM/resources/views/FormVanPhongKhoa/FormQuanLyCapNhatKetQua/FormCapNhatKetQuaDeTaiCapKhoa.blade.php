@@ -665,23 +665,17 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                                                                                                                                                                                                                                                                                        word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                                                                                                    word-wrap: break-word;">Kết
                     quả:</label>
-                <select id="scoreInput"
-                    style="width: 455px; height: 52px; font-size: 32px; color: #255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
-                    <option value="">--Trống--</option>
-                    <option value="Giải Nhất">Giải Nhất</option>
-                    <option value="Giải Nhì">Giải Nhì</option>
-                    <option value="Giải Ba">Giải Ba</option>
-                    <option value="Không có giải">Không có giải</option>
-                </select>
+                <input type="text" id="scoreInput"
+                    style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
             </div>
             <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;"
                 onclick="validateScore()"">Xác nhận</button>
-                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                    <!-- Popup thông báo thành công -->
-                                                                                                                                <div class=" popup-overlay" id="successOverlay"
+                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                <!-- Popup thông báo thành công -->
+                                                                                                                            <div class=" popup-overlay" id="successOverlay"
                 style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
@@ -725,14 +719,51 @@
             }
 
             function validateScore() {
-                let newScore = document.getElementById('scoreInput').value.trim();
+                let newScore = document.getElementById('scoreInput').value.trim().toLowerCase(); // Chuyển về chữ thường
 
-                // Kiểm tra nếu newScore rỗng hoặc chứa số => báo lỗi
-                if (newScore === '' || /\d/.test(newScore)) {
-                    showErrorPopup();
+                // Danh sách kết quả hợp lệ
+                let validResults = {
+                    // Giải Nhất
+                    "giải nhất": "Giải Nhất",
+                    "Giai nhat": "Giải Nhất",
+                    "GIẢI NHẤT": "Giải Nhất",
+                    "giẢi NhẤt": "Giải Nhất",
+                    "GiẢI NHẤT": "Giải Nhất",
+                    "gIảI nHấT": "Giải Nhất",
+
+                    // Giải Nhì
+                    "giải nhì": "Giải Nhì",
+                    "Giai nhi": "Giải Nhì",
+                    "GIẢI NHÌ": "Giải Nhì",
+                    "giẢi NhÌ": "Giải Nhì",
+                    "GiẢI NHÌ": "Giải Nhì",
+                    "gIảI nHì": "Giải Nhì",
+
+                    // Giải Ba
+                    "giải ba": "Giải Ba",
+                    "Giai ba": "Giải Ba",
+                    "GIẢI BA": "Giải Ba",
+                    "giẢi Ba": "Giải Ba",
+                    "GiẢI BA": "Giải Ba",
+                    "gIảI bA": "Giải Ba",
+
+                    // Không có giải (giữ nguyên)
+                    "không có giải": "Không có giải",
+                    "KHÔNG CÓ GIẢI": "Không có giải",
+                    "Không có Giải": "Không có giải",
+                    "khÔng Có GiẢi": "Không có giải"
+                };
+
+
+                // Chuẩn hóa dữ liệu nhập
+                if (validResults.hasOwnProperty(newScore)) {
+                    newScore = validResults[newScore];
+                } else {
+                    showErrorPopup("Kết quả không hợp lệ. Vui lòng nhập: Giải Nhất, Giải Nhì, Giải Ba hoặc Không có giải.");
                     return;
                 }
 
+                console.log("Dữ liệu gửi đi:", { ma_de_tai: selectedMaDeTai, ket_qua_khoa: newScore });
 
                 fetch('/cap-nhat-ket-qua-khoa', {
                     method: 'POST',
@@ -742,19 +773,30 @@
                     },
                     body: JSON.stringify({ ma_de_tai: selectedMaDeTai, ket_qua_khoa: newScore })
                 })
-
                     .then(response => response.json())
                     .then(data => {
+                        console.log("Phản hồi từ server:", data);
                         if (data.success) {
-                            closePopup(); // Đóng popup nhập điểm
-                            showSuccessPopup(); // Hiển thị popup thành công
-                        }
-                        else {
+                            closePopup();
+                            showSuccessPopup();
+                        } else {
                             showErrorPopup(data.error);
                         }
                     })
-                    .catch(error => console.error('Lỗi cập nhật:', error));
+                    .catch(error => console.error('Lỗi khi gửi request:', error));
             }
+
+            function showErrorPopup(message = "Lỗi! Vui lòng nhập đúng dữ liệu.") {
+                document.querySelector(".error-message p").textContent = message;
+                document.getElementById('errorOverlay').style.display = 'block';
+                document.getElementById('errorPopup').style.display = 'block';
+
+                setTimeout(() => {
+                    document.getElementById('errorOverlay').style.display = 'none';
+                    document.getElementById('errorPopup').style.display = 'none';
+                }, 2000);
+            }
+
 
             function showSuccessPopup() {
                 document.getElementById('successOverlay').style.display = 'block';
