@@ -397,9 +397,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 1048px;
-            height: 428px;
-            background: #e7f5ff;
+            width: 778px;
+            height: 242px;
+            background: #E7F5FF;
             border: 2px solid #ccc;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             z-index: 1000;
@@ -408,11 +408,39 @@
             /* color: #5183ca; */
             font-weight: bolder;
             color: #255293;
-            font-size: 20px;
+            font-size: 24px;
             font-family: "Rasa", sans-serif;
             font-weight: 500;
             word-wrap: break-word;
-            line-height: 1.8;
+
+        }
+
+        .popup-container2 {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 810px;
+            height: 308px;
+            background: #E7F5FF;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            overflow: auto;
+            border-radius: 10px;
+            /* color: #5183ca; */
+            font-weight: bolder;
+            color: #255293;
+            font-size: 24px;
+            font-family: "Rasa", sans-serif;
+            font-weight: 500;
+            word-wrap: break-word;
+
+        }
+
+        .popup-container p {
+            padding-left: 30px;
         }
 
 
@@ -578,7 +606,7 @@
         .megaphone {
             width: 30px;
             /* Kích thước icon */
-            height: 50px;
+            height: 60px;
             margin-right: 10px;
             margin-left: 20px;
             /* Tạo khoảng cách giữa icon và chữ */
@@ -607,9 +635,9 @@
         }
 
         .success-popup {
-            width: 810px;
-            height: 307px;
-            background: white;
+            width: 778px;
+            height: 242px;
+            background: #E7F5FF;
             padding: 20px;
             border-radius: 12px;
             text-align: center;
@@ -679,12 +707,15 @@
 
         .input-container {
             position: relative;
-            width: 640px;
+            width: 700px;
             height: 48.23601531982422px;
             border-radius: 10px;
             font-size: 32px;
             font-family: Rasa;
             font-weight: 700;
+
+            display: flex;
+            align-items: center;
 
         }
 
@@ -692,28 +723,31 @@
             width: 640px;
             height: 44.790584564208984px;
             border-radius: 10px;
-            border: 1px solid #255293;
+            /* border: 1px solid #255293; */
+            border: none;
             padding: 0 40px 0 10px;
             color: #17488C;
             background: #5183CA99;
             font-size: 32px;
             font-family: Rasa;
             font-weight: 700;
+
+
         }
 
-        .icon {
+        .input-icon {
             position: absolute;
-            right: 41px;
-            top: 47%;
-            transform: translateY(-50%);
+
             width: 35px;
             height: 35px;
+            right: 70px;
+
             cursor: pointer;
-            /* Làm nổi bật icon */
-            padding: 3px;
-            border-radius: 50%;
-            margin-left: -120px;
-            background-color: #D0E4FF;
+            top: 50%;
+            transform: translateY(-50%);
+
+            pointer-events: none;
+            /* Không cản trở nhập liệu */
         }
 
         .icon:hover {
@@ -722,7 +756,8 @@
         }
 
         .error-message {
-            padding: 30px;
+            padding: 20px;
+
             display: flex;
             /* Sử dụng flexbox */
             align-items: center;
@@ -735,6 +770,24 @@
             /* Cỡ chữ */
             font-weight: 500;
             font-family: Rasa;
+        }
+
+        .error-message img {
+            margin-left: 20px;
+        }
+
+        .error-message p {
+            padding-left: 30px;
+        }
+
+        .popup-header2 {
+            display: flex;
+            align-items: center;
+            /* Canh giữa theo chiều dọc */
+            font-size: 36px;
+            font-weight: bold;
+            color: #255293;
+            padding: 5px;
         }
 
         input[type="datetime-local"] {
@@ -893,8 +946,13 @@
             <!-- Ngày và giờ bảo vệ -->
             <div class="form-group">
                 <label class="form-label">Ngày và giờ bảo vệ:</label>
-                <input type="datetime-local" id="datetime" class="form-input">
+                <div class="input-container">
+                    <input type="text" id="datetime" class="form-input" placeholder="Nhập dạng yyyy-mm-dd h:m:s">
+                    <img class="input-icon" src="{{ asset('images/image.png') }}" alt="Thời gian">
+                </div>
             </div>
+
+
 
             <!-- Địa điểm bảo vệ -->
             <div class="form-group">
@@ -913,11 +971,12 @@
     <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
     <div class="confirm-popup" id="confirmPopup" style="display: none;">
         <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
             <span>Thông báo</span>
         </div>
         <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
         <div class="popup-content">
-            <p>Bạn có chắc chắn muốn cập nhật lịch trình bảo vệ không?</p>
+            <p>Bạn có chắc chắn muốn cập nhật lịch trình<br> bảo vệ không?</p>
             <button class="confirm-btn" onclick="submitUpdate()">Xác nhận</button>
             <button class="cancel-btn" onclick="closeConfirmPopup()">Hủy</button>
         </div>
@@ -926,9 +985,25 @@
     <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
     <div class="popup-container success-popup" id="successPopup" style="display: none;">
-        <p>Cập nhật lịch trình bảo vệ thành công!</p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+            <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
+            <p>Cập nhật lịch trình bảo vệ thành công!</p>
+        </div>
     </div>
+    <div class="popup-overlay" id="errorOverlay"></div>
+    <div class="popup-container2" id="errorPopup">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
 
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="error-message">
+            <img class="cancel" src="{{ asset('images/Cancel.png') }}">
+            <p>Thông tin bạn nhập không chính xác<br />hoặc thiếu!Bạn hãy nhập lại thông tin.</p>
+        </div>
+    </div>
     <script>
         function openPopupFromButton(button) {
             let id = button.getAttribute("data-id");
@@ -941,7 +1016,7 @@
             document.getElementById("Popupupdate").style.display = "block";
             document.getElementById("updateOverlay").style.display = "block";
             document.getElementById("lichTrinhId").value = id;
-            document.getElementById("datetime").value = ngay + "T" + gio;
+            document.getElementById("datetime").value = ngay + " " + gio;
             document.getElementById("location").value = diadiem;
         }
 
@@ -951,26 +1026,38 @@
         }
 
         function validateAndSubmit() {
-            let dateTime = document.getElementById("datetime").value;
-            let location = document.getElementById("location").value;
+            let dateTime = document.getElementById("datetime").value.trim();
+            let location = document.getElementById("location").value.trim();
 
             if (!dateTime || !location) {
-                alert("Vui lòng nhập đầy đủ thông tin!");
-            } else {
-                document.getElementById("confirmOverlay").style.display = "block";
-                document.getElementById("confirmPopup").style.display = "block";
+                showErrorPopup();
+                return;
             }
+
+            let regex = /^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}:\d{2}$/;
+            if (!regex.test(dateTime)) {
+                showErrorPopup();
+                return;
+            }
+
+            // 🛠 Hiển thị popup xác nhận
+            document.getElementById("confirmOverlay").style.display = "block";
+            document.getElementById("confirmPopup").style.display = "block";
+            document.getElementById("Popupupdate").style.display = "none";
+            document.getElementById("updateOverlay").style.display = "none";
         }
+
 
         function closeConfirmPopup() {
             document.getElementById("confirmOverlay").style.display = "none";
             document.getElementById("confirmPopup").style.display = "none";
         }
 
+
         function submitUpdate() {
             let id = document.getElementById("lichTrinhId").value;
-            let ngayGio = document.getElementById("datetime").value;
-            let diadiem = document.getElementById("location").value;
+            let ngayGio = document.getElementById("datetime").value.trim();
+            let diadiem = document.getElementById("location").value.trim();
 
             fetch(`/lich-trinh/${id}/update`, {
                 method: "POST",
@@ -984,15 +1071,41 @@
                 .then(data => {
                     if (data.success) {
                         closePopup();
-                        document.getElementById("successOverlay").style.display = "block";
-                        document.getElementById("successPopup").style.display = "block";
-
-                        setTimeout(() => {
-                            location.reload();
-                        }, 2000);
+                        showSuccessPopup("Cập nhật lịch trình bảo vệ thành công!");
+                    } else {
+                        showErrorPopup(data.message || "Có lỗi xảy ra, vui lòng thử lại.");
                     }
-                });
+                })
+                .catch(() => showErrorPopup("Lỗi kết nối! Vui lòng thử lại."));
         }
+
+
+        function showErrorPopup(message) {
+            //document.querySelector("#errorPopup .error-message p").innerText = message;
+            document.getElementById("errorOverlay").style.display = "block";
+            document.getElementById("errorPopup").style.display = "block";
+
+            document.getElementById("Popupupdate").style.display = "none";
+            document.getElementById("updateOverlay").style.display = "none";
+
+            setTimeout(() => {
+                document.getElementById("errorOverlay").style.display = "none";
+                document.getElementById("errorPopup").style.display = "none";
+
+
+            }, 2500);
+        }
+
+        function showSuccessPopup(message) {
+            //document.querySelector("#successPopup p").innerText = message;
+            document.getElementById("successOverlay").style.display = "block";
+            document.getElementById("successPopup").style.display = "block";
+            document.getElementById("confirmOverlay").style.display = "none";
+            document.getElementById("confirmPopup").style.display = "none";
+
+            setTimeout(() => location.reload(), 2000);
+        }
+
         // Đóng popup khi click ra ngoài
         document.getElementById("updateOverlay").addEventListener("click", function (event) {
             if (event.target === this) {

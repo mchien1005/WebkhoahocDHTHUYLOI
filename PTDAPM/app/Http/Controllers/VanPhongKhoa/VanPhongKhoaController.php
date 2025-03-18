@@ -146,8 +146,18 @@ class VanPhongKhoaController extends Controller
     {
         $lichTrinh = LichTrinhBaoVe::findOrFail($id);
 
-        // Cập nhật dữ liệu
-        $dateTimeParts = explode("T", $request->ngay_gio);
+        // Kiểm tra nếu dữ liệu bị thiếu
+        if (!$request->ngay_gio || !$request->dia_diem) {
+            return response()->json(['success' => false, 'message' => 'Dữ liệu không hợp lệ!']);
+        }
+
+        // Xử lý ngày và giờ
+        $dateTimeParts = explode(" ", $request->ngay_gio); // 🛠 Sửa lỗi "T" thành " "
+
+        if (count($dateTimeParts) < 2) {
+            return response()->json(['success' => false, 'message' => 'Định dạng ngày giờ không hợp lệ!']);
+        }
+
         $lichTrinh->ngay_bao_ve = $dateTimeParts[0];
         $lichTrinh->gio_bao_ve = $dateTimeParts[1];
         $lichTrinh->dia_diem = $request->dia_diem;
@@ -156,6 +166,7 @@ class VanPhongKhoaController extends Controller
 
         return response()->json(['success' => true]);
     }
+
     public function ghepdoidetaihoidong()
     {
         $deTais = DeTai::all();
