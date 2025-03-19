@@ -14,13 +14,26 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(Request $request)
+   public function login(Request $request)
 {
-    // Xác thực dữ liệu đầu vào
     $credentials = $request->validate([
-        'email' => 'required|email',
-        'password' => 'required|min:3',
-    ]);
+            'email' => 'required|email',
+            'password' => [
+                'required',
+                'min:8',
+                'regex:/[a-z]/',      // phải có chữ thường
+                'regex:/[A-Z]/',      // phải có chữ hoa
+                'regex:/[0-9]/',      // phải có số
+                'regex:/[@$!%*#?&]/', // phải có ký tự đặc biệt
+            ],
+        ], [
+            'email.email' => 'Tên đăng nhập hoặc mật khẩu không chính xác!',
+            'email.required' => 'Không được để trống tài khoản!',
+            'password.required' => 'Không được để trống mật khẩu!',
+            'password.password' => 'Tên đăng nhập hoặc mật khẩu không chính xác!',
+            'password.min' => 'Yêu cầu nhập mật khẩu có 8 ký tự (gồm số, chữ hoa, chữ thường và ký hiệu)',
+            'password.regex' => 'Yêu cầu nhập mật khẩu có 8 ký tự (gồm số, chữ hoa, chữ thường và ký hiệu)',
+        ]);
 
     // Kiểm tra đăng nhập
     if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password']])) {
@@ -43,7 +56,6 @@ class LoginController extends Controller
     // Nếu đăng nhập thất bại, hiển thị lỗi
     return back()->withErrors(['email' => 'Tài khoản hoặc mật khẩu không đúng!'])->withInput();
 }
-
 
 
     public function logout(Request $request)
