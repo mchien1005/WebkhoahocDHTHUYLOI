@@ -131,8 +131,10 @@
             font-family: "Rasa", sans-serif;
             font-weight: 500;
             word-wrap: break-word;
-            line-height: 1.5;
+
         }
+
+
 
 
         /* Nội dung có thể cuộn */
@@ -141,15 +143,15 @@
             overflow-y: auto;
             padding-left: 70px;
             padding-top: 40px;
-
+            padding-bottom: 100px;
             /* Điều chỉnh khoảng cách giữa các dòng */
-            font-family: Rasa;
+            font-family: 'Rasa', serif;
             font-weight: 500;
             font-size: 20px;
             line-height: 100%;
             letter-spacing: 0%;
 
-            line-height: 1.4;
+            line-height: 1.2;
         }
 
         .de-tai-trang-thai {
@@ -160,11 +162,11 @@
         }
 
         ul li {
-            margin-left: 50px;
+            margin-left: 60px;
         }
 
         .indent-text {
-            margin-left: 10px;
+            margin-left: 15px;
             /* Thụt vào 10px */
         }
 
@@ -179,6 +181,10 @@
         }
 
         .export-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 80%;
+            transform: translateX(-50%);
             background-color: #5183CA99;
             color: #255293;
             font-size: 18px;
@@ -188,13 +194,11 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            margin-top: 10px;
-            margin-left: 485px;
-            /* Tạo khoảng cách với nội dung trên */
             width: 300px;
-            /* Cố định chiều rộng để đẹp hơn */
             text-align: center;
+            z-index: 1010;
         }
+
 
         .export-btn:hover {
             background-color: #1d417a;
@@ -512,6 +516,19 @@
         .custom-table th:nth-child(8) {
             width: 10%;
         }
+
+        .tablethongke td {
+            text-align: center;
+        }
+
+        .tablethongke th {
+            font-family: 'Rasa', serif;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
     </style>
     <div class="container mt-4">
         <table class="table table-bordered custom-table responsive-table">
@@ -545,7 +562,7 @@
     </div>
     <div class="group-13">
         <div class="rectangle-40"></div>
-        <button class="xuatbaocao" onclick="openPopup()"
+        <button class="xuatbaocao" id="openPopupButton" onclick="openPopup()"
             style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">
             Xuất báo cáo thống kê
         </button>
@@ -647,6 +664,20 @@
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
+        document.addEventListener("click", function (event) {
+            let popup = document.getElementById("popup");
+            let openButton = document.getElementById("openPopupButton"); // ID của nút mở popup
+
+            // Nếu popup đang mở, không bấm vào popup, không bấm vào nút mở -> Đóng popup
+            if (
+                popup.style.display === "block" &&
+                !popup.contains(event.target) &&
+                event.target !== openButton
+            ) {
+                closePopup();
+            }
+        });
+
 
         function showConfirmPopup() {
             document.getElementById("popup").style.display = "none";
@@ -662,6 +693,37 @@
         }
 
         function exportReport() {
+            let popupContent = document.querySelector(".popup-content").cloneNode(true);
+
+            // Xóa nút button trong popup
+            let buttons = popupContent.querySelectorAll("button");
+            buttons.forEach(button => button.remove());
+
+            // Xử lý bảng trong nội dung
+            let tables = popupContent.querySelectorAll("table");
+            tables.forEach(table => {
+                let rows = table.querySelectorAll("tr");
+                let tableText = "\n\n" + " ".repeat(50) + "\n"; // Định dạng bảng
+                rows.forEach(row => {
+                    let cells = row.querySelectorAll("th, td");
+                    let rowText = Array.from(cells).map(cell => cell.textContent.trim()).join(" | ");
+                    tableText += rowText + "\n";
+                });
+                tableText += " ".repeat(50) + "\n\n";
+                table.replaceWith(document.createTextNode(tableText));
+            });
+
+            // Xử lý nội dung text
+            let textContent = popupContent.textContent.replace(/\n\s*\n/g, "\n\n").trim();
+
+            let blob = new Blob([textContent], { type: "text/plain" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "BaoCaoThongKe.txt";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
             document.getElementById("confirmOverlay").style.display = "none";
             document.getElementById("confirmPopup").style.display = "none";
             document.getElementById("successOverlay").style.display = "flex";

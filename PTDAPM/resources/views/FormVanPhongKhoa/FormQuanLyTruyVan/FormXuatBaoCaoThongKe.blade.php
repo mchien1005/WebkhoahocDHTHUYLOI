@@ -1,5 +1,5 @@
 <div class="popup-container" id="popup">
-    <span class="close-btn" onclick="closePopup()">✖</span>
+
     <div class="popup-content">
         <h2>BÁO CÁO THỐNG KÊ ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h2>
 
@@ -54,10 +54,13 @@
         @if ($deTaiSapBaoVe->isEmpty())
             <p>Không có đề tài nào sắp bảo vệ.</p>
         @else
-            <table border="1">
+            <table class="tablethongke">
                 <thead>
                     <tr>
-                        <th>Mã đề tài</th>
+
+                        <th>
+                            <p class="indent-text">4. Mã đề tài</p>
+                        </th>
                         <th>Ngày bảo vệ</th>
                         <th>Giờ bảo vệ</th>
                         <th>Địa điểm</th>
@@ -82,4 +85,5 @@
 
         <button class="export-btn" onclick="showConfirmPopup()">XUẤT BÁO CÁO THỐNG KÊ</button>
     </div>
+
 </div>
