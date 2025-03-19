@@ -656,6 +656,7 @@
 
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.min.js"></script>
     <script>
         function openPopup() {
             document.getElementById("popup").style.display = "block";
@@ -746,9 +747,81 @@
             document.getElementById("popupRadio").style.display = "none";
 
         }
+        function getSelectedTopic() {
+            let selected = document.querySelector('input[name="topic"]:checked');
+            return selected ? selected.value : null;
+        }
+
+        function getFilteredData(filterType) {
+            let rows = document.querySelectorAll(".custom-table tbody tr");
+            let filteredData = [];
+            let headers = "";
+
+            if (filterType === "official") {
+                headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp trường\tKết quả cấp khoa\n";
+            } else if (filterType === "faculty") {
+                headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp khoa\n";
+            } else if (filterType === "university") {
+                headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp trường\n";
+            }
+
+            rows.forEach(row => {
+                let columns = row.getElementsByTagName("td");
+
+                let maDeTai = columns[0].innerText.trim(); // Mã đề tài
+                let tenDeTai = columns[1].innerText.trim(); // Tên đề tài
+                let ngayDangKy = columns[2].innerText.trim(); // Ngày đăng ký
+                let trangThai = columns[3].innerText.trim(); // Trạng thái
+                let giangVien = columns[4].innerText.trim(); // Giảng viên
+                let soSinhVien = columns[5].innerText.trim(); // Số sinh viên
+                let ketQuaTruong = columns[6].innerText.trim(); // Kết quả cấp trường
+                let ketQuaKhoa = columns[7].innerText.trim(); // Kết quả cấp khoa
+
+                if (filterType === "official") {
+                    filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaTruong}\t${ketQuaKhoa}`);
+                } else if (filterType === "faculty" && ketQuaKhoa !== "Chưa có") {
+                    filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaKhoa}`);
+                } else if (filterType === "university" && ketQuaTruong !== "Chưa có") {
+                    filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaTruong}`);
+                }
+            });
+
+            return { headers, filteredData };
+        }
+
         function exportReport2() {
+            let filterType = getSelectedTopic();
+            if (!filterType) {
+                alert("Vui lòng chọn một loại đề tài để xuất!");
+                return;
+            }
+
+            let { headers, filteredData } = getFilteredData(filterType);
+            if (filteredData.length === 0) {
+                alert("Không có dữ liệu phù hợp!");
+                return;
+            }
+
+            // Dòng đầu tiên mặc định
+            let title = "Danh sách đề tài:\n";
+
+            // Kết hợp nội dung file
+            let textContent = title + headers + filteredData.join("\n");
+
+            let blob = new Blob([textContent], { type: "text/plain" });
+
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = `DanhSachDeTai_${filterType}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Ẩn popup chọn radio
             document.getElementById("popupOverlay").style.display = "none";
             document.getElementById("popupRadio").style.display = "none";
+
+            // Hiển thị popup thành công
             document.getElementById("successOverlay2").style.display = "flex";
             document.getElementById("successPopup2").style.display = "block";
 
@@ -758,6 +831,7 @@
                 document.getElementById("successPopup2").style.display = "none";
             }, 2000);
         }
+
 
     </script>
 

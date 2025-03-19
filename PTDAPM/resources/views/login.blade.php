@@ -162,7 +162,7 @@
                     <div class="modal-header border-bottom p-0" style="border-bottom: 2px solid #225293 !important;">
                         <h3 class="mb-0 d-flex align-items-center"
                             style="font-weight: 500;font-size: 40px;line-height: 100%;
-                                                                    letter-spacing: 0%;font-family: 'Rasa', serif; color: #225293;">
+                                                                            letter-spacing: 0%;font-family: 'Rasa', serif; color: #225293;">
                             <img src="{{ asset('img/Megaphone.png') }}" width="45" height="73" class="me-3"> Thông báo
                         </h3>
                     </div>
@@ -172,7 +172,7 @@
                         <img src="{{ asset('images/Cancel.png') }}" width="90" class="me-3">
                         <span class="fw"
                             style="font-weight: 500;font-size: 40px;line-height: 100%;
-                                                                    letter-spacing: 0%;font-family: 'Rasa', serif; color: #225293;">
+                                                                            letter-spacing: 0%;font-family: 'Rasa', serif; color: #225293;">
                             {{ $errors->first() }}
                         </span>
                     </div>
