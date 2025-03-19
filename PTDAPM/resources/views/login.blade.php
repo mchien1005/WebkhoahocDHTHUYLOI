@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Rasa:wght@400;700&display=swap" rel="stylesheet">
     <title>Đăng nhập</title>
@@ -108,7 +108,8 @@
         top: 748px;
         text-decoration: none;
     }
-        .popup {
+
+    .popup {
         display: none;
         position: fixed;
         top: 50%;
@@ -138,7 +139,7 @@
 
 <body>
 
-   <div class="login">
+    <div class="login">
         <img src="{{ asset('img/dangnhap.png') }}" alt="Background" class="image">
         <img src="{{ asset('img/logo 1.png') }}" alt="Logo" class="logo-1">
 
@@ -203,8 +204,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-   
 
 </body>
 
