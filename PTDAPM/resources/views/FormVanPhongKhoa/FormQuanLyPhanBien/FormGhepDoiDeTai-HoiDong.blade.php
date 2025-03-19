@@ -904,7 +904,7 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                                                                                                                                                                                                                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                                                                                                                                                                                                                                                                                            border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -1073,13 +1073,30 @@
                         setTimeout(() => {
                             document.getElementById("successOverlay").style.display = "none";
                             document.getElementById("successPopup").style.display = "none";
+                            location.reload();
                         }, 2000);
                     } else {
-                        console.error("Lỗi: Server không phản hồi success!");
+                        showErrorPopup(data.message); // Hiển thị thông báo lỗi từ server
                     }
                 })
-                .catch(error => console.error("Lỗi gửi dữ liệu:", error));
+                .catch(error => {
+                    console.error("Lỗi gửi dữ liệu:", error);
+                    showErrorPopup("Lỗi kết nối đến server!");
+                });
         }
+
+        function showErrorPopup(message) {
+            document.querySelector("#errorPopup .error-message p").innerText = message;
+            document.getElementById("confirmOverlay").style.display = "none";
+            document.getElementById("confirmPopup").style.display = "none";
+            document.getElementById("errorOverlay").style.display = "block";
+            document.getElementById("errorPopup").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("errorOverlay").style.display = "none";
+                document.getElementById("errorPopup").style.display = "none";
+            }, 3000);
+        }
+
 
 
     </script>

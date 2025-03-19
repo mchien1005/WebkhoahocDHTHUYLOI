@@ -184,6 +184,19 @@ class VanPhongKhoaController extends Controller
         try {
             foreach ($request->ghep_doi as $ma_de_tai => $ma_hds) {
                 foreach ($ma_hds as $ma_hd) {
+                    // Kiểm tra xem đề tài đã được ghép với hội đồng này chưa
+                    $exists = HoiDongDanhGia::where('ma_de_tai', $ma_de_tai)
+                        ->where('ma_hd', $ma_hd)
+                        ->exists();
+
+                    if ($exists) {
+                        return response()->json([
+                            'success' => false,
+                            'message' => "Đề tài này đã được ghép đôi!"
+                        ]);
+                    }
+
+                    // Nếu chưa tồn tại, thêm mới vào CSDL
                     HoiDongDanhGia::create([
                         'ma_hd' => $ma_hd,
                         'ma_de_tai' => $ma_de_tai,
@@ -198,6 +211,8 @@ class VanPhongKhoaController extends Controller
             return response()->json(['success' => false, 'message' => 'Lỗi khi lưu dữ liệu!']);
         }
     }
+
+
     public function xemBaoCao()
     {
         $baocaos = BaoCaoNghienCuu::all();
