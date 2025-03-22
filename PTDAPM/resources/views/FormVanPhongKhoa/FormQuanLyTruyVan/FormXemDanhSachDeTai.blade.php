@@ -251,17 +251,16 @@
 
         .confirm-popup .popup-header {
             font-size: 40px;
-            font-weight: bold;
             color: #255293;
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
         }
 
         .confirm-popup .popup-content {
             font-size: 40px;
             color: #255293;
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
         }
 
         .confirm-popup .confirm-btn,
@@ -291,19 +290,18 @@
             background-color: #1d417a;
         }
 
-        --- .confirm-popup2 .popup-header {
+        .confirm-popup2 .popup-header {
             font-size: 40px;
-            font-weight: bold;
             color: #255293;
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
         }
 
         .confirm-popup2 .popup-content {
             font-size: 40px;
             color: #255293;
             font-weight: 500;
-            word-wrap: break-word
+            word-wrap: break-word;
         }
 
         .confirm-popup2 .confirm-btn,
@@ -312,6 +310,7 @@
             color: #255293;
             font-size: 36px;
             width: 200px;
+            height: 90px;
             font-family: Rasa;
             font-weight: 500;
             word-wrap: break-word;
@@ -321,7 +320,7 @@
             cursor: pointer;
             font-weight: 500;
             word-wrap: break-word;
-            margin-top: 100px;
+            /* margin-top: 40px; */
         }
 
         .confirm-popup2 .confirm-btn:hover,
@@ -334,9 +333,19 @@
             align-items: center;
             /* Canh giữa theo chiều dọc */
             font-size: 40px;
-            font-weight: bold;
             color: #255293;
             padding: 10px;
+        }
+
+        .confirm-popup2 .popup-header {
+            display: flex;
+            align-items: center;
+            padding-bottom: 50px;
+            padding-left: 50px;
+            font-size: 40px;
+            color: #255293;
+            font-weight: 500;
+            word-wrap: break-word;
         }
 
         .megaphone {
@@ -363,10 +372,11 @@
         }
 
         .success-popup {
-            width: 810px;
-            height: 307px;
+            width: 778px;
+            height: 242px;
             background: white;
             padding: 20px;
+
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -375,11 +385,58 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 80px;
+
 
         }
 
+        .success-popup img {
+            padding-top: 50px;
+            display: flex;
+            padding-right: 100px;
+            padding-left: 20px;
+            justify-content: center;
+        }
+
         .success-popup p {
+            padding-top: 70px;
+            align-items: center;
+            justify-content: center;
+            color: #255293;
+            font-size: 40px;
+            font-family: Rasa;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .success-popup2 {
+            width: 778px;
+            height: 242px;
+            background: white;
+            padding: 20px 20px 0px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+
+        }
+
+        .success-popup2 img {
+            padding-top: 50px;
+            display: flex;
+            padding-right: 70px;
+            padding-left: 20px;
+            justify-content: center;
+        }
+
+        .success-popup2 p {
+            padding-top: 70px;
+            align-items: center;
+            justify-content: center;
             color: #255293;
             font-size: 40px;
             font-family: Rasa;
@@ -409,6 +466,7 @@
             display: flex;
             align-items: center;
             margin: 10px 0;
+            margin-bottom: 30px;
             cursor: pointer;
         }
 
@@ -598,9 +656,9 @@
     <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay" style="display: none;"></div>
     <div class="popup-container success-popup" id="successPopup" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <div style="display: flex; gap: 15px;">
             <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
-            <p>Xuất báo cáo thành công!</p>
+            <p>Xuất báo cáo thành công</p>
         </div>
 
     </div>
@@ -619,19 +677,19 @@
         <!-- Nội dung popup -->
         <div class="popup-content">
             <label class="radio-container">
-                <input type="radio" name="topic" value="official">
+                <input type="radio" name="topic" value="chinhthuc">
                 <span class="radio-custom"></span>
                 Đề tài chính thức
             </label>
 
             <label class="radio-container">
-                <input type="radio" name="topic" value="faculty">
+                <input type="radio" name="topic" value="capkhoa">
                 <span class="radio-custom"></span>
                 Đề tài đã nghiên cứu cấp khoa
             </label>
 
             <label class="radio-container">
-                <input type="radio" name="topic" value="university">
+                <input type="radio" name="topic" value="captruong">
                 <span class="radio-custom"></span>
                 Đề tài đã nghiên cứu cấp trường
             </label>
@@ -646,10 +704,10 @@
 
     <!-- Popup thông báo thành công -->
     <div class="popup-overlay" id="successOverlay2" style="display: none;"></div>
-    <div class="popup-container success-popup" id="successPopup2" style="display: none;">
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+    <div class="popup-container success-popup2" id="successPopup2" style="display: none;">
+        <div style="display: flex; gap: 15px;">
             <img class="done" src="{{ asset('images/Done.png') }}" alt="Xuất báo cáo thành công!">
-            <p>Xuất danh sách đề tài thành công!</p>
+            <p>Xuất danh sách đề tài thành công</p>
         </div>
 
     </div>
@@ -757,11 +815,11 @@
             let filteredData = [];
             let headers = "";
 
-            if (filterType === "official") {
+            if (filterType === "chinhthuc") {
                 headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp trường\tKết quả cấp khoa\n";
-            } else if (filterType === "faculty") {
+            } else if (filterType === "capkhoa") {
                 headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp khoa\n";
-            } else if (filterType === "university") {
+            } else if (filterType === "capkhoa") {
                 headers = "Mã đề tài\tTên đề tài\tNgày đăng ký\tTrạng thái\tGiảng viên\tSố sinh viên\tKết quả cấp trường\n";
             }
 
@@ -777,11 +835,11 @@
                 let ketQuaTruong = columns[6].innerText.trim(); // Kết quả cấp trường
                 let ketQuaKhoa = columns[7].innerText.trim(); // Kết quả cấp khoa
 
-                if (filterType === "official") {
+                if (filterType === "chinhthuc") {
                     filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaTruong}\t${ketQuaKhoa}`);
-                } else if (filterType === "faculty" && ketQuaKhoa !== "Chưa có") {
+                } else if (filterType === "capkhoa" && ketQuaKhoa !== "Chưa có") {
                     filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaKhoa}`);
-                } else if (filterType === "university" && ketQuaTruong !== "Chưa có") {
+                } else if (filterType === "captruong" && ketQuaTruong !== "Chưa có") {
                     filteredData.push(`${maDeTai}\t${tenDeTai}\t${ngayDangKy}\t${trangThai}\t${giangVien}\t${soSinhVien}\t${ketQuaTruong}`);
                 }
             });

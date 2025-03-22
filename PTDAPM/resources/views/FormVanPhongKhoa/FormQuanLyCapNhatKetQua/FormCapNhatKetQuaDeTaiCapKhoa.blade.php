@@ -448,7 +448,7 @@
             color: #255293;
             font-weight: 500;
             word-wrap: break-word;
-            margin-left: 60px;
+            margin-left: 20px;
         }
 
         .confirm-popup .popup-content {
@@ -488,7 +488,11 @@
             font-size: 40px;
             font-weight: bold;
             color: #255293;
-            padding: 10px;
+            padding: 10px 0 10px;
+        }
+
+        .popup-header img {
+            padding-right: 10px;
         }
 
         .line-16 {
@@ -506,10 +510,11 @@
         }
 
         .success-popup {
-            width: 810px;
-            height: 307px;
+            width: 778px;
+            height: 242px;
             background: white;
             padding: 20px;
+
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -518,11 +523,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 80px;
+
 
         }
 
+        .success-popup img {
+            padding-top: 50px;
+            display: flex;
+            padding-right: 100px;
+            padding-left: 20px;
+            justify-content: center;
+        }
+
         .success-popup p {
+            padding-top: 70px;
+            align-items: center;
+            justify-content: center;
             color: #255293;
             font-size: 40px;
             font-family: Rasa;
@@ -655,7 +671,7 @@
 
     <div class="popup-overlay" id="confirmOverlay" style="display: none;"></div>
     <div class="confirm-popup" id="confirmPopup" style="display: none;">
-        <div class="popup-header">
+        <div class="popup-header" style="padding-left: 40px;">
             <span>Cập nhật kết quả</span>
         </div>
 
@@ -665,23 +681,23 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                                                                                                                                                                                                                                                                                    word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        word-wrap: break-word;">Kết
                     quả:</label>
                 <input type="text" id="scoreInput"
-                    style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: 1px solid #255293; padding: 0 10px; background: #5183CA99;">
+                    style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: none; padding: 0 10px;margin-left:20px; background: #5183CA99;">
             </div>
-            <button class="confirm-btn" style="margin-left: 260px; margin-top:40px;"
+            <button class="confirm-btn" style="margin-left: 260px; margin-top:50px;"
                 onclick="validateScore()"">Xác nhận</button>
-                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                </div>
-                                                                                                                                                                                                                                                                                                                <!-- Popup thông báo thành công -->
-                                                                                                                            <div class=" popup-overlay" id="successOverlay"
-                style="display: none;">
+                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                    <!-- Popup thông báo thành công -->
+                                                                                                                                                                                <div class="
+                popup-overlay" id="successOverlay" style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+            <div style="display: flex; gap: 15px;">
                 <img class="done" src="{{ asset('images/Done.png') }}" alt="Cập nhật thành công!">
-                <p>Cập nhật kết quả thành công!</p>
+                <p>Cập nhật kết quả thành công</p>
             </div>
         </div>
 

@@ -3,7 +3,7 @@
     <div class="popup-content">
         <h2>BÁO CÁO THỐNG KÊ ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h2>
 
-        <p><b>I. Thông tin tổng quan</b></p>
+        <p>I. Thông tin tổng quan</p>
         <p class="indent-text">1. Tổng số đề tài đăng ký: <strong>{{ $tongDeTai }}</strong></p>
 
         <p class="indent-text">2. Số đề tài theo trạng thái:</p>
@@ -32,13 +32,13 @@
         <p class="indent-text">5. Tổng số giảng viên hướng dẫn: <strong>{{ $tongGiangVien }}</strong></p>
         <p class="indent-text">6. Tổng số sinh viên tham gia: <strong>{{ $tongSinhVien }}</strong></p>
 
-        <p><b>IV. Thống kê kết quả đề tài</b></p>
+        <p>IV. Thống kê kết quả đề tài</p>
         <p class="indent-text">1. Số đề tài đạt cấp khoa: <strong>{{ $deTaiDatCapKhoa }}</strong></p>
         <p class="indent-text">2. Số đề tài đạt cấp trường: <strong>{{ $deTaiDatCapTruong }}</strong></p>
         <p class="indent-text">3. Điểm phản biện trung bình: <strong>{{ number_format($diemPhanBienTB, 2) }}</strong>
         </p>
 
-        <p><b>V. Thống kê lịch trình bảo vệ</b></p>
+        <p>V. Thống kê lịch trình bảo vệ</p>
         <p class="indent-text">1. Số đề tài bảo vệ trong từng đợt:</p>
         <ul>
             @foreach ($deTaiTheoDot as $dot)
@@ -79,7 +79,7 @@
             </table>
         @endif
 
-        <p><b>VI. Thống kê hội đồng phản biện</b></p>
+        <p>VI. Thống kê hội đồng phản biện</p>
         <p class="indent-text">1. Tổng số hội đồng phản biện: <strong>{{ $tongHoiDong }}</strong></p>
         <p class="indent-text">2. Tổng số giảng viên phản biện: <strong>{{ $tongGiangVienPhanBien }}</strong></p>
 

@@ -546,7 +546,6 @@
 
         .confirm-popup .popup-header {
             font-size: 32px;
-            font-weight: bold;
             color: #255293;
             font-weight: 700;
             padding-left: 30px;
@@ -587,10 +586,10 @@
             display: flex;
             align-items: center;
             /* Canh giữa theo chiều dọc */
-            font-size: 40px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 700;
             color: #255293;
-            padding: 10px;
+            padding: 10px 20px 10px;
         }
 
         .popup-header2 {
@@ -668,6 +667,10 @@
 
             font-weight: 500;
             word-wrap: break-word
+        }
+
+        .confirm-popup .confirm-btn {
+            margin-right: 40px;
         }
 
         .success-popup p {
@@ -886,6 +889,18 @@
             /* Chữ in đậm để dễ nhìn hơn */
         }
 
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #5183CA99;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
         /* Trạng thái */
     </style>
     <div class="container mt-4 d-flex justify-content-center">
@@ -937,7 +952,8 @@
     <div class="popup-overlay" id="updateOverlay" style="display: none;"></div>
     <div class="confirm-popup2" id="Popupupdate" style="display: none;">
         <div class="popup-header">
-            <span>Cập nhật lịch trình bảo vệ đề tài</span>
+            <p>Cập nhật lịch trình bảo vệ đề tài</p>
+            <button class="close-btn" onclick="closePopup()">✖</button>
         </div>
 
         <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
