@@ -112,7 +112,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 95%;
+            width: 100%;
             /* Chiếm 90% chiều rộng màn hình */
             max-width: 862px;
             /* Giữ nguyên kích thước tối đa */
@@ -141,7 +141,7 @@
         .popup-content {
             height: 100%;
             overflow-y: auto;
-            padding-left: 70px;
+            padding-left: 60px;
             padding-top: 40px;
             padding-bottom: 100px;
             /* Điều chỉnh khoảng cách giữa các dòng */
@@ -187,14 +187,15 @@
             transform: translateX(-50%);
             background-color: #5183CA99;
             color: #255293;
-            font-size: 18px;
+            font-size: 32px;
             font-family: "Rasa", sans-serif;
-            font-weight: 600;
-            padding: 20px 30px;
+            font-weight: 500;
+
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            width: 300px;
+            width: 326px;
+            height: 68px;
             text-align: center;
             z-index: 1010;
         }

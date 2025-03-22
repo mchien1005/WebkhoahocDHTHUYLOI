@@ -1,7 +1,7 @@
 <div class="popup-container" id="popup">
 
     <div class="popup-content">
-        <h2>BÁO CÁO THỐNG KÊ ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h2>
+        <h3>BÁO CÁO THỐNG KÊ ĐỀ TÀI NGHIÊN CỨU KHOA HỌC</h3>
 
         <p>I. Thông tin tổng quan</p>
         <p class="indent-text">1. Tổng số đề tài đăng ký: <strong>{{ $tongDeTai }}</strong></p>
@@ -83,7 +83,7 @@
         <p class="indent-text">1. Tổng số hội đồng phản biện: <strong>{{ $tongHoiDong }}</strong></p>
         <p class="indent-text">2. Tổng số giảng viên phản biện: <strong>{{ $tongGiangVienPhanBien }}</strong></p>
 
-        <button class="export-btn" onclick="showConfirmPopup()">XUẤT BÁO CÁO THỐNG KÊ</button>
+        <button class="export-btn" onclick="showConfirmPopup()">Xuất báo cáo thống kê</button>
     </div>
 
 </div>
