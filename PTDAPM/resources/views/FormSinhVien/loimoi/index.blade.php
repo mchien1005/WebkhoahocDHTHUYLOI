@@ -90,6 +90,11 @@
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-responsive">
+            @if($loiMois->isEmpty())
+            <div class="text-center mt-4">
+                <h4 class="text-muted">Không có lời mời hướng dẫn</h4>
+            </div>
+            @else
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -116,6 +121,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 </div>
@@ -148,7 +154,7 @@
 
                         <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
                             style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                            data-bs-dismiss="modal">Hủy bỏ</button>
+                            data-bs-dismiss="modal">Hủy</button>
                     </div>
                 </form>
             </div>
@@ -158,22 +164,33 @@
 
 
 <!-- Modal Thông báo Thu hồi -->
-<div class="modal fade" data-bs-dismiss="modal" id="TCModal{{ $loiMoi->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
+<div class="modal fade" id="TCModal{{ $loiMoi->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="static"
     data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-            <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                <h4 class="modal-title">
-                    <img src="{{ asset('images/Done.png') }}" width="30"> Thông báo
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+        <div class="modal-content text-center"
+            style="background-color: #d9eaff; padding: 30px; border-radius: 10px; min-height: 250px; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                <h4 class="modal-title fw-bold d-flex align-items-center"
+                    style="font-size: 40px; gap: 50px;color: #225293;">
+                    <img src="{{ asset('images/Done.png') }}" width="50">
+                    Đã thu hồi lời mời
                 </h4>
-            </div>
-
-            <div class="modal-body text-center">
-                <h4 id="thongbaoText">Đã thu hồi lời mời</h4>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    setTimeout(function() {
+        modal.hide();
+    }, 2000); // 2000ms = 2 giây
+});
+</script>
+
+
 @endforeach
 
 @endsection
