@@ -718,38 +718,48 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-            <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                <h4 class="modal-title">
-                    <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
+    <div class="modal fade" id="XNModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                <h4 class="modal-title fw-bold d-flex align-items-center"
+                    style="font-size: 40px; gap: 50px;color: #225293;">
+                    <img src="{{ asset('images/Done.png') }}" width="50">
+                    Đổi mật khẩu thành công
                 </h4>
-            </div>
-
-            <div class="modal-body text-center">
-                <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
-            </div>
-
-            <div class="modal-footer d-flex">
-                <form action="{{ route('doi-mat-khau.update') }}" method="POST" class="w-100">
-                    @csrf
-                    <div class="d-flex justify-content-between">
-                        <button type="submit" class="btn btn-primary flex-grow-1 mx-5"
-                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
-                            Xác nhận
-                        </button>
-
-                        <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
-                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                            data-bs-dismiss="modal">Hủy bỏ</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
+    <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                    <h4 class="modal-title">
+                        <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
+                    </h4>
+                </div>
+
+                <div class="modal-body text-center">
+                    <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
+                </div>
+
+                <div class="modal-footer d-flex">
+                    <form action="{{ route('doi-mat-khau.update') }}" method="POST" class="w-100">
+                        @csrf
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary flex-grow-1 mx-5"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
+                                Xác nhận
+                            </button>
+
+                            <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                                data-bs-dismiss="modal">Hủy bỏ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
