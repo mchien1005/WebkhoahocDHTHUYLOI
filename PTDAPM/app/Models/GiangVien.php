@@ -30,4 +30,8 @@ class GiangVien extends Model
     {
         return $this->hasMany(DeTai::class, 'ma_gv', 'ma_gv');
     }
+    public function deTais()
+    {
+        return $this->hasMany(DeTai::class, 'ma_gv', 'ma_gv');
+    }
 }
