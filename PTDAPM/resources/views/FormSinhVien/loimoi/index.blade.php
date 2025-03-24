@@ -174,7 +174,7 @@
                                 </a>
                                 @else
                                 <a type="button" data-bs-toggle="modal"
-                                data-bs-target="#TBModal{{ $loiMoi->id }}" style="color: #ffffff80;">Hết hạn thu hồi</a>
+                                data-bs-target="#TBModal{{ $loiMoi->id }}" style="color: #ffffff80;">Thu hồi</a>
                                 @endif
                         </td>
                     </tr>
