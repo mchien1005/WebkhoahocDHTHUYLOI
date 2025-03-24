@@ -173,7 +173,8 @@
                                 Thu hồi
                                 </a>
                                 @else
-                                <p style="color: #ffffff80;">Hết hạn thu hồi</p>
+                                <a type="button" data-bs-toggle="modal"
+                                data-bs-target="#TBModal{{ $loiMoi->id }}" style="color: #ffffff80;">Hết hạn thu hồi</a>
                                 @endif
                         </td>
                     </tr>
@@ -234,6 +235,22 @@
                     style="font-size: 40px; gap: 50px;color: #225293;">
                     <img src="{{ asset('images/Done.png') }}" width="50">
                     Đã thu hồi lời mời
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Thông báo Thu hồi -->
+<div class="modal fade" id="TBModal{{ $loiMoi->id }}" tabindex="-1" aria-hidden="true" data-bs-backdrop="true"
+    data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+        <div class="modal-content text-center"
+            style="background-color: #d9eaff; padding: 30px; border-radius: 10px; min-height: 250px; display: flex; align-items: center; justify-content: center;">
+            <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                <h4 class="modal-title fw-bold d-flex align-items-center"
+                    style="font-size: 40px; gap: 50px;color: #225293;">
+                    <img src="{{ asset('images/Done.png') }}" width="50">
+                    Lời mời đã quá 24 giờ
                 </h4>
             </div>
         </div>
