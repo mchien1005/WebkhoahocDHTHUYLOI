@@ -85,16 +85,20 @@ public function store(Request $request)
      * Display the specified resource.
      */
     public function show()
-    {
-        $deTaiList = DB::table('de_tai')
-            ->where('trang_thai', 'Chờ duyệt')
-            ->select('ma_de_tai', 'ten_de_tai')
-            ->get();
-        
-        return view('FormGiangVien.FormDangKyDeTai.show', [
-            'deTaiList' => $deTaiList
-        ]);
-    }
+{
+    // Lấy mã giảng viên của người dùng đang đăng nhập
+    $giangVien = Auth::user()->giangVien;
+    
+    $deTaiList = DB::table('de_tai')
+        ->where('trang_thai', 'Chờ duyệt')
+        ->where('ma_gv', $giangVien->ma_gv) // Thêm điều kiện để lọc theo giảng viên đăng nhập
+        ->select('ma_de_tai', 'ten_de_tai')
+        ->get();
+    
+    return view('FormGiangVien.FormDangKyDeTai.show', [
+        'deTaiList' => $deTaiList
+    ]);
+}
 
     public function approve(Request $request)
     {
