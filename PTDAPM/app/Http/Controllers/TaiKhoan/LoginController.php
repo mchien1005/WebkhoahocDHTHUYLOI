@@ -77,7 +77,7 @@ class LoginController extends Controller
         // Kiểm tra dữ liệu nhập vào
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|min:6',
+            'new_password' => 'required|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
             'confirm_password' => 'required|same:new_password',
         ]);
 
