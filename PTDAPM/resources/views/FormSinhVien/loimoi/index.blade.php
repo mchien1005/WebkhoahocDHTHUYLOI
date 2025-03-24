@@ -90,11 +90,6 @@
 <div class="container mt-5">
     <div class="table-container">
         <div class="table-responsive">
-            @if($loiMois->isEmpty())
-            <div class="text-center mt-4">
-                <h4 class="text-muted">Không có lời mời hướng dẫn</h4>
-            </div>
-            @else
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -106,6 +101,60 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if($loiMois->isEmpty())
+                        <tr>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        </tr>
+                        <tr>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        </tr>
+                        <tr>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        </tr>
+                        <tr>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        <td class="text-center-col"></td>
+                        </tr>
+                        
+                        <!-- Modal for no invitations -->
+                        <div class="modal fade" id="noInvitationsModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                                <div class="modal-content" style="background-color: #d9eaff; padding: 10px; border-radius: 10px;">
+                                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                                        <h4 class="modal-title" style="color: #225293;">
+                                            <img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <h4 style="color: #225293;">Không có lời mời hướng dẫn</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function() {
+                                var modal = new bootstrap.Modal(document.getElementById('noInvitationsModal'));
+                                modal.show();
+                            });
+                        </script>
+                    @else
+                <tbody>
                     @foreach($loiMois as $loiMoi)
                     <tr>
                         <td class="text-center-col">{{ $loiMoi->id }}</td>
@@ -113,15 +162,26 @@
                         <td class="text-center-col">{{ $loiMoi->trang_thai }}</td>
                         <td class="text-center-col">{{ $loiMoi->thoi_gian_gui }}</td>
                         <td class="text-center-col">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#xacnhanModal{{ $loiMoi->id }}">
+                            @php
+                            $thoiGianGui = \Carbon\Carbon::parse($loiMoi->thoi_gian_gui);
+                            $now = \Carbon\Carbon::now();
+                            $diffInHours = $thoiGianGui->diffInHours($now);
+                            @endphp
+
+                            @if($diffInHours <= 24) <a type="button" data-bs-toggle="modal"
+                                data-bs-target="#xacnhanModal{{ $loiMoi->id }}">
                                 Thu hồi
-                            </a>
+                                </a>
+                                @else
+                                <p style="color: #ffffff80;">Hết hạn thu hồi</p>
+                                @endif
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             @endif
+
         </div>
     </div>
 </div>
