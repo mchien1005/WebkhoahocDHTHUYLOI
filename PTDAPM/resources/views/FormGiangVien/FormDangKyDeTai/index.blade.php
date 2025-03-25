@@ -90,7 +90,7 @@ table {
 th {
     background-color: #4a75af;
     color: white;
-    text-align: left;
+    text-align: center;
     padding: 12px 15px;
     font-weight: 500;
     border: 1px solid white;
@@ -101,7 +101,8 @@ td {
     padding: 12px 15px;
     border: 1px solid white;
     background: rgba(81, 131, 202, 0.60);
-    text-align: left;
+    text-align: center;
+
 }
 
 .tool-widget {
@@ -227,12 +228,15 @@ setTimeout(function() {
                                 <textarea name="research_orientation" class="form-control" rows="5"
                                     style="background-color: transparent; border: none; color: #17488C; font-size: 16px;">{{ old('research_orientation') }}</textarea>
                             </p>
-                            <div id="researchErrorMsg" class="text-danger" style="display: none; margin-top: -10px; font-size: 20px;">
-                                Thiếu thông tin định hướng nghiên cứu
-                            </div>
+
                         </div>
 
                     </form>
+
+                </div>
+                <div id="researchErrorMsg" class="text-danger"
+                    style="display: none; margin-top: -10px; font-size: 20px;">
+                    Thiếu thông tin định hướng nghiên cứu!
                 </div>
             </div>
 
@@ -253,7 +257,7 @@ setTimeout(function() {
                 // Thêm xác thực phía client
                 const researchField = document.querySelector('textarea[name="research_orientation"]');
                 const errorMsg = document.getElementById('researchErrorMsg');
-                
+
                 if (!researchField.value.trim()) {
                     // Hiển thị thông báo lỗi ngay dưới ô nhập
                     errorMsg.style.display = 'block';
@@ -265,14 +269,14 @@ setTimeout(function() {
                     document.getElementById('researchForm').submit();
                 }
             });
-            
+
             // Thêm sự kiện để ẩn thông báo lỗi khi người dùng bắt đầu nhập
             document.querySelector('textarea[name="research_orientation"]').addEventListener('input', function() {
                 if (this.value.trim()) {
                     document.getElementById('researchErrorMsg').style.display = 'none';
                 }
             });
-            
+
             // Thêm sự kiện để ẩn thông báo lỗi khi bấm nút hủy
             document.getElementById('btnCancel').addEventListener('click', function() {
                 document.getElementById('researchErrorMsg').style.display = 'none';
@@ -295,19 +299,14 @@ setTimeout(function() {
 
             <!-- Body -->
             <div class="modal-body">
-                <!-- Trong file view của bạn -->
                 <form id="formDangKyDeTai" action="{{ route('dangkydetaidukien.store') }}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-start">
                         <label for="tenDeTai" class="col-sm-3 col-form-label fw-bold" style="color: #17488C;">Tên đề
                             tài:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="tenDeTai" name="tenDeTai"
-                                value=""
+                            <input type="text" class="form-control" id="tenDeTai" name="tenDeTai" value=""
                                 style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;">
-                            <div id="tenDeTaiError" class="text-danger mt-1" style="display: none; font-size: 20px;">
-                                Vui lòng nhập tên đề tài
-                            </div>
                         </div>
                     </div>
 
@@ -317,9 +316,6 @@ setTimeout(function() {
                         <div class="col-sm-9">
                             <textarea class="form-control" id="moTa" name="moTa" rows="5"
                                 style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;"></textarea>
-                            <div id="moTaError" class="text-danger mt-1" style="display: none; font-size: 20px;">
-                                Vui lòng nhập mô tả đề tài
-                            </div>
                         </div>
                     </div>
 
@@ -333,11 +329,7 @@ setTimeout(function() {
                                 <option value="Công nghệ thông tin">Công nghệ thông tin</option>
                                 <option value="Khoa học dữ liệu">Khoa học dữ liệu</option>
                                 <option value="Trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
-                                <!-- Thêm các lựa chọn khác nếu cần -->
                             </select>
-                            <div id="linhVucError" class="text-danger mt-1" style="display: none; font-size: 20px;">
-                                Vui lòng chọn lĩnh vực nghiên cứu
-                            </div>
                         </div>
                     </div>
 
@@ -354,17 +346,25 @@ setTimeout(function() {
                                 <option value="5" selected>5</option>
                             </select>
                         </div>
+                        
                     </div>
-
-                    <div class="modal-footer d-flex justify-content-end" style="border-top: none;">
-                        <button type="button" id="btnDangKy" class="btn"
-                            style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
-                            Đăng ký
-                        </button>
-                        <button type="button" id="btnHuy" class="btn" data-bs-dismiss="modal"
-                            style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
-                            Hủy
-                        </button>
+                    <div id="ErrorMsg" class="text-danger"
+                            style="display: none; margin-top: -10px; font-size: 20px;">
+                            Thiếu thông tin đề tài!
+                        </div>
+                    <div class="modal-footer d-flex flex-column" style="border-top: none;">
+                        <div id="formErrorMessage" class="text-danger mb-2 align-self-start"
+                            style="display: none; font-size: 20px; margin-left: 25%; width: 75%;"></div>
+                        <div class="d-flex align-self-end">
+                            <button type="button" id="btnDangKy" class="btn me-2"
+                                style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
+                                Đăng ký
+                            </button>
+                            <button type="button" id="btnHuy" class="btn" data-bs-dismiss="modal"
+                                style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
+                                Hủy
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -379,79 +379,51 @@ document.addEventListener('DOMContentLoaded', function() {
     const tenDeTai = document.getElementById('tenDeTai');
     const moTa = document.getElementById('moTa');
     const linhVuc = document.getElementById('linhVuc');
-    
-    // Lấy các phần tử hiển thị lỗi
-    const tenDeTaiError = document.getElementById('tenDeTaiError');
-    const moTaError = document.getElementById('moTaError');
-    const linhVucError = document.getElementById('linhVucError');
-    
+    const errorMsg = document.getElementById('ErrorMsg');
+    const btnHuy = document.getElementById('btnHuy');
+
     // Lấy các nút
     const btnDangKy = document.getElementById('btnDangKy');
-    const btnHuy = document.getElementById('btnHuy');
-    
+
     // Hàm kiểm tra và hiển thị lỗi
     function validateForm() {
-        let isValid = true;
-        
-        // Kiểm tra tên đề tài
-        if (!tenDeTai.value.trim()) {
-            tenDeTaiError.style.display = 'block';
-            isValid = false;
-        } else {
-            tenDeTaiError.style.display = 'none';
+        // Ẩn thông báo lỗi trước đó
+        errorMsg.style.display = 'none';
+
+        // Kiểm tra tất cả các trường
+        if (!tenDeTai.value.trim() || 
+            !moTa.value.trim() || 
+            linhVuc.value === "" || 
+            linhVuc.value === "Chọn lĩnh vực...") {
+            
+            // Hiển thị thông báo lỗi chung
+            errorMsg.style.display = 'block';
+            return false;
         }
-        
-        // Kiểm tra mô tả
-        if (!moTa.value.trim()) {
-            moTaError.style.display = 'block';
-            isValid = false;
-        } else {
-            moTaError.style.display = 'none';
-        }
-        
-        // Kiểm tra lĩnh vực
-        if (linhVuc.value === "" || linhVuc.value === "Chọn lĩnh vực...") {
-            linhVucError.style.display = 'block';
-            isValid = false;
-        } else {
-            linhVucError.style.display = 'none';
-        }
-        
-        return isValid;
+
+        return true;
     }
-    
+
     // Sự kiện khi nhấn nút Đăng ký
     btnDangKy.addEventListener('click', function() {
-        if (validateForm()) {
-            form.submit();
+        if (!validateForm()) {
+            return;
         }
+        
+        // Nếu validate thành công thì submit form
+        form.submit();
     });
-    
-    // Ẩn thông báo lỗi khi nhập/chọn
-    tenDeTai.addEventListener('input', function() {
-        if (tenDeTai.value.trim()) {
-            tenDeTaiError.style.display = 'none';
-        }
-    });
-    
-    moTa.addEventListener('input', function() {
-        if (moTa.value.trim()) {
-            moTaError.style.display = 'none';
-        }
-    });
-    
-    linhVuc.addEventListener('change', function() {
-        if (linhVuc.value !== "" && linhVuc.value !== "Chọn lĩnh vực...") {
-            linhVucError.style.display = 'none';
-        }
-    });
-    
-    // Sự kiện khi nhấn nút Hủy
+
+    // Sự kiện khi nhấn nút Hủy - ẩn thông báo lỗi
     btnHuy.addEventListener('click', function() {
-        // Ẩn tất cả thông báo lỗi
-        tenDeTaiError.style.display = 'none';
-        moTaError.style.display = 'none';
-        linhVucError.style.display = 'none';
+        errorMsg.style.display = 'none';
+    });
+
+    // Xóa thông báo lỗi khi người dùng nhập liệu
+    [tenDeTai, moTa, linhVuc].forEach(field => {
+        field.addEventListener('input', function() {
+            errorMsg.style.display = 'none';
+        });
     });
 });
 </script>
