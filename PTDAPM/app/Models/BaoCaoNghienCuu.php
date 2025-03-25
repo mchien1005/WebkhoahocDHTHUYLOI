@@ -13,11 +13,22 @@ class BaoCaoNghienCuu extends Model
     protected $primaryKey = 'ma_bc'; // Khóa chính
 
     protected $fillable = [
-        'ma_de_tai', 'tieu_de', 'noi_dung', 'ngay_nop'
+        'ma_de_tai',
+        'tieu_de',
+        'noi_dung',
+        'nguoi_tao',
+        'ngay_tao',
+        'trang_thai',
+        'duong_dan_tep'
     ];
+
 
     public function deTai()
     {
         return $this->belongsTo(DeTai::class, 'ma_de_tai', 'ma_de_tai');
+    }
+    public function sinhVien()
+    {
+        return $this->belongsTo(SinhVien::class, 'nguoi_tao', 'ma_sv');
     }
 }
