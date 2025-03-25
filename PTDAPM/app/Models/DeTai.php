@@ -24,5 +24,9 @@ class DeTai extends Model
     {
         return $this->belongsToMany(SinhVien::class, 'sinh_vien_de_tai', 'ma_de_tai', 'ma_sv');
     }
+    public function baoCao()
+    {
+        return $this->hasOne(BaoCaoNghienCuu::class, 'ma_de_tai', 'ma_de_tai');
+    }
 }
 
