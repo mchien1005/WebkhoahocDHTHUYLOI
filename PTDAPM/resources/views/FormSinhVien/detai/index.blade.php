@@ -105,7 +105,7 @@
                     @foreach ($deTais as $deTai)
                     <tr>
                         <td class="text-center-col">
-                            {{ $deTai->ma_de_tai }}
+                            {{ $deTai->ma_de_tai}}
                         </td>
                         <td class="text-center-col">
                             <a type="button" data-bs-toggle="modal"
@@ -113,10 +113,14 @@
                                 {{ $deTai->ten_de_tai }}
                             </a>
                         </td>
-                        <td class="text-center-col">{{ $deTai->trang_thai }}</td>
                         <td class="text-center-col">
-                            <a type="button" data-bs-toggle="modal" data-bs-target="#baocaoModal">
-                                Nộp báo cáo</a>
+                            {{ $deTai->baoCao->trang_thai }}
+                        </td>
+                        <td class="text-center-col">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#baocaoModal"
+                                data-detai="{{ $deTai->ma_de_tai }}">
+                                Nộp báo cáo
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -127,69 +131,41 @@
     </div>
 </div>
 
-
-<!-- Modal Nộp Báo Cáo -->
 <div class="modal fade" id="baocaoModal" tabindex="-1" aria-hidden="true">
-
     <div class="modal-dialog modal-dialog-centered" style="max-width: 600px;">
         <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
             <div class="modal-header">
                 <h4 class="modal-title"><img src="{{ asset('img/baocao.png') }}" width="40"> Nộp báo cáo</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-
-                <form action="{{ route('baocao.store') }}" method="POST" enctype="multipart/form-data">
-
+                <form action="{{ route('FormSinhVien.detai.index.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
-                        <label for="tep_bao_cao">Tệp báo cáo:</label>
+                    <input type="hidden" name="ma_de_tai" id="ma_de_tai">
+                    <div class="form-group mb-3 d-flex align-items-center">
+                        <label for="tep_bao_cao" class="me-2">Tệp báo cáo:</label>
                         <input type="file" name="tep_bao_cao" id="tep_bao_cao" class="form-control" required>
                     </div>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary"
-                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px;"
-                            id="btnTaiLen">Tải lên</button>
+                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px;">
+                            Tải lên
+                        </button>
                         <button type="button" class="btn btn-secondary"
                             style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px;"
-                            data-bs-dismiss="modal">Hủy bỏ</button>
+                            data-bs-dismiss="modal">
+                            Hủy bỏ
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<!-- Modal Thông Báo Lỗi -->
-<div class="modal fade" id="thongbaoModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
-        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-            <div class="modal-header">
-                <h4 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Nộp báo cáo thất bại
-                </h4>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal Thông báo Thành Công -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
-        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-            <div class="modal-header">
-                <h4 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Nộp báo cáo thành công
-                </h4>
-            </div>
-            <div class="modal-body">
-                <p>Báo cáo đã được nộp thành công!</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                    data-bs-dismiss="modal">Đóng</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- Keep existing modals for project details -->
 @foreach ($deTais as $deTai)
 <div class="modal fade" id="DTchitietModal{{ str_replace(' ', '_', $deTai->ma_de_tai) }}" tabindex="-1"
     aria-labelledby="modalTitle" aria-hidden="true">
@@ -214,32 +190,78 @@
             </div>
         </div>
     </div>
-</div>
-@endforeach
+    @endforeach
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Đảm bảo nút mở modal gán đúng mã đề tài
+        var baocaoModal = document.getElementById('baocaoModal');
+        if (baocaoModal) {
+            baocaoModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget;
+                if (button) {
+                    var deTaiId = button.getAttribute('data-detai');
+                    var inputMaDeTai = document.getElementById('ma_de_tai');
+                    if (inputMaDeTai) {
+                        inputMaDeTai.value = deTaiId;
+                    }
+                }
+            });
+        }
+    });
+    </script>
+    <!-- Modal Thông Báo Lỗi -->
+    <div class="modal fade" id="thongbaoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <img src="{{ asset('img/Megaphone.png') }}" width="30">
+                        Nộp báo cáo thất bại
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ session('error') ?? 'Có lỗi xảy ra khi nộp báo cáo.' }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                        data-bs-dismiss="modal">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Thông báo Thành Công -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <img src="{{ asset('img/Megaphone.png') }}" width="30">
+                        Nộp báo cáo thành công
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Báo cáo đã được nộp thành công!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                        data-bs-dismiss="modal">
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-
-
-
-<!-- @if($errors->any())
-<script>
-window.onload = function() {
-    var thongbaoModal = new bootstrap.Modal(document.getElementById('thongbaoModal'));
-    thongbaoModal.show();
-};
-</script>
-@endif
-
-@if(session('success'))
-<script>
-window.onload = function() {
-    var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-    successModal.show();
-};
-</script>
-@endif -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-@endsection
+    @endsection

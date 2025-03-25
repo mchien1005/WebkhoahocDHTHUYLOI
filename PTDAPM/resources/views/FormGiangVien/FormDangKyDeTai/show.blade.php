@@ -79,15 +79,13 @@ th {
 td {
     padding: 15px 20px;
     border: 1px solid #d0e1f9;
-    background: #a7c4e8;
+    background: rgba(81, 131, 202, 0.60);
     text-align: center;
     font-size: 16px;
     color: white;
 }
 
-tr:nth-child(even) td {
-    background: #91b5e2;
-}
+
 
 .submit-btn {
     background-color: #4a75af;
@@ -135,7 +133,7 @@ input[type="checkbox"] {
                 @foreach ($deTaiList as $deTai)
                 <tr>
                     <td>{{ $deTai->ma_de_tai }}</td>
-                    <td>{{ $deTai->ten_de_tai }}</td>
+                    <td>{{ $deTai->ten_de_tai }}</td>   
                     <td class="checkbox">
                         <input type="checkbox" name="selected_detai[]" value="{{ $deTai->ma_de_tai }}">
                     </td>

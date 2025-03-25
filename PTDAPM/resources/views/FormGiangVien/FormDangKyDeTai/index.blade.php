@@ -90,7 +90,7 @@ table {
 th {
     background-color: #4a75af;
     color: white;
-    text-align: left;
+    text-align: center;
     padding: 12px 15px;
     font-weight: 500;
     border: 1px solid white;
@@ -101,7 +101,8 @@ td {
     padding: 12px 15px;
     border: 1px solid white;
     background: rgba(81, 131, 202, 0.60);
-    text-align: left;
+    text-align: center;
+
 }
 
 .tool-widget {
@@ -120,11 +121,11 @@ td {
     color: #333;
 }
 </style>
+<!-- Thông báo thành công -->
 @if(session('success'))
-<div id="overlay"
+<div id="overlay-success"
     style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.5); z-index: 999;">
 </div>
-
 <div id="success-alert" class="alert alert-success mt-3"
     style="background-color: #f0f8ff; border: 1px solid #4682b4; border-radius: 10px; padding: 15px; display: flex; justify-content: center; align-items: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; max-width: 90%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
     <div style="color: #4682b4; margin-right: 20px; display: flex; justify-content: center; align-items: center;">
@@ -137,12 +138,11 @@ td {
         {{ session('success') }}
     </div>
 </div>
-
 <script>
 // Làm hiệu ứng mờ biến mất sau 3 giây
 setTimeout(function() {
     var alert = document.getElementById('success-alert');
-    var overlay = document.getElementById('overlay');
+    var overlay = document.getElementById('overlay-success');
     var opacity = 1;
     var timer = setInterval(function() {
         if (opacity <= 0.1) {
@@ -154,7 +154,7 @@ setTimeout(function() {
         overlay.style.opacity = opacity;
         opacity -= 0.1;
     }, 100);
-}, 1000);
+}, 100);
 </script>
 @endif
 
@@ -223,16 +223,20 @@ setTimeout(function() {
                     <form id="researchForm" action="{{ route('giangvien.dangky-dinhhuong') }}" method="POST">
                         @csrf
 
-
                         <div>
                             <p>
                                 <textarea name="research_orientation" class="form-control" rows="5"
-                                    style="background-color: transparent; border: none; color: #17488C; font-size: 16px;">Tiêu đề: Khuyến khích Nhà Khoa Học Dám Nghĩ, Dám Làm
-  Nội dung: Báo cáo phân tích vai trò của tư duy đột phá trong nghiên cứu khoa học, nhấn mạnh tầm quan trọng của việc tạo điều kiện cho các nhà khoa học thử nghiệm ý tưởng mới. Đồng thời, đề xuất các chính sách hỗ trợ nhằm thúc đẩy sáng tạo và ứng dụng khoa học vào thực tiễn.</textarea>
+                                    style="background-color: transparent; border: none; color: #17488C; font-size: 16px;">{{ old('research_orientation') }}</textarea>
                             </p>
+
                         </div>
 
                     </form>
+
+                </div>
+                <div id="researchErrorMsg" class="text-danger"
+                    style="display: none; margin-top: -10px; font-size: 20px;">
+                    Thiếu thông tin định hướng nghiên cứu!
                 </div>
             </div>
 
@@ -242,7 +246,7 @@ setTimeout(function() {
                     style="background-color: #799DCB; color: #17488C; border-radius: 10px; padding: 8px 20px;">
                     Đăng ký
                 </button>
-                <button type="button" class="btn fw-bold" data-bs-dismiss="modal"
+                <button type="button" class="btn fw-bold" id="btnCancel" data-bs-dismiss="modal"
                     style="background-color: #799DCB; color: #17488C; border-radius: 10px; padding: 8px 20px;">
                     Hủy
                 </button>
@@ -250,11 +254,36 @@ setTimeout(function() {
 
             <script>
             document.getElementById('btnSubmit').addEventListener('click', function() {
-                document.getElementById('researchForm').submit();
+                // Thêm xác thực phía client
+                const researchField = document.querySelector('textarea[name="research_orientation"]');
+                const errorMsg = document.getElementById('researchErrorMsg');
+
+                if (!researchField.value.trim()) {
+                    // Hiển thị thông báo lỗi ngay dưới ô nhập
+                    errorMsg.style.display = 'block';
+                    return;
+                } else {
+                    // Ẩn thông báo lỗi nếu có
+                    errorMsg.style.display = 'none';
+                    // Submit form
+                    document.getElementById('researchForm').submit();
+                }
+            });
+
+            // Thêm sự kiện để ẩn thông báo lỗi khi người dùng bắt đầu nhập
+            document.querySelector('textarea[name="research_orientation"]').addEventListener('input', function() {
+                if (this.value.trim()) {
+                    document.getElementById('researchErrorMsg').style.display = 'none';
+                }
+            });
+
+            // Thêm sự kiện để ẩn thông báo lỗi khi bấm nút hủy
+            document.getElementById('btnCancel').addEventListener('click', function() {
+                document.getElementById('researchErrorMsg').style.display = 'none';
+                // Tùy chọn: có thể reset giá trị trong textarea
+                document.querySelector('textarea[name="research_orientation"]').value = '';
             });
             </script>
-
-
         </div>
     </div>
 </div>
@@ -270,15 +299,13 @@ setTimeout(function() {
 
             <!-- Body -->
             <div class="modal-body">
-                <!-- Trong file view của bạn -->
-                <form action="{{ route('dangkydetaidukien.store') }}" method="POST">
+                <form id="formDangKyDeTai" action="{{ route('dangkydetaidukien.store') }}" method="POST">
                     @csrf
                     <div class="row mb-3 align-items-start">
                         <label for="tenDeTai" class="col-sm-3 col-form-label fw-bold" style="color: #17488C;">Tên đề
                             tài:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="tenDeTai" name="tenDeTai"
-                                value="Khuyến khích Nhà Khoa Học Dám Nghĩ, Dám Làm"
+                            <input type="text" class="form-control" id="tenDeTai" name="tenDeTai" value=""
                                 style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;">
                         </div>
                     </div>
@@ -288,7 +315,7 @@ setTimeout(function() {
                             tài:</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" id="moTa" name="moTa" rows="5"
-                                style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;">Báo cáo phân tích vai trò của tư duy đột phá trong nghiên cứu khoa học, nhấn mạnh tầm quan trọng của việc tạo điều kiện cho các nhà khoa học thử nghiệm ý tưởng mới. Đồng thời, đề xuất các chính sách hỗ trợ nhằm thúc đẩy sáng tạo và ứng dụng khoa học vào thực tiễn.</textarea>
+                                style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;"></textarea>
                         </div>
                     </div>
 
@@ -298,11 +325,10 @@ setTimeout(function() {
                         <div class="col-sm-9">
                             <select class="form-select" id="linhVuc" name="linhVuc"
                                 style="background-color: #95b9e6; border: none; border-radius: 10px; color: #17488C; padding: 10px;">
-                                <option selected>Chọn lĩnh vực...</option>
+                                <option value="" selected>Chọn lĩnh vực...</option>
                                 <option value="Công nghệ thông tin">Công nghệ thông tin</option>
                                 <option value="Khoa học dữ liệu">Khoa học dữ liệu</option>
                                 <option value="Trí tuệ nhân tạo">Trí tuệ nhân tạo</option>
-                                <!-- Thêm các lựa chọn khác nếu cần -->
                             </select>
                         </div>
                     </div>
@@ -320,28 +346,87 @@ setTimeout(function() {
                                 <option value="5" selected>5</option>
                             </select>
                         </div>
+                        
                     </div>
-
-                    <div class="modal-footer d-flex justify-content-end" style="border-top: none;">
-                        <button type="submit" class="btn" 
-                            style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
-                            Đăng ký
-                        </button>
-                        <button type="button" class="btn" data-bs-dismiss="modal"
-                            style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
-                            Hủy
-                        </button>
+                    <div id="ErrorMsg" class="text-danger"
+                            style="display: none; margin-top: -10px; font-size: 20px;">
+                            Thiếu thông tin đề tài!
+                        </div>
+                    <div class="modal-footer d-flex flex-column" style="border-top: none;">
+                        <div id="formErrorMessage" class="text-danger mb-2 align-self-start"
+                            style="display: none; font-size: 20px; margin-left: 25%; width: 75%;"></div>
+                        <div class="d-flex align-self-end">
+                            <button type="button" id="btnDangKy" class="btn me-2"
+                                style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
+                                Đăng ký
+                            </button>
+                            <button type="button" id="btnHuy" class="btn" data-bs-dismiss="modal"
+                                style="background-color: #95b9e6; color: #17488C; font-weight: bold; border-radius: 10px; padding: 8px 25px; font-size: 16px;">
+                                Hủy
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
-
-
-
-
         </div>
     </div>
-
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy các phần tử form
+    const form = document.getElementById('formDangKyDeTai');
+    const tenDeTai = document.getElementById('tenDeTai');
+    const moTa = document.getElementById('moTa');
+    const linhVuc = document.getElementById('linhVuc');
+    const errorMsg = document.getElementById('ErrorMsg');
+    const btnHuy = document.getElementById('btnHuy');
+
+    // Lấy các nút
+    const btnDangKy = document.getElementById('btnDangKy');
+
+    // Hàm kiểm tra và hiển thị lỗi
+    function validateForm() {
+        // Ẩn thông báo lỗi trước đó
+        errorMsg.style.display = 'none';
+
+        // Kiểm tra tất cả các trường
+        if (!tenDeTai.value.trim() || 
+            !moTa.value.trim() || 
+            linhVuc.value === "" || 
+            linhVuc.value === "Chọn lĩnh vực...") {
+            
+            // Hiển thị thông báo lỗi chung
+            errorMsg.style.display = 'block';
+            return false;
+        }
+
+        return true;
+    }
+
+    // Sự kiện khi nhấn nút Đăng ký
+    btnDangKy.addEventListener('click', function() {
+        if (!validateForm()) {
+            return;
+        }
+        
+        // Nếu validate thành công thì submit form
+        form.submit();
+    });
+
+    // Sự kiện khi nhấn nút Hủy - ẩn thông báo lỗi
+    btnHuy.addEventListener('click', function() {
+        errorMsg.style.display = 'none';
+    });
+
+    // Xóa thông báo lỗi khi người dùng nhập liệu
+    [tenDeTai, moTa, linhVuc].forEach(field => {
+        field.addEventListener('input', function() {
+            errorMsg.style.display = 'none';
+        });
+    });
+});
+</script>
 
 
 @endsection

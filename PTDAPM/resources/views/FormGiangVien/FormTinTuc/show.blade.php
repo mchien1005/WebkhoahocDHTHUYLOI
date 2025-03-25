@@ -48,10 +48,10 @@
                 <p style="margin-bottom: 10px; color: #17488C;font-weight: 500;"><strong style="color: #17488c; font-weight: 700;">Ngày đăng:</strong> {{ \Carbon\Carbon::parse($tintuc->ngay_dang)->format('d/m/Y') }}</p>
                 <p style="margin-bottom: 10px; color: #17488C;font-weight: 500;"><strong style="color: #17488c; font-weight: 700;">Người đăng:</strong> {{ $tintuc->nguoi_dang ?? 'Admin' }}</p>
                
-                @if($tintuc->file_dinh_kem)
-                <p style="margin-bottom: 10px; color: #17488C;font-weight: 500;"><strong style="color: #17488c; font-weight: 700;">Đường dẫn tệp đính kèm:</strong>
-                    <a href="{{ asset($tintuc->file_dinh_kem) }}" target="_blank" style="color: #17488C;font-weight: 500; text-decoration: underline;">{{ basename($tintuc->file_dinh_kem) }}</a>
-                </p>
+                @if($tintuc->duong_dan_tep)
+                    <p style="margin-bottom: 10px; color: #17488C;font-weight: 500;"><strong style="color: #17488c; font-weight: 700;">Đường dẫn tệp đính kèm:</strong>
+                        <a href="{{ asset($tintuc->duong_dan_tep) }}" target="_blank" style="color: #17488C;font-weight: 500; text-decoration: underline;">{{ basename($tintuc->duong_dan_tep) }}</a>
+                    </p>
                 @endif
             </div>
         </div>
