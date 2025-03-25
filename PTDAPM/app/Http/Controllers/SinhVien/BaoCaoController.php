@@ -14,7 +14,7 @@ class BaoCaoController extends Controller
     public function index()
     {
         $baoCaoList = BaoCaoNghienCuu::with('deTai', 'nguoiTao')->get();
-        return view('baocao.index', compact('baoCaoList'));
+        return view('FormSinhVien.detai.index', compact('baoCaoList'));
     }
 
     // Hiển thị form nộp báo cáo
