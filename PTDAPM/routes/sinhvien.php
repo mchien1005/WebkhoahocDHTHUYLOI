@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sinh-vien/{ma_tin_tuc}', [TTSinhVienController::class, 'show'])->name('FormSinhVien.student.show');
         Route::get('/de-tai-nghien-cuu', [DetainghiencuuController::class, 'index'])->name('FormSinhVien.detai.index');
         Route::get('/de-tai-nghien-cuu/{id}', [DetainghiencuuController::class, 'show'])->name('FormSinhVien.detai.show');
-        Route::get('/de-tai-nghien-cuu/{id}', [DetainghiencuuController::class, 'show'])->name('FormSinhVien.detai.show');
+        Route::post('/sinh-vien/bao-cao', [DetainghiencuuController::class, 'storeBaoCao'])
+    ->name('FormSinhVien.detai.index.store');
         Route::post('/nop-bao-cao', [DetainghiencuuController::class, 'nopBaoCao'])->name('nop-bao-cao');
         Route::get('/searchgv', [timkiemGVController::class, 'index'])->name('FormSinhVien.searchgv.index');
         Route::get('/giang-vien/{ma_gv}', [TimKiemGVController::class, 'show'])->name('FormSinhVien.searchgv.show');
@@ -39,7 +40,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/sinhvien/loimoi/thuhoi/{id}', [LoimoiSinhVienController::class, 'thuHoi'])
             ->name('sinhvien.loimoi.thuhoi');
         Route::get('/loi-moi', [LoimoiSinhVienController::class, 'index'])->name('FormSinhVien.index');
-        Route::post('/send-invite/{ma_gv}', [LoimoiSinhVienController::class, 'sendInvite'])->name('sendInvite');
 
         // Hiển thị danh sách báo cáo
         Route::get('/bao-cao', [BaoCaoController::class, 'index'])->name('baocao.index');
@@ -55,4 +55,12 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/doi-mat-khau', [LoginController::class, 'showChangePasswordForm'])->name('doi-mat-khau.form');
     Route::post('/doi-mat-khau', [LoginController::class, 'changePassword'])->name('doi-mat-khau.update');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('Sinh Viên')->group(function () {
+        // ...existing routes...
+        Route::get('/searchgv', [TimKiemGVController::class, 'index'])->name('FormSinhVien.searchgv.index');
+        Route::get('/giang-vien/{ma_gv}', [TimKiemGVController::class, 'show'])->name('FormSinhVien.searchgv.show');
+        Route::post('/giang-vien/{ma_gv}/invite', [TimKiemGVController::class, 'invite'])->name('FormSinhVien.searchgv.invite');
+    });
 });
