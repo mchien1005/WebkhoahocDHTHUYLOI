@@ -1083,9 +1083,7 @@
             let parts = ngay.split("-"); // Tách chuỗi theo dấu "-"
             return `${parts[2]}/${parts[1]}/${parts[0]}`; // Đảo thứ tự thành DD/MM/YYYY
         }
-        let originalTitle = "";
-        let originalContent = "";
-        let originalNguoiDang = "";
+
         let editNewsId = null;
         let deleteNewsId = null;
         // Mở popup chỉnh sửa tin tức
@@ -1094,15 +1092,13 @@
 
             document.getElementById("editMaTinTuc").value = maTinTuc;  // Hiển thị Mã tin tức
             document.getElementById("editNgayDang").innerHTML = `
-                                                                                                                                                                                                            <img src="{{ asset('images/Calendar.png') }}" class="calendar-icon" />
-                                                                                                                                                                                                            <span>${formatDate(ngayDang)}</span>
-                                                                                                                                                                                                        `; // Cập nhật ngày đăng với icon // Hiển thị Ngày đăng
+                                                                                                                                                                                                                        <img src="{{ asset('images/Calendar.png') }}" class="calendar-icon" />
+                                                                                                                                                                                                                        <span>${formatDate(ngayDang)}</span>
+                                                                                                                                                                                                                    `; // Cập nhật ngày đăng với icon // Hiển thị Ngày đăng
             document.getElementById("editNguoiDang").value = nguoiDang; // Hiển thị Người đăng (cho phép sửa)
             document.getElementById("editNewsTitle").value = title; // Hiển thị Tiêu đề tin
             document.getElementById("editNewsContent").value = content; // Hiển thị Nội dung tin
-            originalTitle = title;
-            originalContent = content;
-            originalNguoiDang = nguoiDang;
+
             document.getElementById("editNewsOverlay").style.display = "block";
             document.getElementById("editNewsPopup").style.display = "block";
 
@@ -1159,12 +1155,10 @@
             }
 
             // 5.2: Kiểm tra thông tin không hợp lệ (tiêu đề quá ngắn, nội dung chứa ký tự đặc biệt)
-
             if (updatedTitle.length < 5 || updatedContent.length < 5 || nguoiDang.length < 5 || !nguoiDang.includes("@")) {
                 showErrorPopup("Thông tin bạn nhập không hợp lệ! Vui lòng nhập lại.");
                 return;
             }
-
             // Gửi yêu cầu cập nhật tin tức
             fetch(`/tin-tuc/update/${editNewsId}`, {
                 method: "POST",
