@@ -73,7 +73,8 @@ class LoginController extends Controller
 
     // Xử lý đổi mật khẩu
     public function changePassword(Request $request)
-    {
+{
+    try {
         // Kiểm tra dữ liệu nhập vào
         $request->validate([
             'current_password' => 'required',
@@ -86,15 +87,39 @@ class LoginController extends Controller
 
         // Kiểm tra mật khẩu cũ
         if (!Hash::check($request->current_password, $taiKhoan->mat_khau)) {
-            return back()->with('error', 'Mật khẩu cũ không đúng.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Mật khẩu hiện tại không đúng'
+            ]);
         }
 
-        // Cập nhật mật khẩu mới
+        // Kiểm tra mật khẩu mới có trùng với mật khẩu cũ không
+        if (Hash::check($request->new_password, $taiKhoan->mat_khau)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Mật khẩu mới không được trùng với mật khẩu cũ'
+            ]);
+        }
+
         $taiKhoan->mat_khau = Hash::make($request->new_password);
         $taiKhoan->save();
 
-        return back()->with('success', 'Đổi mật khẩu thành công!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Đổi mật khẩu thành công'
+        ]);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Mật khẩu hiện tại không đúng'
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Mật khẩu hiện tại không đúng'
+        ]);
     }
+}
    
 
 }
