@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaiKhoan\LoginController;
 use App\Http\Controllers\PhongDaoTao\PhongDaoTaoController;
+use App\Http\Controllers\TaiKhoan\TaiKhoanController;
 
 Route::get('/', function () {
     return redirect()->route('login.form');
@@ -37,7 +38,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/chia-hoi-dong', [PhongDaoTaoController::class, 'chiaHoiDong'])->name('phongdaotao.chiahoidong');
     Route::get('/chon-hoi-dong', [PhongDaoTaoController::class, 'chonHoiDong'])->name('phongdaotao.chonhoidong');
 
-    Route::get('/quanlytaikhoan', [PhongDaoTaoController::class, 'quanlytaikhoan'])->name('phongdaotao.quanlytaikhoan');
+
+
+    Route::get('/quanlytaikhoan', [TaiKhoanController::class, 'index'])->name('phongdaotao.quanlytaikhoan');
+    Route::post('/quanlytaikhoan', [TaiKhoanController::class, 'store'])->name('taikhoan.store');
+    Route::put('/quanlytaikhoan/{id}', [TaiKhoanController::class, 'update'])->name('taikhoan.update');
+    Route::delete('/quanlytaikhoan/{email}', [TaiKhoanController::class, 'destroy'])->name('taikhoan.destroy');
 });
 
 // Đăng xuất

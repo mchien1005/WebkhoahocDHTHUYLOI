@@ -45,7 +45,23 @@ class TaiKhoan extends Authenticatable
     {
         return $this->hasOne(PhongDaoTao::class, 'email', 'email');
     }
-    
+    // Trả về tên đăng nhập dựa trên vai trò
+    public function getTenDangNhapAttribute()
+    {
+        if ($this->vai_tro === 'Sinh viên' && $this->sinhVien) {
+            return $this->sinhVien->ten_sv;
+        } elseif ($this->vai_tro === 'Giảng viên' && $this->giangVien) {
+            return $this->giangVien->ten_gv;
+        } elseif ($this->vai_tro === 'Nhân viên' && $this->phongdaotao) {
+            return $this->phongdaotao->ten_nv;
+        } elseif ($this->vai_tro === 'Nhân viên' && $this->vanphongkhoa) {
+            return $this->vanphongkhoa->ten_nv;
+        }
+        return 'N/A';
+    }
+    // Lấy số điện thoại nếu là Giảng viên
+    public function getSoDienThoaiAttribute()
+    {
+        return $this->vai_tro === 'Giảng viên' && $this->giangVien ? $this->giangVien->sdt : 'N/A';
+    }
 }
-
-    
