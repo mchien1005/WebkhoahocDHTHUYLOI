@@ -461,20 +461,6 @@
                                     @enderror
                                 </div>
                             </div>
-
-                            <div class="row mb-3">
-                                <label class="col-md-4 col-form-label fw-bold">Mô tả đề tài:</label>
-                                <div class="col-md-8">
-                                    <textarea name="mo_ta" class="form-control" required rows="3"
-                                        style="background-color: rgba(81, 131, 202, 0.6);"
-                                        placeholder="Mô tả chi tiết về đề tài của bạn"></textarea>
-                                    @error('mo_ta')
-                                    <div class="invalid-feedback d-block">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
 
                         <div class="modal-footer border-0">
