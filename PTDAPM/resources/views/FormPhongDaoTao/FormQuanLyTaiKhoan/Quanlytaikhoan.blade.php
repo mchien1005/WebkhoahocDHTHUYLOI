@@ -545,11 +545,15 @@
 
         .confirm-popup .popup-header2 {
             font-size: 40px;
-            font-weight: bold;
-            color: #255293;
+            font-family: Rasa;
             font-weight: 500;
-            word-wrap: break-word
+            font-size: 40px;
+            color: #255293;
+            word-wrap: break-word;
+            margin-left: 20px;
         }
+
+
 
         .confirm-popup .popup-header {
             font-size: 32px;
@@ -593,10 +597,10 @@
             display: flex;
             align-items: center;
             /* Canh giữa theo chiều dọc */
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: #255293;
-            padding: 10px 20px 10px;
+            padding: 20px 30px 20px;
         }
 
         .popup-header2 {
@@ -704,7 +708,7 @@
             display: flex;
             align-items: center;
             margin-bottom: 20px;
-            margin-top: 40px;
+            margin-top: 0px;
         }
 
         .form-label {
@@ -713,36 +717,28 @@
             font-family: Rasa;
             font-weight: 700;
             width: 300px;
-            /* Điều chỉnh độ rộng của nhãn */
-        }
-
-        .input-container {
-            position: relative;
-            width: 700px;
-            height: 48.23601531982422px;
-            border-radius: 10px;
-            font-size: 32px;
-            font-family: Rasa;
-            font-weight: 700;
-
             display: flex;
-            align-items: center;
 
+            padding-left: 0px;
         }
+
+
 
         .form-input {
             width: 640px;
-            height: 44.790584564208984px;
+            height: 51px;
             border-radius: 10px;
             /* border: 1px solid #255293; */
             border: none;
-            padding: 0 40px 0 10px;
-            color: #17488C;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            color: white;
             background: #5183CA99;
-            font-size: 32px;
-            font-family: Rasa;
-            font-weight: 700;
-
+            ffont-family: Inter;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
 
         }
 
@@ -795,14 +791,19 @@
             display: flex;
             align-items: center;
             /* Canh giữa theo chiều dọc */
-            font-size: 36px;
-            font-weight: bold;
+
             color: #255293;
             padding: 5px;
         }
 
         .popup-header2 span {
             margin-left: 10px;
+            font-family: Rasa;
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
         }
 
         input[type="datetime-local"] {
@@ -863,30 +864,23 @@
 
 
         .custom-table th:nth-child(1) {
-            width: 20%;
+            width: 35%;
         }
 
         /* Mã đề tài */
         .custom-table th:nth-child(2) {
             width: 25%;
+            max-width: 40%;
         }
 
         /* Tên đề tài */
         .custom-table th:nth-child(3) {
-            width: 15%;
+            width: 25%;
         }
 
         /* Ngày đăng ký */
         .custom-table th:nth-child(4) {
             width: 15%;
-        }
-
-        .custom-table th:nth-child(5) {
-            width: 15%;
-        }
-
-        .custom-table th:nth-child(6) {
-            width: 10%;
         }
 
         .btn-update {
@@ -959,7 +953,7 @@
         .success-popup img {
             padding-top: 50px;
             display: flex;
-            padding-right: 100px;
+            padding-right: 50px;
             padding-left: 30px;
             justify-content: center;
         }
@@ -1041,25 +1035,432 @@
             width: 36px;
             height: 36px;
         }
+
+        .news-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #eaf4ff;
+
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
+        .news-popup input,
+        .news-popup textarea {
+            width: 667px;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 20px;
+            margin-right: 50px;
+            position: sticky;
+            bottom: 0;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        .button-group2 {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 170px;
+            margin-right: 70px;
+            position: sticky;
+            bottom: 0;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .news-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1103px;
+            height: 616px;
+
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
+        .news-popup .confirm-btn {
+            background-color: #5183CA99;
+            color: #17488C;
+            font-size: 32px;
+            width: 172px;
+            height: 51px;
+            font-family: Rasa;
+            padding: 5px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .news-popup .cancel-btn {
+            background-color: #5183CA99;
+            color: #17488C;
+            font-size: 32px;
+            width: 123px;
+            height: 51px;
+            font-family: Rasa;
+            font-weight: 700;
+            word-wrap: break-word;
+            padding: 5px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        .news-popup .confirm-btn:hover,
+        .news-popup .cancel-btn:hover {
+            background-color: #1d417a;
+        }
+
+        .news-popup .popup-content {
+            font-size: 40px;
+            color: #255293;
+            font-weight: 500;
+            word-wrap: break-word;
+            margin-top: 10px;
+            margin-left: 40px;
+        }
+
+        #vai_tro,
+        #edit_vai_tro {
+            appearance: none;
+            /* Ẩn mũi tên mặc định */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            background-color: #5183CA99;
+            widght: 150px;
+            height: 51px;
+            /* Màu nền */
+            border-radius: 10px;
+            /* Bo góc */
+            border: none;
+            /* Xóa viền mặc định */
+            padding: 8px 12px;
+            /* Thêm padding để dễ nhìn */
+            color: white;
+            font-family: Inter;
+            font-weight: 600;
+            font-size: 20px;
+            outline: none;
+            /* Xóa đường viền khi focus */
+            cursor: pointer;
+
+            background-image: url("{{ asset('images/Expand Arrow.png') }}");
+            /* Đường dẫn ảnh */
+            background-repeat: no-repeat;
+            background-position: right 3px center;
+            /* Đặt vị trí ảnh */
+            background-size: 40px;
+            /* Kích thước ảnh */
+            padding-right: 40px;
+            /* Chừa khoảng trống cho ảnh */
+        }
+
+        option {
+            color: #17488C;
+        }
+
+        .error-message {
+            padding: 30px;
+
+            display: flex;
+            /* Sử dụng flexbox */
+            align-items: center;
+            /* Căn giữa theo chiều dọc */
+            gap: 10px;
+            /* Khoảng cách giữa icon và văn bản */
+            color: #17488C;
+            /* Màu chữ */
+            font-size: 40px;
+            /* Cỡ chữ */
+            font-weight: 500;
+            font-family: Rasa;
+        }
+
+        .error-message img {
+            margin-left: 20px;
+        }
+
+        .error-message p {
+            padding-left: 40px;
+        }
+
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 810px;
+            height: 307px;
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1002;
+            overflow: auto;
+            border-radius: 10px;
+            /* color: #5183ca; */
+            font-weight: bolder;
+            color: #255293;
+            font-size: 24px;
+            font-family: "Rasa", sans-serif;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        #errorOverlay {
+            z-index: 1001;
+        }
+
+        .error-popup .megaphone {
+            width: 45px;
+            /* Kích thước icon */
+            height: 73px;
+            margin-right: 10px;
+            margin-left: 20px;
+            /* Tạo khoảng cách giữa icon và chữ */
+        }
+
+        .error-popup .cancel {
+            width: 90px;
+            /* Kích thước icon */
+            height: 90px;
+
+            /* Tạo khoảng cách giữa icon và chữ */
+        }
+
+        .custom-table2 {
+            padding-top: 50px;
+            width: 100%;
+            /* Điều chỉnh độ rộng bảng */
+            max-width: 637px;
+            height: 600px;
+            /* Giới hạn chiều rộng tối đa */
+            margin: auto;
+            /* Căn giữa theo chiều ngang */
+            text-align: center;
+            /* Căn giữa nội dung */
+        }
+
+        .custom-table2 th {
+            background-color: #255293DE;
+            color: white;
+            text-align: center;
+            height: 62px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+        .custom-table2 td {
+            background: rgba(81, 131, 202, 0.6);
+            color: white;
+            text-align: center;
+            max-height: 100px;
+            height: 62px;
+            font-family: 'Rasa', serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+
+        }
+
+
+        .custom-table2 th:nth-child(1) {
+            width: 70%;
+        }
+
+        /* Mã đề tài */
+        .custom-table2 th:nth-child(2) {
+            width: 30%;
+        }
+
+        .vaitro-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 736px;
+            height: 763px;
+            background: #e7f5ff;
+            border: 2px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            border-radius: 10px;
+            text-align: center;
+
+        }
+
+        .vaitro-popup {
+            max-width: 736px;
+            /* Điều chỉnh độ rộng popup */
+            max-height: 763px;
+            /* Giới hạn chiều cao popup */
+            overflow: hidden;
+            /* Ẩn phần thừa */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vaitro-popup .responsive-table {
+            flex-grow: 1;
+            /* Chiếm phần còn lại trong popup */
+            overflow-y: auto;
+            /* Cuộn dọc khi nội dung quá dài */
+            max-height: 550px;
+            /* Giới hạn chiều cao bảng */
+        }
+
+        .vaitro-popup thead {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 2;
+        }
+
+        .vaitro-popup .confirm-btn {
+            background-color: #5183CA99;
+            color: #17488C;
+            font-size: 32px;
+            width: 172px;
+            height: 51px;
+            font-family: Rasa;
+            padding: 5px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .vaitro-popup .cancel-btn {
+            background-color: #5183CA99;
+            color: #17488C;
+            font-size: 32px;
+            width: 123px;
+            height: 51px;
+            font-family: Rasa;
+            font-weight: 700;
+            word-wrap: break-word;
+            padding: 5px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+
+        }
+
+        .vaitro-popup .confirm-btn:hover,
+        .vaitro-popup .cancel-btn:hover {
+            background-color: #1d417a;
+        }
+
+        .vai-tro-select {
+            appearance: none;
+            /* Ẩn mũi tên mặc định */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+
+            background-color: #5183CA;
+            widght: 145px;
+            height: 36px;
+            /* Màu nền */
+            /* Bo góc */
+            border: none;
+            /* Xóa viền mặc định */
+            padding: 8px 12px;
+            /* Thêm padding để dễ nhìn */
+            color: white;
+            font-family: Inter;
+            font-weight: 600;
+            font-size: 18px;
+            outline: none;
+            /* Xóa đường viền khi focus */
+            cursor: pointer;
+
+            background-image: url("{{ asset('images/material-symbols_arrow-drop-down-rounded.png') }}");
+            /* Đường dẫn ảnh */
+            background-repeat: no-repeat;
+            background-position: right 3px center;
+            /* Đặt vị trí ảnh */
+            background-size: 24px;
+            /* Kích thước ảnh */
+            padding-right: 40px;
+        }
+
+        .success-popup2 {
+            width: 778px;
+            height: 242px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-popup2 img {
+            padding-top: 50px;
+            display: flex;
+            padding-left: 20px;
+            justify-content: center;
+        }
+
+        .success-popup2 p {
+            padding-top: 70px;
+            align-items: center;
+            justify-content: center;
+            color: #255293;
+            font-size: 39px;
+            font-family: Rasa;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
     </style>
     <div>
-        {{-- <div class="d-flex justify-content-between w-100 mb-3">
-            <button class="btn btn-primary" onclick="openRolePopup()">👥 Phân quyền</button>
-            <button class="btn btn-success" onclick="openAddAccountPopup()">➕ Thêm tài khoản</button>
-        </div> --}}
         <div class="header-container">
             <button class="add-role-btn" onclick="openPhanPopup()">
                 <img src="{{ asset('images/mdi_account-switch.png') }}" alt="" />Phân quyền</button>
-            <button class="add-account-btn" onclick="openAddPopup()">
+            <button class="add-account-btn" onclick="openAddAcPopup()">
                 <img src="{{ asset('images/material-symbols_add.png') }}" alt="" />Thêm tài khoản</button>
         </div>
         <table class="table table-bordered custom-table responsive-table text-center">
             <thead>
                 <tr>
-                    <th>Tên đăng nhập</th>
                     <th>Email</th>
                     <th>Mật khẩu</th>
-                    <th>SĐT</th>
                     <th>Vai trò</th>
                     <th>Tác vụ</th>
                 </tr>
@@ -1067,21 +1468,23 @@
             <tbody>
                 @foreach ($taiKhoans as $tk)
                     <tr>
-                        <td>{{ $tk->ten_dang_nhap }}</td> <!-- Lấy tên từ các bảng khác theo email -->
+                        {{-- <td>{{ $tk->ten_dang_nhap }}</td> <!-- Lấy tên từ các bảng khác theo email --> --}}
                         <td>{{ $tk->email }}</td>
-                        <td>********</td>
-                        {{-- <td>{{ $tk->mat_khau }}</td> <!-- Hiển thị mật khẩu không mã hóa --> --}}
-                        <td>
+                        <td onclick="togglePassword({{ $loop->index }}, '{{ $tk->mat_khau }}')" style="cursor: pointer;">
+                            <span id="passwordDisplay_{{ $loop->index }}">••••••••••</span>
+                        </td>
+                        {{-- <td>{{ $tk->mat_khau }}</td> --}}
+                        {{-- <td>
                             @if ($tk->vai_tro === 'Giảng viên')
-                                {{ optional($tk->giangVien)->sdt ?? 'N/A' }}
+                            {{ optional($tk->giangVien)->sdt ?? 'N/A' }}
                             @else
-                                N/A
+                            N/A
                             @endif
-                        </td> <!-- Số điện thoại nếu là Giảng viên -->
+                        </td> <!-- Số điện thoại nếu là Giảng viên --> --}}
                         <td>{{ $tk->vai_tro }}</td>
-                        <td style="display: flex; align-items: center; padding-right: 10px;">
+                        <td style="display: flex; align-items: center; padding-left: 10px;">
                             <!-- Nút Sửa -->
-                            <button class="btn btn-warning" onclick="openEditPopup({{ $tk->email }})"
+                            <button class="btn btn-warning" onclick="openEditPopup('{{ $tk->email }}')"
                                 style="background: none; border: none; cursor: pointer;">
                                 <img class="megaphone" src="{{ asset('images/bx_edit.png') }}" alt="Chỉnh sửa">
                             </button>
@@ -1106,58 +1509,150 @@
         </table>
     </div>
 
-    <!-- Popup thêm tài khoản -->
-    <div id="addModal" style="display:none">
-        <form method="POST" action="{{ route('taikhoan.store') }}">
-            @csrf
-            <input type="email" name="email" required placeholder="Email">
-            <input type="text" name="mat_khau" required placeholder="Mật khẩu">
-            <input type="text" name="sdt" placeholder="Số điện thoại">
-            <select name="vai_tro">
-                <option value="Admin">Admin</option>
-                <option value="Giảng viên">Giảng viên</option>
-                <option value="Sinh viên">Sinh viên</option>
-                <option value="Nhân viên">Nhân viên</option>
-            </select>
-            <button type="submit">Thêm</button>
-        </form>
+    <!-- Popup thông báo thành công -->
+    <div class="popup-overlay" id="addsuccessOverlay" style="display: none;"></div>
+    <div class="popup-container success-popup" id="addsuccessPopup" style="display: none;">
+        <div style="display: flex; gap: 15px;">
+            <img class="done" src="{{ asset('images/Done.png') }}" alt="">
+            <p>Thêm tài khoản thành công</p>
+        </div>
     </div>
-    {{-- <!-- Popup Phân quyền -->
-    <div id="phanQuyenModal" class="modal">
-        <div class="modal-content">
-            <h3>Phân quyền</h3>
-            <table class="table">
+
+    <!-- Form thêm tài khoản -->
+    <div class="popup-overlay" id="newsOverlay" style="display: none;"></div>
+    <div class="news-popup" id="newsPopup" style="display: none;">
+        <div class="popup-header">
+            <p>Thêm tài khoản người dùng</p>
+        </div>
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+        <div class="popup-content">
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-input" type="email" name="email" id="email">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mật khẩu</label>
+                <input class="form-input" type="text" name="mat_khau" id="mat_khau">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Vai trò</label>
+                <select name="vai_tro" id="vai_tro">
+                    <option value="Admin">Admin</option>
+                    <option value="Giảng viên">Giảng viên</option>
+                    <option value="Sinh viên">Sinh viên</option>
+                    <option value="Nhân viên">Nhân viên</option>
+                </select>
+            </div>
+
+            <div class="button-group2">
+                <button type="button" class="confirm-btn" onclick="saveAccount()">Xác nhận</button>
+
+                <button type="button" class="cancel-btn" onclick="closeAddAcPopup()">Hủy</button>
+            </div>
+        </div>
+    </div>
+    <!-- Popup chỉnh sửa tài khoản -->
+    <div class="popup-overlay" id="editOverlay" style="display: none;"></div>
+    <div class="news-popup" id="editPopup" style="display: none;">
+        <div class="popup-header">
+            <p>Chỉnh sửa tài khoản người dùng</p>
+        </div>
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+        <div class="popup-content">
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input class="form-input" type="email" id="edit_email">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mật khẩu</label>
+                <input class="form-input" type="text" id="edit_mat_khau" required placeholder="Mật khẩu mới">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Vai trò</label>
+                <select id="edit_vai_tro">
+                    <option value="Admin">Admin</option>
+                    <option value="Giảng viên">Giảng viên</option>
+                    <option value="Sinh viên">Sinh viên</option>
+                    <option value="Nhân viên">Nhân viên</option>
+                </select>
+            </div>
+
+            <div class="button-group2">
+                <button type="button" class="confirm-btn" onclick="openConfirmEditPopup()">Xác nhận</button>
+                <button type="button" class="cancel-btn" onclick="closeEditPopup()">Hủy</button>
+            </div>
+        </div>
+    </div>
+    <!-- Popup Phân quyền -->
+    <div class="popup-overlay" id="vaitroOverlay" style="display: none;"></div>
+    <div class="vaitro-popup" id="vaitroPopup" style="display: none;">
+        <div class="popup-header">
+            <p>Phân quyền người dùng</p>
+        </div>
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+        <div class="responsive-table">
+            <table class="table table-bordered custom-table2">
                 <thead>
                     <tr>
                         <th>Email</th>
                         <th>Vai trò</th>
-                        <th>Cập nhật</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <select class="form-control roleSelect" data-id="{{ $user->id }}">
-                                <option value="Admin" {{ $user->vai_tro == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                <option value="Giảng viên" {{ $user->vai_tro == 'Giảng viên' ? 'selected' : '' }}>Giảng viên
-                                </option>
-                                <option value="Sinh viên" {{ $user->vai_tro == 'Sinh viên' ? 'selected' : '' }}>Sinh viên
-                                </option>
-                                <option value="Nhân viên" {{ $user->vai_tro == 'Nhân viên' ? 'selected' : '' }}>Nhân viên
-                                </option>
-                            </select>
-                        </td>
-                        <td><button class="btn btn-success btnUpdateRole" data-id="{{ $user->id }}">Lưu</button></td>
-                    </tr>
+                <tbody id="phanQuyenBody">
+                    @foreach ($taiKhoans as $tk)
+                        <tr>
+                            <td>{{ $tk->email }}</td>
+                            <td>
+                                <select class="vai-tro-select" data-email="{{ $tk->email }}">
+                                    <option value="Admin" {{ $tk->vai_tro == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="Giảng viên" {{ $tk->vai_tro == 'Giảng viên' ? 'selected' : '' }}>Giảng viên
+                                    </option>
+                                    <option value="Sinh viên" {{ $tk->vai_tro == 'Sinh viên' ? 'selected' : '' }}>Sinh viên
+                                    </option>
+                                    <option value="Nhân viên" {{ $tk->vai_tro == 'Nhân viên' ? 'selected' : '' }}>Nhân viên
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div> --}}
-    <div class="popup-overlay" id="confirmDeleteOverlay" style="display: none;"></div>
+        <div class="button-group">
+            <button type="button" class="confirm-btn" onclick="openConfirmPQPopup()">Xác nhận</button>
+            <button type="button" class="cancel-btn" onclick="huyPhanQuyen()">Hủy</button>
+        </div>
+    </div>
 
+    <!-- Popup Thành công -->
+    <div class="popup-overlay" id="successPQOverlay" style="display: none;"></div>
+    <div class="popup-container success-popup2" id="successPQPopup" style="display: none;">
+        <div style="display: flex;">
+            <img class="done" src="{{ asset('images/Done.png') }}" alt="">
+            <p>Cập nhật quyền tài khoản thành công</p>
+        </div>
+    </div>
+    <div class="popup-overlay" id="confirmEditOverlay" style="display: none;"></div>
+    <div class="confirm-popup" id="confirmEditPopup" style="display: none;">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
+
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="popup-content" style="padding-top: 30px;">
+            <p style="font-size: 36px; ">Bạn có chắc chắn muốn sửa tài khoản này không?</p>
+            <button class="confirm-btn" onclick="confirmEdit()">Xác nhận</button>
+            <button class="cancel-btn" onclick="closeConfirmEditPopup()">Hủy</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="confirmDeleteOverlay" style="display: none;"></div>
     <div class="confirm-popup" id="confirmDeletePopup" style="display: none;">
         <div class="popup-header2">
             <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
@@ -1181,8 +1676,231 @@
         </div>
     </div>
 
+    <div class="popup-overlay" id="successEditOverlay" style="display: none;"></div>
+    <div class="popup-container success-popup" id="successEditPopup" style="display: none;">
+        <div style="display: flex; gap: 15px;">
+            <img class="done" src="{{ asset('images/Done.png') }}" alt="">
+            <p>Sửa tài khoản thành công</p>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="errorOverlay" style="display: none;"></div>
+    <div class="popup-container error-popup" id="errorPopup" style="display: none;">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
+
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="error-message">
+            <img class="cancel" src="{{ asset('images/Cancel.png') }}">
+            <p>Vui lòng nhập đầy đủ thông tin!</p>
+        </div>
+    </div>
+
+    <!-- Popup Xác nhận phân quyền -->
+    <div class="popup-overlay" id="confirmPQOverlay" style="display: none;"></div>
+    <div class="confirm-popup" id="confirmPQPopup" style="display: none;">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
+
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="popup-content" style="padding-top: 30px;">
+            <p style="font-size: 36px;">Bạn có chắc chắn muốn cập nhật lại quyền không?</p>
+            <button class="confirm-btn" onclick="confirmPhanQuyen()">Xác nhận</button>
+            <button class="cancel-btn" onclick="closeConfirmPQPopup()">Hủy</button>
+        </div>
+    </div>
 
     <script>
+        function saveAccount() {
+            let email = document.getElementById("email").value.trim();
+            let mat_khau = document.getElementById("mat_khau").value.trim();
+            let vai_tro = document.getElementById("vai_tro").value;
+
+            let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+            if (email === "" || mat_khau === "" || vai_tro === "") {
+                document.getElementById('errorOverlay').style.display = 'block';
+                document.getElementById('errorPopup').style.display = 'block';
+
+                // Ẩn popup sau 2 giây
+                setTimeout(() => {
+                    document.getElementById('errorOverlay').style.display = 'none';
+                    document.getElementById('errorPopup').style.display = 'none';
+                }, 2000);
+
+                return;
+            }
+
+            let data = {
+                email: email,
+                mat_khau: mat_khau,
+                vai_tro: vai_tro
+            };
+
+            fetch("/taikhoan/store", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": csrfToken,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    mat_khau: mat_khau,
+                    vai_tro: vai_tro
+                })
+            })
+                .then(response => response.json()) // Chuyển đổi response thành JSON
+                .then(data => {
+                    if (data.success) {
+                        closeAddAcPopup();
+                        showaddSuccessPopup();
+                        setTimeout(() => location.reload(), 2000);
+                    } else {
+                        alert("Lỗi: " + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Lỗi:", error);
+                    alert("Có lỗi xảy ra khi thêm tài khoản. Vui lòng thử lại.");
+                });
+        }
+
+        // Hiển thị popup thêm tài khoản
+        function openAddAcPopup() {
+            document.getElementById("newsOverlay").style.display = "block";
+            document.getElementById("newsPopup").style.display = "block";
+        }
+
+        // Ẩn popup thêm tài khoản
+        function closeAddAcPopup() {
+            document.getElementById("newsOverlay").style.display = "none";
+            document.getElementById("newsPopup").style.display = "none";
+        }
+
+        // Hiển thị popup thông báo thành công
+        function showaddSuccessPopup() {
+            document.getElementById("addsuccessOverlay").style.display = "block";
+            document.getElementById("addsuccessPopup").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("addsuccessOverlay").style.display = "none";
+                document.getElementById("addsuccessPopup").style.display = "none";
+            }, 2000);
+        }
+
+        // Mở popup sửa tài khoản và điền dữ liệu vào form
+        function openEditPopup(email) {
+            console.log("Gửi yêu cầu lấy dữ liệu cho email:", email); // Debug
+
+            fetch(`/taikhoan/${email}/edit`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Dữ liệu nhận được:", data); // Debug
+
+                    // Gán dữ liệu vào input
+                    document.getElementById('edit_email').value = data.email;
+                    document.getElementById('edit_mat_khau').value = data.mat_khau; // Không hiển thị mật khẩu cũ
+                    document.getElementById('edit_vai_tro').value = data.vai_tro; // Chắc chắn ID đúng
+
+                    // Hiển thị popup
+                    document.getElementById('editOverlay').style.display = 'block';
+                    document.getElementById('editPopup').style.display = 'block';
+                })
+                .catch(error => console.error('Lỗi khi lấy dữ liệu tài khoản:', error));
+        }
+
+
+        // Đóng popup sửa tài khoản
+        function closeEditPopup() {
+            document.getElementById('editOverlay').style.display = 'none';
+            document.getElementById('editPopup').style.display = 'none';
+        }
+        function showeditSuccessPopup() {
+            document.getElementById("successEditOverlay").style.display = "block";
+            document.getElementById("successEditPopup").style.display = "block";
+            setTimeout(() => {
+                document.getElementById("successEditOverlay").style.display = "none";
+                document.getElementById("successEditPopup").style.display = "none";
+            }, 2000);
+        }
+        // Mở popup xác nhận trước khi gửi yêu cầu cập nhật
+        function openConfirmEditPopup() {
+            closeEditPopup();
+            document.getElementById("confirmEditOverlay").style.display = "block";
+            document.getElementById("confirmEditPopup").style.display = "block";
+        }
+
+        // Đóng popup xác nhận
+        function closeConfirmEditPopup() {
+            openEditPopup(document.getElementById('edit_email').value);
+            document.getElementById("confirmEditOverlay").style.display = "none";
+            document.getElementById("confirmEditPopup").style.display = "none";
+        }
+
+        // Gửi yêu cầu cập nhật sau khi xác nhận
+        function confirmEdit() {
+            document.getElementById("confirmEditOverlay").style.display = "none";
+            document.getElementById("confirmEditPopup").style.display = "none";
+            updateAccount(); // Gửi yêu cầu cập nhật
+        }
+        // Gửi yêu cầu cập nhật tài khoản
+        function updateAccount() {
+            let email = document.getElementById('edit_email').value;
+            let mat_khau = document.getElementById('edit_mat_khau').value;
+            let vai_tro = document.getElementById('edit_vai_tro').value;
+
+
+            // Kiểm tra nếu có input trống
+            if (email === "" || mat_khau === "" || vai_tro === "") {
+                document.getElementById('errorOverlay').style.display = 'block';
+                document.getElementById('errorPopup').style.display = 'block';
+
+                // Ẩn popup sau 2 giây
+                setTimeout(() => {
+                    document.getElementById('errorOverlay').style.display = 'none';
+                    document.getElementById('errorPopup').style.display = 'none';
+                }, 2000);
+
+                return;
+            }
+
+            let data = {
+                email: email,
+                mat_khau: mat_khau,
+                vai_tro: vai_tro
+            };
+            fetch(`/taikhoan/update`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    email: email,
+                    mat_khau: mat_khau,
+                    vai_tro: vai_tro
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showeditSuccessPopup();
+                        closeEditPopup();
+                        setTimeout(() => location.reload(), 1000); // Reload lại trang để thấy thay đổi
+                    } else {
+                        alert("Lỗi khi cập nhật tài khoản!");
+                    }
+                })
+                .catch(error => console.error("Lỗi khi gửi yêu cầu:", error));
+        }
+
+
+
         let deleteEmail = null; // Lưu email cần xóa
 
         function openConfirmDeletePopup(email) {
@@ -1225,7 +1943,7 @@
             @if(session('delete_success'))
                 showSuccessPopup();
             @endif
-                                                                                                                                                                };
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            };
 
         function showSuccessPopup() {
             document.getElementById("successDeletePopup").style.display = "block";
@@ -1237,6 +1955,86 @@
                 document.getElementById("successDeleteOverlay").style.display = "none";
             }, 2000);
         }
+        function togglePassword(index, password) {
+            let passwordDisplay = document.getElementById(`passwordDisplay_${index}`);
+
+            if (passwordDisplay.innerText === "••••••••••") {
+                passwordDisplay.innerText = password; // Hiện mật khẩu thật
+            } else {
+                passwordDisplay.innerText = "••••••••••"; // Ẩn lại mật khẩu
+            }
+        }
+
+        // Mở popup phân quyền
+        function openPhanPopup() {
+            document.getElementById("vaitroOverlay").style.display = "block";
+            document.getElementById("vaitroPopup").style.display = "block";
+        }
+
+        // Đóng popup phân quyền
+        function huyPhanQuyen() {
+            document.getElementById("vaitroOverlay").style.display = "none";
+            document.getElementById("vaitroPopup").style.display = "none";
+        }
+
+        // Mở popup xác nhận trước khi phân quyền
+        function openConfirmPQPopup() {
+            huyPhanQuyen();
+            document.getElementById("confirmPQOverlay").style.display = "block";
+            document.getElementById("confirmPQPopup").style.display = "block";
+        }
+
+        // Đóng popup xác nhận
+        function closeConfirmPQPopup() {
+            openPhanPopup();
+            document.getElementById("confirmPQOverlay").style.display = "none";
+            document.getElementById("confirmPQPopup").style.display = "none";
+        }
+
+        // Mở popup thành công
+        function showPQSuccessPopup() {
+            document.getElementById("successPQOverlay").style.display = "block";
+            document.getElementById("successPQPopup").style.display = "block";
+
+            setTimeout(() => {
+                document.getElementById("successPQOverlay").style.display = "none";
+                document.getElementById("successPQPopup").style.display = "none";
+            }, 2000);
+        }
+
+        // Gửi yêu cầu cập nhật vai trò sau khi xác nhận
+        function confirmPhanQuyen() {
+            closeConfirmPQPopup(); // Đóng popup xác nhận
+
+            let updates = [];
+            document.querySelectorAll(".vai-tro-select").forEach(select => {
+                let email = select.getAttribute("data-email");
+                let vai_tro = select.value;
+                updates.push({ email, vai_tro });
+            });
+
+            fetch("/taikhoan/phanquyen", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({ updates })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showPQSuccessPopup();
+                        huyPhanQuyen();
+                        setTimeout(() => location.reload(), 2000);
+                    } else {
+                        alert("Có lỗi xảy ra khi cập nhật vai trò!");
+                    }
+                })
+                .catch(error => console.error("Lỗi khi gửi yêu cầu:", error));
+        }
+
+
     </script>
 
 

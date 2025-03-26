@@ -10,6 +10,7 @@ use App\Models\SinhVien;
 use App\Models\GiangVien;
 use App\Models\PhongDaoTao;
 use App\Models\VanPhongKhoa;
+use Illuminate\Support\Facades\Log;
 
 class TaiKhoanController extends Controller
 {
@@ -31,41 +32,62 @@ class TaiKhoanController extends Controller
     // 2️⃣ Thêm tài khoản mới
     public function store(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|unique:tai_khoans',
-            'mat_khau' => 'required|min:6',
-            'vai_tro' => 'required|in:Admin,Giảng viên,Sinh viên,Nhân viên',
-            'sdt' => 'nullable|regex:/^0[0-9]{9}$/'
-        ]);
+        try {
+            Log::info("Nhận dữ liệu:", $request->all()); // Ghi log request
 
-        TaiKhoan::create([
-            'email' => $request->email,
-            'mat_khau' => $request->mat_khau, // ❗ Không mã hóa mật khẩu (Không an toàn)
-            'vai_tro' => $request->vai_tro,
-            'sdt' => $request->sdt
-        ]);
+            // Validate dữ liệu đầu vào
+            $validatedData = $request->validate([
+                'email' => 'required|email|unique:tai_khoan,email',
+                'mat_khau' => 'required|min:6',
+                'vai_tro' => 'required'
+            ]);
 
-        return redirect()->route('FormPhongDaoTao.FormQuanLyTaiKhoan.Quanlytaikhoan')->with('success', 'Thêm tài khoản thành công!');
+            // Lưu vào database
+            TaiKhoan::create([
+                'email' => $validatedData['email'],
+                'mat_khau' => Hash::make($validatedData['mat_khau']), // Băm mật khẩu
+                'vai_tro' => $validatedData['vai_tro']
+            ]);
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error("Lỗi khi lưu tài khoản: " . $e->getMessage()); // Ghi log lỗi
+            return response()->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 
     // 3️⃣ Sửa tài khoản
-    public function update(Request $request, $id)
+    public function edit($email)
     {
-        $taiKhoan = TaiKhoan::findOrFail($id);
+        $taiKhoan = TaiKhoan::where('email', $email)->first();
 
-        $request->validate([
-            'mat_khau' => 'nullable|min:6',
-            'vai_tro' => 'required|in:Admin,Giảng viên,Sinh viên,Nhân viên',
-            'sdt' => 'nullable|regex:/^0[0-9]{9}$/'
+        if (!$taiKhoan) {
+            return response()->json(['error' => 'Không tìm thấy tài khoản'], 404);
+        }
+
+        return response()->json([
+            'email' => $taiKhoan->email,
+            'mat_khau' => $taiKhoan->mat_khau,
+            'vai_tro' => $taiKhoan->vai_tro
         ]);
+    }
 
-        $taiKhoan->update([
-            'mat_khau' => $request->mat_khau ?? $taiKhoan->mat_khau, // ❗ Giữ nguyên nếu không thay đổi
-            'vai_tro' => $request->vai_tro,
-            'sdt' => $request->sdt
-        ]);
 
-        return redirect()->route('FormPhongDaoTao.FormQuanLyTaiKhoan.Quanlytaikhoan')->with('success', 'Cập nhật tài khoản thành công!');
+
+    // Cập nhật tài khoản
+    public function update(Request $request)
+    {
+        $tk = TaiKhoan::where('email', $request->email)->first();
+
+        if ($tk) {
+            $tk->mat_khau = Hash::make($request->mat_khau); // Mã hóa mật khẩu
+            $tk->vai_tro = $request->vai_tro;
+            $tk->save();
+
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['error' => 'Cập nhật thất bại'], 500);
+        }
     }
 
     // 4️⃣ Xóa tài khoản
@@ -79,5 +101,20 @@ class TaiKhoanController extends Controller
         }
 
         return redirect()->route('phongdaotao.quanlytaikhoan')->with('delete_failed', true);
+    }
+
+    public function phanQuyen(Request $request)
+    {
+        $updates = $request->input('updates');
+
+        foreach ($updates as $update) {
+            $taikhoan = TaiKhoan::where('email', $update['email'])->first();
+            if ($taikhoan) {
+                $taikhoan->vai_tro = $update['vai_tro'];
+                $taikhoan->save();
+            }
+        }
+
+        return response()->json(['success' => true, 'message' => 'Phân quyền thành công!']);
     }
 }

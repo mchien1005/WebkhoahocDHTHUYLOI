@@ -10,6 +10,7 @@
     <title>Trường Đại Học Thủy Lợi</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rasa:wght@400;500;700&display=swap');
 

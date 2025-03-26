@@ -41,9 +41,11 @@ Route::middleware(['auth'])->group(function () {
 
 
     Route::get('/quanlytaikhoan', [TaiKhoanController::class, 'index'])->name('phongdaotao.quanlytaikhoan');
-    Route::post('/quanlytaikhoan', [TaiKhoanController::class, 'store'])->name('taikhoan.store');
-    Route::put('/quanlytaikhoan/{id}', [TaiKhoanController::class, 'update'])->name('taikhoan.update');
+    Route::post('/taikhoan/store', [TaiKhoanController::class, 'store'])->name('taikhoan.store');
+    Route::get('/taikhoan/{email}/edit', [TaiKhoanController::class, 'edit']); // Lấy tài khoản để sửa
+    Route::post('/taikhoan/update', [TaiKhoanController::class, 'update']);
     Route::delete('/quanlytaikhoan/{email}', [TaiKhoanController::class, 'destroy'])->name('taikhoan.destroy');
+    Route::post('/taikhoan/phanquyen', [TaiKhoanController::class, 'phanQuyen']);
 });
 
 // Đăng xuất
