@@ -31,4 +31,8 @@ class BaoCaoNghienCuu extends Model
     {
         return $this->belongsTo(SinhVien::class, 'nguoi_tao', 'ma_sv');
     }
+        public function nhanXet()
+    {
+        return $this->hasMany(NhanXetBaoCao::class, 'ma_bc', 'ma_bc');
+    }
 }
