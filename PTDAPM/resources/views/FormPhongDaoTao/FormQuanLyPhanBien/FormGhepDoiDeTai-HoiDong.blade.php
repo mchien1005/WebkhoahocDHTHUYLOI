@@ -910,7 +910,7 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                                                                                                                                                                                                                                                                                                                                                                    border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                    border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -954,10 +954,23 @@
 
         <div class="error-message">
             <img class="cancel" src="{{ asset('images/Cancel.png') }}">
-            <p>Số lượng giảng viên không hợp lệ,<br />vui lòng nhập lại.</p>
+            <p>Đề tài này đã được ghép đôi!</p>
         </div>
     </div>
+    {{-- <div class="popup-overlay" id="errorOverlay"></div>
+    <div class="popup-container" id="errorPopup">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
 
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="error-message">
+            <img class="cancel" src="{{ asset('images/Cancel.png') }}">
+            <p>Số lượng giảng viên không hợp lệ,<br />vui lòng nhập lại.</p>
+        </div>
+    </div> --}}
     <script>
         function validateAndSave() {
             let rows = document.querySelectorAll("tbody tr");

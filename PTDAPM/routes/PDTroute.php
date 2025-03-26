@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/tintuc/{ma_tin_tuc}', [PhongDaoTaoController::class, 'showTinTuc'])->name('phongdaotao.chitiettintuc');
     Route::get('/phanbienvabaove', [PhongDaoTaoController::class, 'phanBienVaBaoVe'])->name('phongdaotao.phanbienvabaove');
     Route::get('/xem-bao-cao', [PhongDaoTaoController::class, 'xemBaoCao'])->name('phongdaotao.xembaocao');
-    Route::get('vanphongkhoa/baocao/{ma_bc}', [PhongDaoTaoController::class, 'showBaoCao'])->name('phongdaotao.chitietbaocao');
+    Route::get('/baocao/{ma_bc}', [PhongDaoTaoController::class, 'showBaoCao'])->name('phongdaotao.chitietbaocao');
     Route::get('/chia-hoi-dong', [PhongDaoTaoController::class, 'chiaHoiDong'])->name('phongdaotao.chiahoidong');
     Route::get('/chon-hoi-dong', [PhongDaoTaoController::class, 'chonHoiDong'])->name('phongdaotao.chonhoidong');
 

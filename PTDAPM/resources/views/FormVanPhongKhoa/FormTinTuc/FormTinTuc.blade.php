@@ -173,7 +173,7 @@
 
         @foreach ($vpk as $item)
             <div class="news-item">
-                
+
 
                 <div class="news-content">
                     <h3 class="news-title">{{ $item->tieu_de }}</h3>

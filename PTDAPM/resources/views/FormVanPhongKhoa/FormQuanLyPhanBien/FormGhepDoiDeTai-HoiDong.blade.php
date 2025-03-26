@@ -904,7 +904,7 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                                                                                                                                                                                                                                                                                                                                            border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                                                                                                                                                                                                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -948,7 +948,7 @@
 
         <div class="error-message">
             <img class="cancel" src="{{ asset('images/Cancel.png') }}">
-            <p>Số lượng giảng viên không hợp lệ,<br />vui lòng nhập lại.</p>
+            <p>Đề tài này đã được ghép đôi!</p>
         </div>
     </div>
 
@@ -1013,7 +1013,7 @@
                     }
                 });
 
-                if (checkedValues.length > 0 && checkedValues.length < 2) {
+                if (checkedValues.length > 0 && checkedValues.length > 1) {
                     isValid = false;
                 }
 
