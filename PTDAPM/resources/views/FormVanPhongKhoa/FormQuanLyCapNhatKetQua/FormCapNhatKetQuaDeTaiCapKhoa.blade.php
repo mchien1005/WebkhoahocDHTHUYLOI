@@ -681,17 +681,17 @@
             <div style="display: flex; align-items: center; margin: 20px 0;">
                 <label for="result"
                     style="margin-right: 10px; color: #17488C; font-size: 40px; font-family: Rasa; font-weight: 500;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        word-wrap: break-word;">Kết
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    word-wrap: break-word;">Kết
                     quả:</label>
                 <input type="text" id="scoreInput"
                     style="width: 455px; height: 52px;font-size:32px;color:#255293; border-radius: 20px; border: none; padding: 0 10px;margin-left:20px; background: #5183CA99;">
             </div>
             <button class="confirm-btn" style="margin-left: 260px; margin-top:50px;"
                 onclick="validateScore()"">Xác nhận</button>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                    <!-- Popup thông báo thành công -->
-                                                                                                                                                                                <div class="
+                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                <!-- Popup thông báo thành công -->
+                                                                                                                                                                                            <div class="
                 popup-overlay" id="successOverlay" style="display: none;">
         </div>
         <div class="popup-container success-popup" id="successPopup" style="display: none;">
@@ -781,7 +781,7 @@
 
                 console.log("Dữ liệu gửi đi:", { ma_de_tai: selectedMaDeTai, ket_qua_khoa: newScore });
 
-                fetch('/cap-nhat-ket-qua-khoa', {
+                fetch('/vpk/cap-nhat-ket-qua-khoa', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

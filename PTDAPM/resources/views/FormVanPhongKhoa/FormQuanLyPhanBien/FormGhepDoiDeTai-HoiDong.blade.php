@@ -904,7 +904,7 @@
         <div class="rectangle-402"></div>
         <button class="luu" onclick="validateAndSave()"
             style="
-                                                                                                                                                                                                                                                                                                                                                                                                border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
+                                                                                                                                                                                                                                                                                                                                                                                                    border: none; background: transparent; cursor: pointer; color: #255293DE; font-size: 24px; font-weight: 600;">
             Lưu
 
         </button>
@@ -1013,7 +1013,7 @@
                     }
                 });
 
-                if (checkedValues.length > 0 && checkedValues.length > 1) {
+                if (checkedValues.length > 0 || checkedValues.length > 1) {
                     isValid = false;
                 }
 

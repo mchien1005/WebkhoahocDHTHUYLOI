@@ -170,7 +170,7 @@
     </style>
     <div class="main-content">
         <h1 class="page-title">Tin tức</h1>
-
+        <div class="divider"></div>
         @foreach ($vpk as $item)
             <div class="news-item">
 

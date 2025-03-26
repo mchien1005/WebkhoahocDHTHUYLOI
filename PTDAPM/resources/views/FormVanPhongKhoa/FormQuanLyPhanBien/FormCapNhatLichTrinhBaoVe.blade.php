@@ -1075,7 +1075,7 @@
             let ngayGio = document.getElementById("datetime").value.trim();
             let diadiem = document.getElementById("location").value.trim();
 
-            fetch(`/lich-trinh/${id}/update`, {
+            fetch(`vpk/lich-trinh/${id}/update`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
