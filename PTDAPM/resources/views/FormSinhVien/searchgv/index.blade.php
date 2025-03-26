@@ -215,7 +215,7 @@
                             <td class="text-center-col">{{ $gv->ten_gv }}</td>
                             <td class="text-center-col">{{ $gv->linh_vuc_nc }}</td>
                             <td class="text-center-col">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#GVchitietModal{{ $gv->ma_gv }}"
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#GVchitietModal{{ $gv->ma_gv }}"
                                     style="color: #17488C;">
                                     Gửi lời mời hướng dẫn
                                 </a>
@@ -299,10 +299,11 @@
                             </div>
                         </div>
                         <div class="text-center-col">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}" style="color: #17488C;">
-                            Gửi lời mời hướng dẫn
-                        </a>
-                    </div>
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}"
+                                style="color: #17488C;">
+                                Gửi lời mời hướng dẫn
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -314,26 +315,27 @@
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="background-color: #E7F5FF; border-radius: 0; color: #225293;">
-                    <form action="{{ route('FormSinhVien.searchgv.invite', $gv->ma_gv) }}" method="POST">
-                        @csrf
-                        <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                            <h5 class="modal-title fw-bold">Gửi lời mời hướng dẫn</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
+                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                        <h5 class="modal-title fw-bold">Gửi lời mời hướng dẫn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
 
+                    <form action="{{ route('FormSinhVien.loimoi.store') }}" method="POST">
+                        @csrf
                         <div class="modal-body" style="padding: 20px;color: #17488C;">
                             <div class="row mb-3">
                                 <label class="col-md-4 fw-bold">Tên giảng viên:</label>
                                 <div class="col-md-8">
                                     <h5 class="fw-bold">{{ $gv->ten_gv }}</h5>
-                                    <input type="hidden" name="ma_gv" value="{{ $gv->ma_gv }}" style="color: #225293;">
+                                    <input type="hidden" name="ma_gv" value="{{ $gv->ma_gv }}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label class="col-md-4 fw-bold">Tên sinh viên:</label>
                                 <div class="col-md-8">
-                                    <input type="text" name="ten_sv" class="form-control" required
+                                    <input type="text" name="ten_sv" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ten_sv }}"
                                         style="background-color: rgba(81, 131, 202, 0.6);">
                                 </div>
                             </div>
@@ -341,7 +343,8 @@
                             <div class="row mb-3">
                                 <label class="col-md-4 fw-bold">Mã sinh viên:</label>
                                 <div class="col-md-8">
-                                    <input type="text" name="ma_sv" class="form-control" required
+                                    <input type="text" name="ma_sv" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ma_sv }}"
                                         style="background-color: rgba(81, 131, 202, 0.6);">
                                 </div>
                             </div>
@@ -349,7 +352,8 @@
                             <div class="row mb-3">
                                 <label class="col-md-4 fw-bold">Email:</label>
                                 <div class="col-md-8">
-                                    <input type="email" name="email" class="form-control" required
+                                    <input type="email" name="email" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->email }}"
                                         style="background-color: rgba(81, 131, 202, 0.6);">
                                 </div>
                             </div>
@@ -357,7 +361,7 @@
                             <div class="row mb-3">
                                 <label class="col-md-4 fw-bold">Đề tài:</label>
                                 <div class="col-md-8">
-                                    <select name="de_tai" class="form-select" required
+                                    <select name="ma_de_tai" class="form-select" required
                                         style="background-color: rgba(81, 131, 202, 0.6);">
                                         <option value="">Chọn đề tài của giảng viên</option>
                                         @if($gv->deTais && $gv->deTais->count() > 0)
@@ -368,15 +372,21 @@
                                         <option value="" disabled>Không có đề tài</option>
                                         @endif
                                     </select>
+                                    @error('ma_de_tai')
+                                    <div class="invalid-feedback d-block">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                data-bs-toggle="modal" data-bs-target="#invite2Modal"
-                                style="text-decoration: none !important; background-color: rgba(81, 131, 202, 0.6);color: #225293;font-weight: bolder">Đã
-                                có đề tài</button>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#invite2Modal{{ $gv->ma_gv }}" data-bs-dismiss="modal"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #225293;">
+                                Đã có đề tài
+                            </button>
                             <button type="submit" class="btn btn-primary"
                                 style="background-color: rgba(81, 131, 202, 0.6); color: #225293;">
                                 Gửi lời mời
@@ -387,73 +397,50 @@
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="invite2Modal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content" style="background-color: #E7F5FF; border-radius: 0; color: #225293;">
-                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                        <h5 class="modal-title fw-bold" id="modalTitle" style="text-decoration: none !important;">
-                            Gửi lời
-                            mời hướng dẫn</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label fw-bold "
-                                style="text-decoration: none !important;">Tên
-                                giảng viên:</label>
-                            <div class="col-md-8">
-                                <span class="fw-bold "
-                                    style="text-decoration: none !important; color:#225293">{{ $gv->ten_gv }}</span>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label fw-bold "
-                                style="text-decoration: none !important;">Tên
-                                sinh viên:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                    style="text-decoration: none !important;background-color: rgba(81, 131, 202, 0.6);">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label fw-bold " style="text-decoration: none !important;">Mã
-                                sinh viên:</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control "
-                                    style="text-decoration: none !important;background-color: rgba(81, 131, 202, 0.6);">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label class="col-md-4 col-form-label fw-bold "
-                                style="text-decoration: none !important;">Email:</label>
-                            <div class="col-md-8">
-                                <input type="email" class="form-control "
-                                    style="text-decoration: none !important;background-color: rgba(81, 131, 202, 0.6);">
-                            </div>
-                        </div>
-                        <div class="row mb-3 align-items-center">
-                            <label class="col-md-4 btn btn-secondary"
-                                style="background-color: rgba(81, 131, 202, 0.6); color: #225293; font-weight: bolder;">
-                                Đã có đề tài
-                            </label>
-                            <div class="col-md-8">
-                                <input type="email" class="form-control "
-                                    style="text-decoration: none !important;background-color: rgba(81, 131, 202, 0.6);">
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary"
-                            style="text-decoration: none !important; background-color: rgba(81, 131, 202, 0.6);color: #225293;font-weight: bolder">Gửi
-                            lời mời</button>
-                    </div>
-                </div>
+        <div class="modal fade" id="invite2Modal{{ $gv->ma_gv }}" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: #E7F5FF; border-radius: 0; color: #225293;">
+            <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                <h5 class="modal-title fw-bold">Gửi lời mời hướng dẫn (Đã có đề tài)</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
+            <form action="{{ route('FormSinhVien.loimoi.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="ma_gv" value="{{ $gv->ma_gv }}">
+
+                <div class="modal-body" style="padding: 20px;color: #17488C;">
+                    <!-- Keep other fields as they are -->
+                    <div class="row mb-3">
+                        <label class="col-md-4 col-form-label fw-bold">Tên đề tài:</label>
+                        <div class="col-md-8">
+                            <input type="text" name="ten_de_tai" class="form-control" required
+                                style="background-color: rgba(81, 131, 202, 0.6);"
+                                placeholder="Nhập tên đề tài của bạn">
+                            @error('ten_de_tai')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                    </div>
+                    <!-- Remove the description textarea field -->
+                </div>
+
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        style="background-color: rgba(81, 131, 202, 0.6);color: #225293;">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary"
+                        style="background-color: rgba(81, 131, 202, 0.6); color: #225293;">
+                        Gửi lời mời
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
+</div>
         <div class="modal fade" id="emptySearchModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
                 <div class="modal-content" style="background-color: #d9eaff; padding: 10px; border-radius: 10px;">
