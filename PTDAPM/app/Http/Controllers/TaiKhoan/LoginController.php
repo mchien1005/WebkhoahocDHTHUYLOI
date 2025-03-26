@@ -47,7 +47,7 @@ class LoginController extends Controller
             } elseif ($user->vai_tro === 'Admin') {
                 return redirect()->route('vanphongkhoa.tintuc');
             } elseif ($user->vai_tro === 'Nhân viên') {
-                return redirect()->route('vanphongkhoa.tintuc');
+                return redirect()->route('phongdaotao.tintuc');
             }
             // Trường hợp không xác định vai trò
         }
