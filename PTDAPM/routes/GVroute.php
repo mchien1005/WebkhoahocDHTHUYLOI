@@ -37,9 +37,9 @@ Route::middleware(['auth'])->group(function () {
         
         Route::get('/de-tai-nghien-cuu', [DeTaiNghienCuuController::class, 'index'])->name('detainghiencuu.index');
         Route::post('/detainghiencuu', [DeTaiNghienCuuController::class, 'store'])->name('detainghiencuu.store');
-        Route::get('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'show'])->name('detainghiencuu.show');
-        Route::put('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'update'])->name('detainghiencuu.update');
-        Route::delete('/detainghiencuu/{id}', [DeTaiNghienCuuController::class, 'destroy'])->name('detainghiencuu.destroy');
+         Route::get('/detainghiencuu/{ma_de_tai}', [DeTaiNghienCuuController::class, 'show'])->name('detainghiencuu.show');
+        Route::put('/detainghiencuu/{ma_de_tai}', [DeTaiNghienCuuController::class, 'update'])->name('detainghiencuu.update');
+        Route::delete('/detainghiencuu/{ma_de_tai}', [DeTaiNghienCuuController::class, 'destroy'])->name('detainghiencuu.destroy');
 
 
 
