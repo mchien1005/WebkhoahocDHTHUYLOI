@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('ma_sv', 20);
             $table->string('ma_gv', 20);
             $table->unsignedInteger('ma_de_tai');
-            $table->enum('trang_thai', ['Chờ duyệt', 'Chấp nhận', 'Từ chối']);
+            $table->enum('trang_thai', ['Chờ duyệt', 'Chấp nhận', 'Từ chối'])->default('Chờ duyệt');
             $table->dateTime('thoi_gian_gui')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();
 

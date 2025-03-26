@@ -70,7 +70,7 @@ class DetainghiencuuController extends Controller
     ]);
 
     return redirect()->route('FormSinhVien.detai.index')
-        ->with('success', 'Cập nhật báo cáo thành công');
+        ->with('success', 'Nộp báo cáo thành công');
 }
 
 }

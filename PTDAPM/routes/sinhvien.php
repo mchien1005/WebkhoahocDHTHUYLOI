@@ -22,7 +22,7 @@ Route::post('/dang-nhap', [LoginController::class, 'login'])->name('login.proces
 // Bảo vệ các route yêu cầu đăng nhập
 Route::middleware(['auth'])->group(function () {
     Route::prefix('Sinh Viên')->group(function () {
-        Route::put('profile/{ma_sv}', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
 
 
 
@@ -59,8 +59,18 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::prefix('Sinh Viên')->group(function () {
         // ...existing routes...
-        Route::get('/searchgv', [TimKiemGVController::class, 'index'])->name('FormSinhVien.searchgv.index');
-        Route::get('/giang-vien/{ma_gv}', [TimKiemGVController::class, 'show'])->name('FormSinhVien.searchgv.show');
-        Route::post('/giang-vien/{ma_gv}/invite', [TimKiemGVController::class, 'invite'])->name('FormSinhVien.searchgv.invite');
+        Route::get('/searchgv', [timkiemGVController::class, 'index'])->name('FormSinhVien.searchgv.index');
+        Route::get('/giang-vien/{ma_gv}', [timkiemGVController::class, 'show'])->name('FormSinhVien.searchgv.show');
+        
+    });
+});
+Route::middleware(['auth'])->group(function () {
+    // Change from PUT to POST and remove {ma_sv} parameter
+    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+});
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('Sinh Viên')->group(function () {
+        Route::post('/loi-moi/store', [timkiemGVController::class, 'storeLoimoi'])
+            ->name('FormSinhVien.loimoi.store');
     });
 });

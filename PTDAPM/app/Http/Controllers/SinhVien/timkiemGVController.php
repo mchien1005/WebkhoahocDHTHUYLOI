@@ -54,80 +54,57 @@ class TimKiemGVController extends Controller
         return view('FormSinhVien.searchgv.show', compact('giangVien'));
     }
 
-    public function invite(Request $request, $ma_gv)
-    {
-        try {
-            DB::beginTransaction();
-    
-            // Validate request
-            $validator = Validator::make($request->all(), [
-                'ten_sv' => 'required|string|max:255',
-                'ma_sv' => 'required|string|max:20',
-                'email' => 'required|email',
-                'de_tai' => 'required|exists:de_tai,ma_de_tai'
-            ]);
-    
-            if ($validator->fails()) {
-                return back()
-                    ->withErrors($validator)
-                    ->withInput()
-                    ->with('error', 'Vui lòng kiểm tra lại thông tin đã nhập');
-            }
-    
-            // Check existing invitation
-            $existingInvite = LoiMoiHuongDan::where([
-                'ma_sv' => $request->ma_sv,
-                'ma_gv' => $ma_gv,
-                'ma_de_tai' => $request->de_tai,
-            ])->first();
-    
-            if ($existingInvite) {
-                DB::rollBack();
-                return back()->with('error', 'Bạn đã gửi lời mời cho đề tài này với giảng viên này rồi.');
-            }
-    
-            // Create new invitation
-            $loiMoi = new LoiMoiHuongDan();
-            $loiMoi->ma_sv = $request->ma_sv;
-            $loiMoi->ma_gv = $ma_gv;
-            $loiMoi->ma_de_tai = $request->de_tai;
-            $loiMoi->ten_sv = $request->ten_sv;
-            $loiMoi->email_sv = $request->email;
-            $loiMoi->thoi_gian_gui = now();
-            $loiMoi->trang_thai = 'Chờ phản hồi';
-    
-            if (!$loiMoi->save()) {
-                throw new \Exception('Không thể lưu lời mời');
-            }
-    
-            DB::commit();
-            return back()->with('success', 'Đã gửi lời mời hướng dẫn thành công!');
-    
-        } catch (\PDOException $e) {
-            DB::rollBack();
-            return back()
-                ->withInput()
-                ->with('error', 'Lỗi kết nối cơ sở dữ liệu. Vui lòng thử lại sau.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return back()
-                ->withInput()
-                ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
-        }
-    }
-    public function cancelInvite($id)
-    {
-        $loiMoi = LoiMoiHuongDan::findOrFail($id);
-        
-        if ($loiMoi->ma_sv !== Auth::user()->sinhVien->ma_sv) {
-            return back()->with('error', 'Bạn không có quyền hủy lời mời này.');
+    public function storeLoimoi(Request $request)
+{
+    try {
+        DB::beginTransaction();
+
+        $validator = Validator::make($request->all(), [
+            'ma_gv' => 'required|exists:giang_vien,ma_gv',
+            'ma_de_tai' => 'required_without:ten_de_tai|exists:de_tai,ma_de_tai',
+            'ten_de_tai' => 'required_without:ma_de_tai|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        try {
-            $loiMoi->delete();
-            return back()->with('success', 'Đã hủy lời mời thành công.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Có lỗi xảy ra khi hủy lời mời.');
+        // Check if it's a new project
+        if ($request->has('ten_de_tai')) {
+            $deTai = DeTai::create([
+                'ten_de_tai' => $request->ten_de_tai,
+                'mo_ta' => 'Chưa có mô tả',
+                'trang_thai' => 'Chờ duyệt',
+                'ma_gv' => $request->ma_gv,
+                'ngay_dang_ky' => now(),
+                'so_luong_sv' => 1,
+                'linh_vuc_nc' => $request->linh_vuc_nc ?? 'Chưa xác định'
+            ]);
+
+            $ma_de_tai = $deTai->ma_de_tai;
+        } else {
+            $ma_de_tai = $request->ma_de_tai;
         }
+
+        // Create invitation with explicit status
+        LoiMoiHuongDan::create([
+            'ma_sv' => Auth::user()->sinhVien->ma_sv,
+            'ma_gv' => $request->ma_gv,
+            'ma_de_tai' => $ma_de_tai,
+            'trang_thai' => 'Chờ duyệt',
+            'thoi_gian_gui' => now()
+        ]);
+
+        DB::commit();
+        return redirect()->back()
+            ->with('success', 'Gửi lời mời thành công!');
+
+    } catch (\Exception $e) {
+        DB::rollBack();
+        return redirect()->back()
+            ->with('error', 'Có lỗi xảy ra khi gửi lời mời: ' . $e->getMessage());
     }
+}
 }
