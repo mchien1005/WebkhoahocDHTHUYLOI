@@ -502,11 +502,6 @@
                             <img src="{{ asset('img/User Male.png') }}" alt="Profile" class="menu-icon" />
                             Cập nhật thông tin cá nhân
                         </a>
-
-                        <!-- <a type="button" data-bs-toggle="modal" data-bs-target="#DoiMKModal">
-                            <img src="{{ asset('img/Security Shield.png') }}" alt="Password" class="menu-icon" />
-                            Đổi mật khẩu
-                        </a> -->
                         <a class="nav-link" href="{{ route('doi-mat-khau.form') }}" data-bs-toggle="modal"
                             data-bs-target="#DoiMKModal">
                             <img src="{{ asset('img/Security Shield.png') }}" alt="Password" class="menu-icon" />
@@ -558,10 +553,52 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
                 <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
-                    <form id="updateSinhVienForm" method="POST"
-                        action="{{ route('profile.update', ['ma_sv' => Auth::user()->sinhVien->ma_sv]) }}">
+                    <form action="{{ route('profile.update') }}" method="POST">
                         @csrf
-                        @method('PUT')
+                        <!-- @if(session('success'))
+                        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                                <div class="modal-content"
+                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                                        <h4 class="modal-title fw-bold d-flex align-items-center"
+                                            style="font-size: 30px; gap: 15px; color: #225293;">
+                                            <img src="{{ asset('img/Done.png') }}" width="30">
+                                            <span>{{ session('success') }}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-footer border-0 justify-content-center">
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
+                                            OK
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @if(session('error'))
+                        <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                                <div class="modal-content"
+                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                                        <h4 class="modal-title fw-bold d-flex align-items-center"
+                                            style="font-size: 30px; gap: 15px; color: #dc3545;">
+                                            <img src="{{ asset('img/Error.png') }}" width="30">
+                                            <span>{{ session('error') }}</span>
+                                        </h4>
+                                    </div>
+                                    <div class="modal-footer border-0 justify-content-center">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                            style="background-color: rgba(220, 53, 69, 0.6); color: #fff; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
+                                            Đóng
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif -->
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
@@ -570,8 +607,6 @@
                                         <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="120"
                                             height="120" style="border-radius: 50%;">
                                     </div>
-
-
                                 </div>
 
                                 <div class="col-md-9">
@@ -579,38 +614,42 @@
                                         <label class="form-label me-2"
                                             style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Họ
                                             và tên:</label>
-
-                                        <input type="text" class="form-control"
+                                        <input type="text" name="ten_sv" class="form-control" required
                                             style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
                                             value="{{ Auth::user()->sinhVien->ten_sv }}">
                                     </div>
+
                                     <div class="mb-2 row">
                                         <div class="col-md-7 d-flex align-items-center">
                                             <label class="form-label me-2"
                                                 style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
                                                 sinh viên:</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" name="ma_sv" class="form-control" readonly
                                                 style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
                                                 value="{{ Auth::user()->sinhVien->ma_sv }}">
                                         </div>
                                         <div class="col-md-5 d-flex align-items-center">
                                             <label class="form-label me-2"
                                                 style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Lớp:</label>
-                                            <input type="text" class="form-control"
+                                            <input type="text" name="lop" class="form-control" required
                                                 style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
                                                 value="{{ Auth::user()->sinhVien->lop }}">
                                         </div>
                                     </div>
+
                                     <div class="mb-2 row align-items-center">
                                         <div class="col-md-7 d-flex align-items-center">
                                             <label class="form-label me-2"
                                                 style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Giới
                                                 tính:</label>
                                             <div class="d-flex align-items-center">
-                                                <input type="radio" name="gioi_tinh" checked class="me-2"
+                                                <input type="radio" checked class="me-2" name="gioi_tinh" value="Nam"
+                                                    required
+                                                    {{ Auth::user()->sinhVien->gioi_tinh == 'Nam' ? 'checked' : '' }}
                                                     style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;">
                                                 Nam
-                                                <input type="radio" name="gioi_tinh"
+                                                <input type="radio" name="gioi_tinh" value="Nữ" required
+                                                    {{ Auth::user()->sinhVien->gioi_tinh == 'Nữ' ? 'checked' : '' }}
                                                     style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;"
                                                     class="ms-4">
                                                 Nữ
@@ -620,24 +659,25 @@
                                             <label class="form-label me-3"
                                                 style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Năm
                                                 sinh:</label>
-                                            <input type="year" class="form-control"
+                                            <input type="number" name="nam_sinh" class="form-control" required
                                                 style="background-color: #d9eaff; color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
                                                 value="{{ Auth::user()->sinhVien->nam_sinh }}">
                                         </div>
                                     </div>
+
                                     <div class="mb-2 d-flex align-items-center">
                                         <label class="form-label me-2"
                                             style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
                                             khoa:</label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" name="ma_khoa" class="form-control" required
                                             style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                            value="{{ Auth::user()->sinhVien->ma_khoa}}">
-
+                                            value="{{ Auth::user()->sinhVien->ma_khoa }}">
                                     </div>
+
                                     <div class="mb-2 d-flex align-items-center">
                                         <label class="form-label me-2"
                                             style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Email:</label>
-                                        <input type="email" class="form-control"
+                                        <input type="email" name="email" class="form-control" required
                                             style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
                                             value="{{ Auth::user()->sinhVien->email }}">
                                     </div>
@@ -761,7 +801,60 @@
         </div>
     </div>
 
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" data-bs-backdrop="true" tabindex="-1" aria-hidden="true"
+        data-bs-dismiss="modal">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                    <h4 class="modal-title d-flex align-items-center w-100"
+                        style="font-size: 30px; color: #225293; gap: 50px; text-align: center;">
+                        <img src="{{ asset('images/Done.png') }}" width="50">
+                        <p id="successMessage">{{ session('success') }}</p>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header border-0 w-100 d-flex justify-content-center">
+                    <h4 class="modal-title fw-bold d-flex align-items-center"
+                        style="font-size: 30px; gap: 15px; color: #dc3545;">
+                        <img src="{{ asset('img/Error.png') }}" width="30">
+                        <span id="errorMessage">{{ session('error') }}</span>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const successMessage = '{{ Session::has("success") ? Session::get("success") : "" }}';
+        const errorMessage = '{{ Session::has("error") ? Session::get("error") : "" }}';
+
+        if (successMessage) {
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            document.getElementById('successMessage').textContent = successMessage;
+            successModal.show();
+
+            // Auto hide after 2 seconds
+            setTimeout(() => {
+                successModal.hide();
+            }, 2000);
+        }
+
+        if (errorMessage) {
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            document.getElementById('errorMessage').textContent = errorMessage;
+            errorModal.show();
+        }
+    });
+    </script>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
