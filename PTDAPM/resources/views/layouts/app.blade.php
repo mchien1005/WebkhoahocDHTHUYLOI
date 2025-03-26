@@ -816,22 +816,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Error Modal -->
-    <div class="modal fade" id="errorModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                    <h4 class="modal-title fw-bold d-flex align-items-center"
-                        style="font-size: 30px; gap: 15px; color: #dc3545;">
-                        <img src="{{ asset('img/Error.png') }}" width="30">
-                        <span id="errorMessage">{{ session('error') }}</span>
-                    </h4>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const successMessage = '{{ Session::has("success") ? Session::get("success") : "" }}';
