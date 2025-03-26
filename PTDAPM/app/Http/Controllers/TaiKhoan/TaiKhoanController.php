@@ -71,7 +71,13 @@ class TaiKhoanController extends Controller
     // 4️⃣ Xóa tài khoản
     public function destroy($email)
     {
-        TaiKhoan::where('email', $email)->delete();
-        return redirect()->back()->with('success', 'Tài khoản đã bị xóa.');
+        $taiKhoan = TaiKhoan::where('email', $email)->first();
+
+        if ($taiKhoan) {
+            $taiKhoan->delete();
+            return redirect()->route('phongdaotao.quanlytaikhoan')->with('delete_success', true);
+        }
+
+        return redirect()->route('phongdaotao.quanlytaikhoan')->with('delete_failed', true);
     }
 }

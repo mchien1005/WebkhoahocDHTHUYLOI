@@ -672,7 +672,7 @@
             border: none;
             border-radius: 20px;
             cursor: pointer;
-
+            margin-top: 70px;
             font-weight: 500;
             word-wrap: break-word
         }
@@ -801,6 +801,10 @@
             padding: 5px;
         }
 
+        .popup-header2 span {
+            margin-left: 10px;
+        }
+
         input[type="datetime-local"] {
             color: #17488C;
             /* Màu chữ */
@@ -813,17 +817,14 @@
 
         .container {
             display: flex;
-            justify-content: center;
-            /* Căn giữa ngang */
-            align-items: center;
             /* Căn giữa dọc (nếu cần) */
         }
 
         .custom-table {
-            padding-top: 150px;
-            width: 80%;
+            padding-top: 120px;
+            width: 100%;
             /* Điều chỉnh độ rộng bảng */
-            max-width: 1000px;
+            max-width: 987px;
             /* Giới hạn chiều rộng tối đa */
             margin: auto;
             /* Căn giữa theo chiều ngang */
@@ -919,14 +920,139 @@
             color: red;
         }
 
-        /* Trạng thái */
+        .popup-content {
+            height: 100%;
+            overflow-y: auto;
+            padding-left: 20px;
+            padding-top: 20px;
+
+            /* Điều chỉnh khoảng cách giữa các dòng */
+            font-family: Rasa;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 100%;
+            letter-spacing: 0%;
+        }
+
+        .confirm-popup .popup-content {
+            font-size: 40px;
+            color: #255293;
+            font-weight: 500;
+            word-wrap: break-word
+        }
+
+        .success-popup {
+            width: 778px;
+            height: 242px;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-popup img {
+            padding-top: 50px;
+            display: flex;
+            padding-right: 100px;
+            padding-left: 30px;
+            justify-content: center;
+        }
+
+        .success-popup p {
+            padding-top: 70px;
+            align-items: center;
+            justify-content: center;
+            color: #255293;
+            font-size: 40px;
+            font-family: Rasa;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .header-container {
+            display: flex;
+            /* Căn h1 bên trái, button bên phải */
+            justify-content: flex-end;
+            /* Căn giữa theo chiều dọc */
+            /* Khoảng cách với nội dung bên dưới */
+        }
+
+        .add-account-btn {
+            display: flex;
+            align-items: center;
+            /* Căn icon và text cùng dòng */
+            gap: 8px;
+            background-color: #5183CA;
+            /* Màu xanh */
+            color: white;
+            font-family: Rasa;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 249px;
+            height: 51px;
+            margin-right: 20px;
+            margin-top: 100px;
+            margin-bottom: -100px;
+        }
+
+        .add-role-btn {
+            display: flex;
+            align-items: center;
+            /* Căn icon và text cùng dòng */
+            gap: 8px;
+            background-color: #5183CA;
+            /* Màu xanh */
+            color: white;
+            font-family: Rasa;
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 192px;
+            height: 51px;
+            margin-right: 20px;
+            margin-top: 100px;
+            margin-bottom: -100px;
+        }
+
+        .add-account-btn:hover,
+        .add-role-btn:hover {
+            background-color: #3A6EA5;
+            /* Màu xanh đậm hơn khi hover */
+        }
+
+        .header-container img {
+            width: 36px;
+            height: 36px;
+        }
     </style>
-    <div class="container mt-4 d-flex justify-content-center">
+    <div>
         {{-- <div class="d-flex justify-content-between w-100 mb-3">
             <button class="btn btn-primary" onclick="openRolePopup()">👥 Phân quyền</button>
             <button class="btn btn-success" onclick="openAddAccountPopup()">➕ Thêm tài khoản</button>
         </div> --}}
-
+        <div class="header-container">
+            <button class="add-role-btn" onclick="openPhanPopup()">
+                <img src="{{ asset('images/mdi_account-switch.png') }}" alt="" />Phân quyền</button>
+            <button class="add-account-btn" onclick="openAddPopup()">
+                <img src="{{ asset('images/material-symbols_add.png') }}" alt="" />Thêm tài khoản</button>
+        </div>
         <table class="table table-bordered custom-table responsive-table text-center">
             <thead>
                 <tr>
@@ -965,10 +1091,13 @@
                                 style="margin: 0;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger"
-                                    style="background: none; border: none; cursor: pointer;">
+                                <!-- Nút Xóa -->
+                                <button type="button" class="btn btn-danger"
+                                    style="background: none; border: none; cursor: pointer;"
+                                    onclick="openConfirmDeletePopup('{{ $tk->email }}')">
                                     <img class="megaphone" src="{{ asset('images/iconamoon_trash-bold.png') }}" alt="Xóa">
                                 </button>
+
                             </form>
                         </td>
                     </tr>
@@ -1027,5 +1156,88 @@
             </table>
         </div>
     </div> --}}
+    <div class="popup-overlay" id="confirmDeleteOverlay" style="display: none;"></div>
+
+    <div class="confirm-popup" id="confirmDeletePopup" style="display: none;">
+        <div class="popup-header2">
+            <img class="megaphone" src="{{ asset('images/Megaphone.png') }}" alt="Thông báo">
+            <span>Thông báo</span>
+        </div>
+
+        <hr style="border: 1px solid #255293; width: 100%; margin: 0;">
+
+        <div class="popup-content" style="padding-top: 30px;">
+            <p style="font-size: 36px; ">Bạn có chắc chắn muốn xóa tài khoản này không?</p>
+            <button class="confirm-btn" onclick="confirmDelete()">Xác nhận</button>
+            <button class="cancel-btn" onclick="closeConfirmDeletePopup()">Hủy</button>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="successDeleteOverlay" style="display: none;"></div>
+    <div class="popup-container success-popup" id="successDeletePopup" style="display: none;">
+        <div style="display: flex; gap: 15px;">
+            <img class="done" src="{{ asset('images/Done.png') }}" alt="">
+            <p>Xóa tài khoản thành công</p>
+        </div>
+    </div>
+
+
+    <script>
+        let deleteEmail = null; // Lưu email cần xóa
+
+        function openConfirmDeletePopup(email) {
+            deleteEmail = email;
+            document.getElementById("confirmDeletePopup").style.display = "block";
+            document.getElementById("confirmDeleteOverlay").style.display = "block";
+        }
+
+        function closeConfirmDeletePopup() {
+            document.getElementById("confirmDeletePopup").style.display = "none";
+            document.getElementById("confirmDeleteOverlay").style.display = "none";
+        }
+
+        function confirmDelete() {
+            if (deleteEmail) {
+                let form = document.createElement("form");
+                form.method = "POST";
+                form.action = `/quanlytaikhoan/${deleteEmail}`; // Route xóa
+                form.style.display = "none";
+
+                let csrfToken = document.createElement("input");
+                csrfToken.type = "hidden";
+                csrfToken.name = "_token";
+                csrfToken.value = "{{ csrf_token() }}";
+
+                let methodInput = document.createElement("input");
+                methodInput.type = "hidden";
+                methodInput.name = "_method";
+                methodInput.value = "DELETE";
+
+                form.appendChild(csrfToken);
+                form.appendChild(methodInput);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        }
+
+        // Kiểm tra nếu có thông báo xóa thành công từ session
+        window.onload = function () {
+            @if(session('delete_success'))
+                showSuccessPopup();
+            @endif
+                                                                                                                                                                };
+
+        function showSuccessPopup() {
+            document.getElementById("successDeletePopup").style.display = "block";
+            document.getElementById("successDeleteOverlay").style.display = "block";
+
+            // Tự động ẩn sau 2 giây
+            setTimeout(() => {
+                document.getElementById("successDeletePopup").style.display = "none";
+                document.getElementById("successDeleteOverlay").style.display = "none";
+            }, 2000);
+        }
+    </script>
+
 
 @endsection
