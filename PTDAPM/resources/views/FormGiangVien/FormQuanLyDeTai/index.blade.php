@@ -159,6 +159,17 @@
       color: #721c24;
       border: 1px solid #f5c6cb;
     }
+    #ErrorMsg {
+    text-align: left;
+    margin-top: 10px;
+    font-size: 14px;
+    width: 100%;
+    padding-left: 120px; /* Căn chỉnh với layout label */
+}
+
+.modal-form .is-invalid {
+    border-color: red;
+}
   </style>
 
   <h1 class="page-title">Đề tài nghiên cứu</h1>
@@ -174,81 +185,147 @@
       {{ session('error') }}
     </div>
   @endif
+  @if(session('message'))
+    <div class="alert alert-warning">
+        {{ session('message') }}
+    </div>
+@endif
   
   <button class="add-button" type="button" data-bs-toggle="modal" data-bs-target="#themDetai">Thêm đề tài</button>
   
-  <!-- Thêm đề tài modal -->
-  <div class="modal fade" id="themDetai" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
-        <div class="modal-content" style="background-color: #e3f0ff; padding: 20px; border-radius: 10px; border: none;">
+    <!-- Modal Thêm đề tài -->
+    <div class="modal fade" id="themDetai" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+            <div class="modal-content" style="background-color: #e3f0ff; padding: 20px; border-radius: 10px; border: none;">
+                <!-- Header -->
+                <div class="modal-header" style="border-bottom: 2px solid #17488C;">
+                    <h4 class="modal-title fw-bold" style="color: #17488C;">Thêm đề tài</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-            <!-- Header -->
-            <div class="modal-header" style="border-bottom: 2px solid #17488C;">
-                <h4 class="modal-title fw-bold" style="color: #17488C;">Thêm đề tài</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <!-- Body -->
+                <div class="modal-body">
+                    <form id="researchTopicForm" action="{{ route('detainghiencuu.store') }}" method="POST" class="modal-form">
+                        @csrf
+                        <div class="row mb-3 align-items-center">
+                            <label for="ten_de_tai" class="col-sm-3 col-form-label">Tên đề tài:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="ten_de_tai" name="ten_de_tai" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-center">
+                            <label for="mo_ta" class="col-sm-3 col-form-label">Mô tả:</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="mo_ta" name="mo_ta" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-center">
+                            <label for="trang_thai" class="col-sm-3 col-form-label">Trạng thái:</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="trang_thai" name="trang_thai" style="width:auto">
+                                    <option value="Chờ duyệt">Chờ duyệt</option>
+                                    <option value="Được duyệt">Được duyệt</option>
+                                    <option value="Hoàn thành">Hoàn thành</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-center">
+                            <label for="linh_vuc_nc" class="col-sm-3 col-form-label">Lĩnh vực nghiên cứu:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="linh_vuc_nc" name="linh_vuc_nc" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3 align-items-center">
+                            <label for="so_luong_sv" class="col-sm-3 col-form-label">Số lượng sinh viên:</label>
+                            <div class="col-sm-9">
+                                <select class="form-select" id="so_luong_sv" name="so_luong_sv" style="width:auto">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="ErrorMsg" class="text-danger" style="display: none; margin-top: -10px; font-size: 20px; padding: 0 0">
+                            Cần nhập đủ thông tin đề tài!
+                        </div>
+                        
+                        <!-- Footer -->
+                        <div class="modal-footer d-flex justify-content-end">
+                            <button type="submit" class="btn btn-custom" onclick="return validateForm()">
+                                Xác nhận
+                            </button>
+                            <button type="button" class="btn btn-custom" data-bs-dismiss="modal" onclick="resetForm()">
+                                Hủy
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <!-- Body -->
-             
-             <div class="modal-body">
-                <form action="{{ route('detainghiencuu.store') }}" method="POST" class="modal-form">
-                    @csrf
-                    <div class="row mb-3 align-items-center">
-                        <label for="ten_de_tai" class="col-sm-3 col-form-label">Tên đề tài:</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ten_de_tai" name="ten_de_tai" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-center">
-                        <label for="mo_ta" class="col-sm-3 col-form-label">Mô tả:</label>
-                        <div class="col-sm-9">
-                            <textarea class="form-control" id="mo_ta" name="mo_ta" rows="3" required></textarea>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-center">
-                        <label for="trang_thai" class="col-sm-3 col-form-label">Trạng thái:</label>
-                        <div class="col-sm-9">
-                            <select class="form-select" id="trang_thai" name="trang_thai" style="width:auto">
-                                <option value="Chờ duyệt">Chờ duyệt</option>
-                                <option value="Được duyệt">Được duyệt</option>
-                                <option value="Hoàn thành">Hoàn thành</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-center">
-                        <label for="linh_vuc_nc" class="col-sm-3 col-form-label">Lĩnh vực nghiên cứu:</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="linh_vuc_nc" name="linh_vuc_nc" required>
-                        </div>
-                    </div>
-                    <div class="row mb-3 align-items-center">
-                        <label for="so_luong_sv" class="col-sm-3 col-form-label">Số lượng sinh viên:</label>
-                        <div class="col-sm-9">
-                            <select class="form-select" id="so_luong_sv" name="so_luong_sv" style="width:auto">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Footer -->
-                    <div class="modal-footer d-flex justify-content-end">
-                        <button type="submit" class="btn btn-custom">
-                            Xác nhận
-                        </button>
-                        <button type="button" class="btn btn-custom" data-bs-dismiss="modal">
-                            Hủy
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            
         </div>
     </div>
-</div>
+
+    <!-- Modal Xác nhận -->
+    <div class="modal fade" id="xc" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px; color: #17488C; display: flex; align-items: center;">
+                <div class="modal-body d-flex align-items-center justify-content-center" style="gap: 15px;">
+                    <div style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                        <img src="{{ asset('img/Done.png') }}" width="40">
+                    </div>
+                    <h4 style="font-size: 22px; font-weight: bold; margin: 0;">Thêm đề tài thành công!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+    function validateForm() {
+        // Get all required form inputs
+        const tenDeTai = document.getElementById('ten_de_tai');
+        const moTa = document.getElementById('mo_ta');
+        const linhVucNc = document.getElementById('linh_vuc_nc');
+        const errorMsg = document.getElementById('ErrorMsg');
+
+        // Check if any required fields are empty
+        if (tenDeTai.value.trim() === '' || 
+            moTa.value.trim() === '' || 
+            linhVucNc.value.trim() === '') {
+            
+            errorMsg.style.display = 'block';
+            return false; // Prevent form submission
+        }
+
+        // If all fields are filled, hide error message
+        errorMsg.style.display = 'none';
+        var themDetaiModal = bootstrap.Modal.getInstance(document.getElementById('themDetai'));
+        themDetaiModal.hide();
+        
+        // Programmatically trigger the confirmation modal
+        var confirmModal = new bootstrap.Modal(document.getElementById('xc'));
+        confirmModal.show();
+
+        return true; // Allow form submission
+    }
+
+    function resetForm() {
+        // Hide error message
+        const errorMsg = document.getElementById('ErrorMsg');
+        errorMsg.style.display = 'none';
+
+        // Reset form fields
+        document.getElementById('ten_de_tai').value = '';
+        document.getElementById('mo_ta').value = '';
+        document.getElementById('linh_vuc_nc').value = '';
+        document.getElementById('trang_thai').selectedIndex = 0;
+        document.getElementById('so_luong_sv').selectedIndex = 0;
+    }
+    </script>
 
   <!-- Danh sách đề tài -->
   <table>
@@ -299,169 +376,270 @@
               <p><strong>Trạng thái:</strong> {{ $deTai->trang_thai }}</p>
               <p><strong>Lĩnh vực nghiên cứu:</strong> {{ $deTai->linh_vuc_nc }}</p>
               <p><strong>Số lượng sinh viên:</strong> {{ $deTai->so_luong_sv }}</p>
-              <p><strong>Ngày đăng ký:</strong> {{ $deTai->ngay_dang_ky }}</p>
-              @if($deTai->diem_phan_bien)
-                <p><strong>Điểm phản biện:</strong> {{ $deTai->diem_phan_bien }}</p>
-              @endif
-              @if($deTai->ket_qua_khoa)
-                <p><strong>Kết quả cấp khoa:</strong> {{ $deTai->ket_qua_khoa }}</p>
-              @endif
-              @if($deTai->ket_qua_truong)
-                <p><strong>Kết quả cấp trường:</strong> {{ $deTai->ket_qua_truong }}</p>
-              @endif
             </div>
 
             <!-- Footer -->
             <div class="modal-footer d-flex justify-content-end">
-              @if(Auth::user() && Auth::user()->ma_gv == $deTai->ma_gv)
                 <button type="button" class="btn fw-bold" data-bs-toggle="modal" data-bs-target="#suaDeTai{{ $deTai->ma_de_tai }}"
                   style="background-color: #799DCB; color: #17488C; border-radius: 10px; padding: 8px 20px;">
                   Sửa
                 </button>
-                <form action="{{ route('detainghiencuu.destroy', $deTai->ma_de_tai) }}" method="POST" style="display: inline;">
-                  @csrf
-                  @method('DELETE')
-                  <button type="button" class="btn fw-bold btn-delete"
+
+                  <button type="button" class="btn fw-bold btn-delete" data-bs-toggle="modal" data-bs-target="#dongy{{ $deTai->ma_de_tai }}"
                     style="background-color: #799DCB; color: #17488C; border-radius: 10px; padding: 8px 20px;">
                     Xóa
                   </button>
-                </form>
-              @endif
             </div>
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="dongy{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;color:#17488C">
+            <div class="modal-header" style="border-bottom: 2px solidrgb(24, 83, 165) !important;">
+                <h1 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo</h1>
+            </div>
+            <div class="modal-body text-center">
+                <h3 id="thongbaoText">Bạn chắc chắn muốn xóa đề tài này?</h3>
+            </div>
+            <div class="modal-footer d-flex">
+                <form action="{{ route('detainghiencuu.destroy', $deTai->ma_de_tai) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-primary flex-grow-1 mx-5 " data-bs-toggle="modal" data-bs-target="#xacnhan{{ $deTai->ma_de_tai }}"
+                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C;
+                        border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;"
+                        id="btnTaiLen">Xác nhận</button>
+                </form>
+                <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C;
+                    border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;"
+                    data-bs-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="modal fade" id="xacnhan{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px; color: #17488C; display: flex; align-items: center;">
+            
+            <div class="modal-body d-flex align-items-center justify-content-center" style="gap: 15px;">
+                <!-- Icon dấu tích -->
+                <div style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <img src="{{ asset('img/Done.png') }}" width="40">
+                </div>
+                <!-- Nội dung thông báo -->
+                <h4 style="font-size: 22px; font-weight: bold; margin: 0;">Xóa đề tài thành công!</h4>
+            </div>
+        </div>
+    </div>
+  </div>
       
-      <!-- Modal sửa đề tài -->
-      <div class="modal fade" id="suaDeTai{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
-          <div class="modal-content" style="background-color: #e3f0ff; padding: 20px; border-radius: 10px; border: none;">
+<!-- Modal sửa đề tài -->
+<div class="modal fade" id="suaDeTai{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+        <div class="modal-content" style="background-color: #e3f0ff; padding: 20px; border-radius: 10px; border: none;">
             <!-- Header -->
             <div class="modal-header" style="border-bottom: 2px solid #17488C;">
-              <h4 class="modal-title fw-bold" style="color: #17488C;">Sửa đề tài</h4>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title fw-bold" style="color: #17488C;">Sửa đề tài</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="resetSuaForm('{{ $deTai->ma_de_tai }}')"></button>
             </div>
 
             <!-- Body -->
             <div class="modal-body">
-              <form action="{{ route('detainghiencuu.update', $deTai->ma_de_tai) }}" method="POST" class="modal-form">
-                @csrf
-                @method('PUT')
-                <div class="row mb-3 align-items-center">
-                  <label for="ten_de_tai_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Tên đề tài:</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="ten_de_tai_{{ $deTai->ma_de_tai }}" name="ten_de_tai" value="{{ $deTai->ten_de_tai }}" required>
-                  </div>
-                </div>
-                <div class="row mb-3 align-items-center">
-                  <label for="mo_ta_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Mô tả:</label>
-                  <div class="col-sm-9">
-                    <textarea class="form-control" id="mo_ta_{{ $deTai->ma_de_tai }}" name="mo_ta" rows="3" required>{{ $deTai->mo_ta }}</textarea>
-                  </div>
-                </div>
-                <div class="row mb-3 align-items-center">
-                  <label for="trang_thai_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Trạng thái:</label>
-                  <div class="col-sm-9">
-                    <select class="form-select" id="trang_thai_{{ $deTai->ma_de_tai }}" name="trang_thai" style="width:auto">
-                      <option value="Chờ duyệt" {{ $deTai->trang_thai == 'Chờ duyệt' ? 'selected' : '' }}>Chờ duyệt</option>
-                      <option value="Được duyệt" {{ $deTai->trang_thai == 'Được duyệt' ? 'selected' : '' }}>Được duyệt</option>
-                      <option value="Hoàn thành" {{ $deTai->trang_thai == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-3 align-items-center">
-                  <label for="linh_vuc_nc_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Lĩnh vực nghiên cứu:</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="linh_vuc_nc_{{ $deTai->ma_de_tai }}" name="linh_vuc_nc" value="{{ $deTai->linh_vuc_nc }}" required>
-                  </div>
-                </div>
-                <div class="row mb-3 align-items-center">
-                  <label for="so_luong_sv_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Số lượng sinh viên:</label>
-                  <div class="col-sm-9">
-                    <select class="form-select" id="so_luong_sv_{{ $deTai->ma_de_tai }}" name="so_luong_sv" style="width:auto">
-                      @for($i = 1; $i <= 5; $i++)
-                        <option value="{{ $i }}" {{ $deTai->so_luong_sv == $i ? 'selected' : '' }}>{{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
-                </div>
-                <!-- Footer -->
-                <div class="modal-footer d-flex justify-content-end">
-                  <button type="submit" class="btn btn-custom">
-                    Xác nhận
-                  </button>
-                  <button type="button" class="btn btn-custom" data-bs-dismiss="modal">
-                    Hủy
-                  </button>
-                </div>
-              </form>
+                <form id="formSuaDeTai{{ $deTai->ma_de_tai }}" action="{{ route('detainghiencuu.update', $deTai->ma_de_tai) }}" method="POST" class="modal-form">
+                    @csrf
+                    @method('PUT')
+                    <div class="row mb-3 align-items-center">
+                        <label for="ten_de_tai_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Tên đề tài:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="ten_de_tai_{{ $deTai->ma_de_tai }}" name="ten_de_tai" value="{{ $deTai->ten_de_tai }}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="mo_ta_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Mô tả:</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" id="mo_ta_{{ $deTai->ma_de_tai }}" name="mo_ta" rows="3" required>{{ $deTai->mo_ta }}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="trang_thai_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Trạng thái:</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" id="trang_thai_{{ $deTai->ma_de_tai }}" name="trang_thai" style="width:auto">
+                                <option value="Chờ duyệt" {{ $deTai->trang_thai == 'Chờ duyệt' ? 'selected' : '' }}>Chờ duyệt</option>
+                                <option value="Được duyệt" {{ $deTai->trang_thai == 'Được duyệt' ? 'selected' : '' }}>Được duyệt</option>
+                                <option value="Hoàn thành" {{ $deTai->trang_thai == 'Hoàn thành' ? 'selected' : '' }}>Hoàn thành</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="linh_vuc_nc_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Lĩnh vực nghiên cứu:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="linh_vuc_nc_{{ $deTai->ma_de_tai }}" name="linh_vuc_nc" value="{{ $deTai->linh_vuc_nc }}" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3 align-items-center">
+                        <label for="so_luong_sv_{{ $deTai->ma_de_tai }}" class="col-sm-3 col-form-label">Số lượng sinh viên:</label>
+                        <div class="col-sm-9">
+                            <select class="form-select" id="so_luong_sv_{{ $deTai->ma_de_tai }}" name="so_luong_sv" style="width:auto">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <option value="{{ $i }}" {{ $deTai->so_luong_sv == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="ErrorMsg{{ $deTai->ma_de_tai }}" class="text-danger" style="display: none; margin-top: -10px; font-size: 20px; padding: 0 0">
+                        Cần nhập đủ thông tin đề tài!
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer d-flex justify-content-end">
+                        <button type="button" class="btn btn-custom" onclick="validateSuaForm('{{ $deTai->ma_de_tai }}')">
+                            Xác nhận
+                        </button>
+                        <button type="button" class="btn btn-custom" data-bs-dismiss="modal" onclick="resetSuaForm('{{ $deTai->ma_de_tai }}')">
+                            Hủy
+                        </button>
+                    </div>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
-      
-      <!-- Modal xác nhận xóa -->
-      <div class="modal fade" id="xacNhanXoa{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-          <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px; color:#17488C">
-            <div class="modal-header" style="border-bottom: 2px solid #17488C;">
-              <h1 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+</div>
+
+<!-- Modal xác nhận sửa -->
+<div class="modal fade" id="dongy1{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;color:#17488C">
+            <div class="modal-header" style="border-bottom: 2px solidrgb(24, 83, 165) !important;">
+                <h1 class="modal-title"><img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-              <h3>Bạn có chắc chắn muốn xóa đề tài này?</h3>
+                <h3 id="thongbaoText">Bạn có muốn lưu thông tin này không?</h3>
             </div>
             <div class="modal-footer d-flex">
-              <form action="{{ route('detainghiencuu.destroy', $deTai->ma_de_tai) }}" method="POST" style="display: inline; width: 100%;">
-                @csrf
-                @method('DELETE')
-                <div class="d-flex justify-content-around w-100">
-                  <button type="submit" class="btn btn-primary flex-grow-1 mx-2"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;">
-                    Xác nhận
-                  </button>
-                  <button type="button" class="btn btn-secondary flex-grow-1 mx-2" data-bs-dismiss="modal"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;">
-                    Hủy
-                  </button>
-                </div>
-              </form>
+                <button type="button" class="btn btn-primary flex-grow-1 mx-5" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#xacnhan1{{ $deTai->ma_de_tai }}" 
+                    onclick="document.getElementById('formSuaDeTai{{ $deTai->ma_de_tai }}').submit();"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C;
+                    border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;"
+                    id="btnTaiLen">Xác nhận</button>
+                <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C;
+                    border-radius: 22px; padding: 10px 30px; font-size: 20px; font-weight: bold;"
+                    data-bs-dismiss="modal" onclick="resetSuaForm('{{ $deTai->ma_de_tai }}')"> Hủy</button>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
+<!-- Modal xác nhận thành công -->
+<div class="modal fade" id="xacnhan1{{ $deTai->ma_de_tai }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px; color: #17488C; display: flex; align-items: center;">
+            <div class="modal-body d-flex align-items-center justify-content-center" style="gap: 15px;">
+                <div style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                    <img src="{{ asset('img/Done.png') }}" width="40">
+                </div>
+                <h4 style="font-size: 22px; font-weight: bold; margin: 0;">Sửa đề tài thành công!</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function validateSuaForm(maDeTai) {
+    // Get all required form inputs
+    const tenDeTai = document.getElementById('ten_de_tai_' + maDeTai);
+    const moTa = document.getElementById('mo_ta_' + maDeTai);
+    const linhVucNc = document.getElementById('linh_vuc_nc_' + maDeTai);
+    const errorMsg = document.getElementById('ErrorMsg' + maDeTai);
+    const suaDeTaiModal = document.getElementById('suaDeTai' + maDeTai);
+    const dongyModal = document.getElementById('dongy1' + maDeTai);
+
+    // Check if any required fields are empty
+    if (tenDeTai.value.trim() === '' || 
+        moTa.value.trim() === '' || 
+        linhVucNc.value.trim() === '') {
+        
+        errorMsg.style.display = 'block';
+        return false; // Prevent form submission
+    }
+
+    // If all fields are filled, hide error message and show confirmation modal
+    errorMsg.style.display = 'none';
+
+    // Hide the edit form modal
+    if (suaDeTaiModal) {
+        var suaDeTaiModalInstance = bootstrap.Modal.getInstance(suaDeTaiModal);
+        if (suaDeTaiModalInstance) {
+            suaDeTaiModalInstance.hide();
+        }
+    }
+
+    // Show confirmation modal
+    var confirmModal = new bootstrap.Modal(dongyModal);
+    confirmModal.show();
+
+    return true;
+}
+
+function resetSuaForm(maDeTai) {
+    // Hide error message
+    const errorMsg = document.getElementById('ErrorMsg' + maDeTai);
+    errorMsg.style.display = 'none';
+
+    // Reset form fields to original values
+    document.getElementById('ten_de_tai_' + maDeTai).value = '{{ $deTai->ten_de_tai }}';
+    document.getElementById('mo_ta_' + maDeTai).value = '{{ $deTai->mo_ta }}';
+    document.getElementById('linh_vuc_nc_' + maDeTai).value = '{{ $deTai->linh_vuc_nc }}';
+    document.getElementById('trang_thai_' + maDeTai).value = '{{ $deTai->trang_thai }}';
+    document.getElementById('so_luong_sv_' + maDeTai).value = '{{ $deTai->so_luong_sv }}';
+
+    // Hide any open modals
+    const suaDeTaiModal = document.getElementById('suaDeTai' + maDeTai);
+    const dongyModal = document.getElementById('dongy1' + maDeTai);
+    const xacNhanModal = document.getElementById('xacnhan1' + maDeTai);
+
+    if (suaDeTaiModal) {
+        var suaDeTaiModalInstance = bootstrap.Modal.getInstance(suaDeTaiModal);
+        if (suaDeTaiModalInstance) {
+            suaDeTaiModalInstance.hide();
+        }
+    }
+
+    if (dongyModal) {
+        var dongyModalInstance = bootstrap.Modal.getInstance(dongyModal);
+        if (dongyModalInstance) {
+            dongyModalInstance.hide();
+        }
+    }
+
+    if (xacNhanModal) {
+        var xacNhanModalInstance = bootstrap.Modal.getInstance(xacNhanModal);
+        if (xacNhanModalInstance) {
+            xacNhanModalInstance.hide();
+        }
+    }
+}
+</script>
       @empty
-      <tr>
-        <td colspan="4" class="text-center">Không có đề tài nào</td>
+      <tr class="empty-row">
+        <td colspan="4">Không có dữ liệu</td>
       </tr>
       @endforelse
-      
-      <!-- Các hàng trống để giữ thiết kế của bảng -->
-      @if(count($deTais) < 3)
-        @for($i = 0; $i < 3 - count($deTais); $i++)
-          <tr class="empty-row">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        @endfor
-      @endif
     </tbody>
   </table>
+    
+  
+      
 
-  <!-- JavaScript cho các chức năng -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Script để kích hoạt modal xác nhận xóa
-      document.querySelectorAll('.btn-delete').forEach(button => {
-        button.addEventListener('click', function() {
-          const deTaiId = this.closest('form').action.split('/').pop();
-          const modal = document.getElementById('xacNhanXoa' + deTaiId);
-          const bootstrapModal = new bootstrap.Modal(modal);
-          bootstrapModal.show();
-        });
-      });
-    });
-  </script>
+  
+
+
 @endsection
