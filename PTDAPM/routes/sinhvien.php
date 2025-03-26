@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/doi-mat-khau', [LoginController::class, 'showChangePasswordForm'])->name('doi-mat-khau.form');
-    Route::post('/doi-mat-khau', [LoginController::class, 'changePassword'])->name('doi-mat-khau.update');
+    Route::put('/doi-mat-khau', [LoginController::class, 'changePassword'])->name('doi-mat-khau.update');
 });
 Route::middleware(['auth'])->group(function () {
     Route::prefix('Sinh Viên')->group(function () {
@@ -66,7 +66,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     // Change from PUT to POST and remove {ma_sv} parameter
-    Route::post('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::put('/profile/update', [ProfileController::class, 'updateProfile'])->name('profile.update');
 });
 Route::middleware(['auth'])->group(function () {
     Route::prefix('Sinh Viên')->group(function () {
