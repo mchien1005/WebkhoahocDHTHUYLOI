@@ -14,8 +14,15 @@ class SinhVien extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['ma_sv', 'ten_sv', 'lop', 'gioi_tinh', 'nam_sinh', 'khoa', 'email'];
-
+    protected $fillable = [
+        'ma_sv', 
+        'ten_sv', 
+        'lop', 
+        'gioi_tinh', 
+        'nam_sinh', 
+        'ma_khoa',  // Change from 'khoa' to 'ma_khoa'
+        'email'
+    ];
     public function taiKhoan()
     {
         return $this->belongsTo(TaiKhoan::class, 'email', 'email');
