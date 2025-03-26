@@ -28,5 +28,14 @@ class DeTai extends Model
     {
         return $this->hasOne(BaoCaoNghienCuu::class, 'ma_de_tai', 'ma_de_tai');
     }
+        public function taiKhoan()
+    {
+        return $this->belongsTo(TaiKhoan::class, 'email', 'email');
+    }
+
+    public function deTai()
+    {
+        return $this->hasMany(DeTai::class, 'ma_gv', 'ma_gv');
+    }
 }
 
