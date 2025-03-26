@@ -637,8 +637,8 @@
     <div class="group-12">
         <div class="rectangle-402"></div>
         <button class="xuatdanhsach" onclick="showConfirmPopup2()"
-            style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500;">Xuất
-            danh sách đề tài
+            style="border: none; background: transparent; cursor: pointer; color: white; font-size: 36px; font-weight: 500; padding-top:20px;">Xuất
+            danh sách
         </button>
     </div>
     <div class="truy-v-n-th-ng-tin2">Truy vấn thông tin</div>
