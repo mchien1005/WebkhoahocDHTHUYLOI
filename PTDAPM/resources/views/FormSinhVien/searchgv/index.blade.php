@@ -1,847 +1,543 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trường Đại Học Thủy Lợi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rasa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Rasa', serif;
-    }
-
-    body {
-        background-color: #e7f5ff;
-    }
-
-    .page-wrapper {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        width: 100%;
-    }
-
-    .sidebar {
-        background-color: #4267B2;
-        color: white;
-        width: 100%;
-        max-width: 500px;
-    }
-
-    .menu-item {
-        padding: 0;
-        background-color: #255293DE;
-    }
-
-    .menu-item a {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        color: white;
-        width: 100%;
-        padding: 20px 15px;
-    }
-
-    .menu-item:hover {
-        background-color: #365899;
-        cursor: pointer;
-    }
-
-    .menu-item.active {
-        background: rgba(80.75, 131.22, 201.88, 0.60);
-    }
-
-    .icon-container {
-        width: 36px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 15px;
-    }
-
-    .sidebar-icon {
-        width: 40px;
-        height: 40px;
-        filter: brightness(0) invert(1);
-    }
-
-    span {
-        color: #E7F5FF;
-        font-size: 32px;
-        font-family: Rasa;
-        font-weight: 500;
-        word-wrap: break-word
-    }
-
-    /* Header styles */
-    .header {
-        background-color: #255293;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        padding: 0 20px;
-        width: 100%;
-        border-bottom: 2px solid #82b0f1;
-    }
-
-    .logo {
-        width: 60px;
-        height: auto;
-        margin-right: 20px;
-    }
-
-    .school-name {
-        color: #E7F5FF;
-        font-size: 40px;
-        font-family: Rasa;
-        font-weight: 500;
-        word-wrap: break-word;
-    }
-
-    .user-info {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        color: #e7f5ff;
-        position: relative;
-    }
-
-    .user-icon {
-        width: 40px;
-        height: auto;
-        margin-right: 5px;
-    }
-
-    .user-name {
-        font-size: 18px;
-        font-weight: 700;
-        margin-right: 15px;
-    }
-
-    /* Dropdown styles - updated */
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .dropdown-button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        display: flex;
-        align-items: center;
-    }
-
-    .dropdown-button img {
-        width: 20px;
-        height: 60px;
-    }
-
-    .dropdown-icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        right: 0;
-        margin-right: -20px;
-        top: 100%;
-        background-color: rgba(36, 82, 147, 0.95);
-        min-width: 250px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        border-radius: 0 0 10px 10px;
-        border: 1px solid #17488C;
-        z-index: 100;
-    }
-
-    .dropdown-content a {
-        color: white;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        font-size: 14px;
-    }
-
-    .dropdown-content a:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    /* Menu icon styles */
-    .menu-icon {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-    }
-
-    /* Main content container */
-    .content-container {
-        display: flex;
-        flex: 1;
-    }
-
-    /* Sidebar styles */
-    .sidebar {
-        width: 250px;
-        background-color: rgba(36, 82, 146, 0.87);
-        flex-shrink: 0;
-    }
-
-    .menu-item {
-        height: 60px;
-        border: 1px solid #02367f;
-        display: flex;
-        align-items: center;
-        padding-left: 15px;
-        color: #e7f5ff;
-        font-size: 20px;
-        font-weight: 500;
-    }
-
-    .menu-item.active {
-        background-color: #5083c9;
-    }
-
-    .menu-item.normal {
-        background-color: rgba(36, 82, 146, 0.87);
-    }
-
-    .sidebar-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 15px;
-    }
-
-    /* Main content styles */
-    .main-content {
-        flex: 1;
-        padding: 20px;
-        overflow-y: auto;
-    }
-
-    .page-title {
-        color: #17478c;
-        font-size: 28px;
-        font-weight: 500;
-        margin-bottom: 20px;
-    }
-
-    .news-section {
-        margin-bottom: 30px;
-    }
-
-    .news-item {
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    .news-image {
-        width: 180px;
-        height: 120px;
-        object-fit: cover;
-        margin-right: 20px;
-        flex-shrink: 0;
-    }
-
-    .news-content {
-        flex: 1;
-    }
-
-    .news-title {
-        color: #245292;
-        font-size: 22px;
-        font-weight: 500;
-        margin-bottom: 10px;
-        line-height: 1.2;
-    }
-
-    .news-date {
-        color: #245292;
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    }
-
-    .news-excerpt {
-        color: #17478c;
-        font-size: 14px;
-        line-height: 1.4;
-        margin-bottom: 10px;
-    }
-
-    .news-link {
-        color: #245292;
-        font-size: 16px;
-        font-weight: 500;
-        text-decoration: none;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-    }
-
-    .news-link img {
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-    }
-
-    .divider {
-        height: 1px;
-        background-color: #cccccc;
-        margin: 25px 0;
-    }
-
-    a.text-link {
-        color: #17478c;
-        text-decoration: underline;
-    }
-
-    /* Media queries for laptop screens */
-    @media screen and (min-width: 1024px) {
-        .header {
-            height: 90px;
-        }
-
-        .logo {
-            width: 75px;
-        }
-
-        .school-name {
-            color: #E7F5FF;
-            font-size: 40px;
-            font-family: Rasa;
-            font-weight: 500;
-            word-wrap: break-word;
-        }
-
-        .user-name {
-            font-size: 20px;
-        }
-
-        .sidebar {
-            width: 300px;
-        }
-
-        .menu-item {
-            height: 75px;
-            font-size: 24px;
-        }
-
-        .sidebar-icon {
-            width: 30px;
-            height: 30px;
-        }
-
-        .page-title {
-            font-size: 32px;
-        }
-
-        .news-image {
-            width: 220px;
-            height: 140px;
-        }
-
-        .news-title {
-            font-size: 26px;
-        }
-
-        .news-date {
-            font-size: 18px;
-        }
-
-        .news-excerpt {
-            font-size: 16px;
-        }
-
-        .news-link {
-            font-size: 18px;
-        }
-    }
-
-    /* Media queries for larger screens */
-    @media screen and (min-width: 1440px) {
-        .header {
-            height: 109px;
-        }
-
-        .logo {
-            width: 104px;
-        }
-
-        .school-name {
-            font-size: 40px;
-        }
-
-        .user-icon {
-            width: 55px;
-        }
-
-        .user-name {
-            font-size: 24px;
-        }
-
-        .sidebar {
-            width: 400px;
-        }
-
-        .menu-item {
-            height: 95px;
-            font-size: 32px;
-            padding-left: 20px;
-        }
-
-        .sidebar-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 22px;
-        }
-
-        .news-image {
-            width: 261px;
-            height: 147px;
-            margin-right: 30px;
-        }
-
-        .news-title {
-            font-size: 32px;
-        }
-
-        .news-date {
-            font-size: 24px;
-        }
-
-        .news-excerpt {
-            font-size: 20px;
-        }
-
-        .news-link {
-            font-size: 24px;
-        }
-
-
-        .dropdown-content {
-            min-width: 300px;
-        }
-
-        .dropdown-content a {
-            padding: 16px 20px;
-            font-size: 20px;
-        }
-
-        .menu-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 16px;
-        }
-
-        .news-link {
-            display: flex;
-            justify-content: flex-end;
-            /* Đảm bảo căn lề phải */
-            align-items: center;
-            margin-top: 10px;
-            /* Thêm khoảng cách nếu cần */
-            width: 100%;
-            /* Đảm bảo nó chiếm toàn bộ chiều rộng */
-        }
-
-        .news-link img {
-            width: 16px;
-            height: 16px;
-            margin-right: 8px;
-            /* Khoảng cách giữa biểu tượng và chữ */
-        }
-
-        .news-link a {
-            color: #245292;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .news-link a:hover {
-            text-decoration: underline;
-        }
-    }
-    </style>
-</head>
-
-<body>
-    <div class="page-wrapper">
-        <!-- Header -->
-        <div class="header">
-            <img src=" {{ asset('img/Logo-Thuy_Loi.png') }}" alt="Logo Thủy Lợi" class="logo" />
-            <h1 class="school-name">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
-            <div class="user-info">
-                <img src="{{ asset('img/Test Account.png') }}" alt="User Icon" class="user-icon" />
-                <span class="user-name">{{ Auth::user()->sinhVien->ten_sv }}</span>
-                <div class="dropdown">
-                    <button class="dropdown-button">
-
-                        <img src="{{ asset('img/Chevron Down.png') }}" alt="Dropdown" class="dropdown-icon" />
-                    </button>
-                    <div class="dropdown-content">
-                        <img src="{{ asset('img/User.png') }}" alt="Profile" style="display: block; margin: auto;">
-                        <a type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="btn-edit-profile">
-                            <img src="{{ asset('img/User Male.png') }}" alt="Profile" class="menu-icon" />
-                            Cập nhật thông tin cá nhân
-                        </a>
-                        <a class="nav-link" href="{{ route('doi-mat-khau.form') }}" data-bs-toggle="modal"
-                            data-bs-target="#DoiMKModal">
-                            <img src="{{ asset('img/Security Shield.png') }}" alt="Password" class="menu-icon" />
-                            Đổi mật khẩu</a>
-
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <img src="{{ asset('img/Move Up.png') }}" alt="Password" class="menu-icon" />
-                            Đăng xuất
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Content container (sidebar + main content) -->
-        <div class="content-container">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                @yield('sidebar')
+@extends('layouts.app')
+
+@section('sidebar')
+<div class="menu-item">
+    <a href="{{ route('FormSinhVien.student.index') }}">
+        <img src="{{ asset('img/Commercial.png') }}" alt="News Icon" class="sidebar-icon" />
+        <span>Tin tức</span>
+    </a>
+</div>
+<div class="menu-item">
+    <a href="{{ route('FormSinhVien.detai.index') }}">
+        <img src="{{ asset('img/Saddle Stitched Booklet.png') }}" alt="Research Icon" class="sidebar-icon" />
+        <span>Đề tài nghiên cứu</span>
+    </a>
+</div>
+<div class="menu-item active">
+    <a href="{{ route('FormSinhVien.searchgv.index') }}">
+        <img src="{{ asset('img/Vector.png') }}" alt="Register Icon" class="sidebar-icon" />
+        <span>Tìm kiếm giảng viên</span>
+    </a>
+</div>
+<div class="menu-item ">
+    <a href="{{ route('FormSinhVien.loimoi.index') }}">
+        <img src="{{ asset('img/School Director.png') }}" alt="Invitation Icon" class="sidebar-icon" />
+        <span>Lời mời hướng dẫn</span>
+    </a>
+</div>
+
+@endsection
+
+
+@section('content')
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap');
+
+.table-container {
+    max-width: 90%;
+    margin-left: 0;
+}
+
+.table {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 10px;
+    overflow: hidden;
+
+}
+
+.table thead th {
+    background-color: #255293;
+    color: white;
+    /* Chỉnh màu chữ */
+    text-align: center;
+    border: 2px solid white;
+    vertical-align: start;
+    padding: 15px;
+}
+
+.table tbody td {
+    background-color: rgba(81, 131, 202, 0.6);
+    color: #225293;
+    border: 2px solid white;
+    vertical-align: middle;
+    padding: 15px;
+}
+
+.table tbody tr:nth-child(even) td {
+    background-color: rgba(81, 131, 202, 0.8);
+}
+
+.table a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.table a:hover {
+    text-decoration: underline;
+}
+
+.badge {
+    font-size: 18px;
+    padding: 10px 15px;
+}
+
+.text-center-col {
+    text-align: center;
+}
+
+/* Căn chỉnh input và button */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 700px;
+    margin-left: 0;
+}
+
+.search-container input {
+    width: 524px;
+    height: 51px;
+    background-color: rgba(81, 131, 202, 0.6);
+    color: #225293;
+    border-radius: 18px;
+    border: none;
+    padding: 10px;
+}
+
+.search-container button {
+    width: 152px;
+    height: 51px;
+    background-color: rgba(81, 131, 202, 0.6);
+    color: #225293;
+    border-radius: 18px;
+    border: none;
+    font-size: 20px;
+    font-family: 'Rasa', serif;
+}
+
+.custom-input {
+    background-color: rgba(81, 131, 202, 0.6);
+    color: #17488C;
+    border-radius: 18px;
+    border: none;
+    height: 51px;
+    padding-left: 15px;
+    /* Tạo khoảng cách cho chữ bên trong */
+}
+
+.custom-input::placeholder {
+    color: #17488C;
+    /* Đổi màu placeholder để đồng bộ */
+}
+
+.custom-modal {
+    max-width: 1044px !important;
+    width: 1044px !important;
+}
+
+.custom-modal .modal-content {
+    height: 733px !important;
+    overflow-y: auto;
+    /* Để tránh tràn nội dung */
+}
+</style>
+
+<body class="" style="background-color: #E6F0FA;font-family: Inter;">
+    <div class="container d-flex flex-column align-items-start">
+
+        <!-- Form tìm kiếm -->
+        <form id="searchForm" action="{{ route('FormSinhVien.searchgv.index') }}" method="GET">
+            <input type="hidden" name="submitted" value="1">
+            <div class="mb-3 search-container">
+                <input type="text" class="form-control" name="search" id="searchInput"
+                    style="width: 524px; background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;"
+                    value="{{ request('search') }}">
+                <button type="submit" class="btn" id="searchButton"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 32px; border-radius: 18px; border: none; height: 51px; width: 152px;">
+                    Tìm kiếm
+                </button>
             </div>
 
-            <!-- Main Content -->
-            <div class="main-content">
-                @yield('content')
+            <!-- Dropdown lĩnh vực nghiên cứu -->
+            <div class="mb-3">
+                <select name="field" class="form-control"
+                    style="width: 524px; background-color: rgba(81, 131, 202, 0.6);color: #17488C; font-size: 32px; border-radius: 18px; height: 51px;">
+                    <option value="" style="text-align: center;">-- Chọn lĩnh vực nghiên cứu --</option>
+                    @foreach ($fields as $field)
+                    <option value="{{ $field }}" {{ request('field') == $field ? 'selected' : '' }}>
+                        {{ $field }}
+                    </option>
+                    @endforeach
+                </select>
             </div>
-        </div>
-    </div>
+        </form>
 
-    <div class="modal-body">
+        <!-- Thông báo lỗi -->
         @if(session('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
-                <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
-                    <form action="{{ route('profile.update') }}" method="POST">
-                        @csrf
-                        <!-- @if(session('success'))
-                        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                                <div class="modal-content"
-                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                                        <h4 class="modal-title fw-bold d-flex align-items-center"
-                                            style="font-size: 30px; gap: 15px; color: #225293;">
-                                            <img src="{{ asset('img/Done.png') }}" width="30">
-                                            <span>{{ session('success') }}</span>
-                                        </h4>
-                                    </div>
-                                    <div class="modal-footer border-0 justify-content-center">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
-                                            OK
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+        <!-- Kết quả tìm kiếm -->
+        <div class="container mt-4 table-container">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Mã giảng viên</th>
+                            <th class="text-center">Tên giảng viên</th>
+                            <th class="text-center">Lĩnh vực nghiên cứu</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if($giangVien->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center">Không có giảng viên phù hợp với tiêu chí cần tìm
+                            </td>
+                        </tr>
+                        @else
+                        @foreach($giangVien as $gv)
+                        <tr>
+                            <td class="text-center-col">{{ $gv->ma_gv }}</td>
+                            <td class="text-center-col"><a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#GVchitietModal{{ $gv->ma_gv }}" style="color: #17488C;">
+                                    {{ $gv->ten_gv }}
+                                </a></td>
+                            <td class="text-center-col">{{ $gv->linh_vuc_nc }}</td>
+                            <td class="text-center-col">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}"
+                                    style="color: #17488C;">
+                                    Gửi lời mời hướng dẫn
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
                         @endif
-                        @if(session('error'))
-                        <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                                <div class="modal-content"
-                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                                        <h4 class="modal-title fw-bold d-flex align-items-center"
-                                            style="font-size: 30px; gap: 15px; color: #dc3545;">
-                                            <img src="{{ asset('img/Error.png') }}" width="30">
-                                            <span>{{ session('error') }}</span>
-                                        </h4>
-                                    </div>
-                                    <div class="modal-footer border-0 justify-content-center">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                            style="background-color: rgba(220, 53, 69, 0.6); color: #fff; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
-                                            Đóng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif -->
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-3 d-flex justify-content-center align-items-center">
-                                    <div
-                                        style="width: 164.36px; height: 213.39px; background-color: rgba(81, 131, 202, 0.6); display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                                        <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="120"
-                                            height="120" style="border-radius: 50%;">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-9">
-                                    <div class="mb-2 d-flex align-items-center">
-                                        <label class="form-label me-2"
-                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Họ
-                                            và tên:</label>
-                                        <input type="text" name="ten_sv" class="form-control" required
-                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                            value="{{ Auth::user()->sinhVien->ten_sv }}">
-                                    </div>
-
-                                    <div class="mb-2 row">
-                                        <div class="col-md-7 d-flex align-items-center">
-                                            <label class="form-label me-2"
-                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
-                                                sinh viên:</label>
-                                            <input type="text" name="ma_sv" class="form-control" readonly
-                                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                                value="{{ Auth::user()->sinhVien->ma_sv }}">
-                                        </div>
-                                        <div class="col-md-5 d-flex align-items-center">
-                                            <label class="form-label me-2"
-                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Lớp:</label>
-                                            <input type="text" name="lop" class="form-control" required
-                                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                                value="{{ Auth::user()->sinhVien->lop }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-2 row align-items-center">
-                                        <div class="col-md-7 d-flex align-items-center">
-                                            <label class="form-label me-2"
-                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Giới
-                                                tính:</label>
-                                            <div class="d-flex align-items-center">
-                                                <input type="radio" checked class="me-2" name="gioi_tinh" value="Nam"
-                                                    required
-                                                    {{ Auth::user()->sinhVien->gioi_tinh == 'Nam' ? 'checked' : '' }}
-                                                    style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;">
-                                                Nam
-                                                <input type="radio" name="gioi_tinh" value="Nữ" required
-                                                    {{ Auth::user()->sinhVien->gioi_tinh == 'Nữ' ? 'checked' : '' }}
-                                                    style="accent-color: rgba(81, 131, 202, 0.6); height: 20px; width: 20px;"
-                                                    class="ms-4">
-                                                Nữ
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5 d-flex align-items-center">
-                                            <label class="form-label me-3"
-                                                style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Năm
-                                                sinh:</label>
-                                            <input type="number" name="nam_sinh" class="form-control" required
-                                                style="background-color: #d9eaff; color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                                value="{{ Auth::user()->sinhVien->nam_sinh }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-2 d-flex align-items-center">
-                                        <label class="form-label me-2"
-                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Mã
-                                            khoa:</label>
-                                        <input type="text" name="ma_khoa" class="form-control" required
-                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                            value="{{ Auth::user()->sinhVien->ma_khoa }}">
-                                    </div>
-
-                                    <div class="mb-2 d-flex align-items-center">
-                                        <label class="form-label me-2"
-                                            style="width: 130px; color: #17488C; font-size: 25px; font-family: 'Rasa', serif;">Email:</label>
-                                        <input type="email" name="email" class="form-control" required
-                                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-size: 25px; font-family: 'Rasa', serif; border-radius: 18px; border: none; height: 49.89px;"
-                                            value="{{ Auth::user()->sinhVien->email }}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer border-0">
-                            <button type="submit" class="btn btn-primary"
-                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
-                            <button type="button" class="btn btn-secondary"
-                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
-                                data-bs-dismiss="modal">Hủy</button>
-                        </div>
-                    </form>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-    </div>
-    <div class="modal fade" id="DoiMKModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;height: 652px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header border-0">
-                    <img src="{{ asset('img/Security Lock.png') }}" alt="Password" class="menu-icon"
-                        style="color:#17478c" />
-                    <h5 class="modal-title"
-                        style="color: #17488C; font-weight: bold; font-size: 25px; font-family: 'Rasa', serif;">Đổi mật
-                        khẩu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-                @endif
-                @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
-                <hr>
-                <form method="POST" action="{{ route('doi-mat-khau.update') }}">
-                    @csrf
-                    <div class="row">
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <div
-                                style="width: 164.36px; height: 213.39px; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                                <img src="{{ asset('img/Padlock.png') }}" class="img-fluid" width="120" height="120"
-                                    style="border-radius: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="modal-body">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-lock" style="font-size: 50px; color: #17488C;"></i>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mật khẩu hiện tại</label>
-                                    <input type="password" name="current_password" class="form-control"
-                                        id="currentPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mật khẩu mới</label>
-                                    <input type="password" name="new_password" class="form-control" id="newPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Nhập lại mật khẩu mới</label>
-                                    <input type="password" name="confirm_password" class="form-control"
-                                        id="confirmPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+        <!-- Modals cho từng giảng viên -->
+        @foreach($giangVien as $gv)
+        <!-- Modal Chi tiết Giảng viên -->
+        <div class="modal fade" id="GVchitietModal{{ $gv->ma_gv }}" tabindex="-1"
+            style="color: #17488C; border-radius: 18px ;font-size:20px"
+            aria-labelledby="GVchitietModalLabel{{ $gv->ma_gv }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content"
+                    style="background-color: #E7F5FF; border-radius: 0; display: flex; justify-content: flex-start;">
+                    <div class="modal-body d-flex flex-column text-start">
+                        <div class="row">
+                            <div class="col-md-2 d-flex justify-content-start align-items-start">
+                                <div
+                                    style="width: 130px; height: 160px; background-color: rgba(81, 131, 202, 0.6); display: flex; justify-content: center; align-items: center; border-radius: 8px;">
+                                    <img src="{{ asset('img/User02.png') }}" class="img-fluid" width="100" height="100"
+                                        style="border-radius: 45%;">
                                 </div>
                             </div>
+                            <div class="col-md-10">
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-3 fw-bold">Họ và tên:</div>
+                                    <div class="col-md-9 text-wrap" style="word-break: break-word;">
+                                        {{ $gv->ten_gv }}</div>
+                                </div>
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-3 fw-bold">Mã giảng viên:</div>
+                                    <div class="col-md-3 text-wrap" style="word-break: break-word;">{{ $gv->ma_gv }}
+                                    </div>
+                                    <div class="col-md-2 fw-bold">Mã khoa:</div>
+                                    <div class="col-md-4 text-wrap" style="word-break: break-word;">
+                                        {{ $gv->ma_khoa }}</div>
+                                </div>
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-3 fw-bold">Học vị:</div>
+                                    <div class="col-md-9 text-wrap" style="word-break: break-word;">
+                                        {{ $gv->hoc_vi }}</div>
+                                </div>
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-3 fw-bold">Số điện thoại:</div>
+                                    <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->sdt }}
+                                    </div>
+                                </div>
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-3 fw-bold">Email:</div>
+                                    <div class="col-md-9 text-wrap" style="word-break: break-word;">{{ $gv->email }}
+                                    </div>
+                                </div>
+                                <div class="row g-0" style="color: #17488C;">
+                                    <div class="col-md-4 fw-bold">Lĩnh vực nghiên cứu:</div>
+                                    <div class="col-md-8 text-wrap" style="word-break: break-word; ;font-size:20px">
+                                        {{ $gv->linh_vuc_nc }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <div class="row g-0 mt-2">
+                            <div class="col-md-12">
+                                <p><strong>Định hướng nghiên cứu:</strong>
+                                    <span class="text-wrap"
+                                        style="word-break: break-word;color: #17488C ;font-size:20px">{{ $gv->dinh_huong_nc }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row g-0">
+                            <div class="col-md-12">
+                                <p><strong>Số sinh viên hướng dẫn:</strong>
+                                    <span class="text-wrap"
+                                        style="word-break: break-word; color: #17488C;font-size:20px">{{ $gv->so_sv_huong_dan }}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- <div class="text-center-col">
+                            <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}"
+                                style="color: #17488C;">
+                                Gửi lời mời hướng dẫn
+                            </a>
+                        </div> -->
                     </div>
-                    <div class="modal-footer border-0 d-flex">
-                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#XNModal"
-                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">Lưu</button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Replace the existing inviteModal with this -->
+        <div class="modal fade" id="inviteModal{{ $gv->ma_gv }}" tabindex="-1" aria-labelledby="modalTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #E7F5FF; border-radius: 0; color: #225293;">
+                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                        <h5 class="modal-title fw-bold">Gửi lời mời hướng dẫn</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="XNModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                <h4 class="modal-title fw-bold d-flex align-items-center"
-                    style="font-size: 40px; gap: 50px;color: #225293;">
-                    <img src="{{ asset('images/Done.png') }}" width="50">
-                    Đổi mật khẩu thành công
-                </h4>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                    <h4 class="modal-title">
-                        <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
-                    </h4>
-                </div>
 
-                <div class="modal-body text-center">
-                    <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
-                </div>
-
-                <div class="modal-footer d-flex">
-                    <form action="{{ route('doi-mat-khau.update') }}" method="POST" class="w-100">
+                    <form action="{{ route('FormSinhVien.loimoi.store') }}" method="POST">
                         @csrf
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary flex-grow-1 mx-5"
-                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
-                                Xác nhận
-                            </button>
+                        <div class="modal-body" style="padding: 20px;color: #17488C;">
+                            <div class="row mb-3">
+                                <label class="col-md-4 fw-bold">Tên giảng viên:</label>
+                                <div class="col-md-8">
+                                    <h5 class="fw-bold">{{ $gv->ten_gv }}</h5>
+                                    <input type="hidden" name="ma_gv" value="{{ $gv->ma_gv }}">
+                                </div>
+                            </div>
 
-                            <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
-                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                                data-bs-dismiss="modal">Hủy bỏ</button>
+                            <div class="row mb-3">
+                                <label class="col-md-4 fw-bold">Tên sinh viên:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="ten_sv" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ten_sv }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 fw-bold">Mã sinh viên:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="ma_sv" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ma_sv }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 fw-bold">Email:</label>
+                                <div class="col-md-8">
+                                    <input type="email" name="email" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->email }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 fw-bold">Đề tài:</label>
+                                <div class="col-md-8">
+                                    <select name="ma_de_tai" class="form-select" required
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                        <option value="">Chọn đề tài của giảng viên</option>
+                                        @if($gv->deTais && $gv->deTais->count() > 0)
+                                        @foreach($gv->deTais as $deTai)
+                                        <option value="{{ $deTai->ma_de_tai }}">{{ $deTai->ten_de_tai }}</option>
+                                        @endforeach
+                                        @else
+                                        <option value="" disabled>Không có đề tài</option>
+                                        @endif
+                                    </select>
+                                    @error('ma_de_tai')
+                                    <div class="invalid-feedback d-block">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+                                data-bs-target="#invite2Modal{{ $gv->ma_gv }}" data-bs-dismiss="modal"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #225293;">
+                                Đã có đề tài
+                            </button>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #225293;">
+                                Gửi lời mời
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Success Modal -->
-    <div class="modal fade" id="successModal" data-bs-backdrop="true" tabindex="-1" aria-hidden="true"
-        data-bs-dismiss="modal">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                    <h4 class="modal-title d-flex align-items-center w-100"
-                        style="font-size: 30px; color: #225293; gap: 50px; text-align: center;">
-                        <img src="{{ asset('images/Done.png') }}" width="50">
-                        <p id="successMessage">{{ session('success') }}</p>
-                    </h4>
+        <div class="modal fade" id="invite2Modal{{ $gv->ma_gv }}" tabindex="-1" aria-labelledby="modalTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color: #E7F5FF; border-radius: 0; color: #225293;">
+                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                        <h5 class="modal-title fw-bold">Gửi lời mời hướng dẫn (Đã có đề tài)</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <form action="{{ route('FormSinhVien.loimoi.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="ma_gv" value="{{ $gv->ma_gv }}">
+
+                        <div class="modal-body" style="padding: 20px;color: #17488C;">
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Tên giảng viên:</label>
+                                <div class="col-md-8">
+                                    <span class="fw-bold">{{ $gv->ten_gv }}</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Tên sinh viên:</label>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ten_sv }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Mã sinh viên:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="ma_sv" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->ma_sv }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Email:</label>
+                                <div class="col-md-8">
+                                    <input type="email" name="email" class="form-control" readonly
+                                        value="{{ Auth::user()->sinhVien->email }}"
+                                        style="background-color: rgba(81, 131, 202, 0.6);">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Tên đề tài:</label>
+                                <div class="col-md-8">
+                                    <input type="text" name="ten_de_tai" class="form-control" required
+                                        style="background-color: rgba(81, 131, 202, 0.6);"
+                                        placeholder="Nhập tên đề tài của bạn">
+                                    @error('ten_de_tai')
+                                    <div class="invalid-feedback d-block">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-md-4 col-form-label fw-bold">Mô tả đề tài:</label>
+                                <div class="col-md-8">
+                                    <textarea name="mo_ta" class="form-control" required rows="3"
+                                        style="background-color: rgba(81, 131, 202, 0.6);"
+                                        placeholder="Mô tả chi tiết về đề tài của bạn"></textarea>
+                                    @error('mo_ta')
+                                    <div class="invalid-feedback d-block">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #225293;">
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #225293;">
+                                Gửi lời mời
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const successMessage = '{{ Session::has("success") ? Session::get("success") : "" }}';
-        const errorMessage = '{{ Session::has("error") ? Session::get("error") : "" }}';
+        <div class="modal fade" id="emptySearchModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 10px; border-radius: 10px;">
+                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                        <h4 class="modal-title" style="color: #225293;">
+                            <img src="{{ asset('img/Megaphone.png') }}" width="30"> Thông báo
+                        </h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4 style="color: #225293;">Vui lòng nhập thông tin tìm kiếm</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        if (successMessage) {
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            document.getElementById('successMessage').textContent = successMessage;
-            successModal.show();
+        @endforeach
+</body>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('searchForm');
+    const searchInput = document.getElementById('searchInput');
+    const fieldSelect = document.querySelector('select[name="field"]');
 
-            // Auto hide after 2 seconds
-            setTimeout(() => {
-                successModal.hide();
-            }, 2000);
-        }
+    searchForm.addEventListener('submit', function(e) {
+        e.preventDefault(); // Ngăn form submit ngay lập tức
 
-        if (errorMessage) {
-            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-            document.getElementById('errorMessage').textContent = errorMessage;
-            errorModal.show();
+        // Kiểm tra cả hai trường tìm kiếm có trống không
+        if ((!searchInput.value || searchInput.value.trim() === '') &&
+            (!fieldSelect.value || fieldSelect.value === '')) {
+
+            // Hiển thị modal
+            var emptySearchModal = new bootstrap.Modal(document.getElementById('emptySearchModal'));
+            emptySearchModal.show();
+        } else {
+            // Nếu có ít nhất một trường có giá trị, submit form
+            this.submit();
         }
     });
-    </script>
+});
+</script>
 
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-</html>
+@if(session('error'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    errorModal.show();
+});
+</script>
+@endif
+@endsection
