@@ -537,20 +537,6 @@
     </div>
 
     <div class="modal-body">
-        <!-- @if(session('success'))
-        <div class="popup popup-success">
-            {{ session('success') }}
-        </div>
-        @endif
-        @if ($errors->any())
-        <div class="popup popup-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
                 <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
@@ -644,7 +630,8 @@
                             </div>
                         </div>
                         <div class="modal-footer border-0">
-                            <button type="submit" class="btn btn-primary"
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#XBTBModal"
                                 style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
                             <button type="button" class="btn btn-secondary"
                                 style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
@@ -654,193 +641,205 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="XBTBModal" data-bs-backdrop="true"  tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+        <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+            <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                <img src="{{ asset('images/Done.png') }}" width="50">
+                <h4 class="modal-title mx-auto">Cập nhật thành công!</h4>
+            </div>
+        </div>
     </div>
-    <div class="modal fade" id="DoiMKModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;height: 652px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header border-0">
-                    <img src="{{ asset('img/Security Lock.png') }}" alt="Password" class="menu-icon"
-                        style="color:#17478c" />
-                    <h5 class="modal-title"
-                        style="color: #17488C; font-weight: bold; font-size: 25px; font-family: 'Rasa', serif;">Đổi mật
-                        khẩu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <hr>
-                <form method="POST" id="doiMK-form" action="{{ route('doi-mat-khau.update') }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="row">
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <div
-                                style="width: 164.36px; height: 213.39px; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
-                                <img src="{{ asset('img/Padlock.png') }}" class="img-fluid" width="120" height="120"
-                                    style="border-radius: 50%;">
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="modal-body">
-                                <div class="text-center mb-3">
-                                    <i class="fas fa-lock" style="font-size: 50px; color: #17488C;"></i>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mật khẩu hiện tại</label>
-                                    <input type="password" name="current_password" class="form-control"
-                                        id="currentPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Mật khẩu mới</label>
-                                    <input type="password" name="new_password" class="form-control" id="newPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Nhập lại mật khẩu mới</label>
-                                    <input type="password" name="confirm_password" class="form-control"
-                                        id="confirmPassword"
-                                        style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
-                                </div>
-                            </div>
-                        </div>
+</div>
+
+
+        <div class="modal fade" id="DoiMKModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;height: 652px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                    <div class="modal-header border-0">
+                        <img src="{{ asset('img/Security Lock.png') }}" alt="Password" class="menu-icon"
+                            style="color:#17478c" />
+                        <h5 class="modal-title"
+                            style="color: #17488C; font-weight: bold; font-size: 25px; font-family: 'Rasa', serif;">Đổi
+                            mật
+                            khẩu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-footer border-0 d-flex">
+                    <hr>
+                    <form method="POST" id="doiMK-form" action="{{ route('doi-mat-khau.update') }}">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                <div
+                                    style="width: 164.36px; height: 213.39px; display: flex; justify-content: center; align-items: center; border-radius: 10px;">
+                                    <img src="{{ asset('img/Padlock.png') }}" class="img-fluid" width="120" height="120"
+                                        style="border-radius: 50%;">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="modal-body">
+                                    <div class="text-center mb-3">
+                                        <i class="fas fa-lock" style="font-size: 50px; color: #17488C;"></i>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Mật khẩu hiện tại</label>
+                                        <input type="password" name="current_password" class="form-control"
+                                            id="currentPassword"
+                                            style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Mật khẩu mới</label>
+                                        <input type="password" name="new_password" class="form-control" id="newPassword"
+                                            style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Nhập lại mật khẩu mới</label>
+                                        <input type="password" name="confirm_password" class="form-control"
+                                            id="confirmPassword"
+                                            style="background-color: rgba(81, 131, 202, 0.3); border: none;border-radius: 18px; width: 443px; height: 52px; font-size: 32px; font-family: 'Rasa', serif;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="modal-footer border-0 d-flex">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#xacnhanDoiMKModal"
-                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">
-                                Lưu
+                            <div class="modal-footer border-0 d-flex">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#xacnhanDoiMKModal"
+                                    style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">
+                                    Lưu
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="XNModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                    <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                        <img src="{{ asset('images/Done.png') }}" width="50">
+                        <h4 class="modal-title mx-auto">
+                            Bạn đã đổi mật khẩu thành công!
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="TBModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                    <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                        <img src="{{ asset('images/Cancel.png') }}" width="50">
+                        <h4 class="modal-title mx-auto">
+                            Mật khẩu mới không được trùng với mật khẩu cũ!
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="TB2Modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                    <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                        <img src="{{ asset('images/Cancel.png') }}" width="50">
+                        <h4 class="modal-title mx-auto">
+                            Mật khẩu cũ không chính xác!
+                        </h4>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+                <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                    <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
+                        <h4 class="modal-title">
+                            <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
+                        </h4>
+                    </div>
+
+                    <div class="modal-body text-center">
+                        <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
+                    </div>
+
+                    <div class="modal-footer d-flex">
+                        <div class="d-flex justify-content-between">
+                            <button type="button" id="btnXacNhanDoiMK" class="btn btn-primary flex-grow-1 mx-5"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
+                                Xác nhận
                             </button>
+
+                            <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                                data-bs-dismiss="modal">Hủy bỏ</button>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="XNModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
-                    <img src="{{ asset('images/Done.png') }}" width="50">
-                    <h4 class="modal-title mx-auto">
-                        Bạn đã đổi mật khẩu thành công!
-                    </h4>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="TBModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
-                    <img src="{{ asset('images/Cancel.png') }}" width="50">
-                    <h4 class="modal-title mx-auto">
-                        Mật khẩu mới không được trùng với mật khẩu cũ!
-                    </h4>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="TB2Modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
-                    <img src="{{ asset('images/Cancel.png') }}" width="50">
-                    <h4 class="modal-title mx-auto">
-                        Mật khẩu cũ không chính xác!
-                    </h4>
-                </div>
-
-
-
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="xacnhanDoiMKModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">
-                    <h4 class="modal-title">
-                        <img src="{{ asset('img/Security Lock.png') }}" width="30"> Xác nhận
-                    </h4>
-                </div>
-
-                <div class="modal-body text-center">
-                    <h4 id="thongbaoText">Bạn có chắc chắn muốn đổi mật khẩu?</h4>
-                </div>
-
-                <div class="modal-footer d-flex">
-                    <div class="d-flex justify-content-between">
-                        <button type="button" id="btnXacNhanDoiMK" class="btn btn-primary flex-grow-1 mx-5"
-                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
-                            Xác nhận
-                        </button>
-
-                        <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
-                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                            data-bs-dismiss="modal">Hủy bỏ</button>
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const xacnhanModal = new bootstrap.Modal(document.getElementById('xacnhanDoiMKModal'));
-        const XNModal = new bootstrap.Modal(document.getElementById('XNModal'));
-        const doiMKModal = new bootstrap.Modal(document.getElementById('DoiMKModal'));
-        const TBModal = new bootstrap.Modal(document.getElementById('TBModal'));
-        const TB2Modal = new bootstrap.Modal(document.getElementById('TB2Modal'));
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const xacnhanModal = new bootstrap.Modal(document.getElementById('xacnhanDoiMKModal'));
+            const XNModal = new bootstrap.Modal(document.getElementById('XNModal'));
+            const doiMKModal = new bootstrap.Modal(document.getElementById('DoiMKModal'));
+            const TBModal = new bootstrap.Modal(document.getElementById('TBModal'));
+            const TB2Modal = new bootstrap.Modal(document.getElementById('TB2Modal'));
 
-        document.getElementById('btnXacNhanDoiMK').addEventListener('click', async function() {
-            const form = document.getElementById('doiMK-form');
-            const formData = new FormData(form);
+            document.getElementById('btnXacNhanDoiMK').addEventListener('click', async function() {
+                const form = document.getElementById('doiMK-form');
+                const formData = new FormData(form);
 
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                            .content,
-                        'Accept': 'application/json'
-                    }
-                });
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector(
+                                    'meta[name="csrf-token"]')
+                                .content,
+                            'Accept': 'application/json'
+                        }
+                    });
 
-                const result = await response.json();
-                xacnhanModal.hide();
+                    const result = await response.json();
+                    xacnhanModal.hide();
 
-                if (result.success) {
-                    XNModal.show();
-                    setTimeout(() => {
-                        XNModal.hide();
-                        doiMKModal.hide();
-                        form.reset();
-                    }, 2000);
-                } else {
-                    if (result.message === 'Mật khẩu mới không được trùng với mật khẩu cũ') {
-                        TBModal.show();
+                    if (result.success) {
+                        XNModal.show();
+                        setTimeout(() => {
+                            XNModal.hide();
+                            doiMKModal.hide();
+                            form.reset();
+                        }, 2000);
                     } else {
-                        TB2Modal.show();
+                        if (result.message === 'Mật khẩu mới không được trùng với mật khẩu cũ') {
+                            TBModal.show();
+                        } else {
+                            TB2Modal.show();
+                        }
+                        setTimeout(() => {
+                            TBModal.hide();
+                            TB2Modal.hide();
+                        }, 2000);
                     }
+                } catch (error) {
+                    xacnhanModal.hide();
+                    TB2Modal.show();
                     setTimeout(() => {
-                        TBModal.hide();
                         TB2Modal.hide();
                     }, 2000);
                 }
-            } catch (error) {
-                xacnhanModal.hide();
-                TB2Modal.show();
-                setTimeout(() => {
-                    TB2Modal.hide();
-                }, 2000);
-            }
+            });
         });
-    });
-    </script>
+        </script>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
