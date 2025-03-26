@@ -99,7 +99,7 @@ class TimKiemGVController extends Controller
 
         DB::commit();
         return redirect()->back()
-            ->with('success', 'Gửi lời mời thành công! Vui lòng chờ phản hồi từ giảng viên.');
+            ->with('success', 'Gửi lời mời thành công!');
 
     } catch (\Exception $e) {
         DB::rollBack();
