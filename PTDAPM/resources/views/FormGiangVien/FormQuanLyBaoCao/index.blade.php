@@ -96,8 +96,20 @@
     .text-center {
       text-align: center;
     }
-  </style>
+    .xem-bao-cao {
+    text-decoration: underline; /* Gạch chân */
+    color: inherit; /* Giữ nguyên màu chữ mặc định */
+}
 
+.xem-bao-cao:hover {
+    text-decoration: none; /* Khi hover thì bỏ gạch chân */
+}
+  </style>
+  @if(session('message'))
+    <div class="alert alert-warning">
+        {{ session('message') }}
+    </div>
+@endif
   <h1 class="page-title">Báo cáo đề tài</h1>
 
 <table>
@@ -117,14 +129,16 @@
         <td>{{ $baocao->ma_bc }}</td>
         <td>{{ $baocao->DeTai->ten_de_tai ?? 'Không có tên đề tài' }}</td>
         <td>{{ $baocao->tieu_de }}</td>
-        <td class="text-center"><a type="button" data-bs-toggle="modal" data-bs-target="#xembaocao{{ $baocao->ma_bc }}">Xem báo cáo</a></td>
         <td class="text-center">
-          @if($baocao->trang_thai == 'Chờ duyệt')
-            <a type="button" data-bs-toggle="modal" data-bs-target="#duyet{{ $baocao->ma_bc }}">Chưa duyệt</a>
-          @elseif($baocao->trang_thai == 'Được duyệt')
-            <span class="badge bg-success">Đã duyệt</span>
-          @elseif($baocao->trang_thai == 'Bị từ chối')
-            <span class="badge bg-danger">Từ chối</span>
+    <a type="button" data-bs-toggle="modal" data-bs-target="#xembaocao{{ $baocao->ma_bc }}" class="xem-bao-cao">Xem báo cáo</a>
+</td>
+        <td class="text-center">
+        @if($baocao->trang_thai == 'Chờ duyệt')
+    <a type="button" data-bs-toggle="modal" data-bs-target="#duyet{{ $baocao->ma_bc }}" class="trang-thai-btn text-white">Chưa duyệt</a>
+@elseif($baocao->trang_thai == 'Được duyệt')
+    <a type="button" data-bs-toggle="modal" data-bs-target="#duyet{{ $baocao->ma_bc }}" class="trang-thai-btn text-white">Đã duyệt</a>
+@elseif($baocao->trang_thai == 'Bị từ chối')
+    <a type="button" data-bs-toggle="modal" data-bs-target="#duyet{{ $baocao->ma_bc }}" class="trang-thai-btn text-white">Từ chối</a>
           @else
             <span>{{ $baocao->trang_thai }}</span>
           @endif
@@ -181,8 +195,9 @@
 
                 <!-- Nhận xét -->
                 <p class="fw-bold mt-3">Nhận xét:</p>
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalNhanXet{{ $baocao->ma_bc }}"
-                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-weight: bold;width:100%;
+                <button type="button" class="btn w-100 text-start" 
+                    data-bs-toggle="modal" data-bs-target="#modalNhanXet{{ $baocao->ma_bc }}"
+                    style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; font-weight: bold;
                     border-radius: 22px; padding: 10px 30px; font-size: 18px;">
                     Nhập văn bản (Không yêu cầu bắt buộc)
                 </button>
@@ -246,7 +261,7 @@
                     <input type="hidden" name="ma_bc" value="{{ $baocao->ma_bc }}">
                 
                 <button type="submit" class="btn" data-bs-toggle="modal" data-bs-target="#submit{{ $baocao->ma_bc }}"
-                    style="background-color: #17488C; color: #ffffff; font-weight: bold;
+                    style="background-color: #799DCB; color: #17488C; font-weight: bold;
                     border-radius: 15px; padding: 8px 25px; font-size: 16px;">
                     Gửi
                 </button>
