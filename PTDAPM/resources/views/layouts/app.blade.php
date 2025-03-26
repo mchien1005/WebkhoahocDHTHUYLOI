@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Trường Đại Học Thủy Lợi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rasa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -536,69 +537,27 @@
     </div>
 
     <div class="modal-body">
-        @if(session('success'))
-        <div class="alert alert-success">
+        <!-- @if(session('success'))
+        <div class="popup popup-success">
             {{ session('success') }}
         </div>
         @endif
         @if ($errors->any())
-        <div class="alert alert-danger">
+        <div class="popup popup-danger">
             <ul>
                 @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
                 @endforeach
             </ul>
         </div>
-        @endif
+        @endif -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" style="max-width: 1250px; height: 616px;">
                 <div class="modal-content" style="background-color: #d9eaff; padding: 20px">
                     <form action="{{ route('profile.update') }}" method="POST">
                         @csrf
-                        <!-- @if(session('success'))
-                        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                                <div class="modal-content"
-                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                                        <h4 class="modal-title fw-bold d-flex align-items-center"
-                                            style="font-size: 30px; gap: 15px; color: #225293;">
-                                            <img src="{{ asset('img/Done.png') }}" width="30">
-                                            <span>{{ session('success') }}</span>
-                                        </h4>
-                                    </div>
-                                    <div class="modal-footer border-0 justify-content-center">
-                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
-                                            OK
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-                        @if(session('error'))
-                        <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-                                <div class="modal-content"
-                                    style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                                    <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                                        <h4 class="modal-title fw-bold d-flex align-items-center"
-                                            style="font-size: 30px; gap: 15px; color: #dc3545;">
-                                            <img src="{{ asset('img/Error.png') }}" width="30">
-                                            <span>{{ session('error') }}</span>
-                                        </h4>
-                                    </div>
-                                    <div class="modal-footer border-0 justify-content-center">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                            style="background-color: rgba(220, 53, 69, 0.6); color: #fff; border-radius: 18px; border: none; width: 100px; font-size: 20px; font-family: 'Rasa', serif;">
-                                            Đóng
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif -->
+                        @method('PUT')
+
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-3 d-flex justify-content-center align-items-center">
@@ -686,7 +645,7 @@
                         </div>
                         <div class="modal-footer border-0">
                             <button type="submit" class="btn btn-primary"
-                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;" >Lưu</button>
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
                             <button type="button" class="btn btn-secondary"
                                 style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
                                 data-bs-dismiss="modal">Hủy</button>
@@ -708,15 +667,10 @@
                         khẩu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                @if(session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-                @endif
-                @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-                @endif
                 <hr>
-                <form method="POST" action="{{ route('doi-mat-khau.update') }}">
+                <form method="POST" id="doiMK-form" action="{{ route('doi-mat-khau.update') }}">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-md-3 d-flex justify-content-center align-items-center">
                             <div
@@ -751,8 +705,13 @@
                         </div>
                     </div>
                     <div class="modal-footer border-0 d-flex">
-                        <button type="submit" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#XNModal"
-                            style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">Lưu</button>
+                        <div class="modal-footer border-0 d-flex">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#xacnhanDoiMKModal"
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 100px; font-size: 15px; font-family: 'Rasa', serif;">
+                                Lưu
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -760,12 +719,42 @@
     </div>
     <div class="modal fade" id="XNModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                <h4 class="modal-title fw-bold d-flex align-items-center"
-                    style="font-size: 40px; gap: 50px;color: #225293;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
                     <img src="{{ asset('images/Done.png') }}" width="50">
-                    Đổi mật khẩu thành công
-                </h4>
+                    <h4 class="modal-title mx-auto">
+                        Bạn đã đổi mật khẩu thành công!
+                    </h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="TBModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                    <img src="{{ asset('images/Cancel.png') }}" width="50">
+                    <h4 class="modal-title mx-auto">
+                        Mật khẩu mới không được trùng với mật khẩu cũ!
+                    </h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="TB2Modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 700px;">
+            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
+                <div class="modal-header d-flex align-items-center justify-content-between" style="color: #17488C;">
+                    <img src="{{ asset('images/Cancel.png') }}" width="50">
+                    <h4 class="modal-title mx-auto">
+                        Mật khẩu cũ không chính xác!
+                    </h4>
+                </div>
+
+
+
             </div>
         </div>
     </div>
@@ -783,63 +772,75 @@
                 </div>
 
                 <div class="modal-footer d-flex">
-                    <form action="{{ route('doi-mat-khau.update') }}" method="POST" class="w-100">
-                        @csrf
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-primary flex-grow-1 mx-5"
-                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
-                                Xác nhận
-                            </button>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" id="btnXacNhanDoiMK" class="btn btn-primary flex-grow-1 mx-5"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
+                            Xác nhận
+                        </button>
 
-                            <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
-                                style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                                data-bs-dismiss="modal">Hủy bỏ</button>
-                        </div>
-                    </form>
+                        <button type="button" class="btn btn-secondary flex-grow-1 mx-2"
+                            style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
+                            data-bs-dismiss="modal">Hủy bỏ</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Success Modal -->
-    <div class="modal fade" id="successModal" data-bs-backdrop="true" tabindex="-1" aria-hidden="true"
-        data-bs-dismiss="modal">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
-            <div class="modal-content" style="background-color: #d9eaff; padding: 20px; border-radius: 10px;">
-                <div class="modal-header border-0 w-100 d-flex justify-content-center">
-                    <h4 class="modal-title d-flex align-items-center w-100"
-                        style="font-size: 30px; color: #225293; gap: 50px; text-align: center;">
-                        <img src="{{ asset('images/Done.png') }}" width="50">
-                        <p id="successMessage">{{ session('success') }}</p>
-                    </h4>
-                </div>
-            </div>
-        </div>
-    </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const successMessage = '{{ Session::has("success") ? Session::get("success") : "" }}';
-        const errorMessage = '{{ Session::has("error") ? Session::get("error") : "" }}';
+        const xacnhanModal = new bootstrap.Modal(document.getElementById('xacnhanDoiMKModal'));
+        const XNModal = new bootstrap.Modal(document.getElementById('XNModal'));
+        const doiMKModal = new bootstrap.Modal(document.getElementById('DoiMKModal'));
+        const TBModal = new bootstrap.Modal(document.getElementById('TBModal'));
+        const TB2Modal = new bootstrap.Modal(document.getElementById('TB2Modal'));
 
-        if (successMessage) {
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            document.getElementById('successMessage').textContent = successMessage;
-            successModal.show();
+        document.getElementById('btnXacNhanDoiMK').addEventListener('click', async function() {
+            const form = document.getElementById('doiMK-form');
+            const formData = new FormData(form);
 
-            // Auto hide after 2 seconds
-            setTimeout(() => {
-                successModal.hide();
-            }, 2000);
-        }
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .content,
+                        'Accept': 'application/json'
+                    }
+                });
 
-        if (errorMessage) {
-            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-            document.getElementById('errorMessage').textContent = errorMessage;
-            errorModal.show();
-        }
+                const result = await response.json();
+                xacnhanModal.hide();
+
+                if (result.success) {
+                    XNModal.show();
+                    setTimeout(() => {
+                        XNModal.hide();
+                        doiMKModal.hide();
+                        form.reset();
+                    }, 2000);
+                } else {
+                    if (result.message === 'Mật khẩu mới không được trùng với mật khẩu cũ') {
+                        TBModal.show();
+                    } else {
+                        TB2Modal.show();
+                    }
+                    setTimeout(() => {
+                        TBModal.hide();
+                        TB2Modal.hide();
+                    }, 2000);
+                }
+            } catch (error) {
+                xacnhanModal.hide();
+                TB2Modal.show();
+                setTimeout(() => {
+                    TB2Modal.hide();
+                }, 2000);
+            }
+        });
     });
     </script>
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
