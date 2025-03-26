@@ -12,6 +12,9 @@ class BaoCaoNghienCuuController
     public function index()
     {
         $baocaos = BaoCaoNghienCuu::all();
+        if ($baocaos->isEmpty()) {
+            return view('FormGiangVien.FormQuanLyBaoCao.index')->with('message', 'Không có báo cáo nào để xem.');
+    }
         return view('FormGiangVien.FormQuanLyBaoCao.index', compact('baocaos'));
     }
 
@@ -46,4 +49,5 @@ class BaoCaoNghienCuuController
 
         return redirect()->back()->with('success', 'Nhận xét đã được lưu.');
     }
+
 }

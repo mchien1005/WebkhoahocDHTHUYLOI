@@ -132,7 +132,7 @@
                         </tr>
                         
                         <!-- Modal for no invitations -->
-                        <div class="modal fade" id="noInvitationsModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+                        <div class="modal fade" id="noInvitationsModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="true">
                             <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
                                 <div class="modal-content" style="background-color: #d9eaff; padding: 10px; border-radius: 10px;">
                                     <div class="modal-header" style="border-bottom: 2px solid #225293 !important;">

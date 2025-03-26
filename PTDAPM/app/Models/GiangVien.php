@@ -34,4 +34,8 @@ class GiangVien extends Model
     {
         return $this->hasMany(DeTai::class, 'ma_gv', 'ma_gv');
     }
+        public function nhanXetBaoCao()
+    {
+        return $this->hasMany(NhanXetBaoCao::class, 'ma_gv', 'ma_gv');
+    }
 }
