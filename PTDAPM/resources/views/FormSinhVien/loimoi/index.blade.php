@@ -208,7 +208,7 @@
                     @method('DELETE')
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-primary flex-grow-1 mx-5" data-bs-toggle="modal"
-                            data-bs-target="#TCModal{{ $loiMoi->id }}"
+                            data-bs-target="{{ $loiMoi->id }}"
                             style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px; font-weight: bold;">
                             Xác nhận
                         </button>
