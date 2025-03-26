@@ -686,7 +686,7 @@
                         </div>
                         <div class="modal-footer border-0">
                             <button type="submit" class="btn btn-primary"
-                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;">Lưu</button>
+                                style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;" >Lưu</button>
                             <button type="button" class="btn btn-secondary"
                                 style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px; border: none; width: 108.56px; height: 49.89px; font-size: 32px; font-family: 'Rasa', serif;"
                                 data-bs-dismiss="modal">Hủy</button>
