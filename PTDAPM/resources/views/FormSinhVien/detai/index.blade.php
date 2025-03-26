@@ -149,7 +149,7 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"
+                        <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#successModal"
                             style="background-color: rgba(81, 131, 202, 0.6);color: #17488C; border-radius: 18px;">
                             Tải lên
                         </button>
@@ -245,16 +245,6 @@
                         Nộp báo cáo thành công
                     </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Báo cáo đã được nộp thành công!</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        style="background-color: rgba(81, 131, 202, 0.6); color: #17488C; border-radius: 18px;"
-                        data-bs-dismiss="modal">
-                        Đóng
-                    </button>
                 </div>
             </div>
         </div>
