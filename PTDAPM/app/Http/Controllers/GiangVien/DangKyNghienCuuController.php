@@ -117,7 +117,7 @@ public function store(Request $request)
                 ->whereIn('ma_de_tai', $selectedDeTai)
                 ->update(['trang_thai' => 'Được duyệt']);
 
-            return redirect()->back()->with('success', 'Nộp đề tài thành công thành công!');
+            return redirect()->back()->with('success', 'Đã nộp đề tài thành công');
         }
 
     }
