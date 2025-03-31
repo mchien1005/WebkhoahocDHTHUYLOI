@@ -199,7 +199,6 @@
                             <th class="text-center">Mã giảng viên</th>
                             <th class="text-center">Tên giảng viên</th>
                             <th class="text-center">Lĩnh vực nghiên cứu</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -217,12 +216,6 @@
                                     {{ $gv->ten_gv }}
                                 </a></td>
                             <td class="text-center-col">{{ $gv->linh_vuc_nc }}</td>
-                            <td class="text-center-col">
-                                <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}"
-                                    style="color: #17488C;">
-                                    Gửi lời mời hướng dẫn
-                                </a>
-                            </td>
                         </tr>
                         @endforeach
                         @endif
@@ -301,12 +294,12 @@
                                 </p>
                             </div>
                         </div>
-                        <!-- <div class="text-center-col">
+                        <div class="text-end">
                             <a type="button" data-bs-toggle="modal" data-bs-target="#inviteModal{{ $gv->ma_gv }}"
-                                style="color: #17488C;">
+                                style="color: #17488C; background-color: rgba(81, 131, 202, 0.6); border-radius: 18px; padding: 5px 10px; font-size: 20px;">
                                 Gửi lời mời hướng dẫn
                             </a>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
