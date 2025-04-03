@@ -1,8 +1,0 @@
-[phases.setup]
-nixPkgs = ['php83', 'apacheHttpd', 'composer']
-
-[phases.build]
-cmds = ['composer install --no-dev --optimize-autoloader']
-
-[start]
-cmd = "vendor/bin/heroku-php-apache2 public/"
