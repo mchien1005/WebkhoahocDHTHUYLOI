@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\GiangVien;
 
 use Illuminate\Http\Request;
-use App\Models\Tintuc;
+use App\Models\TinTuc;
 
 class TintucController
 {
     // Hiển thị danh sách tin tức
     public function index()
     {
-        $tintucs = Tintuc::all();
+        $tintucs = TinTuc::all();
         return view('FormGiangVien.FormTinTuc.index', compact('tintucs'));
     }
 
